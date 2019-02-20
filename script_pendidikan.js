@@ -1,10 +1,10 @@
-function tampilsemuaibadah() {
+function tampilsemuapendidikan() {
   $.ajax({
-    url: 'act/ibadah_cari.php',
+    url: 'act/pendidikan_cari.php',
     data: "",
     dataType: 'json',
     success: function (rows) {
-      cari_ibadah(rows);
+      cari_pendidikan(rows);
     },
     error: function (xhr, ajaxOptions, thrownError) {
       $('#gagal').modal('show');
@@ -15,7 +15,7 @@ function tampilsemuaibadah() {
 
 }
 
-function cari_ibadah(rows) {
+function cari_pendidikan(rows) {
   hapusInfo();
   hapusRadius();
   clearroute2();
@@ -37,16 +37,16 @@ function cari_ibadah(rows) {
       centerBaru = new google.maps.LatLng(latitude, longitude);
       marker = new google.maps.Marker({
         position: centerBaru,
-        icon: 'assets/ico/musajik.png',
+        icon: 'assets/ico/sekolah.png',
         map: map,
         animation: google.maps.Animation.DROP,
       });
       markersDua.push(marker);
       map.setCenter(centerBaru);
-      klikInfoWindowibadah(id);
+      klikInfoWindowpendidikan(id);
       map.setZoom(15);
       tampilkanhasilcari();
-      $('#hasilcari').append("<tr><td>" + name + "</td><td style='text-align: center'><button class='btn btn-theme04 btn-xs' onclick='detailibadah_infow(\"" + id + "\");' title='tampilkan info'><i class='fa fa-search-plus'></i></button></td></tr>");
+      $('#hasilcari').append("<tr><td>" + name + "</td><td style='text-align: center'><button class='btn btn-theme04 btn-xs' onclick='detailpendidikan_infow(\"" + id + "\");' title='tampilkan info'><i class='fa fa-search-plus'></i></button></td></tr>");
       a = a + 1;
     }
     $('#found').append("Found: " + a)
@@ -54,14 +54,14 @@ function cari_ibadah(rows) {
   }
 }
 
-function carinamaibadah() { 
-  var namaibadah = document.getElementById("namaibadah").value;
+function carinamapendidikan() { 
+  var namapendidikan = document.getElementById("namapendidikan").value;
   $.ajax({
-    url: 'act/ibadah_cari-nama.php?cari_nama=' + namaibadah,
+    url: 'act/pendidikan_cari-nama.php?cari_nama=' + namapendidikan,
     data: "",
     dataType: 'json',
     success: function (rows) {
-      cari_ibadah(rows);
+      cari_pendidikan(rows);
     },
     error: function (xhr, ajaxOptions, thrownError) {
       $('#gagal').modal('show');
@@ -71,15 +71,15 @@ function carinamaibadah() {
   });
 }
 
-function carijenis_ibadah() { 
-  var jenis = document.getElementById("jenisibadah").value;
-  console.log("cari ibadah dengan jenis: " + jenis);
+function carijenis_pendidikan() { 
+  var jenis = document.getElementById("jenispendidikan").value;
+  console.log("cari pendidikan dengan jenis tingkatan: " + jenis);
   $.ajax({
-    url: 'act/ibadah_cari-jenis.php?type=' + jenis,
+    url: 'act/pendidikan_cari-jenistingkat.php?type=' + jenis,
     data: "",
     dataType: 'json',
     success: function (rows) {
-      cari_ibadah(rows);
+      cari_pendidikan(rows);
     },
     error: function (xhr, ajaxOptions, thrownError) {
       $('#gagal').modal('show');
@@ -89,15 +89,15 @@ function carijenis_ibadah() {
   });
 }
 
-function carikons_ibadah() { 
-  var jenis_k = document.getElementById("jeniskons_ibadah").value;
-  console.log("cari ibadah dengan jenis konstruksi: " + jenis_k);
+function caritipe_pendidikan() { 
+  var stat = document.getElementById("tipependidikan").value;
+  console.log("cari pendidikan dengan tipe: " + stat);
   $.ajax({
-    url: 'act/ibadah_cari-jeniskonstruksi.php?k=' + jenis_k,
+    url: 'act/pendidikan_cari-tipe.php?type=' + stat,
     data: "",
     dataType: 'json',
     success: function (rows) {
-      cari_ibadah(rows);
+      cari_pendidikan(rows);
     },
     error: function (xhr, ajaxOptions, thrownError) {
       $('#gagal').modal('show');
@@ -107,16 +107,16 @@ function carikons_ibadah() {
   });
 }
 
-function cariluasbang_ibadah() { 
-  var awal = document.getElementById("ibadah_awalbang").value;
-  var akhir = document.getElementById("ibadah_akhirbang").value;
-  console.log("cari ibadah dengan luas bangunan: " + awal + " - " +akhir);
+function cariluasbang_pendidikan() { 
+  var awal = document.getElementById("pendidikan_awalbang").value;
+  var akhir = document.getElementById("pendidikan_akhirbang").value;
+  console.log("cari b.pendidikan dengan luas bangunan: " + awal + " - " +akhir);
   $.ajax({
-    url: 'act/ibadah_cari-luasbang.php?awal=' + awal + '&akhir=' + akhir,
+    url: 'act/pendidikan_cari-luasbang.php?awal=' + awal + '&akhir=' + akhir,
     data: "",
     dataType: 'json',
     success: function (rows) {
-      cari_ibadah(rows);
+      cari_pendidikan(rows);
     },
     error: function (xhr, ajaxOptions, thrownError) {
       $('#gagal').modal('show');
@@ -126,16 +126,16 @@ function cariluasbang_ibadah() {
   });
 }
 
-function cariluastanah_ibadah() { 
-  var awal = document.getElementById("ibadah_awaltanah").value;
-  var akhir = document.getElementById("ibadah_akhirtanah").value;
-  console.log("cari ibadah dengan luas tanah: " + awal + " - " +akhir);
+function cariluastanah_pendidikan() { 
+  var awal = document.getElementById("pendidikan_awaltanah").value;
+  var akhir = document.getElementById("pendidikan_akhirtanah").value;
+  console.log("cari b.pendidikan dengan luas tanah: " + awal + " - " +akhir);
   $.ajax({
-    url: 'act/ibadah_cari-luastanah.php?awal=' + awal + '&akhir=' + akhir,
+    url: 'act/pendidikan_cari-luastanah.php?awal=' + awal + '&akhir=' + akhir,
     data: "",
     dataType: 'json',
     success: function (rows) {
-      cari_ibadah(rows);
+      cari_pendidikan(rows);
     },
     error: function (xhr, ajaxOptions, thrownError) {
       $('#gagal').modal('show');
@@ -145,16 +145,15 @@ function cariluastanah_ibadah() {
   });
 }
 
-function caritahun_ibadah() { 
-  var awal = document.getElementById("ibadah_awaltahun").value;
-  var akhir = document.getElementById("ibadah_akhirtahun").value;
-  console.log("cari ibadah dengan tahun berdiri: " + awal + " - " +akhir);
+function carikons_pendidikan() { 
+  var jenis_k = document.getElementById("jeniskons_pendidikan").value;
+  console.log("cari pendidikan dengan jenis konstruksi: " + jenis_k);
   $.ajax({
-    url: 'act/ibadah_cari-tahun.php?awal=' + awal + '&akhir=' + akhir,
+    url: 'act/pendidikan_cari-jeniskonstruksi.php?k=' + jenis_k,
     data: "",
     dataType: 'json',
     success: function (rows) {
-      cari_ibadah(rows);
+      cari_pendidikan(rows);
     },
     error: function (xhr, ajaxOptions, thrownError) {
       $('#gagal').modal('show');
@@ -164,15 +163,15 @@ function caritahun_ibadah() {
   });
 }
 
-function carijorong_ibadah() { 
-  var jorong = document.getElementById("jorong_ibadah").value;
-  console.log("cari b ibadah dengan jorong: " + jorong);
+function carijorong_pendidikan() { 
+  var jorong = document.getElementById("jorong_pendidikan").value;
+  console.log("cari b pendidikan dengan jorong: " + jorong);
   $.ajax({
-    url: 'act/ibadah_cari-jorong.php?j=' + jorong,
+    url: 'act/pendidikan_cari-jorong.php?j=' + jorong,
     data: "",
     dataType: 'json',
     success: function (rows) {
-      cari_ibadah(rows);
+      cari_pendidikan(rows);
     },
     error: function (xhr, ajaxOptions, thrownError) {
       $('#gagal').modal('show');
@@ -182,20 +181,20 @@ function carijorong_ibadah() {
   });
 }
 
-function klikInfoWindowibadah(id) {
+function klikInfoWindowpendidikan(id) {
   google.maps.event.addListener(marker, "click", function () {
     console.log("marker dengan id=" + id + " diklik");
-    detailibadah_infow(id);
+    detailpendidikan_infow(id);
   });
 
 }
 
-function detailibadah_infow(id) { //menampilkan informas
+function detailpendidikan_infow(id) { //menampilkan informas
   hapusInfo();
   clearroute2();
   console.log("fungsi info marker id=" + id);
     $.ajax({
-    url: 'act/ibadah_detail.php?cari=' + id,
+    url: 'act/pendidikan_detail.php?cari=' + id,
     data: "",
     dataType: 'json',
     success: function (rows) {
@@ -207,14 +206,14 @@ function detailibadah_infow(id) { //menampilkan informas
           var image = "There are no photos for this building";
         }
         else {
-          var image = "<img src='foto/b-ibadah/"+row.image+"' alt='building photo' width='165'>";
+          var image = "<img src='foto/b-pendidikan/"+row.image+"' alt='building photo' width='165'>";
         }
         var latitude = row.latitude;
         var longitude = row.longitude;
         centerBaru = new google.maps.LatLng(row.latitude, row.longitude);
         marker = new google.maps.Marker({
           position: centerBaru,
-          icon: 'assets/ico/musajik.png',
+          icon: 'assets/ico/sekolah.png',
           map: map,
           animation: google.maps.Animation.DROP,
         });
@@ -223,13 +222,13 @@ function detailibadah_infow(id) { //menampilkan informas
         map.setZoom(18);
         infowindow = new google.maps.InfoWindow({
           position: centerBaru,
-          content: "<span style=color:black><center><b>Information</b><br>"+image+"<p><i class='fas fa-mosque'></i><b> "+ nama + "</b><br><a role='button' class='btn btn-default fa fa-car' onclick='callRoute(centerLokasi, centerBaru);rutetampil();'> Show Route</a>&nbsp<a role='button' class='btn btn-default fa fa-info-circle' onclick='detailibadah("+'"'+id+'"'+")'> View Details</a></center></span>",
+          content: "<span style=color:black><center><b>Information</b><br>"+image+"<p><i class='fas fa-school'></i><b> "+ nama + "</b><br><a role='button' class='btn btn-default fa fa-car' onclick='callRoute(centerLokasi, centerBaru);rutetampil();'> Show Route</a>&nbsp<a role='button' class='btn btn-default fa fa-info-circle' onclick='detailpendidikan("+'"'+id+'"'+")'> View Details</a></center></span>",
           pixelOffset: new google.maps.Size(0, -33)
         });
         infoDua.push(infowindow);
         hapusInfo();
         infowindow.open(map);
-        klikInfoWindowibadah(id);
+        klikInfoWindowpendidikan(id);
       }
     },
     error: function (xhr, ajaxOptions, thrownError) {
@@ -241,16 +240,16 @@ function detailibadah_infow(id) { //menampilkan informas
 }
 
 
-function aktifkanRadiusibadah() { //fungsi radius
+function aktifkanRadiuspendidikan() { //fungsi radius
   if (pos == 'null') {
     $('#atur-posisi').modal('show');
   } else {
     hapusRadius();
     clearroute2();
-    var inputradiusibadah = document.getElementById("inputradiusibadah").value;
+    var inputradiuspendidikan = document.getElementById("inputradiuspendidikan").value;
     var circle = new google.maps.Circle({
       center: pos,
-      radius: parseFloat(inputradiusibadah * 100),
+      radius: parseFloat(inputradiuspendidikan * 100),
       map: map,
       strokeColor: "blue",
       strokeOpacity: 0.8,
@@ -261,34 +260,34 @@ function aktifkanRadiusibadah() { //fungsi radius
     map.setZoom(15);
     map.setCenter(pos);
     circles.push(circle);
-    teksradiusibadah()
+    teksradiuspendidikan()
   }
   cekRadiusStatus = 'on';
-  tampilkanradiusibadah();
+  tampilkanradiuspendidikan();
 }
 
-function teksradiusibadah() {
-  document.getElementById('m_ibadah').innerHTML = document.getElementById('inputradiusibadah').value * 100
+function teksradiuspendidikan() {
+  document.getElementById('m_pendidikan').innerHTML = document.getElementById('inputradiuspendidikan').value * 100
 }
 
-function cekRadiusibadah() {
-  radiusibadah = inputradiusibadah.value * 100;
+function cekRadiuspendidikan() {
+  radiuspendidikan = inputradiuspendidikan.value * 100;
   lat = document.getElementById("lat").value;
   lng = document.getElementById("lng").value;
 }
 
-function tampilkanradiusibadah() { //menampilkan bang ibadah berdasarkan radius
+function tampilkanradiuspendidikan() { //menampilkan bang pendidikan berdasarkan radius
   $('#hasilcari1').show();
   $('#hasilcari').empty();
   $('#found').empty();
   hapusInfo();
   hapusMarkerTerdekat();
-  cekRadiusibadah();
+  cekRadiuspendidikan();
   clearroute2();
-  console.log("panggil radiusnyaa, b.ibadah sekitar dengan koordinat:" + lat + "," + lng + " dan radius=" + radiusibadah);
+  console.log("panggil radiusnyaa, b.pendidikan sekitar dengan koordinat:" + lat + "," + lng + " dan radius=" + radiuspendidikan);
 
   $.ajax({
-    url: 'act/ibadah_radius.php?lat=' + pos.lat + '&lng=' + pos.lng + '&rad=' + radiusibadah,
+    url: 'act/pendidikan_radius.php?lat=' + pos.lat + '&lng=' + pos.lng + '&rad=' + radiuspendidikan,
     data: "",
     dataType: 'json',
     success: function (rows) {
@@ -303,16 +302,16 @@ function tampilkanradiusibadah() { //menampilkan bang ibadah berdasarkan radius
           centerBaru = new google.maps.LatLng(latitude, longitude);
           marker = new google.maps.Marker({
             position: centerBaru,
-            icon: 'assets/ico/musajik.png',
+            icon: 'assets/ico/sekolah.png',
             map: map,
             animation: google.maps.Animation.DROP,
           });
           markersDua.push(marker);
           map.setCenter(centerBaru);
-          klikInfoWindowibadah(id);
+          klikInfoWindowpendidikan(id);
           map.setZoom(15);
           tampilkanhasilcari();
-          $('#hasilcari').append("<tr><td>" + nama + "</td><td style='text-align: center'><button class='btn btn-theme04 btn-xs' onclick='detailibadah_infow(\"" + id + "\");' title='tampilkan info'><i class='fa fa-search-plus'></i></button></td></tr>");
+          $('#hasilcari').append("<tr><td>" + nama + "</td><td style='text-align: center'><button class='btn btn-theme04 btn-xs' onclick='detailpendidikan_infow(\"" + id + "\");' title='tampilkan info'><i class='fa fa-search-plus'></i></button></td></tr>");
           a = a + 1;
         }
         $('#found').append("Found: " + a)
@@ -325,7 +324,7 @@ function tampilkanradiusibadah() { //menampilkan bang ibadah berdasarkan radius
   });
 }
 
-function carifasilitas_ibadah(){
+function carifasilitas_pendidikan(){
 
   $('#hasilcari1').show();
   $('#hasilcari').empty();
@@ -334,15 +333,15 @@ function carifasilitas_ibadah(){
   hapusRadius();
   hapusMarkerTerdekat();
   var arrayFas=[];
-  for(i=0; i<$("input[name=fas_ibadah]:checked").length;i++){
-    arrayFas.push($("input[name=fas_ibadah]:checked")[i].value);
+  for(i=0; i<$("input[name=fas_pendidikan]:checked").length;i++){
+    arrayFas.push($("input[name=fas_pendidikan]:checked")[i].value);
   }
   if (arrayFas==''){
     $('#peringatan').modal('show');
     $('#ket-p').append('Choose Facility !');
   }else{
-    $.ajax({ url: server+'act/ibadah_cari-fasilitas.php?fas='+arrayFas, data: "", dataType: 'json', success: function(rows){
-      console.log(server+'act/ibadah_cari-fasilitas.php?fas='+arrayFas);
+    $.ajax({ url: server+'act/pendidikan_cari-fasilitas.php?fas='+arrayFas, data: "", dataType: 'json', success: function(rows){
+      console.log(server+'act/pendidikan_cari-fasilitas.php?fas='+arrayFas);
       $('#found').empty();
       $('#hasilcari').empty();
       if(rows==null)
@@ -363,16 +362,16 @@ function carifasilitas_ibadah(){
               marker = new google.maps.Marker
             ({
               position: centerBaru,
-              icon:'assets/ico/musajik.png',
+              icon:'assets/ico/sekolah.png',
               map: map,
               animation: google.maps.Animation.DROP,
             });
               markersDua.push(marker);
               map.setCenter(centerBaru);
-              klikInfoWindowibadah(id)
+              klikInfoWindowpendidikan(id)
               map.setZoom(15);
               tampilkanhasilcari();
-              $('#hasilcari').append("<tr><td>" + nama + "</td><td style='text-align: center'><button class='btn btn-theme04 btn-xs' onclick='detailibadah_infow(\"" + id + "\");' title='tampilkan info'><i class='fa fa-search-plus'></i></button></td></tr>");
+              $('#hasilcari').append("<tr><td>" + nama + "</td><td style='text-align: center'><button class='btn btn-theme04 btn-xs' onclick='detailpendidikan_infow(\"" + id + "\");' title='tampilkan info'><i class='fa fa-search-plus'></i></button></td></tr>");
               a = a + 1;
           }
           $('#found').append("Found: " + a)

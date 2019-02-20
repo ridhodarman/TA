@@ -29,9 +29,10 @@ function digitasirumah() {
         var data = arrays.features[i];
         var arrayGeometries = data.geometry.coordinates;
         var jenis = data.jenis;
-        var p1 = '<p> ID: ' + data.properties.id + '</p>';
+        var link = "<button class='btn btn-info btn-xs fa fa-info-circle' title='View Details' onclick='detailumkm("+'"'+data.properties.id+'"'+")'></button>";
+        var p1 = ' ID: ' + data.properties.id;
         var p2 = '<p>' + data.properties.nama + '</p>';
-        var p3 = p1 + p2 +'('+jenis+')';
+        var p3 = link + p1 + p2 +'('+jenis+') ';
 
         var idTitik = 0;
         var hitungTitik = [];
@@ -70,6 +71,11 @@ function digitasirumah() {
         });
         nrumah = nrumah + 1;
       }
+    },
+    error: function (xhr, ajaxOptions, thrownError) {
+      $('#gagal').modal('show');
+      $('#notifikasi').append(xhr.status);
+      $('#notifikasi').append(thrownError);
     }
   });
   var infoWindow = new google.maps.InfoWindow({
@@ -87,10 +93,10 @@ function digitasiumkm() {
         var data = arrays.features[i];
         var arrayGeometries = data.geometry.coordinates;
         var jenis = data.jenis;
-        var link = '<a href="" target="_blank">View Detail</a>';
-        var p1 = '<p> ID: ' + data.properties.id + '</p>';
+        var link = "<button class='btn btn-info btn-xs fa fa-info-circle' title='View Details' onclick='detailumkm("+'"'+data.properties.id+'"'+")'></button>";
+        var p1 = ' ID: ' + data.properties.id;
         var p2 = '<p>' + data.properties.nama + '</p>';
-        var p3 = p1 + p2 +'('+jenis+') '+link;
+        var p3 = link + p1 + p2 +'('+jenis+') ';
 
         var idTitik = 0;
         var hitungTitik = [];
@@ -128,6 +134,11 @@ function digitasiumkm() {
         });
         numkm = numkm + 1;
       }
+    },
+    error: function (xhr, ajaxOptions, thrownError) {
+      $('#gagal').modal('show');
+      $('#notifikasi').append(xhr.status);
+      $('#notifikasi').append(thrownError);
     }
   });
   var infoWindow = new google.maps.InfoWindow({
@@ -146,10 +157,11 @@ function digitasit4ibadah() {
         var data = arrays.features[i];
         var arrayGeometries = data.geometry.coordinates;
         var jenis = data.jenis;
-        var link = '<a href="" target="_blank">View Detail</a>';
-        var p1 = '<p> ID: ' + data.properties.id + '</p>';
+        var jenis = data.jenis;
+        var link = "<button class='btn btn-info btn-xs fa fa-info-circle' title='View Details' onclick='detailibadah("+'"'+data.properties.id+'"'+")'></button>";
+        var p1 = ' ID: ' + data.properties.id;
         var p2 = '<p>' + data.properties.nama + '</p>';
-        var p3 = p1 + p2 +'('+jenis+') '+link;
+        var p3 = link + p1 + p2 +'('+jenis+') ';
 
         var idTitik = 0;
         var hitungTitik = [];
@@ -187,6 +199,11 @@ function digitasit4ibadah() {
         });
         nibadah = nibadah + 1;
       }
+    },
+    error: function (xhr, ajaxOptions, thrownError) {
+      $('#gagal').modal('show');
+      $('#notifikasi').append(xhr.status);
+      $('#notifikasi').append(thrownError);
     }
   });
   var infoWindow = new google.maps.InfoWindow({
@@ -204,10 +221,10 @@ function digitasikantor() {
         var data = arrays.features[i];
         var arrayGeometries = data.geometry.coordinates;
         var jenis = data.jenis;
-        var link = '<a href="" target="_blank">View Detail</a>';
-        var p1 = '<p> ID: ' + data.properties.id + '</p>';
+        var link = "<button class='btn btn-info btn-xs fa fa-info-circle' title='View Details' onclick='detailumkm("+'"'+data.properties.id+'"'+")'></button>";
+        var p1 = ' ID: ' + data.properties.id;
         var p2 = '<p>' + data.properties.nama + '</p>';
-        var p3 = p1 + p2 +'('+jenis+') '+link;
+        var p3 = link + p1 + p2 +'('+jenis+') ';
 
         var idTitik = 0;
         var hitungTitik = [];
@@ -245,6 +262,11 @@ function digitasikantor() {
         });
         nkantor = nkantor + 1;
       }
+    },
+    error: function (xhr, ajaxOptions, thrownError) {
+      $('#gagal').modal('show');
+      $('#notifikasi').append(xhr.status);
+      $('#notifikasi').append(thrownError);
     }
   });
   var infoWindow = new google.maps.InfoWindow({
@@ -262,10 +284,10 @@ function digitasipendidikan() {
         var data = arrays.features[i];
         var arrayGeometries = data.geometry.coordinates;
         var jenis = data.jenis;
-        var link = '<a href="" target="_blank">View Detail</a>';
-        var p1 = '<p> ID: ' + data.properties.id + '</p>';
+        var link = "<button class='btn btn-info btn-xs fa fa-info-circle' title='View Details' onclick='detailumkm("+'"'+data.properties.id+'"'+")'></button>";
+        var p1 = ' ID: ' + data.properties.id;
         var p2 = '<p>' + data.properties.nama + '</p>';
-        var p3 = p1 + p2 +'('+jenis+') '+link;
+        var p3 = link + p1 + p2 +'('+jenis+') ';
 
         var idTitik = 0;
         var hitungTitik = [];
@@ -303,6 +325,11 @@ function digitasipendidikan() {
         });
         npendidikan = npendidikan + 1;
       }
+    },
+    error: function (xhr, ajaxOptions, thrownError) {
+      $('#gagal').modal('show');
+      $('#notifikasi').append(xhr.status);
+      $('#notifikasi').append(thrownError);
     }
   });
   var infoWindow = new google.maps.InfoWindow({
@@ -320,10 +347,10 @@ function digitasikesehatan() {
         var data = arrays.features[i];
         var arrayGeometries = data.geometry.coordinates;
         var jenis = data.jenis;
-        var link = '<a href="" target="_blank">View Detail</a>';
-        var p1 = '<p> ID: ' + data.properties.id + '</p>';
+        var link = "<button class='btn btn-info btn-xs fa fa-info-circle' title='View Details' onclick='detailumkm("+'"'+data.properties.id+'"'+")'></button>";
+        var p1 = ' ID: ' + data.properties.id;
         var p2 = '<p>' + data.properties.nama + '</p>';
-        var p3 = p1 + p2 +'('+jenis+') '+link;
+        var p3 = link + p1 + p2 +'('+jenis+') ';
 
         var idTitik = 0;
         var hitungTitik = [];
@@ -361,6 +388,11 @@ function digitasikesehatan() {
         });
         nkesehatan = nkesehatan + 1;
       }
+    },
+    error: function (xhr, ajaxOptions, thrownError) {
+      $('#gagal').modal('show');
+      $('#notifikasi').append(xhr.status);
+      $('#notifikasi').append(thrownError);
     }
   });
   var infoWindow = new google.maps.InfoWindow({
@@ -427,6 +459,11 @@ function digitasijorong() {
         digitjorong[njorong].setMap(map);
         njorong = njorong + 1;
       }
+    },
+    error: function (xhr, ajaxOptions, thrownError) {
+      $('#gagal').modal('show');
+      $('#notifikasi').append(xhr.status);
+      $('#notifikasi').append(thrownError);
     }
   });
   var infoWindow = new google.maps.InfoWindow({

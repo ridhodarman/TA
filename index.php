@@ -15,6 +15,9 @@
     <script type="text/javascript" src="script_rumah.js"></script>
     <script type="text/javascript" src="script_umkm.js"></script>
     <script type="text/javascript" src="script_ibadah.js"></script>
+    <script type="text/javascript" src="script_office.js"></script>
+    <script type="text/javascript" src="script_pendidikan.js"></script>
+    <script type="text/javascript" src="script_kesehatan.js"></script>
 </head>
 
 <body>
@@ -270,11 +273,47 @@
                                 <p style="font-size: 400%; color: #edd83b"><i class="fas fa-exclamation-circle"></i></p>
                                 <p>Not Found</p>
                             </div>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+                        </center>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="peringatan">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-dialog modal-sm" style="width: 200%">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <center>
+                            <div>
+                                <p style="font-size: 400%; color: #edd83b"><i class="fas fa-exclamation-circle"></i></p>
+                                <div id="ket-p"></div>
+                            </div>
                             <button type="button" class="btn btn-warning" data-dismiss="modal">OK</button>
                         </center>
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="gagal">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <center>
+                            <div>
+                                <p style="font-size: 400%; color: red"><i class="far fa-times-circle"></i></p>
+                                <p>Oopss..,  Something went wrong!</p>
+                                <div id="notifikasi"><?php  ?></div>
+                            </div>
+                            <button type="button" class="btn btn-warning" data-dismiss="modal">OK</button>
+                        </center>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 
@@ -338,3 +377,55 @@
     }
 ?>
 </html>
+<div class="modal fade bd-example-modal-lg modal-xl" id="info-bang">
+    <div class="modal-dialog modal-lg modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="jenis-bang"></h5>
+                <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+            </div>
+            <div class="modal-body" style="background-color: #eee">
+                <div id="konten-bang"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function detailumkm(id) {
+        $("#jenis-bang").empty()
+        $("#jenis-bang").append("<i class='fas fa-store-alt'></i> Micro, Small, Medium, Enterprise Building Info")
+        $('#konten-bang').load("info-umkm.php?id="+id);
+        $('#info-bang').modal('show');
+    }
+
+    function detailibadah(id) {
+        $("#jenis-bang").empty()
+        $("#jenis-bang").append("<i class='fas fa-mosque'></i> Worship Building Info")
+        $('#konten-bang').load("info-ibadah.php?id="+id);
+        $('#info-bang').modal('show');
+    }
+
+    function detailpendidikan(id) {
+        $("#jenis-bang").empty()
+        $("#jenis-bang").append("<i class='fas fa-school'></i> Educational Building Info")
+        $('#konten-bang').load("info-pendidikan.php?id="+id);
+        $('#info-bang').modal('show');
+    }
+
+    function detailkesehatan(id) {
+        $("#jenis-bang").empty()
+        $("#jenis-bang").append("<i class='fas fa-hospital-alt'></i> Health Building Info")
+        $('#konten-bang').load("info-kesehatan.php?id="+id);
+        $('#info-bang').modal('show');
+    }
+
+    function detailkantor(id) {
+        $("#jenis-bang").empty()
+        $("#jenis-bang").append("<i class='fa fa-bank'></i> Office Building Info")
+        $('#konten-bang').load("info-kantor.php?id="+id);
+        $('#info-bang').modal('show');
+    }
+</script>

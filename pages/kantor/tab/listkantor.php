@@ -39,7 +39,7 @@
                     // echo "<td>".$data['jenis']."</td>";
                     echo "<td>".wordlimit($data['address'],40)."</td>";
                     echo '<td>
-                        <a href="info-umkm.php?id='.$id.'"><button class="btn btn-info btn-xs" title="View Detail"><i class="fa fa-info-circle"></i> View Detail</button></a>
+                        <a href="info-kantor.php?id='.$id.'"><button class="btn btn-info btn-xs" title="View Detail"><i class="fa fa-info-circle"></i> View Detail</button></a>
                         <button class="btn btn-danger btn-xs" title="Hapus" data-toggle="modal" data-target="#delete-bang'.$id.'"><i class="fa fa-trash"></i> Delete</button>
                         </td>';
                     echo "</tr>";
