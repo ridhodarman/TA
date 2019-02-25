@@ -211,3 +211,59 @@ function cari_idrumah() {
     });
   }
 }
+
+function carikons_rumah() { 
+  var jenis_k = document.getElementById("jeniskons_rumah").value;
+  console.log("cari rumah dengan jenis konstruksi: " + jenis_k);
+  $.ajax({
+    url: 'act/rumah_cari-jeniskonstruksi.php?k=' + jenis_k,
+    data: "",
+    dataType: 'json',
+    success: function (rows) {
+      cari_rumah(rows);
+    },
+    error: function (xhr, ajaxOptions, thrownError) {
+      $('#gagal').modal('show');
+      $('#notifikasi').append(xhr.status);
+      $('#notifikasi').append(thrownError);
+    }
+  });
+}
+
+function caritahun_rumah() { 
+  var awal = document.getElementById("rumah_awaltahun").value;
+  var akhir = document.getElementById("rumah_akhirtahun").value;
+  console.log("cari rumah dengan tahun berdiri: " + awal + " - " +akhir);
+  $.ajax({
+    url: 'act/rumah_cari-tahun.php?awal=' + awal + '&akhir=' + akhir,
+    data: "",
+    dataType: 'json',
+    success: function (rows) {
+      cari_rumah(rows);
+    },
+    error: function (xhr, ajaxOptions, thrownError) {
+      $('#gagal').modal('show');
+      $('#notifikasi').append(xhr.status);
+      $('#notifikasi').append(thrownError);
+    }
+  });
+}
+
+function carilistrik_rumah() { 
+  var awal = document.getElementById("rumah_awallistrik").value;
+  var akhir = document.getElementById("rumah_akhirlistrik").value;
+  console.log("cari listrik dengan kapsitas: " + awal + " - " +akhir);
+  $.ajax({
+    url: 'act/rumah_cari-listrik.php?awal=' + awal + '&akhir=' + akhir,
+    data: "",
+    dataType: 'json',
+    success: function (rows) {
+      cari_rumah(rows);
+    },
+    error: function (xhr, ajaxOptions, thrownError) {
+      $('#gagal').modal('show');
+      $('#notifikasi').append(xhr.status);
+      $('#notifikasi').append(thrownError);
+    }
+  });
+}

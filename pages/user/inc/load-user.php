@@ -48,6 +48,7 @@
                                         <p>Are you sure to delete "'.$username.'" ?</p>
                                     </div>
                                     <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                                         <button type="button" class="btn btn-danger" onclick="hapusadmin('.$user_enc.','.$usr.')">Delete</button>
                                     </div>
                                 </div>
@@ -56,7 +57,7 @@
 
                         <div class="modal fade" id="edit-admin'.$username.'">
                             <div class="modal-dialog modal-dialog-centered" role="document">
-                                <form method="post" id="form-editadmin'.$username.'">
+                                <form method="post" id="form-editadmin'.$username.'" action="act/edit-admin.php">
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <h5 class="modal-title">Edit</h5>
@@ -74,7 +75,7 @@
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                            <button type="button" class="btn btn-primary" id="editadmin'.$username.'" onclick="editadmin('.$usr.', '.$usr2.')" disabled><i class="ti-save"></i> Save</button>
+                                            <button type="submit" class="btn btn-primary" id="editadmin'.$username.'" disabled><i class="ti-save"></i> Save</button>
                                         </div>
                                     </div>
                                 </form>

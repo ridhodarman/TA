@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Manage Admin Account</title>
+    <title>Account Setting</title>
 
     <?php 
         include('../inc/head.php') 
@@ -101,7 +101,7 @@
                                                 <button class="btn btn-danger btn-xs" title="Hapus" data-toggle="modal" data-target="#delete-admin'.$username.'"><i class="fa fa-trash"></i> Delete</button>
                                                 </td>';
                                             echo "</tr>";
-                                            $user_enc = "'".base64_encode($username)."'";
+                                            $user_enc = base64_encode($username);
                                             $usr="'".$username."'";
                                             $usr2="'usr-edit".$username."'";
                                             $ids="'ids".$username."'";
@@ -130,7 +130,7 @@
 
                                                 <div class="modal fade" id="edit-admin'.$username.'">
                                                     <div class="modal-dialog modal-dialog-centered" role="document">
-                                                        <form method="post" id="form-editadmin'.$username.'" action="act/edit-admin.php">
+                                                        <form method="post" id="form-editadmin'.$username.'">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
                                                                     <h5 class="modal-title">Edit</h5>
@@ -148,7 +148,7 @@
                                                                 </div>
                                                                 <div class="modal-footer">
                                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                                                    <button type="submit" class="btn btn-primary" id="editadmin'.$username.'" disabled><i class="ti-save"></i> Save</button>
+                                                                    <button type="button" class="btn btn-primary" id="editadmin'.$username.'" onclick="editadmin('.$usr.', '.$usr2.')" disabled><i class="ti-save"></i> Save</button>
                                                                 </div>
                                                             </div>
                                                         </form>
@@ -230,35 +230,35 @@
         });
     }
 
-    // //edit data
-    // function editadmin(username, input) {
-    //     console.log(username)
-    //     console.log(input)
-    //     var user = document.getElementById(input).value;
-    //         if (user==null || user=='') {
-    //             $('#datakosong').modal('show');
-    //         }
-    //         else {
-    //             var data = $('#form-editadmin'+username).serialize();
-    //             console.log(data)
-    //             $.ajax({
-    //                 type: 'POST',
-    //                 url: "act/edit-admin.php",
-    //                 data: data,
-    //                 success: function() {
-    //                     $('#tabel-admin').load("inc/load-user.php");
-    //                     $('#edit-admin'+username).modal('hide');
-    //                     $('#sukses-update').modal('show');
-    //                 },
-    //                 error: function (xhr, ajaxOptions, thrownError) {
-    //                     $("#notifikasi").empty();
-    //                     $('#gagal').modal('show');
-    //                     $("#notifikasi").append("<p>"+xhr.status+"</p>");
-    //                     $("#notifikasi").append("<p>"+thrownError+"</p>");
-    //                 }
-    //             });
-    //         }
-    // }
+    //edit data
+    function editadmin(username, input) {
+        console.log(username)
+        console.log(input)
+        var user = document.getElementById(input).value;
+            if (user==null || user=='') {
+                $('#datakosong').modal('show');
+            }
+            else {
+                var data = $('#form-editadmin'+username).serialize();
+                console.log(data)
+                $.ajax({
+                    type: 'POST',
+                    url: "act/edit-admin.php",
+                    data: data,
+                    success: function() {
+                        $('#tabel-admin').load("inc/load-user.php");
+                        $('#edit-admin'+username).modal('hide');
+                        $('#sukses-update').modal('show');
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        $("#notifikasi").empty();
+                        $('#gagal').modal('show');
+                        $("#notifikasi").append("<p>"+xhr.status+"</p>");
+                        $("#notifikasi").append("<p>"+thrownError+"</p>");
+                    }
+                });
+            }
+    }
 
     function cek(input1, input2, button, label) {
         var pw1 = document.getElementById(input1).value;
@@ -320,6 +320,8 @@
                     $('#'+label).html('...This username is already registered');
                     $('#'+button).prop('disabled', true);
                     if (user == tempuser){
+                        $('#'+label).empty();
+                        $('#'+button).prop('disabled', false);
                         ketemu=false;
                     }
                   }";
@@ -336,8 +338,4 @@
     $(document).ready(function() {
             $('#listadmin').DataTable();
     } );
-
-    function back() {
-        window.history.back();
-    }
 </script>

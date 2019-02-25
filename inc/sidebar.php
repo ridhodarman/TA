@@ -33,8 +33,60 @@ select {
                                     </li>
                                 </ul>
                             </li> 
-                            <li name="terbatas"><a href="javascript:void(0)" onclick="rumahberpenghuni()">Show Rumah Berpenghuni</a></li>
-                            <li name="terbatas"><a href="javascript:void(0)" onclick="rumahkosong()">Show Rumah Kosong</a></li>                        
+                            <li name="terbatas"><a href="javascript:void(0)" aria-expanded="true">Search By Construction Type</a>
+                                <ul class="collapse">
+                                    <li>
+                                    <div class="input-group mb-3">
+                                        <select aria-label="Text input with dropdown button" id="jeniskons_rumah">
+                                            <?php                
+                                                $sql_j=pg_query("SELECT * FROM type_of_construction ORDER BY name_of_type");
+                                                while($row = pg_fetch_assoc($sql_j))
+                                                {
+                                                    echo"<option value=".$row['type_id'].">".$row['name_of_type']."</option>";
+                                                }
+                                            ?>
+                                        </select>
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary" type="button" onclick="carikons_rumah()"><i class="fa fa-search"></i></button>
+                                        </div>
+                                    </div>
+                                    </li>
+                                </ul>
+                            </li>  
+                            <li name="terbatas"><a href="javascript:void(0)" aria-expanded="true">Search By Standing Year</a>
+                                <ul class="collapse">
+                                    <li>
+                                    <div class="input-group">
+                                        <p aria-label="Amount (to the nearest dollar)">
+                                            <div class="input-group-append" style="width: 28%">
+                                                <input type="text" id="rumah_awaltahun" class="input-group-text putih" onkeypress="return hanyaAngka(event)" placeholder="from"/>
+                                                <span class="input-group-text">-</span>
+                                                <input type="text" id="rumah_akhirtahun" class="input-group-text putih" onkeypress="return hanyaAngka(event)" placeholder="until"/>
+                                                <button class="btn btn-primary input-group-text" onclick="caritahun_rumah()"><i class="fa fa-search"></i></button>
+                                            </div>
+                                        </p>
+                                    </div>
+                                    </li>
+                                </ul>
+                            </li>     
+                            <li name="terbatas"><a href="javascript:void(0)" aria-expanded="true">Search By Electricity Capacity</a>
+                                <ul class="collapse">
+                                    <li>
+                                    <div class="input-group">
+                                        <p aria-label="Amount (to the nearest dollar)">
+                                            <div class="input-group-append" style="width: 25%">
+                                                <input type="text" id="rumah_awallistrik" class="input-group-text putih" onkeypress="return hanyaAngka(event)" placeholder="from" />
+                                                <span class="input-group-text">-</span>
+                                                <input type="text" id="rumah_akhirlistrik" class="input-group-text putih" onkeypress="return hanyaAngka(event)" placeholder="until"/>
+                                                <button class="btn btn-primary input-group-text" onclick="carilistrik_rumah()"><i class="fa fa-search"></i></button>
+                                            </div>
+                                        </p>
+                                    </div>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li name="terbatas"><a href="javascript:void(0)" onclick="rumahberpenghuni()">Show inhabited houses</a></li>
+                            <li name="terbatas"><a href="javascript:void(0)" onclick="rumahkosong()">Show uninhabited houses</a></li>
                         </ul>
                     </li>
                     <li>
