@@ -21,8 +21,20 @@ select {
                     <li>
                         <a href="javascript:void(0)" aria-expanded="true"><i class="ti-home"></i><span>House</span></a>
                         <ul class="collapse">
-                            <li><a href="javascript:void(0)" onclick="rumahberpenghuni()">Show Rumah Berpenghuni</a></li>
-                            <li><a href="javascript:void(0)" onclick="rumahkosong()">Show Rumah Kosong</a></li>                        
+                            <li><a href="javascript:void(0)" aria-expanded="true">Search By Survey ID</a>
+                                <ul class="collapse">
+                                    <li>
+                                    <div class="input-group mb-3">
+                                        <input type="text" aria-label="Text input with dropdown button" id="id-rumah">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary" type="button" onclick="cari_idrumah()"><i class="fa fa-search"></i></button>
+                                        </div>
+                                    </div>
+                                    </li>
+                                </ul>
+                            </li> 
+                            <li name="terbatas"><a href="javascript:void(0)" onclick="rumahberpenghuni()">Show Rumah Berpenghuni</a></li>
+                            <li name="terbatas"><a href="javascript:void(0)" onclick="rumahkosong()">Show Rumah Kosong</a></li>                        
                         </ul>
                     </li>
                     <li>
@@ -773,3 +785,20 @@ select {
       }
     }
 </script>
+
+<?php
+    if ($akses==true) {
+        echo '
+            <script>
+                $("[name='."'".'terbatas'."'".']").show()
+            </script>
+        ';
+    }
+    else {
+        echo '
+            <script>
+                $("[name='."'".'terbatas'."'".']").hide()
+            </script>
+        ';  
+    }
+?>

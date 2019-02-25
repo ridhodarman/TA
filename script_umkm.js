@@ -281,6 +281,7 @@ function carifasilitas_umkm(){
     arrayFas.push($("input[name=fas_umkm]:checked")[i].value);
   }
   if (arrayFas==''){
+    $('#ket-p').empty();
     $('#peringatan').modal('show');
     $('#ket-p').append('Choose Facility !');
   }else{

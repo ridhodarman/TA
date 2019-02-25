@@ -10,29 +10,36 @@
                 <h5 class="modal-title">Add Datuk</h5>
                 <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
             </div>
-            <form role="form" action="act/tambahrumah.php" enctype="multipart/form-data" method="post"></form>
+            <form method="post" id="form-tambahdatuk">
                 <div class="modal-body">
                     <div class="form-group">
                         <label>Name of Datuk:</label>
-                        <input type="text" class="form-control" name="id" value="" required>
+                        <input type="text" class="form-control" id="nama" name="nama" value="" required>
                     </div>
                     <div class="form-group">
                         <label>Tribe:</label>
-                        <select class="form-control" name="suku" value="" required>
+                        <select class="form-control" name="suku" id="daftarsuku" required>
                             <option></option>
+                            <?php                
+                                $sql_suku=pg_query("SELECT * FROM tribe ORDER BY name_of_tribe");
+                                while($row = pg_fetch_assoc($sql_suku))
+                                {
+                                    echo"<option value=".$row['tribe_id'].">".$row['name_of_tribe']."</option>";
+                                }
+                            ?>
                         </select>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">+ Add</button>
+                    <button type="button" class="btn btn-primary" id="tambahkandatuk">+ Add</button>
                 </div>
             </form>
         </div>
     </div>
 </div>
 
-<div class="panel-body" style="padding-top: 2%; padding-left: 2%; padding-right: 2%">
+<div class="panel-body" style="padding-top: 2%; padding-left: 2%; padding-right: 2%" id="tabel-datuk">
     <h4 style="text-align: center;">Datuk List</h4>
     <table width="100%" class="table table-striped table-bordered table-hover" id="listdatuk">
         <thead>
@@ -46,34 +53,43 @@
         <tbody>
             <?php
                 $no=1;
-                $sql=pg_query("SELECT * FROM msme_building");
+                $sql=pg_query("SELECT D.datuk_id, D.datuk_name, D.tribe_id, T.name_of_tribe 
+                                FROM datuk AS D
+                                JOIN tribe AS T ON D.tribe_id=T.tribe_id
+                            ");
                 while ($data=pg_fetch_assoc($sql)) {
-                    $id=$data['msme_building_id'];
+                    $id=$data['datuk_id'];
+                    $id_enc= "'".base64_encode($id)."'";
+                    $id_suku=$data['D.tribe_id'];
+                    $nama=$data['datuk_name'];
                     echo "<tr>";
                     echo "<td>".$no."</td>";
-                    echo "<td>".$data['name_of_msme_building']."</td>";
-                    echo "<td>".$data['type_of_msme']."</td>";
+                    echo "<td>".$nama."</td>";
+                    echo "<td>".$data['name_of_tribe']."</td>";
                     echo '<td>
                             <button class="btn btn-info btn-xs" data-toggle="modal" data-target="#edit-datuk'.$id.'"><i class="fa fa-edit"></i> Edit</button>
                             <button class="btn btn-danger btn-xs" title="Hapus" data-toggle="modal" data-target="#delete-datuk'.$id.'"><i class="fa fa-trash"></i> Delete</button>
                           </td>';
                     echo "</tr>";
+
+                    //$j_datuk=pg_num_rows(pg_query("SELECT datuk_id FROM datuk WHERE tribe_id='$id'"));
+
                     echo '
                             <div class="modal fade" id="delete-datuk'.$id.'">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title">Delete '.$jenis.' ?</h5>
+                                            <h5 class="modal-title">Delete '.$nama.' ?</h5>
                                             <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
                                         </div>
                                         <div class="modal-body">
-                                            <p>Are you sure to delete "'.$jenis.'" from data of datuk list ? <br/>
-                                            There are as many as <b> 100 </b> families that have this datuk.
-                                            </p>
+                                            <center><p>Are you sure to delete "'.$nama.'" from data of datuk list ? <br/>
+                                            There are as many as <b> - </b> families that have this datuk.
+                                            </p></center>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                            <button type="button" class="btn btn-danger">Delete</button>
+                                            <button type="button" class="btn btn-danger" onclick="hapusdatuk('.$id_enc.','.$id.')">Delete</button>
                                         </div>
                                     </div>
                                 </div>
@@ -82,7 +98,7 @@
 
                             <div class="modal fade" id="edit-datuk'.$id.'">
                                 <div class="modal-dialog modal-dialog-centered" role="document">
-                                <form method="post" id="form-tambahjenis">
+                                <form method="post" id="form-editdatuk">
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <h5 class="modal-title">Edit</h5>
@@ -91,19 +107,26 @@
                                         <div class="modal-body">
                                             <div class="form-group">
                                                 <label>Name of Datuk:</label>
-                                                <input type="text" class="form-control" name="id" value="'.$datuk.'" required>
+                                                <input type="text" class="form-control" id="edit-nama'.$id.'" value="'.$nama.'" required>
                                             </div>
                                             <div class="form-group">
                                                 <label>Tribe:</label>
-                                                <select class="form-control" name="suku" value="'.$suku.'" required>
-                                                    <option></option>
+                                                <select class="form-control" id="edit-suku'.$id.'" value="'.$suku.'" required>
+                                                <option></option>';
+                                                $sql_suku=pg_query("SELECT * FROM tribe ORDER BY name_of_tribe");
+                                                while($row = pg_fetch_assoc($sql_suku))
+                                                {
+                                                    echo"<option value=".$row['tribe_id'].">".$row['name_of_tribe']."</option>";
+                                                }
+                            
+                            echo '
                                                 </select>
                                             </div>
                                             <input type="hidden" class="form-control" name="id" value="'.$id.'" required>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                            <button type="button" class="btn btn-primary" id="tambahkanfas"><i class="ti-save"></i> Save</button>
+                                            <button type="button" class="btn btn-primary" onclick="editdatuk('.$id.')""><i class="ti-save"></i> Save</button>
                                         </div>
                                     </div>
                                 </form>
@@ -147,29 +170,87 @@
 </div>
 
 <script type="text/javascript">
+     //$("#daftarsuku").clone().prependTo("[name='daftarsuku2']").show()
+
+    //tambah data
     $(document).ready(function(){
-        $(".tambahjenis").click(function(){
-            var jenis = document.getElementById('jenis').value;
-            if (jenis==null || jenis=='') {
-                alert("Enter the type name that will be added first!")
+        $("#tambahkandatuk").click(function(){ 
+            var nama = document.getElementById('nama').value;
+            if (nama==null || nama=='') {
+                $('#datakosong').modal('show');
             }
             else {
-                var data = $('#form-tambahjenis').serialize();
+                var data = $('#form-tambahdatuk').serialize();
                 $.ajax({
                     type: 'POST',
-                    url: "act/tambahjenis.php",
+                    url: "act/tambah-datuk.php",
                     data: data,
                     success: function() {
-                        $('#tabel-jenis-umkm').load("inc/load-jenisumkm.php");
-                        window.location.href="#listjenis";
-                        alert("Successfully added data");
+                        $('#tabel-datuk').load("inc/load-datuk.php");
+                        $('#tambahdatuk').modal('hide');
+                        $('#sukses-tambah').modal('show');
+                        document.getElementById('nama').value=null;
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        $("#notifikasi").empty();
+                        $('#gagal').modal('show');
+                        $("#notifikasi").append("<p>"+xhr.status+"</p>");
+                        $("#notifikasi").append("<p>"+thrownError+"</p>");
                     }
                 });
             }
         });
     });
 
+    //hapus data
+    function hapusdatuk(id, idtemp) {
+        $.ajax({ 
+            url: 'act/hapus-datuk.php?id='+id,
+            data: "",
+            success: function() {
+                $('#tabel-datuk').load("inc/load-datuk.php");
+                $('#sukses-hapus').modal('show');
+                $('#delete-datuk'+idtemp).modal('hide');
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                $("#notifikasi").empty();
+                $('#gagal').modal('show');
+                $("#notifikasi").append("<p>"+xhr.status+"</p>");
+                $("#notifikasi").append("<p>"+thrownError+"</p>");
+            }
+        });
+    }
+
+    //edit data
+    function editdatuk(id) {
+         $("#daftarsuku").clone().prependTo("#edit-suku"+id);
+        var edit_nama = document.getElementById('edit-nama'+id).value;
+        var edit_suku = document.getElementById('edit-suku'+id).value;
+            if (edit_nama==null || edit_nama=='' || edit_suku==null || edit_suku=='') {
+                $('#datakosong').modal('show');
+            }
+            else {
+                var data = $('#form-editdatuk'+id).serialize();
+                $.ajax({
+                    url: "act/edit-datuk.php?id="+id+"&nama="+edit_nama+"&suku="+edit_suku,
+                    data: "",
+                    success: function() {
+                        $('#tabel-datuk').load("inc/load-datuk.php");
+                        $('#edit-datuk'+id).modal('hide');
+                        $('#sukses-update').modal('show');
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        $("#notifikasi").empty();
+                        $('#gagal').modal('show');
+                        $("#notifikasi").append("<p>"+xhr.status+"</p>");
+                        $("#notifikasi").append("<p>"+thrownError+"</p>");
+                    }
+                });
+            }
+    }
+
+
     $(document).ready(function() {
-        $('#listdatuk').DataTable();
+            $('#listdatuk').DataTable();
     } );
 </script>

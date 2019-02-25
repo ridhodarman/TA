@@ -35,8 +35,6 @@
     </table>
 </div>
 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDM2fDXHmGzCDmDBk3bdPIEjs6zwnI1kGQ&libraries=drawing"></script>        
-<script src="../inc/mapupd.js" type="text/javascript"></script>
 
 <div class="modal fade" id="tambahkeluarga">
     <div class="modal-dialog modal-dialog-centered" role="document">

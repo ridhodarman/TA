@@ -5,26 +5,26 @@
 
 <div class="modal fade" id="tambahkerja">
     <div class="modal-dialog modal-dialog-centered" role="document">
-        <form method="post" id="form-tambahjenis" style="width: 90%;">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Add Job List</h5>
-                    <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
-                </div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Add Job List</h5>
+                <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+            </div>
+            <form method="post" id="form-tambahkerja">
                 <div class="modal-body">
                     <p>Job Name:</p>
-                    <input type="text" class="form-control" name="jenis" id="jenis" placeholder="enter job name...">
+                    <input type="text" class="form-control" name="kerja2" id="kerja2" placeholder="enter job name...">
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" id="tambahkanj">+ Add</button>
+                    <button type="button" class="btn btn-primary" id="tambahkankerja">+ Add</button>
                 </div>
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
 </div>
 
-<div class="panel-body" style="padding-top: 2%; padding-left: 2%; padding-right: 2%">
+<div class="panel-body" style="padding-top: 2%; padding-left: 2%; padding-right: 2%" id="tabel-kerja">
     <h4 style="text-align: center;">Job List</h4>
    
         <table width="100%" class="table table-striped table-bordered table-hover" id="listkerja">
@@ -37,14 +37,15 @@
             </thead>
             <tbody  id="tabel-jenis-umkm">
                 <?php
-                    $sql=pg_query("SELECT * FROM type_of_msme ORDER BY name_of_type ASC");
+                    $sql=pg_query("SELECT * FROM job ORDER BY job_name ASC");
                     $no=1;
                     while ($data=pg_fetch_assoc($sql)) {
-                        $id=$data['type_id'];
-                        $jenis=$data['name_of_type'];
+                        $id=$data['job_id'];
+                        $id_enc= "'".base64_encode($id)."'";
+                        $pekerjaan=$data['job_name'];
                         echo "<tr>";
                         echo "<td>".$no."</td>";
-                        echo "<td>".$jenis."</td>";
+                        echo "<td>".$pekerjaan."</td>";
                         echo '<td>
                             <button class="btn btn-info btn-xs" data-toggle="modal" data-target="#edit-kj'.$id.'"><i class="fa fa-edit"></i> Edit</button>
                             <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#delete-kj'.$id.'"><i class="fa fa-trash"></i> Delete</button>
@@ -56,17 +57,17 @@
     						    <div class="modal-dialog">
     						        <div class="modal-content">
     						            <div class="modal-header">
-    						                <h5 class="modal-title">Delete '.$jenis.' ?</h5>
+    						                <h5 class="modal-title">Delete '.$pekerjaan.' ?</h5>
     						                <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
     						            </div>
     						            <div class="modal-body">
-    						                <p>Are you sure to delete "'.$jenis.'" from the job list? <br/>
-    						                There are as many as <b>100</b> head(s) of family(ies) who have this job.
+    						                <p>Are you sure to delete "'.$pekerjaan.'" from the job list? <br/>
+    						                There are as many as <b>-</b> head(s) of family(ies) who have this job.
     						                </p>
     						            </div>
     						            <div class="modal-footer">
     						                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-    						                <button type="button" class="btn btn-danger">Delete</button>
+    						                <button type="button" class="btn btn-danger" onclick="hapuskerja('.$id_enc.','.$id.')">Delete</button>
     						            </div>
     						        </div>
     						    </div>
@@ -75,22 +76,22 @@
 
                             <div class="modal fade" id="edit-kj'.$id.'">
                                 <div class="modal-dialog modal-dialog-centered" role="document">
-                                    <form method="post" id="form-editjenis">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title">Edit</h5>
-                                                <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
-                                            </div>
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Edit</h5>
+                                            <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+                                        </div>
+                                        <form method="post" id="form-editkerja">
                                             <div class="modal-body">
                                                 <p>Job Name:</p>
-                                                <input type="text" class="form-control" name="e-jenis" id="jenis" placeholder="enter job name..." value="'.$jenis.'">
+                                                <input type="text" class="form-control" id="kerja-edit'.$id.'" placeholder="enter job name..." value="'.$pekerjaan.'">
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                                <button type="button" class="btn btn-primary" id="tambahkanj"><i class="ti-save"></i> Save</button>
+                                                <button type="button" class="btn btn-primary" onclick="editkerja('.$id.')"><i class="ti-save"></i> Save</button>
                                             </div>
-                                        </div>
-                                    </form>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         ';
@@ -119,29 +120,81 @@
 </div>
 
 <script type="text/javascript">
+
+    //tambah data
     $(document).ready(function(){
-        $("#tambahkanj").click(function(){
-            var jenis = document.getElementById('jenis').value;
-            if (jenis==null || jenis=='') {
-                alert("Enter the type name that will be added first!")
+        $("#tambahkankerja").click(function(){
+            var kerja = document.getElementById('kerja2').value;
+            if (kerja==null || kerja=='') {
+                $('#datakosong').modal('show');
             }
             else {
-                var data = $('#form-tambahjenis').serialize();
+                var data = $('#form-tambahkerja').serialize();
                 $.ajax({
                     type: 'POST',
-                    url: "act/tambahjenis.php",
+                    url: "act/tambah-kerja.php",
                     data: data,
                     success: function() {
-                        $('#tabel-jenis-umkm').load("inc/load-jenisumkm.php");
-                        $('#tambahjenis').modal('hide');
-                        $('#suksestambahjenis').modal('show');
-                        document.getElementById('jenis').value=null;
+                        $('#tabel-kerja').load("inc/load-kerja.php");
+                        $('#tambahkerja').modal('hide');
+                        $('#sukses-tambah').modal('show');
+                        document.getElementById('kerja2').value=null;
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        $("#notifikasi").empty();
+                        $('#gagal').modal('show');
+                        $("#notifikasi").append("<p>"+xhr.status+"</p>");
+                        $("#notifikasi").append("<p>"+thrownError+"</p>");
                     }
                 });
             }
         });
     });
 
+    //hapus data
+    function hapuskerja(id, idtemp) {
+        $.ajax({ 
+            url: 'act/hapus-kerja.php?id='+id,
+            data: "",
+            success: function() {
+                $('#tabel-kerja').load("inc/load-kerja.php");
+                $('#sukses-hapus').modal('show');
+                $('#delete-kj'+idtemp).modal('hide');
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                $("#notifikasi").empty();
+                $('#gagal').modal('show');
+                $("#notifikasi").append("<p>"+xhr.status+"</p>");
+                $("#notifikasi").append("<p>"+thrownError+"</p>");
+            }
+        });
+    }
+
+    //edit data
+    function editkerja(id) {
+        var kerja_edit = document.getElementById('kerja-edit'+id).value;
+            if (kerja_edit==null || kerja_edit=='') {
+                $('#datakosong').modal('show');
+            }
+            else {
+                var data = $('#form-editkerja'+id).serialize();
+                $.ajax({
+                    url: "act/edit-kerja.php?id="+id+"&kerja-edit="+kerja_edit,
+                    data: "",
+                    success: function() {
+                        $('#tabel-kerja').load("inc/load-kerja.php");
+                        $('#edit-kj'+id).modal('hide');
+                        $('#sukses-update').modal('show');
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        $("#notifikasi").empty();
+                        $('#gagal').modal('show');
+                        $("#notifikasi").append("<p>"+xhr.status+"</p>");
+                        $("#notifikasi").append("<p>"+thrownError+"</p>");
+                    }
+                });
+            }
+    }
 
     $(document).ready(function() {
             $('#listkerja').DataTable();

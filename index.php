@@ -105,24 +105,24 @@
             </style>
             <div class="modal fade" id="login">
                 <div class="modal-dialog modal-dialog-centered" role="document">
-                    <form method="post" style="width: 140%;" action="act/login.php">
-                        <div class="modal-content gambarlogin">
-                            <div class="modal-header">
-                                <h5 class="modal-title tulisan">Login</h5>
-                                <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
-                            </div>
-                            <div class="modal-body">
-                                <font class="tulisan">Username:</font>
-                                <input type="text" class="form-control form-transparan" name="username" placeholder="username...">
-                                <font class="tulisan">Password:</font>
-                                <input type="password" class="form-control form-transparan" name="password" placeholder="password...">
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary tombol-kensyel" data-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary tombol-login"><i class="fas fa-sign-in-alt"></i> Login</button>
-                            </div>
+                    <div class="modal-content gambarlogin">
+                        <div class="modal-header">
+                            <h5 class="modal-title tulisan">Login</h5>
+                            <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
                         </div>
-                    </form>
+                        <form method="post" action="act/login.php" style="width: 90%">
+                        <div class="modal-body">
+                            <font class="tulisan">Username:</font>
+                            <input type="text" class="form-control form-transparan" name="username" placeholder="username..." required>
+                            <font class="tulisan">Password:</font>
+                            <input type="password" class="form-control form-transparan" name="password" placeholder="password..." required>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary tombol-kensyel" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary tombol-login"><i class="fas fa-sign-in-alt"></i> Login</button>
+                        </div>
+                        </form>
+                    </div>
                 </div>
             </div>
             <div id="belakang" style="z-index: 0; visibility: hidden;"></div>

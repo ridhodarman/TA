@@ -223,15 +223,21 @@
                                             LEFT JOIN worship_building_facilities AS F ON F.facility_id=D.facility_id
                                             WHERE D.worship_building_id = '$id'
                                             ");
-                                        while ($data=pg_fetch_assoc($sql)) {
-                                            $id_fas=$data['facility_id'];
-                                            $namafas =$data['name_of_facility'];
-                                            $qty = $data['quantity_of_facilities'];
-                                            echo "<tr>";
-                                            echo "<td>".$namafas."</td>";
-                                            echo "<td>".$qty."</td>";
-                                            echo "</tr>";
+                                        if (pg_num_rows($sql)>0) {
+                                        	while ($data=pg_fetch_assoc($sql)) {
+	                                            $id_fas=$data['facility_id'];
+	                                            $namafas =$data['name_of_facility'];
+	                                            $qty = $data['quantity_of_facilities'];
+	                                            echo "<tr>";
+	                                            echo "<td>".$namafas."</td>";
+	                                            echo "<td>".$qty."</td>";
+	                                            echo "</tr>";
+	                                        }
                                         }
+                                        else {
+                                        	echo '<td colspan="2">no data</td>';
+                                        }
+                                        
                                     ?>
                                             
                                         </tbody>

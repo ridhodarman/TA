@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Office Building</title>
+    <title>Account Setting</title>
 
     <?php 
         include('../inc/head.php') 
@@ -45,18 +45,24 @@
             <div class="main-content-inner">
                 <div class="card">
                     <div class="card-body">
-                        <h5>Account Setting</h5>
-                        <br/>
-                        <label>Username:</label>
-                        <input type="text" class="form-control" name="e-jenis" id="jenis" placeholder="username...">
-                        <br/>
-                        <label>Password:</label>
-                        <input type="text" class="form-control" name="e-jenis" id="jenis" placeholder="password...">
-                        <br/>
-                        <div class="pull-right">
-                            <button class="btn btn-default" onclick="back()"> Cancel</button>
-                            <button class="btn btn-primary"><i class="fa fa-save"></i> Save</button>
-                        </div>
+                        <form method="POST" action="act/ubahpassword.php">
+                            <h5>Account Setting</h5>
+                            <br/>
+                            <label>Username:</label>
+                            <input type="text" class="form-control" name="username" value="<?php echo  $_SESSION['username'] ?>" placeholder="username..." readonly>
+                            <br/>
+                            <label>Password:</label>
+                            <input type="password" class="form-control" name="pw" id="pw" value="" required onkeyup="cek()">
+                            <br/>
+                            <label>Re-type Password:</label>
+                            <input type="password" class="form-control" name="cek-pw" id="cek-pw" value="" required onkeyup="cek()">
+                            <label id="ket"></label>
+                            <br/>
+                            <div class="pull-right">
+                                <button class="btn btn-default" onclick="back()"> Cancel</button>
+                                <button type="submit" class="btn btn-primary" id="ubah" disabled><i class="fa fa-save"></i> Save</button>
+                            </div>
+                        </form>
                     </div>
                 </div>          
             </div>
@@ -113,10 +119,25 @@
 
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+</body>
+</html>
     <script type="text/javascript">
         function back() {
             window.history.back();
         }
+
+        function cek() {
+            var pw1 = document.getElementById("pw").value;
+            var pw2 = document.getElementById("cek-pw").value;
+
+            if (pw1 == pw2) {
+                $('#ubah').prop('disabled', false);
+                 $('#ket').empty();
+            }
+            else {
+                 $('#ubah').prop('disabled', true);
+                 $('#ket').css('color', 'red');
+                 $('#ket').html('the password entered must be the same!');
+            }
+        }
     </script>
-</body>
-</html>

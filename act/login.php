@@ -10,7 +10,7 @@ if (isset($_POST['username'])) {
 		session_start();
 	  	$_SESSION['username'] = $row['username'];
 	  	$_SESSION['password'] = $row['password'];
-	  	
+	  	$_SESSION['role'] = $row['role'];
 		
 		header("location: ../");
 		

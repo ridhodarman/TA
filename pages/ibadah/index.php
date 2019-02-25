@@ -8,7 +8,6 @@
     <title>Worship Building</title>
 
     <?php 
-        $loc = "../";
         include('../inc/head.php') 
     ?>
 

@@ -186,3 +186,28 @@ function teksradius()
   {
     document.getElementById('km').innerHTML=document.getElementById('inputradius').value*100
   }
+
+function cari_idrumah() { 
+  var idrumah = document.getElementById("id-rumah").value;
+  console.log("cari rumah dengan id: " + idrumah);
+  if (idrumah==null || idrumah=="") {
+    $('#ket-p').empty();
+    $('#peringatan').modal('show');
+    $('#ket-p').append('enter survey ID !');
+  }
+  else {
+    $.ajax({
+      url: 'act/rumah_cari-id.php?id=' + idrumah,
+      data: "",
+      dataType: 'json',
+      success: function (rows) {
+        cari_rumah(rows);
+      },
+      error: function (xhr, ajaxOptions, thrownError) {
+        $('#gagal').modal('show');
+        $('#notifikasi').append(xhr.status);
+        $('#notifikasi').append(thrownError);
+      }
+    });
+  }
+}

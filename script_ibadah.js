@@ -338,6 +338,7 @@ function carifasilitas_ibadah(){
     arrayFas.push($("input[name=fas_ibadah]:checked")[i].value);
   }
   if (arrayFas==''){
+    $('#ket-p').empty();
     $('#peringatan').modal('show');
     $('#ket-p').append('Choose Facility !');
   }else{

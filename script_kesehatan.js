@@ -263,6 +263,7 @@ function carifasilitas_kesehatan(){
     arrayFas.push($("input[name=fas_kesehatan]:checked")[i].value);
   }
   if (arrayFas==''){
+    $('#ket-p').empty();
     $('#peringatan').modal('show');
     $('#ket-p').append('Choose Facility !');
   }else{

@@ -17,15 +17,28 @@
                             <li id="datuk">
                                 <a href="<?php echo $loc; ?>datuk" aria-expanded="true"><i class="ti-pie-chart"></i><span>Manage Datuk & Tribe Data</span></a>
                             </li>
-                            <li>
-                                <a href="javascript:void(0)" aria-expanded="true"><i class="fa fa-info-circle"></i><span>About</span></a>
-                                <ul class="collapse">
-                                    <li><a href="fontawesome.html"><i class="ti-flag-alt-2"></i> Nagari</a></li>
-                                    <li><a href="themify.html"><i class="ti-flag"></i> Jorong</a></li>
-                                </ul>
+                            <li id="aksessuper">
+                                <a href="user" aria-expanded="true"><i class="fas fa-users-cog"></i><span>Manage Admin Nagari</span></a>
                             </li>        
                         </ul>
                     </nav>
                 </div>
             </div>
         </div>
+
+<?php
+    if ($_SESSION['role']==1) {
+        echo '
+            <script>
+                $("#aksessuper").show()
+            </script>
+        ';
+    }
+    else {
+        echo '
+            <script>
+                $("#aksessuper").hide()
+            </script>
+        ';  
+    }
+?>

@@ -337,6 +337,7 @@ function carifasilitas_pendidikan(){
     arrayFas.push($("input[name=fas_pendidikan]:checked")[i].value);
   }
   if (arrayFas==''){
+    $('#ket-p').empty();
     $('#peringatan').modal('show');
     $('#ket-p').append('Choose Facility !');
   }else{

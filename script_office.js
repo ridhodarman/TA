@@ -301,6 +301,7 @@ function carifasilitas_kantor(){
     arrayFas.push($("input[name=fas_kantor]:checked")[i].value);
   }
   if (arrayFas==''){
+    $('#ket-p').empty();
     $('#peringatan').modal('show');
     $('#ket-p').append('Choose Facility !');
   }else{
