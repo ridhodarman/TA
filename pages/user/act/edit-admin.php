@@ -1,6 +1,6 @@
 <?php
 	session_start();
-    if(isset($_SESSION['username'])) {
+    if(isset($_SESSION['username']) && $_SESSION['role'] == 1) {
 		include ('../../../inc/koneksi.php');
 		include ('../inc/notif-act.php');
 		$username = $_POST['usr-edit'];

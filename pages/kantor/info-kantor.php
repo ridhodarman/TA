@@ -192,7 +192,7 @@
 
                                                 var marker = new google.maps.Marker({
                                                 position: posisi,
-                                                icon:server+'assets/ico/musajik.png',
+                                                icon:server+'assets/ico/kantor.png',
                                                 animation: google.maps.Animation.BOUNCE,
                                                 map: map
                                                 });

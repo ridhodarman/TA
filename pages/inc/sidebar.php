@@ -18,7 +18,7 @@
                                 <a href="<?php echo $loc; ?>datuk" aria-expanded="true"><i class="ti-pie-chart"></i><span>Manage Datuk & Tribe Data</span></a>
                             </li>
                             <li id="aksessuper">
-                                <a href="user" aria-expanded="true"><i class="fas fa-users-cog"></i><span>Manage Admin Nagari</span></a>
+                                <a href="<?php echo $loc; ?>user" aria-expanded="true"><i class="fas fa-users-cog"></i><span>Manage Admin Nagari</span></a>
                             </li>        
                         </ul>
                     </nav>

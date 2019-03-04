@@ -1,6 +1,6 @@
 <?php
 	session_start();
-    if(isset($_SESSION['username']) && $_POST['username'] != null ) {
+    if(isset($_SESSION['username']) && $_POST['username'] != null  && $_SESSION['role'] == 1) {
 
 		include ('../../../inc/koneksi.php');
 

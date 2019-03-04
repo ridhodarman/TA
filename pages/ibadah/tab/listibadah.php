@@ -224,6 +224,10 @@
             }
     }
 
+    $(".readonly").on('keydown paste', function(e){
+        e.preventDefault();
+    });
+
     function reset () {
         $("#toggleCSS").attr("href", "../../assets/alertify/themes/alertify.default.css");
         alertify.set({

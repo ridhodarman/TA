@@ -254,6 +254,10 @@
         });
     }
 
+    $(".readonly").on('keydown paste', function(e){
+        e.preventDefault();
+    });
+
     $("#geom").on( 'click', function () {
         reset();
         alertify.alert('<img src="../../inc/poligon.gif" width="150px"><br/>please draw the area with polygon on the map');

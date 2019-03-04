@@ -8,7 +8,10 @@
     <title>Manage Admin Account</title>
 
     <?php 
-        include('../inc/head.php') 
+        include('../inc/head.php');
+        if($_SESSION['role'] != 1){
+            echo '<script>window.location="../../assets/403"</script>';
+        } 
     ?>
 
 </head>

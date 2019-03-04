@@ -1,6 +1,6 @@
 <?php
     session_start();
-    if(is_null($_SESSION['username'])){
+    if(is_null($_SESSION['username']) || $_SESSION['role'] != 1){
         echo '<script>window.location="../../../assets/403"</script>';
     }
     include ('../../../inc/koneksi.php');

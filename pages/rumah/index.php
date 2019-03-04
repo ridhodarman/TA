@@ -5,21 +5,23 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>srtdash - ICO Dashboard</title>
+    <title>House</title>
 
     <?php 
-        $loc = "../";
-        include('../inc/head.php');
-
-        function wordlimit($text,$limit){
-            if(strlen($text)>$limit)
-                $word = mb_substr($text,0,$limit-3)."...";
-            else
-                $word = $text;
-            return $word;          
-        } 
+        include('../inc/head.php') 
     ?>
-
+    <!-- <link rel="stylesheet" href="../../js/jquery-ui.js" /> -->
+    <link rel="stylesheet" href="../dist/css/bootstrap-select.css">
+    <link rel="stylesheet" href="../../assets/alertify/themes/alertify.core.css" />
+    <link rel="stylesheet" href="../../assets/alertify/themes/alertify.default.css" id="toggleCSS" />
+    <meta name="viewport" content="width=device-width">
+    <script src="../../assets/alertify/lib/alertify.min.js"></script>
+    <style type="text/css">
+        .readonly {
+            background-color: #eee;
+            cursor: col-resize;
+        }
+    </style>
 </head>
 
 <body>
@@ -52,45 +54,192 @@
             <br>
             <!-- page title area end -->
             <div class="main-content-inner">
-                 
-                <a href="tambahrumah.php" class="btn btn-default btn-lg" style="width: 100%">+ Add House Building Data </a><br/><br/>
+                <div class="card">
+                    <div class="card-body">
+                        <div style="text-align: center; padding-top: 3%; padding-bottom:3%">
+                            <button class="btn btn-default btn-lg" style="width: 90%; background-color: #fafafa" data-toggle="modal" data-target="#tambahrumah">+
+                            Add House Building Data </button>
+                        </div>
+                        <div class="panel-body" style="padding-top: 2%; padding-left: 2%; padding-right: 2%">
+                            <h4 style="text-align: center;">List of House Buildings</h4>
+                            <table width="100%" class="table table-striped table-bordered table-hover" id="listrumah">
+                                <thead>
+                                    <tr style="text-align: center">
+                                        <th>ID</th>
+                                        <!-- <th>Owner</th> -->
+                                        <th>Address</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                        $sql=pg_query("SELECT house_building_id, address FROM house_building");
+                                        while ($data=pg_fetch_assoc($sql)) {
+                                            $id=$data['house_building_id'];
+                                            //$nama=$data['name_of_worship_building'];
+                                            echo "<tr>";
+                                            echo "<td>".$id."</td>";
+                                            //echo "<td>".$nama."</td>";
+                                            echo "<td>".wordlimit($data['address'],50)."</td>";
+                                            echo '<td>
+                                                <a href="info-rumah.php?id='.$id.'"><button class="btn btn-info btn-xs" title="View Detail"><i class="fa fa-info-circle"></i> View Detail</button></a>
+                                                <button class="btn btn-danger btn-xs" title="Hapus" data-toggle="modal" data-target="#delete-bang'.$id.'"><i class="fa fa-trash"></i> Delete</button>
+                                                </td>';
+                                            echo "</tr>";
+                                            $id2 = base64_encode($id);
+                                            echo '
+                                                <div class="modal fade" id="delete-bang'.$id.'">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title">Delete '.$id.' ?</h5>
+                                                                <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <p>Are you sure to delete "'.$id.'" from  the house building data ?</p>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                                                <a href="act/hapus-b-ibadah.php?id='.$id2.'"><button type="button" class="btn btn-danger">Delete</button></a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            ';
+                                        }
+                                    ?>
+                                </tbody>
+                            </table>
+                        </div>
+                        </div>
+                    </div>
+                </div>          
+            </div>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDM2fDXHmGzCDmDBk3bdPIEjs6zwnI1kGQ&libraries=drawing"></script>        
+<script src="../inc/mapupd.js" type="text/javascript"></script>
 
-                
-                <div class="panel-body card" style="padding-top: 2%; padding-left: 2%; padding-right: 2%">
-                    <h4 style="text-align: center;">House List</h4>
-                    <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Owner</th>
-                                <th>Address</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                                $sql=pg_query("SELECT * FROM house_building");
-                                while ($data=pg_fetch_assoc($sql)) {
-                                    $id=$data['house_building_id'];
-                                    echo "<tr>";
-                                    echo "<td>".$id."</td>";
-                                    echo "<td>".$data['fcn_owner']."</td>";
-                                    echo "<td>".$data['address']."</td>";
-                                    echo '<td>
-                                        <a href="inforumah.php?id='.$id.'"><button class="btn btn-info btn-xs" title="View Detail"><i class="fa fa-info-circle"></i> View Detail</button></a>
-                                        <a href="act/hapusrumah.php?id='.$id.'"><button class="btn btn-danger btn-xs" title="Hapus" onclick="return confirm(\'Yakin?\')"><i class="fa fa-trash"></i> Delete</button></a>
-                                        </td>';
-                                    echo "</tr>";
-                                }
-                            ?>
-                        </tbody>
-                    </table>
+<div class="modal fade bd-example-modal-lg modal-xl" id="tambahrumah">
+        <div class="modal-dialog modal-lg modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add House Building Data</h5>
+                    <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
                 </div>
-            
-        
-                
-    </div>
+                <form role="form" action="act/tambah-rumah.php" enctype="multipart/form-data" method="post">
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-sm-6" id="hide2">
+                                <!-- menampilkan peta-->
+                                <section class="panel">
+                                    <header class="panel-heading">
+                                        <h3>
+                                            <input id="latlng" type="text" class="form-control" value="" placeholder="Latitude, Longitude">
+                                            <p />
+                                            <button class="btn btn-default my-btn" id="btnlatlng" type="button" title="Geocode"><i class="fa fa-search"></i></button>
+                                            <button class="btn btn-default my-btn" type="button" title="Hapus Marker" onclick="hapusmarkerdankoor()"><i
+                                                    class="fa fa-ban"></i></button>
+                                            <button class="btn btn-default my-btn" id="delete-button" type="button" title="Remove shape"><i
+                                                    class="fa fa-trash"></i></button>
+                                        </h3>
+                                    </header>
+                                    <div class="panel-body" style="padding-top: 1%">
+                                        <div id="map" style="width:100%;height:420px;"></div>
+                                    </div>
+                                </section>
+                            </div>
 
+                            <div class="col-sm-6" id="hide3">
+                                <!-- menampilkan form tambah-->
+                                <div class="row">
+                                    <div class="form-group col-sm-6">
+                                        <label><span style="color:red">*</span>ID Survey</label><b id="ids"></b>
+                                        <input type="text" class="form-control" name="id" id="id" onkeyup="besarkan()" onchange="cekid()" required>
+                                    </div>
+                                    <div class="form-group col-sm-6">
+                                        <label>Standing Year</label><label id="tahuns"></label>
+                                        <input type="text" class="form-control" name="tahun" value="0" onkeypress="return hanyaAngka(event, '#tahuns')">
+                                    </div>
+                                    <div class="form-group col-sm-6">
+                                        <label>Land & Building Tax</label><label id="pbbs"></label>
+                                        <input type="text" class="form-control" name="pbb" value="0" onkeypress="return hanyaAngka(event, '#pbbs')">
+                                    </div>
+                                    <div class="form-group col-sm-6">
+                                        <label>Construction Type</label>
+                                        <select name="konstruksi" class="form-control" style="font-size: 85%">
+                                            <?php                
+                                                $sql_j=pg_query("SELECT * FROM type_of_construction ORDER BY name_of_type");
+                                                while($row = pg_fetch_assoc($sql_j))
+                                                {
+                                                    echo"<option value=".$row['type_id'].">".$row['name_of_type']."</option>";
+                                                }
+                                            ?>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-sm-6">
+                                        <label>Building Area (m<sup>2</sup>)</label><label id="lbangs"></label>
+                                        <input type="text" class="form-control" name="lbang" value="0" onkeypress="return hanyaAngka(event, '#lbangs')" value="<?php echo $bang ?>">
+                                    </div>
+                                    <div class="form-group col-sm-6">
+                                        <label>Land Area (m<sup>2</sup>)</label><label id="lahans"></label>
+                                        <input type="text" class="form-control" name="lahan" value="0" onkeypress="return hanyaAngka(event, '#lahans')">
+                                    </div>
+                                    <div class="form-group col-sm-6">
+                                        <label>Electricity Capacity (kWh)</label><label id="listriks"></label>
+                                        <input type="text" class="form-control" name="listrik" value="0" onkeypress="return hanyaAngka(event, '#listriks')">
+                                    </div>
+                                    <div class="form-group col-sm-6">
+                                        <label>Tap Water</label>
+                                        <select name="water" class="form-control" style="font-size: 85%">
+                                            <option value="0">Available</option>
+                                            <option value="1">Not Available</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-sm-6">
+                                        <label>Status</label>
+                                        <select name="status" class="form-control" style="font-size: 85%">
+                                            <option value="0">Unhabited</option>
+                                            <option value="1">Inhabited</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-sm-6">
+                                        <label>Alamat</label>
+                                        <textarea class="form-control" name="alamat"></textarea>
+                                    </div>
+                                    <div class="form-group col-sm-6">
+                                        <label><span style="color:red">*</span> Coordinat</label>
+                                        <textarea class="form-control readonly" id="geom" name="geom" required></textarea>
+                                    </div>
+                                    <div class="form-group col-sm-6">
+                                        <label>Owner:
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" checked id="unknown" name="customRadio" class="custom-control-input" onclick="cekhuni(0)">
+                                            <label class="custom-control-label" for="unknown">Unknown</label>
+                                        </div>
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" id="known" name="customRadio" class="custom-control-input" onclick="cekhuni(1)">
+                                            <label class="custom-control-label" for="known">Known (Enter the Family Card Number)</label>
+                                        </div>
+                                        </label>
+                                        <div id="nik2">
+                                            <select class="selectpicker form-control" id="nik" data-container="body" data-live-search="true" title="Select a number" data-hide-disabled="true">
+                                                <option>1</option>
+                                                <option>130182328392839983 (Fulan Fulan F., F.Fn djkjashdjkashdjads)</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary" id="tambahbangunan">+ Add</button>
+                    </div>
+                    </form>
+                </form>
+            </div>
+        </div>
+    </div>
     <!-- SAMPAI DISINI -->
     
                 
@@ -99,57 +248,78 @@
         </div>
         <!-- main content area end -->
         <!-- footer area start-->
-        <footer>
-            <div class="footer-area">
-                <p>© Copyright 2018. All right reserved. Template by <a href="https://colorlib.com/wp/">Colorlib</a>.</p>
-            </div>
-        </footer>
-        <!-- footer area end-->
-    </div>
-    <!-- page container area end -->
-    <!-- offset area start -->
-
-    <!-- offset area end -->
-
-    <!-- jquery latest version -->
-<!--     <script src="../../assets/js/vendor/jquery-2.2.4.min.js"></script> -->
-    <!-- bootstrap 4 js -->
-    <script src="../../assets/js/popper.min.js"></script>
-    <script src="../../assets/js/bootstrap.min.js"></script>
-    <script src="../../assets/js/owl.carousel.min.js"></script>
-    <script src="../../assets/js/metisMenu.min.js"></script>
-    <script src="../../assets/js/jquery.slimscroll.min.js"></script>
-    <script src="../../assets/js/jquery.slicknav.min.js"></script>
-
-    <!-- start chart js -->
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script> -->
-    <!-- start highcharts js -->
-    <!-- <script src="https://code.highcharts.com/highcharts.js"></script> -->
-    <!-- start zingchart js -->
-    <!-- <script src="https://cdn.zingchart.com/zingchart.min.js"></script> -->
-    <!-- <script>
-    zingchart.MODULESDIR = "https://cdn.zingchart.com/modules/";
-    ZC.LICENSE = ["569d52cefae586f634c54f86dc99e6a9", "ee6b7db5b51705a13dc2339db3edaf6d"];
-    </script> -->
-    <!-- all line chart activation -->
-    <script src="../../assets/js/line-chart.js"></script>
-    <!-- all pie chart -->
-    <script src="../../assets/js/pie-chart.js"></script>
-
-    <!-- others plugins -->
-    <script src="../../assets/js/plugins.js"></script>
-    <script src="../../assets/js/scripts.js"></script>
-
-    <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('#dataTables-example').DataTable();
-        } );
-
-        function back(){
-            window.location = "../";
-        }
-    </script>
+       <?php include('../inc/foot.php') ?>
 </body>
 </html>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#listrumah').DataTable();
+    } );
+
+    function besarkan() {
+        var id=document.getElementById('id').value.toUpperCase();
+        document.getElementById('id').value=id;
+    }
+
+    function cekid () {
+        var id=document.getElementById('id').value
+        var ketemu=false;
+        <?php 
+          $sql = pg_query("SELECT worship_building_id FROM worship_building");
+          while ($data = pg_fetch_array($sql))
+          {
+            $idnya = $data['worship_building_id'];
+            echo "if (id == \"".$idnya."\")";
+            echo "{
+                    ketemu=true;
+                    $('#ids').css('color', 'red');
+                    $('#ids').html('...This ID is already registered');
+                    $('#tambahbangunan').prop('disabled', true);
+                  }";
+
+          }
+        ?>
+         if (ketemu==false){
+                $('#ids').empty();
+                $('#tambahbangunan').prop('disabled', false);
+            }
+    }
+
+    function reset () {
+        $("#toggleCSS").attr("href", "../../assets/alertify/themes/alertify.default.css");
+        alertify.set({
+            labels : {
+                ok     : "OK",
+                cancel : "Cancel"
+            },
+            delay : 5000,
+            buttonReverse : false,
+            buttonFocus   : "ok"
+        });
+    }
+
+    $(".readonly").on('keydown paste', function(e){
+        e.preventDefault();
+    });
+
+    $("#geom").on( 'click', function () {
+        reset();
+        alertify.alert('<img src="../../inc/poligon.gif" width="150px"><br/>please draw the area with polygon on the map');
+        return false;
+    });
+
+    function cekhuni(val) {
+        if (val==0) {
+            $("#nik").val(null).change();
+            $('#nik2').hide();
+        }
+        else {
+            $('#nik2').show();
+        }
+    }
+    $("#nik").val(null).change();
+    $('#nik2').hide();
+
+</script>
+<link rel="stylesheet" href="../../js/bootstrap.bundle.min.js" />
+<script src="../dist/js/bootstrap-select.js"></script>
