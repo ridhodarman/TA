@@ -64,7 +64,7 @@
                         <div class="col-md-8 col-sm-4 clearfix">
                             <ul class="notification-area pull-right" style="padding-right: 32%">
                                 <li id="tombol-login"><button class="btn btn-outline btn-primary" data-toggle="modal" data-target="#login"><i class="fas fa-sign-in-alt"></i> Login</button></li>
-                                <li id="kelola"><button class="btn btn-outline btn-primary" onclick="keloladata()"><i class="ti-settings"></i> Kelola Data</button></li>
+                                <li id="kelola"><button class="btn btn-outline btn-primary" onclick="keloladata()"><i class="ti-settings"></i> Manage Data</button></li>
                                 <li id="settingan" class="user-name dropdown-toggle" data-toggle="dropdown">
                                     <i class="ti-settings"></i>
                                     <div class="dropdown-menu">
@@ -92,7 +92,8 @@
                     font-weight : bold; 
                 }
                 .form-transparan {
-                    background: rgba(221, 110, 110, 0.4);
+                    background: rgba(0, 0, 0, 0.59);
+                    color: lightgray;
                 }
 
                 .tombol-login {
@@ -107,7 +108,7 @@
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content gambarlogin">
                         <div class="modal-header">
-                            <h5 class="modal-title tulisan">Login</h5>
+                            <h5 class="modal-title tulisan">L o g i n</h5>
                             <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
                         </div>
                         <form method="post" action="act/login.php" style="width: 90%">

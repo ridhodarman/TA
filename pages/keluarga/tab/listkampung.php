@@ -1,13 +1,13 @@
 <div style="text-align: center; padding-top: 3%; padding-bottom:3%">
 <button class="btn btn-default btn-lg" style="width: 90%; background-color: #fafafa" data-toggle="modal" data-target="#tambahkampung">+
-    Add a list of villages</button>
+    Add Village Data</button>
 </div>
 
 <div class="modal fade" id="tambahkampung">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Add a list of villages</h5>
+                <h5 class="modal-title">Add Village Data</h5>
                 <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
             </div>
             <form method="post" id="form-tambahkampung">
