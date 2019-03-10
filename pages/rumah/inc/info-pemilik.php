@@ -278,13 +278,13 @@
 <div class="modal fade" id="gantipemilik">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
-            <form>
+            <form action="act/gantipemilik.php" method="POST">
                 <div class="modal-header">
                     <h6 class="modal-title">Change Owner</h6>
                     <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
                 </div>
                 <div class="modal-body">
-                    <select class="selectpicker form-control" id="nik" data-container="body" data-live-search="true" title="Choose FCN" data-hide-disabled="true" style="font-size: 89%; font-weight: bold">
+                    <select class="selectpicker form-control" id="nik" data-container="body" data-live-search="true" title="Choose FCN" data-hide-disabled="true" style="font-size: 89%; font-weight: bold" onchange="simpanpemilik()">
                         <option value="0">Unknown</option>
                         <?php                
                             $sql_d=pg_query("SELECT national_identity_number, owner_name FROM house_building_owner ORDER BY owner_name");
@@ -294,10 +294,12 @@
                             }
                         ?>
                     </select>
+                    <input type="hidden" name="pemilik" id="pemilik">
+                    <input type="hidden" name="id-bang" value="<?php echo $id ?>"/>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
                 </div>
             </form>
         </div>
@@ -311,7 +313,10 @@
     $("#kerja select").val(<?php echo "'".$id_kerja."'" ?>);
     $("#pendidikan select").val(<?php echo "'".$id_pendidikan."'" ?>);
 
-    //alert(<?php echo "'".$id_datuk."'" ?>)
+    document.getElementById("pemilik").value=document.getElementById("nik").value;
+    function simpanpemilik() {
+        document.getElementById("pemilik").value=document.getElementById("nik").value;
+    }
 
 
 

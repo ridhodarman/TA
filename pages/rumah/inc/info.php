@@ -8,69 +8,49 @@
                 </h6>
                 <br />
                 <table style="width: 100%;">
-                    <tr>
-                        <td>Nama </td>
-                        <td>:</td>
-                        <td>
-                            <?php echo $nama ?>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Worship Type </td>
-                        <td>:</td>
-                        <td>
-                            <?php echo $jenis; ?>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Building Size </td>
-                        <td>:</td>
-                        <td>
-                            <?php echo $bang; ?> m<sup>2</sup>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Land Area </td>
-                        <td>:</td>
-                        <td>
-                            <?php echo $lahan; ?> m<sup>2</sup>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Parking Area </td>
-                        <td>:</td>
-                        <td>
-                            <?php echo $parkir; ?> m<sup>2</sup>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Standing Year </td>
-                        <td>:</td>
-                        <td>
-                            <?php echo $tahun ?>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Construction Type </td>
-                        <td>:</td>
-                        <td>
-                            <?php echo $konstruksi; ?>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Electricity Capacity </td>
-                        <td>:</td>
-                        <td>
-                            <?php echo $listrik; ?> kWh
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Address </td>
-                        <td>:</td>
-                        <td>
-                            <?php echo $alamat; ?>
-                        </td>
-                    </tr>
+                    <table style="width: 100%;">
+                        <tr>
+                            <td>Standing Year </td>
+                            <td>:</td>
+                            <td>
+                                <?php echo $tahun ?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Land and Building Tax </td>
+                            <td>:</td>
+                            <td>Rp.
+                                <?php echo number_format($pbb); ?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Type of Construction </td>
+                            <td>:</td>
+                            <td>
+                                <?php echo $jkonstruksi ?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Tap Water </td>
+                            <td>:</td>
+                            <td>
+                                <?php echo $pdam ?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Status </td>
+                            <td>:</td>
+                            <td>
+                                <?php echo $status ?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Address </td>
+                            <td>:</td>
+                            <td>
+                                <?php echo $alamat ?>
+                            </td>
+                        </tr>
                 </table>
             </div>
         </div>
@@ -93,26 +73,22 @@
                         <input type="hidden" name="id-temp" value="<?php echo $id ?>"/>
                     </div>
                     <div class="form-group col-sm-6">
-                        <label>Name</label>
-                        <input type="text" class="form-control" name="nama" value="<?php echo $nama ?>" required>
+                        <label>Standing Year</label><label id="tahuns"></label>
+                        <input type="text" class="form-control" name="tahun" value="<?php echo $tahun ?>" onkeypress="return hanyaAngka(event, '#tahuns')">
                     </div>
                     <div class="form-group col-sm-6">
-                        <label>Worship Building Type</label>
-                        <select name="j-ibadah" class="form-control" style="font-size: 85%" required>
-                            <option value="<?php echo $tipe_i ?>"><?php echo $jenis; ?></option>
-                            <?php                
-                                $sql_jibadah=pg_query("SELECT * FROM type_of_worship WHERE type_id != '$tipe_i' ORDER BY name_of_type");
-                                while($row = pg_fetch_assoc($sql_jibadah))
-                                {
-                                    echo"<option value=".$row['type_id'].">".$row['name_of_type']."</option>";
-                                }
-                            ?>
-                        </select>
+                        <label>Land & Building Tax</label><label id="pbbs"></label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">Rp</div>
+                            </div>
+                            <input type="text" class="form-control" name="pbb" value="0" onkeypress="return hanyaAngka(event, '#pbbs')">
+                        </div>
                     </div>
                     <div class="form-group col-sm-6">
                         <label>Construction Type</label>
                         <select name="konstruksi" class="form-control" style="font-size: 85%" required>
-                            <option value="<?php echo $tipe_k ?>"><?php echo $konstruksi ?></option>
+                            <option value="<?php echo $tipe_k ?>"><?php echo $jkonstruksi ?></option>
                             <?php                
                                 $sql_jibadah=pg_query("SELECT * FROM type_of_construction WHERE type_id != '$tipe_k' ORDER BY name_of_type");
                                 while($row = pg_fetch_assoc($sql_jibadah))
@@ -123,28 +99,26 @@
                         </select>
                     </div>
                     <div class="form-group col-sm-6">
-                        <label>Building Area (m<sup>2</sup>)</label><label id="lbangs"></label>
-                        <input type="text" class="form-control" name="lbang" id="lbang" onkeypress="return hanyaAngka(event, '#lbangs')" value="<?php echo $bang ?>">
-                    </div>
-                    <div class="form-group col-sm-6">
-                        <label>Land Area (m<sup>2</sup>)</label><label id="lahans"></label>
-                        <input type="text" class="form-control" name="lahan" value="<?php echo $lahan ?>" onkeypress="return hanyaAngka(event, '#lahans')">
-                    </div>
-                    <div class="form-group col-sm-6">
-                        <label>Parking Area (m<sup>2</sup>)</label><label id="parkirs"></label>
-                        <input type="text" class="form-control" name="parkir" value="<?php echo $parkir ?>" onkeypress="return hanyaAngka(event, '#parkirs')">
-                    </div>
-                    <div class="form-group col-sm-6">
                         <label>Electricity Capacity (kWh)</label><label id="listriks"></label>
                         <input type="text" class="form-control" name="listrik" value="<?php echo $listrik ?>" onkeypress="return hanyaAngka(event, '#listriks')">
+                    </div>
+                    <div class="form-group col-sm-6" id="water">
+                        <label>Tap Water</label>
+                        <select name="water" class="form-control" style="font-size: 85%">
+                            <option value="0">Available</option>
+                            <option value="1">Not Available</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-sm-6" id="status">
+                        <label>Status</label>
+                        <select name="status" class="form-control" style="font-size: 85%">
+                            <option value="0">Unhabited</option>
+                            <option value="1">Inhabited</option>
+                        </select>
                     </div>
                     <div class="form-group col-sm-6">
                         <label>Alamat</label>
                         <textarea class="form-control" name="alamat"><?php echo $alamat ?></textarea>
-                    </div>
-                    <div class="form-group col-sm-6">
-                        <label>Standing Year</label><label id="tahuns"></label>
-                        <input type="text" class="form-control" name="tahun" value="<?php echo $tahun ?>" onkeypress="return hanyaAngka(event, '#tahuns')">
                     </div>
                 </div>
             </div>
@@ -158,6 +132,9 @@
 </div>
 
 <script type="text/javascript">
+    $("#water select").val(<?php echo "'".$i_water."'" ?>);
+    $("#status select").val(<?php echo "'".$i_status."'" ?>);
+
     function besarkan() {
         var id=document.getElementById('id').value.toUpperCase();
         document.getElementById('id').value=id;

@@ -5,23 +5,23 @@
 		include ('../../inc/notif-act.php');
 		$id_bang = $_POST['id-bang'];
 		$geom = $_POST['geom'];
-		$sql = pg_query("UPDATE worship_building SET 
+		$sql = pg_query("UPDATE house_building SET 
 						geom = ST_GeomFromText('$geom')
-						WHERE worship_building_id = '$id_bang'");
+						WHERE house_building_id = '$id_bang'");
 		if ($sql){
 			echo '<script>
 				$("#updated").modal("show");
 				</script>
-				<meta http-equiv="REFRESH" content="1;url=../info-b-ibadah.php?id='.$id_bang.'">
 				';
 		}
 		else {
 			echo '<script>
 				$("#gagal").modal("show");
 				</script>
-				<meta http-equiv="REFRESH" content="1;url=../info-b-ibadah.php?id='.$id_bang.'">
 				';
 		}
+
+		echo '<meta http-equiv="REFRESH" content="1;url=../info-rumah.php?id='.$id_bang.'">';
 	}
 	else {
 		echo '<script>window.location="../../../assets/403"</script>';

@@ -13,18 +13,19 @@ if(isset($_SESSION['username']) && $_POST['id'] != null ) {
 	$tap = $_POST['water'];
 	$status = $_POST['status'];
 	$address = $_POST['alamat'];
-	$owner = $_POST['owner'];
+	$owner = $_POST['pemilik'];
 	$geom = $_POST['geom'];
 
-	if ($owner==null) {
-		$owner = "unknown";
-	}
-			
-	$sql = pg_query("INSERT INTO house_building 
+	// if ($owner==null) {
+	// 	$owner = "0";
+	// }
+	
+	$query="INSERT INTO house_building 
 		(house_building_id, address, standing_year, land_building_tax, type_of_construction, electricity_capacity, tap_water, building_status, fcn_owner, geom) 
 		VALUES 
-		('$id', '$address', '$year', '$pbb', '$cons', '$elect', '$tap', '$status', '$owner', ST_GeomFromText('$geom'))");
+		('$id', '$address', '$year', '$pbb', '$cons', '$elect', '$tap', '$status', '$owner', ST_GeomFromText('$geom'))";
 
+	$sql = pg_query($query);
 
 	if ($sql){
 		echo '<script>

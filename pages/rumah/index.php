@@ -161,7 +161,12 @@
                                     </div>
                                     <div class="form-group col-sm-6">
                                         <label>Land & Building Tax</label><label id="pbbs"></label>
-                                        <input type="text" class="form-control" name="pbb" value="0" onkeypress="return hanyaAngka(event, '#pbbs')">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">Rp</div>
+                                            </div>
+                                            <input type="text" class="form-control" name="pbb" value="0" onkeypress="return hanyaAngka(event, '#pbbs')">
+                                        </div>
                                     </div>
                                     <div class="form-group col-sm-6">
                                         <label>Construction Type</label>
@@ -221,7 +226,7 @@
                                         </div>
                                         </label>
                                         <div id="nik2">
-                                            <select class="selectpicker form-control" id="nik" data-container="body" data-live-search="true" title="Select a number" data-hide-disabled="true">
+                                            <select class="selectpicker form-control" id="nik" data-container="body" data-live-search="true" title="Select a number" data-hide-disabled="true" onchange="simpanpemilik()">
                                                 <option value="0">Unknown</option>
                                                 <?php                
                                                     $sql_d=pg_query("SELECT national_identity_number, owner_name FROM house_building_owner ORDER BY owner_name");
@@ -232,6 +237,7 @@
                                                 ?>
                                             </select>
                                         </div>
+                                        <input type="hidden" name="pemilik" id="pemilik" required="">
                                     </div>
                                 </div>
                             </div>
@@ -258,6 +264,10 @@
 </body>
 </html>
 <script type="text/javascript">
+    function back() {
+        window.location.href ="../"
+    }
+
     $(document).ready(function() {
         $('#listrumah').DataTable();
     } );
@@ -316,15 +326,21 @@
 
     function cekhuni(val) {
         if (val==0) {
-            $("#nik").val(0).change();
+            document.getElementById("nik").value = "0";
             $('#nik2').hide();
+            document.getElementById("pemilik").value=document.getElementById("nik").value;
         }
         else {
             $('#nik2').show();
         }
     }
-    $("#nik").val(0).change();
+    document.getElementById("nik").value = "0";
     $('#nik2').hide();
+
+    document.getElementById("pemilik").value=document.getElementById("nik").value;
+    function simpanpemilik() {
+        document.getElementById("pemilik").value=document.getElementById("nik").value;
+    }
 
 </script>
 <link rel="stylesheet" href="../../js/bootstrap.bundle.min.js" />

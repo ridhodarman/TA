@@ -63,26 +63,33 @@
                     $alamat = $row['address'];
                     $tahun = $row['standing_year'];
                     $pbb = $row['land_building_tax'];
+                    
+                    $tipe_k = $row['type_of_construction'];
                     $jkonstruksi = $row['jkonstruksi'];
+                    
                     $listrik = $row['electricity_capacity'];
+                    
+                    $i_water = $row['tap_water'];
                     $pdam=null;
-                    if ($row['tap_water']==0) {
+                    if ($i_water==0) {
                         $pdam = "Not Available";
                     }
-                    else if ($row['tap_water']==1) {
+                    else if ($i_water==1) {
                         $pdam = "Available";
                     }
-                    else if ($row['tap_water']==3) {
+                    else if ($i_water==3) {
                         $pdam = "unknown";
                     }
+
                     $status=null;
-                    if ($row['building_status']==0) {
-                        $status = "Empty";
+                    $i_status = $row['building_status'];
+                    if ($i_status==0) {
+                        $status = "Unhabited";
                     }
-                    else if ($row['building_status']==1) {
+                    else if ($i_status==1) {
                         $status = "Inhabited";
                     }
-                    else if ($row['building_status']==3) {
+                    else if ($i_status==3) {
                         $status = "unknown";
                     }
 
@@ -192,10 +199,10 @@
             <div class="main-content-inner">
                 <h3>House Building Info</h3>
                 <div class="row">
-                    <div class="col-lg-5 mt-5">
+                    <div class="col-lg-6 mt-5">
                         <?php include ('inc/info.php') ?>
                     </div>
-                    <div class="col-lg-7 mt-5">
+                    <div class="col-lg-6 mt-5">
                         <div class="card">
                             <div class="card-body">
                                 <div class="media mb-5">
