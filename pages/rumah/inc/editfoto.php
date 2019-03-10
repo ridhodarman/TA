@@ -41,9 +41,9 @@
                     </thead>
                     <tbody>
                     <?php
-                    $sql = pg_query("SELECT photo_url, upload_date FROM worship_building_gallery WHERE worship_building_id='$id' 
+                    $sql = pg_query("SELECT photo_url, upload_date FROM house_building_gallery WHERE house_building_id='$id' 
                                 ");
-                        $server='../../foto/b-ibadah/';
+                        $server='../../foto/rumah/';
                         while ($row = pg_fetch_assoc($sql)) {
                             $foto=$row['photo_url'];
                             $id2 = base64_encode($foto);

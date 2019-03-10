@@ -14,7 +14,7 @@
     <div class="modal-dialog modal-lg modal-xl">
         <div class="modal-content">
             <div class="modal-header">
-                <h6 class="modal-title">Edit Spasial Data / Location : <?php echo $nama." (".$id.")" ?></h6>
+                <h6 class="modal-title">Edit Spasial Data / Location : <?php echo $id ?></h6>
                 <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
             </div>
             <form method="post" action="act/info-editspasial.php">
@@ -40,7 +40,7 @@
                             <input type="hidden" class="form-control" name="id-bang" value="<?php echo $id ?>">
                             <br/><br/><br/>
                             <label for="geom"><span style="color:red">*</span> Coordinat</label>
-                            <textarea class="form-control readonly" id="geom" name="geom" required style="height: 50%"><?php echo $geom; ?></textarea>  
+                            <textarea class="form-control readonly" id="geom" name="geom" required style="height: 50%"><?php echo $geom ?></textarea>  
                         </div>
                     </div>
                 </div>
@@ -58,5 +58,9 @@
         reset();
         alertify.alert('<img src="../../inc/poligon.gif" width="150px"><br/>please draw the area with polygon on the map');
         return false;
+    });
+
+    $(".readonly").on('keydown paste', function(e){
+        e.preventDefault();
     });
 </script>

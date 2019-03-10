@@ -57,7 +57,7 @@
                         </div>
                         <div class="form-group col-sm-6">
                             Education Level:
-                            <select class="form-control" name="kerja" required>
+                            <select class="form-control" name="kerja" required style="font-size: 81%; font-weight: bold">
                                 <option></option>
                                 <?php                
                                     $sql_p=pg_query("SELECT * FROM education ORDER BY educational_level");
@@ -70,7 +70,7 @@
                         </div>
                         <div class="form-group col-sm-6">
                             Job: 
-                            <select class="form-control" name="kerja" required>
+                            <select class="form-control" name="kerja" required style="font-size: 81%; font-weight: bold">
                                 <option></option>
                                 <?php                
                                     $sql_k=pg_query("SELECT * FROM job ORDER BY job_name");
@@ -92,7 +92,7 @@
                         </div>
                         <div class="form-group col-sm-6">
                             Take Insurance:
-                             <select class="form-control" name="asuransi" required>
+                             <select class="form-control" name="asuransi" required style="font-size: 81%; font-weight: bold">
                                 <option></option>
                                 <option value="1">Yes</option>
                                 <option value="0">No</option>
@@ -100,7 +100,7 @@
                         </div>
                         <div class="form-group col-sm-6">
                             Savings:
-                            <select class="form-control" name="tabungan" required>
+                            <select class="form-control" name="tabungan" required style="font-size: 81%; font-weight: bold">
                                 <option></option>
                                 <option value="1">Yes</option>
                                 <option value="0">No</option>
@@ -108,7 +108,7 @@
                         </div>
                         <div class="form-group col-sm-6">
                             Datuk:
-                            <select class="form-control" name="datuk" required>
+                            <select class="form-control" name="datuk" required onchange="ceksuku()" id="iddatuk" style="font-size: 81%; font-weight: bold">
                                 <option></option>
                                 <?php                
                                     $sql_suku=pg_query("SELECT * FROM datuk ORDER BY datuk_name");
@@ -118,10 +118,10 @@
                                     }
                                 ?>
                             </select>
-                            <font id="suku">Tribe: -</font>
+                            <div id="suku">Tribe: <?php echo $suku ?></div>
                         </div>
                         <div class="form-group col-sm-6">Village:
-                            <select class="form-control" name="kampung" required>
+                            <select class="form-control" name="kampung" required style="font-size: 81%; font-weight: bold">
                                 <option></option>
                                 <?php                
                                     $sql_v=pg_query("SELECT * FROM village ORDER BY village_name");
@@ -168,5 +168,12 @@ function formatRupiah(angka, prefix){
  
     rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
     return prefix == undefined ? rupiah : (rupiah ? '' + rupiah : '');
+}
+
+function ceksuku() {
+    var iddatuk = document.getElementById('iddatuk').value; 
+    //alert(iddatuk)
+    $("#suku").empty()
+    $("#suku").load("inc/suku.php?id_datuk="+iddatuk);
 }
 </script>

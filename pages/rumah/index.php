@@ -222,8 +222,14 @@
                                         </label>
                                         <div id="nik2">
                                             <select class="selectpicker form-control" id="nik" data-container="body" data-live-search="true" title="Select a number" data-hide-disabled="true">
-                                                <option>1</option>
-                                                <option>130182328392839983 (Fulan Fulan F., F.Fn djkjashdjkashdjads)</option>
+                                                <option value="0">Unknown</option>
+                                                <?php                
+                                                    $sql_d=pg_query("SELECT national_identity_number, owner_name FROM house_building_owner ORDER BY owner_name");
+                                                    while($row = pg_fetch_assoc($sql_d))
+                                                    {
+                                                        echo"<option value=".$row['national_identity_number'].">(".$row['national_identity_number'].") ".$row['owner_name']."</option>";
+                                                    }
+                                                ?>
                                             </select>
                                         </div>
                                     </div>
@@ -310,14 +316,14 @@
 
     function cekhuni(val) {
         if (val==0) {
-            $("#nik").val(null).change();
+            $("#nik").val(0).change();
             $('#nik2').hide();
         }
         else {
             $('#nik2').show();
         }
     }
-    $("#nik").val(null).change();
+    $("#nik").val(0).change();
     $('#nik2').hide();
 
 </script>

@@ -1,12 +1,15 @@
+<link rel="stylesheet" href="../dist/css/bootstrap-select.css">
 <?php
 
                 $querysearch = "SELECT H.fcn_owner, O.*,
-                                        D.datuk_name, T.name_of_tribe, V.village_name
+                                        D.datuk_name, T.name_of_tribe, V.village_name, J.job_name, E.educational_level
                                 FROM house_building AS H
                                 JOIN house_building_owner AS O ON H.fcn_owner=O.national_identity_number
                                 JOIN datuk AS D ON O.datuk_id=D.datuk_id
                                 JOIN tribe AS T ON D.tribe_id=T.tribe_id
                                 JOIN village AS V ON O.village_id=V.village_id
+                                JOIN job AS J ON O.job_id=J.job_id
+                                JOIN education AS E ON O.educational_id=E.education_id
                                 WHERE H.house_building_id='$id' 
                             ";
 
@@ -25,7 +28,9 @@
                     $nama = $row['owner_name'];
                     $nokk = $row['family_card_number'];
                     $tgl = $row['birth_date'];
-                    $pendidikan = $row['educational_id'];
+
+                    $id_pendidikan = $row['educational_id'];
+                    $pendidikan = $row['educational_level'];
                     
                     $id_kerja = $row['job_id'];
                     $pekerjaan = $row['job_name'];
@@ -61,8 +66,6 @@
 
                     $id_kampung = $row['village_id'];
                     $kampung = $row['village_name'];
-
-                    $geom = $row['geom'];
                 }
 
 ?>
@@ -236,7 +239,7 @@
                         </div>
                         <div class="form-group col-sm-6" id="datuk">
                             Datuk:
-                            <select class="form-control" name="datuk" required style="font-size: 81%; font-weight: bold">
+                            <select class="form-control" name="datuk" id="iddatuk" required style="font-size: 81%; font-weight: bold" onchange="ceksuku()">
                                 <option></option>
                                 <?php                
                                     $sql_d=pg_query("SELECT * FROM datuk ORDER BY datuk_name");
@@ -246,7 +249,7 @@
                                     }
                                 ?>
                             </select>
-                            <font id="suku">Tribe: -</font>
+                            <div id="suku">Tribe: <?php echo $suku ?></div>
                         </div>
                         <div class="form-group col-sm-6" id="kampung">
                             Village:
@@ -272,10 +275,41 @@
     </div>
 </div>
 
+<div class="modal fade" id="gantipemilik">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <form>
+                <div class="modal-header">
+                    <h6 class="modal-title">Change Owner</h6>
+                    <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+                </div>
+                <div class="modal-body">
+                    <select class="selectpicker form-control" id="nik" data-container="body" data-live-search="true" title="Choose FCN" data-hide-disabled="true" style="font-size: 89%; font-weight: bold">
+                        <option value="0">Unknown</option>
+                        <?php                
+                            $sql_d=pg_query("SELECT national_identity_number, owner_name FROM house_building_owner ORDER BY owner_name");
+                            while($row = pg_fetch_assoc($sql_d))
+                            {
+                                echo"<option value=".$row['national_identity_number'].">(".$row['national_identity_number'].") ".$row['owner_name']."</option>";
+                            }
+                        ?>
+                    </select>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 <script type="text/javascript">
     $("#kampung select").val(<?php echo "'".$id_kampung."'" ?>);
     $("#datuk select").val(<?php echo "'".$id_datuk."'" ?>);
     $("#tabungan select").val(<?php echo "'".$tab."'" ?>);
+    $("#kerja select").val(<?php echo "'".$id_kerja."'" ?>);
+    $("#pendidikan select").val(<?php echo "'".$id_pendidikan."'" ?>);
 
     //alert(<?php echo "'".$id_datuk."'" ?>)
 
@@ -302,4 +336,15 @@ function formatRupiah(angka, prefix){
     rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
     return prefix == undefined ? rupiah : (rupiah ? '' + rupiah : '');
 }
+
+
+function ceksuku() {
+    var iddatuk = document.getElementById('iddatuk').value; 
+    //alert(iddatuk)
+    $("#suku").empty()
+    $("#suku").load("inc/suku.php?id_datuk="+iddatuk);
+}
 </script>
+
+<link rel="stylesheet" href="../../js/bootstrap.bundle.min.js" />
+<script src="../dist/js/bootstrap-select.js"></script>
