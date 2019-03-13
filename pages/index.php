@@ -93,6 +93,9 @@
                             <li class="nav-item">
                                 <a class="nav-link" id="konstruksi-tab" data-toggle="tab" href="#konstruksi" role="tab" aria-controls="konstruksi" aria-selected="false"><i class="fas fa-hammer"></i> Manage Data on Types of Construction</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="model-tab" data-toggle="tab" href="#model" role="tab" aria-controls="model" aria-selected="false"><i class="fas fa-home"></i> Manage Building Model Data</a>
+                            </li>
                         </ul>
                         <div class="tab-content mt-3" id="myTabContent">
                             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
@@ -100,6 +103,10 @@
                             </div>
                             <div class="tab-pane fade" id="konstruksi" role="tabpanel" aria-labelledby="konstruksi">
                                 <?php include ("tab/jeniskonstruksi.php") ?>
+                            </div>
+
+                            <div class="tab-pane fade" id="model" role="tabpanel" aria-labelledby="model">
+                                <?php include ("tab/modelbangunan.php") ?>
                             </div>
                         </div>
                     </div>
@@ -114,15 +121,7 @@
                 <!-- row area start-->
             </div>
         </div>
-        <!-- main content area end -->
-        <!-- footer area start-->
-        <footer>
-            <div class="footer-area">
-                <p>© Copyright 2018. All right reserved. Template by <a href="https://colorlib.com/wp/">Colorlib</a>.</p>
-            </div>
-        </footer>
-        <!-- footer area end-->
-    </div>
+
     <!-- page container area end -->
     <!-- offset area start -->
 

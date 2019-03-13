@@ -143,7 +143,7 @@
                                         </h3>
                                     </header>
                                     <div class="panel-body" style="padding-top: 1%">
-                                        <div id="map" style="width:100%;height:420px;"></div>
+                                        <div id="map" style="width:100%;height:450px;"></div>
                                     </div>
                                 </section>
                             </div>
@@ -200,19 +200,35 @@
                                         </select>
                                     </div>
                                     <div class="form-group col-sm-6">
-                                        <label>Status</label>
-                                        <select name="status" class="form-control" style="font-size: 85%">
-                                            <option value="0">Unhabited</option>
-                                            <option value="1">Inhabited</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group col-sm-6">
                                         <label>Alamat</label>
                                         <textarea class="form-control" name="alamat"></textarea>
                                     </div>
                                     <div class="form-group col-sm-6">
                                         <label><span style="color:red">*</span> Coordinat</label>
                                         <textarea class="form-control readonly" id="geom" name="geom" required></textarea>
+                                    </div>
+                                    <div class="form-group col-sm-6">
+                                        <div class="row">
+                                            <div class="form-group col-sm-12">
+                                                <label>Status</label>
+                                                <select name="status" class="form-control" style="font-size: 85%">
+                                                    <option value="0">Unhabited</option>
+                                                    <option value="1">Inhabited</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group col-sm-12">
+                                                <label>Building Model</label>
+                                                <select name="model" class="form-control" style="font-size: 85%">
+                                                    <?php                
+                                                        $sql_j=pg_query("SELECT * FROM type_of_construction ORDER BY name_of_type");
+                                                        while($row = pg_fetch_assoc($sql_j))
+                                                        {
+                                                            echo"<option value=".$row['type_id'].">".$row['name_of_type']."</option>";
+                                                        }
+                                                    ?>
+                                                </select>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="form-group col-sm-6">
                                         <label>Owner:
@@ -222,7 +238,7 @@
                                         </div>
                                         <div class="custom-control custom-radio">
                                             <input type="radio" id="known" name="customRadio" class="custom-control-input" onclick="cekhuni(1)">
-                                            <label class="custom-control-label" for="known">Known (Enter the Family Card Number)</label>
+                                            <label class="custom-control-label" for="known">Known (Choose Owner)</label>
                                         </div>
                                         </label>
                                         <div id="nik2">
@@ -236,8 +252,11 @@
                                                     }
                                                 ?>
                                             </select>
+                                            <a href="../keluarga">
+                                                <button type="button" class="btn btn-primary btn-xs btn-flat btn-lg mt-3"><i class="fas fa-user-edit"></i> Manage House Owner Data</button>
+                                            </a>
                                         </div>
-                                        <input type="hidden" name="pemilik" id="pemilik" required="">
+                                        <input type="hidden" name="pemilik" id="pemilik">
                                     </div>
                                 </div>
                             </div>

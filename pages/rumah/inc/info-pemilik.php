@@ -74,10 +74,23 @@
                                 <div class="media mb-5">
                                     <div class="media-body">
                                         <div style="float: right; padding-right: 1%; padding-bottom: 6%; ">
-                                            <button type="button" class="btn btn-info btn-sm btn-flat btn-lg mt-3" data-toggle="modal" data-target="#editpemilik"><i class="fa fa-edit"></i> Edit</button>
 
-                                            <button type="button" class="btn btn-warning btn-sm btn-flat btn-lg mt-3" data-toggle="modal" data-target="#gantipemilik">
-                                                <b> <i class="fas fa-id-card-alt"></i> Change Owner</b></button>
+                                            <?php
+                                                if ($nik=="0") {
+                                                    echo '
+                                                        <button type="button" class="btn btn-info btn-sm btn-flat btn-lg mt-3" data-toggle="modal" data-target="#gantipemilik">
+                                                        <b> <i class="fas fa-id-card-alt"></i> Edit Owner</b></button>
+                                                    ';
+                                                }
+                                                else {
+                                                    echo '
+                                                        <button type="button" class="btn btn-info btn-sm btn-flat btn-lg mt-3" data-toggle="modal" data-target="#editpemilik"><i class="fa fa-edit"></i> Edit</button>
+
+                                                        <button type="button" class="btn btn-warning btn-sm btn-flat btn-lg mt-3" data-toggle="modal" data-target="#gantipemilik">
+                                                        <b> <i class="fas fa-id-card-alt"></i> Change Owner</b></button>
+                                                    ';
+                                                }
+                                            ?>
 
                                         </div>
 
@@ -106,7 +119,8 @@
                                                 <td>Birth Date </td>
                                                 <td>:
                                                     <?php
-                                                        if ($tgl!=null) {
+                                                        $tgl2 = date('Y-m-d');
+                                                        if ($tgl!=null && $tgl!=$tgl2) {
                                                              echo date("d - F - Y",strtotime($tgl)); 
                                                          } 
                                                         
@@ -128,7 +142,12 @@
                                             <tr>
                                                 <td>Income </td>
                                                 <td>:
-                                                    <?php echo "Rp. ". number_format($pendapatan) ?>
+                                                    <?php
+                                                        if ($pendapatan!=null) {
+                                                             echo "Rp. ". number_format($pendapatan); 
+                                                         } 
+                                                        
+                                                    ?>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -284,22 +303,34 @@
                     <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
                 </div>
                 <div class="modal-body">
-                    <select class="selectpicker form-control" id="nik" data-container="body" data-live-search="true" title="Choose FCN" data-hide-disabled="true" style="font-size: 89%; font-weight: bold" onchange="simpanpemilik()">
-                        <option value="0">Unknown</option>
-                        <?php                
-                            $sql_d=pg_query("SELECT national_identity_number, owner_name FROM house_building_owner ORDER BY owner_name");
-                            while($row = pg_fetch_assoc($sql_d))
-                            {
-                                echo"<option value=".$row['national_identity_number'].">(".$row['national_identity_number'].") ".$row['owner_name']."</option>";
-                            }
-                        ?>
-                    </select>
+                    <div class="custom-control custom-radio">
+                        <input type="radio" id="unknown" name="customRadio" class="custom-control-input" onclick="cekhuni(0)">
+                        <label class="custom-control-label" for="unknown">Unknown</label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                        <input type="radio" checked id="known" name="customRadio" class="custom-control-input" onclick="cekhuni(1)">
+                        <label class="custom-control-label" for="known">Known (Choose Owner)</label>
+                    </div>
+                    <div id="nik2">
+                        <select class="selectpicker form-control" id="nik" data-container="body" data-live-search="true" title="Choose FCN" data-hide-disabled="true" style="font-size: 89%; font-weight: bold" onchange="simpanpemilik()">
+                            <?php                
+                                $sql_d=pg_query("SELECT national_identity_number, owner_name FROM house_building_owner WHERE national_identity_number !='0' ORDER BY owner_name");
+                                while($row = pg_fetch_assoc($sql_d))
+                                {
+                                    echo"<option value=".$row['national_identity_number'].">(".$row['national_identity_number'].") ".$row['owner_name']."</option>";
+                                }
+                            ?>
+                        </select>
+                        <a href="../keluarga">
+                            <button type="button" class="btn btn-primary btn-xs btn-flat btn-lg mt-3"><i class="fas fa-user-edit"></i> Manage House Owner Data</button>
+                        </a>
+                    </div>
                     <input type="hidden" name="pemilik" id="pemilik">
                     <input type="hidden" name="id-bang" value="<?php echo $id ?>"/>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Save changes</button>
+                    <button type="submit" class="btn btn-success">Save changes</button>
                 </div>
             </form>
         </div>
@@ -312,6 +343,17 @@
     $("#tabungan select").val(<?php echo "'".$tab."'" ?>);
     $("#kerja select").val(<?php echo "'".$id_kerja."'" ?>);
     $("#pendidikan select").val(<?php echo "'".$id_pendidikan."'" ?>);
+
+    function cekhuni(val) {
+        if (val==0) {
+            document.getElementById("nik").value = "0";
+            $('#nik2').hide();
+            document.getElementById("pemilik").value=0;
+        }
+        else {
+            $('#nik2').show();
+        }
+    }
 
     document.getElementById("pemilik").value=document.getElementById("nik").value;
     function simpanpemilik() {

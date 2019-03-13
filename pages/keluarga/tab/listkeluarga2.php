@@ -6,7 +6,7 @@
 <div class="panel-body" style="padding-top: 2%; padding-left: 2%; padding-right: 2%">
     <h4 style="text-align: center;">List of Family Data</h4>
    
-        <table width="100%" class="table table-striped table-bordered table-hover" id="listkeluarga2">
+        <table width="100%" class="table table-striped table-bordered table-hover" id="listkeluarga">
             <thead>
                 <tr style="text-align: center">
                     <th>No. Family Card</th>
@@ -145,7 +145,7 @@
 
 <script type="text/javascript">
         $(document).ready(function() {
-            $('#listkeluarga2').DataTable();
+            $('#listkeluarga').DataTable();
         } );
 
 function ceknominal() {

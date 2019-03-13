@@ -43,24 +43,30 @@
                 <div class="card">
                     <div class="card-body">
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
-                            <li class="nav-item">
-                                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true"><i class="ti-layout"></i> Manage Family Data</a>
+                        	<li class="nav-item">
+                                <a class="nav-link active" id="home-tab2" data-toggle="tab" href="#home2" role="tab" aria-controls="home2" aria-selected="true"><i class="fas fa-user-edit"></i> House Owner</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="pendidikan-tab" data-toggle="tab" href="#pendidikan" role="tab" aria-controls="pendidikan" aria-selected="false"><i class="fas fa-user-ninja"></i> Manage Education List</a>
+                                <a class="nav-link" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true"><i class="fa fa-users"></i> House Holder</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="kampung-tab" data-toggle="tab" href="#kampung" role="tab" aria-controls="kampung" aria-selected="false"><i class="fab fa-pied-piper-alt"></i> Manage Village List</a>
+                                <a class="nav-link" id="pendidikan-tab" data-toggle="tab" href="#pendidikan" role="tab" aria-controls="pendidikan" aria-selected="false"><i class="fas fa-user-ninja"></i>Education List</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="kerja-tab" data-toggle="tab" href="#kerja" role="tab" aria-controls="kerja" aria-selected="false"><i class="fas fa-chalkboard-teacher"></i> Manage Job List</a>
+                                <a class="nav-link" id="kampung-tab" data-toggle="tab" href="#kampung" role="tab" aria-controls="kampung" aria-selected="false"><i class="fab fa-pied-piper-alt"></i>Village List</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="aset-tab" data-toggle="tab" href="#aset" role="tab" aria-controls="aset" aria-selected="false"><i class="fa fa-cube"></i> Manage Asset List</a>
+                                <a class="nav-link" id="kerja-tab" data-toggle="tab" href="#kerja" role="tab" aria-controls="kerja" aria-selected="false"><i class="fas fa-chalkboard-teacher"></i>Job List</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="aset-tab" data-toggle="tab" href="#aset" role="tab" aria-controls="aset" aria-selected="false"><i class="fa fa-cube"></i>Asset List</a>
                             </li>
                         </ul>
                         <div class="tab-content mt-3" id="myTabContent">
-                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                        	<div class="tab-pane fade show active" id="home2" role="tabpanel" aria-labelledby="home-tab2">
+                                <?php include ("tab/listkeluarga2.php") ?>
+                            </div>
+                            <div class="tab-pane fade" id="home" role="tabpanel" aria-labelledby="home-tab">
                                 <?php include ("tab/listkeluarga.php") ?>
                             </div>
                             <div class="tab-pane fade" id="pendidikan" role="tabpanel" aria-labelledby="pendidikan-tab">
@@ -91,43 +97,7 @@
         <?php include('../inc/foot.php') ?>
         <!-- footer area end-->
     </div>
-    <!-- page container area end -->
-    <!-- offset area start -->
-    
-
-    <!-- offset area end -->
-
-    <!-- jquery latest version -->
-<!--     <script src="../../assets/js/vendor/jquery-2.2.4.min.js"></script> -->
-    <!-- bootstrap 4 js -->
-    <script src="../../assets/js/popper.min.js"></script>
-    <script src="../../assets/js/bootstrap.min.js"></script>
-    <script src="../../assets/js/owl.carousel.min.js"></script>
-    <script src="../../assets/js/metisMenu.min.js"></script>
-    <script src="../../assets/js/jquery.slimscroll.min.js"></script>
-    <script src="../../assets/js/jquery.slicknav.min.js"></script>
-
-    <!-- start chart js -->
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script> -->
-    <!-- start highcharts js -->
-    <!-- <script src="https://code.highcharts.com/highcharts.js"></script> -->
-    <!-- start zingchart js -->
-    <!-- <script src="https://cdn.zingchart.com/zingchart.min.js"></script> -->
-    <!-- <script>
-    zingchart.MODULESDIR = "https://cdn.zingchart.com/modules/";
-    ZC.LICENSE = ["569d52cefae586f634c54f86dc99e6a9", "ee6b7db5b51705a13dc2339db3edaf6d"];
-    </script> -->
-    <!-- all line chart activation -->
-    <script src="../../assets/js/line-chart.js"></script>
-    <!-- all pie chart -->
-    <script src="../../assets/js/pie-chart.js"></script>
-
-    <!-- others plugins -->
-    <script src="../../assets/js/plugins.js"></script>
-    <script src="../../assets/js/scripts.js"></script>
-
-    <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+  
     <script type="text/javascript">
         function back(){
             window.location = "../";

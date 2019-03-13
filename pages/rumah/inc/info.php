@@ -109,12 +109,28 @@
                             <option value="1">Not Available</option>
                         </select>
                     </div>
-                    <div class="form-group col-sm-6" id="status">
-                        <label>Status</label>
-                        <select name="status" class="form-control" style="font-size: 85%">
-                            <option value="0">Unhabited</option>
-                            <option value="1">Inhabited</option>
-                        </select>
+                    <div class="form-group col-sm-6">
+                        <div class="row">
+                            <div class="form-group col-sm-12">
+                                <label>Status</label>
+                                <select name="status" class="form-control" style="font-size: 85%">
+                                    <option value="0">Unhabited</option>
+                                    <option value="1">Inhabited</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-sm-12">
+                                <label>Building Model</label>
+                                <select name="model" class="form-control" style="font-size: 85%">
+                                    <?php                
+                                        $sql_j=pg_query("SELECT * FROM type_of_construction ORDER BY name_of_type");
+                                        while($row = pg_fetch_assoc($sql_j))
+                                        {
+                                            echo"<option value=".$row['type_id'].">".$row['name_of_type']."</option>";
+                                        }
+                                    ?>
+                                </select>
+                            </div>
+                        </div>
                     </div>
                     <div class="form-group col-sm-6">
                         <label>Alamat</label>
