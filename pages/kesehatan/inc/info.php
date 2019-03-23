@@ -16,7 +16,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>Type of Health Services</td>
+                        <td>Type of Health Building</td>
                         <td>:</td>
                         <td>
                             <?php echo $jenis; ?>
@@ -118,11 +118,11 @@
                         <input type="text" class="form-control" name="nama" value="<?php echo $nama; ?>" required>
                     </div>
                     <div class="form-group col-sm-6">
-                        <label><span style="color:red">*</span>Type of Health Service</label>
+                        <label><span style="color:red">*</span>Type of Health Building</label>
                         <select name="j-kes" class="form-control" style="font-size: 85%">
                             <option value="<?php echo $id_h; ?>"><?php echo $jenis; ?></option>
                             <?php                
-                                $sql_j=pg_query("SELECT * FROM type_of_health_services WHERE type_id != '$id_h' ORDER BY name_of_type");
+                                $sql_j=pg_query("SELECT * FROM type_of_health_building WHERE type_id != '$id_h' ORDER BY name_of_type");
                                 while($row = pg_fetch_assoc($sql_j))
                                 {
                                     echo"<option value=".$row['type_id'].">".$row['name_of_type']."</option>";

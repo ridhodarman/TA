@@ -31,7 +31,7 @@
             <thead>
                 <tr style="text-align: center">
                     <th>No.</th>
-                    <th>Types of Building Worship</th>
+                    <th>Types of Worship Building</th>
                     <th>Action</th>
                 </tr>
             </thead>

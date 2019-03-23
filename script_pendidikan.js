@@ -8,7 +8,7 @@ function tampilsemuapendidikan() {
     },
     error: function (xhr, ajaxOptions, thrownError) {
       $('#gagal').modal('show');
-      $('#notifikasi').append(xhr.status);
+      $('#notifikasi').empty();$('#notifikasi').append(xhr.status);
       $('#notifikasi').append(thrownError);
     }
   });
@@ -65,7 +65,7 @@ function carinamapendidikan() {
     },
     error: function (xhr, ajaxOptions, thrownError) {
       $('#gagal').modal('show');
-      $('#notifikasi').append(xhr.status);
+      $('#notifikasi').empty();$('#notifikasi').append(xhr.status);
       $('#notifikasi').append(thrownError);
     }
   });
@@ -83,7 +83,7 @@ function carijenis_pendidikan() {
     },
     error: function (xhr, ajaxOptions, thrownError) {
       $('#gagal').modal('show');
-      $('#notifikasi').append(xhr.status);
+      $('#notifikasi').empty();$('#notifikasi').append(xhr.status);
       $('#notifikasi').append(thrownError);
     }
   });
@@ -101,7 +101,7 @@ function caritipe_pendidikan() {
     },
     error: function (xhr, ajaxOptions, thrownError) {
       $('#gagal').modal('show');
-      $('#notifikasi').append(xhr.status);
+      $('#notifikasi').empty();$('#notifikasi').append(xhr.status);
       $('#notifikasi').append(thrownError);
     }
   });
@@ -120,7 +120,7 @@ function cariluasbang_pendidikan() {
     },
     error: function (xhr, ajaxOptions, thrownError) {
       $('#gagal').modal('show');
-      $('#notifikasi').append(xhr.status);
+      $('#notifikasi').empty();$('#notifikasi').append(xhr.status);
       $('#notifikasi').append(thrownError);
     }
   });
@@ -139,7 +139,7 @@ function cariluastanah_pendidikan() {
     },
     error: function (xhr, ajaxOptions, thrownError) {
       $('#gagal').modal('show');
-      $('#notifikasi').append(xhr.status);
+      $('#notifikasi').empty();$('#notifikasi').append(xhr.status);
       $('#notifikasi').append(thrownError);
     }
   });
@@ -157,7 +157,7 @@ function carikons_pendidikan() {
     },
     error: function (xhr, ajaxOptions, thrownError) {
       $('#gagal').modal('show');
-      $('#notifikasi').append(xhr.status);
+      $('#notifikasi').empty();$('#notifikasi').append(xhr.status);
       $('#notifikasi').append(thrownError);
     }
   });
@@ -175,7 +175,7 @@ function carijorong_pendidikan() {
     },
     error: function (xhr, ajaxOptions, thrownError) {
       $('#gagal').modal('show');
-      $('#notifikasi').append(xhr.status);
+      $('#notifikasi').empty();$('#notifikasi').append(xhr.status);
       $('#notifikasi').append(thrownError);
     }
   });
@@ -233,7 +233,7 @@ function detailpendidikan_infow(id) { //menampilkan informas
     },
     error: function (xhr, ajaxOptions, thrownError) {
       $('#gagal').modal('show');
-      $('#notifikasi').append(xhr.status);
+      $('#notifikasi').empty();$('#notifikasi').append(xhr.status);
       $('#notifikasi').append(thrownError);
     }
   });
@@ -381,7 +381,7 @@ function carifasilitas_pendidikan(){
     },
     error: function (xhr, ajaxOptions, thrownError) {
       $('#gagal').modal('show');
-      $('#notifikasi').append(xhr.status);
+      $('#notifikasi').empty();$('#notifikasi').append(xhr.status);
       $('#notifikasi').append(thrownError);
     }
   });

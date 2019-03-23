@@ -6,7 +6,7 @@ $jenis = $_GET["type"];
 
 $querysearch = " 	SELECT health_building_id, name_of_health_building ,ST_X(ST_Centroid(geom)) AS longitude, ST_Y(ST_CENTROID(geom)) As latitude
 					FROM health_building 
-                    WHERE type_of_health_services = '$jenis' order by name_of_health_building
+                    WHERE type_of_health_building = '$jenis' order by name_of_health_building
 				";
 
 $hasil = pg_query($querysearch);

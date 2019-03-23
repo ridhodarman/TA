@@ -8,7 +8,7 @@ function tampilsemuaumkm() { //menampilkan semua umkm
     },
     error: function (xhr, ajaxOptions, thrownError) {
       $('#gagal').modal('show');
-      $('#notifikasi').append(xhr.status);
+      $('#notifikasi').empty();$('#notifikasi').append(xhr.status);
       $('#notifikasi').append(thrownError);
     }
   });
@@ -66,7 +66,7 @@ function carinamaumkm() { //menampilkan umkm berdasarkan nama
     },
     error: function (xhr, ajaxOptions, thrownError) {
       $('#gagal').modal('show');
-      $('#notifikasi').append(xhr.status);
+      $('#notifikasi').empty();$('#notifikasi').append(xhr.status);
       $('#notifikasi').append(thrownError);
     }
   });
@@ -84,7 +84,7 @@ function carijenis_umkm() {
     },
     error: function (xhr, ajaxOptions, thrownError) {
       $('#gagal').modal('show');
-      $('#notifikasi').append(xhr.status);
+      $('#notifikasi').empty();$('#notifikasi').append(xhr.status);
       $('#notifikasi').append(thrownError);
     }
   });
@@ -102,7 +102,7 @@ function carikons_umkm() {
     },
     error: function (xhr, ajaxOptions, thrownError) {
       $('#gagal').modal('show');
-      $('#notifikasi').append(xhr.status);
+      $('#notifikasi').empty();$('#notifikasi').append(xhr.status);
       $('#notifikasi').append(thrownError);
     }
   });
@@ -120,7 +120,7 @@ function carijorong_umkm() {
     },
     error: function (xhr, ajaxOptions, thrownError) {
       $('#gagal').modal('show');
-      $('#notifikasi').append(xhr.status);
+      $('#notifikasi').empty();$('#notifikasi').append(xhr.status);
       $('#notifikasi').append(thrownError);
     }
   });
@@ -178,7 +178,7 @@ function detailumkm_infow(id) { //menampilkan informas
     },
     error: function (xhr, ajaxOptions, thrownError) {
       $('#gagal').modal('show');
-      $('#notifikasi').append(xhr.status);
+      $('#notifikasi').empty();$('#notifikasi').append(xhr.status);
       $('#notifikasi').append(thrownError);
     }
   });
@@ -324,7 +324,7 @@ function carifasilitas_umkm(){
     },
     error: function (xhr, ajaxOptions, thrownError) {
       $('#gagal').modal('show');
-      $('#notifikasi').append(xhr.status);
+      $('#notifikasi').empty();$('#notifikasi').append(xhr.status);
       $('#notifikasi').append(thrownError);
     }
     });

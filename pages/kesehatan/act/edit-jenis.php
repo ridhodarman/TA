@@ -4,7 +4,7 @@
 		include ('../../../inc/koneksi.php');
 		$id = $_GET['id'];
 		$jenis = $_GET['jenis-edit'];
-		$sql = pg_query("UPDATE type_of_health_services SET name_of_type = '$jenis' WHERE type_id = '$id'");
+		$sql = pg_query("UPDATE type_of_health_building SET name_of_type = '$jenis' WHERE type_id = '$id'");
 	}
 	else {
 		echo '<script>window.location="../../../assets/403"</script>';

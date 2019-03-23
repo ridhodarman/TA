@@ -284,7 +284,7 @@
                             <div class="modal fade" id="tambahpenghuni">
                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                     <div class="modal-content">
-                                        <form action="act/gantipemilik.php" method="POST">
+                                        <form action="act/tambahpenghuni.php" method="POST">
                                             <div class="modal-header">
                                                 <h6 class="modal-title">Add Head of Family Data</h6>
                                                 <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
@@ -293,10 +293,10 @@
                                                 <select class="selectpicker form-control" id="kk" data-container="body" data-live-search="true" title="Choose FCN" data-hide-disabled="true" style="font-size: 89%; font-weight: bold" onchange="simpanpenghuni()">
                                                     <option></option>
                                                     <?php                
-                                                        $sql_d=pg_query("SELECT national_identity_number, owner_name FROM house_building_owner WHERE national_identity_number !='0' ORDER BY owner_name");
+                                                        $sql_d=pg_query("SELECT family_card_number, head_of_family FROM householder ORDER BY head_of_family");
                                                         while($row = pg_fetch_assoc($sql_d))
                                                         {
-                                                            echo"<option value=".$row['national_identity_number'].">(".$row['national_identity_number'].") ".$row['owner_name']."</option>";
+                                                            echo"<option value=".$row['family_card_number'].">(".$row['family_card_number'].") ".$row['head_of_family']."</option>";
                                                         }
                                                     ?>
                                                 </select>
@@ -355,9 +355,8 @@
                                         <div class="media mb-5">
                                             <div class="media-body">
                                             <a style="float: right; padding-right: 1%; padding-bottom: 6%; ">
-                                            <button type="button" class="btn btn-info btn-sm btn-flat btn-lg mt-3" data-toggle="modal" data-target="#editpenghuni<?php echo $kk_penghuni ?>"><i class="fa fa-edit"></i> Edit</button>
+                                            <button type="button" class="btn btn-danger btn-sm btn-flat btn-lg mt-3" data-toggle="modal" data-target="#deletepenghuni<?php echo $kk_penghuni ?>"><i class="fas fa-user-slash"></i> Remove</button>
                                             </a>
-                                                <h5 class="mb-3">Householder</h5>
                                                 <table style="width: 100%">
                                                     <tr>
                                                         <td>Family Card Number </td>
@@ -451,43 +450,20 @@
                                 </div>
                             </div>
                             
-                            <div class="modal fade" id="editpenghuni<?php echo $kk_penghuni ?>">
+                            <div class="modal fade" id="deletepenghuni<?php echo $kk_penghuni ?>">
                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                     <div class="modal-content">
-                                        <form>
-                                            <div class="modal-header">
-                                                <h6 class="modal-title">Edit Owner</h6>
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Delete householder ?</h5>
                                                 <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
                                             </div>
-                                            <div class="modal-body" style="font-size: 110%">
-                                                Family Card Number: <input class="form-control" type="text" name="" value="<?php echo $kk_penghuni ?>">
-                                                Name of Head Family: <input class="form-control" type="text" name="" value="<?php echo $nama_kk ?>">
-                                                National ID Number: <input class="form-control" type="text" name="" value="<?php echo $nik_kk ?>">
-                                                Birth Date: <input class="form-control" type="date" name="" value="<?php echo $tgl_penghuni ?>">
-                                                Education Level: <input class="form-control" type="text" name="">
-                                                Job: <input class="form-control" type="text" name="">
-                                                Income:
-                                                    <div class="input-group">
-                                                        <div class="input-group-prepend">
-                                                            <div class="input-group-text">Rp</div>
-                                                        </div>
-                                                        <input type="text" class="form-control" id="penghasilan" value="<?php echo $penghasilan_penghuni ?>" onkeyup="ceknominal()">
-                                                    </div>
-                                                Take Insurance: <input class="form-control" type="text" name="">
-                                                Savings: <input class="form-control" type="text" name="">
-                                                Datuk: <input class="form-control" type="text" name="">
-                                                Tribe: <input class="form-control" type="text" name="">
-                                                Village: <input class="form-control" type="text" name="">
-                                                The Number of Dependents: <input class="form-control" type="text" name="" value="<?php echo $tanggungan_penghuni ?>">
-                                                <a href="" onclick="return confirm(\'Are you sure you want to delete the data of this family head from the householder?\')">
-                                                <button type="button" class="btn btn-danger btn-sm btn-flat btn-lg mt-3"><i class="fa fa-trash"></i> Delete</button>
-                                                </a>
+                                            <div class="modal-body">
+                                                <p>Are you sure to delete this householder from house ?</p>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                <button type="button" class="btn btn-primary">Save changes</button>
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                                <a href="act/hapuspenghuni.php?id=<?php echo base64_encode($kk_penghuni) ?>&bang=<?php echo $id ?>"><button type="button" class="btn btn-danger">Delete</button></a>
                                             </div>
-                                        </form>
                                     </div>
                                 </div>
                             </div>

@@ -8,7 +8,7 @@ function tampilsemuaibadah() {
     },
     error: function (xhr, ajaxOptions, thrownError) {
       $('#gagal').modal('show');
-      $('#notifikasi').append(xhr.status);
+      $('#notifikasi').empty();$('#notifikasi').append(xhr.status);
       $('#notifikasi').append(thrownError);
     }
   });
@@ -65,7 +65,7 @@ function carinamaibadah() {
     },
     error: function (xhr, ajaxOptions, thrownError) {
       $('#gagal').modal('show');
-      $('#notifikasi').append(xhr.status);
+      $('#notifikasi').empty();$('#notifikasi').append(xhr.status);
       $('#notifikasi').append(thrownError);
     }
   });
@@ -83,7 +83,7 @@ function carijenis_ibadah() {
     },
     error: function (xhr, ajaxOptions, thrownError) {
       $('#gagal').modal('show');
-      $('#notifikasi').append(xhr.status);
+      $('#notifikasi').empty();$('#notifikasi').append(xhr.status);
       $('#notifikasi').append(thrownError);
     }
   });
@@ -101,7 +101,7 @@ function carikons_ibadah() {
     },
     error: function (xhr, ajaxOptions, thrownError) {
       $('#gagal').modal('show');
-      $('#notifikasi').append(xhr.status);
+      $('#notifikasi').empty();$('#notifikasi').append(xhr.status);
       $('#notifikasi').append(thrownError);
     }
   });
@@ -120,7 +120,7 @@ function cariluasbang_ibadah() {
     },
     error: function (xhr, ajaxOptions, thrownError) {
       $('#gagal').modal('show');
-      $('#notifikasi').append(xhr.status);
+      $('#notifikasi').empty();$('#notifikasi').append(xhr.status);
       $('#notifikasi').append(thrownError);
     }
   });
@@ -139,7 +139,7 @@ function cariluastanah_ibadah() {
     },
     error: function (xhr, ajaxOptions, thrownError) {
       $('#gagal').modal('show');
-      $('#notifikasi').append(xhr.status);
+      $('#notifikasi').empty();$('#notifikasi').append(xhr.status);
       $('#notifikasi').append(thrownError);
     }
   });
@@ -158,7 +158,7 @@ function caritahun_ibadah() {
     },
     error: function (xhr, ajaxOptions, thrownError) {
       $('#gagal').modal('show');
-      $('#notifikasi').append(xhr.status);
+      $('#notifikasi').empty();$('#notifikasi').append(xhr.status);
       $('#notifikasi').append(thrownError);
     }
   });
@@ -176,7 +176,7 @@ function carijorong_ibadah() {
     },
     error: function (xhr, ajaxOptions, thrownError) {
       $('#gagal').modal('show');
-      $('#notifikasi').append(xhr.status);
+      $('#notifikasi').empty();$('#notifikasi').append(xhr.status);
       $('#notifikasi').append(thrownError);
     }
   });
@@ -234,7 +234,7 @@ function detailibadah_infow(id) { //menampilkan informas
     },
     error: function (xhr, ajaxOptions, thrownError) {
       $('#gagal').modal('show');
-      $('#notifikasi').append(xhr.status);
+      $('#notifikasi').empty();$('#notifikasi').append(xhr.status);
       $('#notifikasi').append(thrownError);
     }
   });
@@ -382,7 +382,7 @@ function carifasilitas_ibadah(){
     },
     error: function (xhr, ajaxOptions, thrownError) {
       $('#gagal').modal('show');
-      $('#notifikasi').append(xhr.status);
+      $('#notifikasi').empty();$('#notifikasi').append(xhr.status);
       $('#notifikasi').append(thrownError);
     }
   });

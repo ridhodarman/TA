@@ -45,13 +45,13 @@
             <?php
                 $id=$_GET['id'];
 
-                $querysearch = "SELECT H.health_building_id, H.name_of_health_building, H.building_area, H.land_area, H.parking_area, H.standing_year, H.electricity_capacity, H.address, H.type_of_construction, H.type_of_health_services, H.name_of_head, H.number_of_medical_personnel, H.number_of_nonmedical_personnel,
+                $querysearch = "SELECT H.health_building_id, H.name_of_health_building, H.building_area, H.land_area, H.parking_area, H.standing_year, H.electricity_capacity, H.address, H.type_of_construction, H.type_of_health_building, H.name_of_head, H.number_of_medical_personnel, H.number_of_nonmedical_personnel,
                                 ST_X(ST_Centroid(H.geom)) AS longitude, ST_Y(ST_CENTROID(H.geom)) As latitude,
                                 T.name_of_type as constr, J.name_of_type as type,
                                 ST_AsText(geom) as geom
 					            FROM health_building as H
                                 LEFT JOIN type_of_construction as T ON H.type_of_construction=T.type_id
-                                LEFT JOIN type_of_health_services as J ON H.type_of_health_services=J.type_id
+                                LEFT JOIN type_of_health_building as J ON H.type_of_health_building=J.type_id
                                 WHERE H.health_building_id='$id' 
 				            ";
 
@@ -69,7 +69,7 @@
                     $konstruksi = $row['constr'];
                     $jenis = $row['type'];
                     $id_k = $row['type_of_construction'];
-                    $id_h = $row['type_of_health_services'];
+                    $id_h = $row['type_of_health_building'];
                     $kepala = $row['name_of_head'];
                     $medis = $row['number_of_medical_personnel'];
                     $non = $row['number_of_nonmedical_personnel'];

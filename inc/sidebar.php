@@ -32,6 +32,145 @@ select {
                                     </div>
                                     </li>
                                 </ul>
+                            </li>
+                            <li name="terbatas"><a href="javascript:void(0)" aria-expanded="true">*Search By Owner Name</a>
+                                <ul class="collapse">
+                                    <li>
+                                    <div class="input-group mb-3">
+                                        <input type="text" aria-label="Text input with dropdown button" id="pemilik">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary" type="button" onclick="cari_pemilik()"><i class="fa fa-search"></i></button>
+                                        </div>
+                                    </div>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li name="terbatas"><a href="javascript:void(0)" aria-expanded="true">*Search By Family Head of Householder</a>
+                                <ul class="collapse">
+                                    <li>
+                                    <div class="input-group mb-3">
+                                        <input type="text" aria-label="Text input with dropdown button" id="penghuni">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary" type="button" onclick="cari_penghuni()"><i class="fa fa-search"></i></button>
+                                        </div>
+                                    </div>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li name="terbatas"><a href="javascript:void(0)" aria-expanded="true">*Search By Family Card Number of Householder</a>
+                                <ul class="collapse">
+                                    <li>
+                                    <div class="input-group mb-3">
+                                        <input type="text" aria-label="Text input with dropdown button" id="kk">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary" type="button" onclick="cari_kk()"><i class="fa fa-search"></i></button>
+                                        </div>
+                                    </div>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li name="terbatas"><a href="javascript:void(0)" aria-expanded="true">*Search By Datuk of Head Family</a>
+                                <ul class="collapse">
+                                    <li>
+                                    <div class="input-group mb-3">
+                                        <select aria-label="Text input with dropdown button" id="datuk">
+                                            <?php                
+                                                $sql_d=pg_query("SELECT * FROM datuk ORDER BY datuk_name");
+                                                while($row = pg_fetch_assoc($sql_d))
+                                                {
+                                                    echo"<option value=".$row['datuk_id'].">".$row['datuk_name']."</option>";
+                                                }
+                                            ?>
+                                        </select>
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary" type="button" onclick="cari_datuk()"><i class="fa fa-search"></i></button>
+                                        </div>
+                                    </div>
+                                    </li>
+                                </ul>
+                            </li>  
+                            <li name="terbatas"><a href="javascript:void(0)" aria-expanded="true">*Search By Tribe of Head Family</a>
+                                <ul class="collapse">
+                                    <li>
+                                    <div class="input-group mb-3">
+                                        <select aria-label="Text input with dropdown button" id="suku">
+                                            <?php                
+                                                $sql_s=pg_query("SELECT * FROM tribe ORDER BY name_of_tribe");
+                                                while($row = pg_fetch_assoc($sql_s))
+                                                {
+                                                    echo"<option value=".$row['tribe_id'].">".$row['name_of_tribe']."</option>";
+                                                }
+                                            ?>
+                                        </select>
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary" type="button" onclick="cari_suku()"><i class="fa fa-search"></i></button>
+                                        </div>
+                                    </div>
+                                    </li>
+                                </ul>
+                            </li> 
+                            <li name="terbatas"><a href="javascript:void(0)" aria-expanded="true">*Search By Income of Head Family</a>
+                                <ul class="collapse">
+                                    <li>
+                                        <label style="color: white">Form:</label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">Rp</div>
+                                            </div>
+                                            <input type="text" id="penghasilan1" onkeyup="ceknominal1()">
+                                        </div>
+                                        <br/>
+                                        <label style="color: white">Until:</label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">Rp</div>
+                                            </div>
+                                            <input type="text" id="penghasilan2" onkeyup="ceknominal2()">
+                                        </div>
+                                        <br/>
+                                        <button class="btn btn-primary btn-sm" type="button" onclick="cari_pendapatan()" style="width: 90%"><i class="fa fa-search"></i> <b>search</b></button>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li name="terbatas"><a href="javascript:void(0)" aria-expanded="true">*Search By Village of Head Family</a>
+                                <ul class="collapse">
+                                    <li>
+                                    <div class="input-group mb-3">
+                                        <select aria-label="Text input with dropdown button" id="kampung">
+                                            <?php                
+                                                $sql_k=pg_query("SELECT * FROM village ORDER BY village_name");
+                                                while($row = pg_fetch_assoc($sql_k))
+                                                {
+                                                    echo"<option value=".$row['village_id'].">".$row['village_name']."</option>";
+                                                }
+                                            ?>
+                                        </select>
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary" type="button" onclick="cari_kampung()"><i class="fa fa-search"></i></button>
+                                        </div>
+                                    </div>
+                                    </li>
+                                </ul>
+                            </li> 
+                            <li name="terbatas"><a href="javascript:void(0)" aria-expanded="true">*Search By Education Level of Head Family</a>
+                                <ul class="collapse">
+                                    <li>
+                                    <div class="input-group mb-3">
+                                        <select aria-label="Text input with dropdown button" id="pendkk">
+                                            <?php                
+                                                $sql_e=pg_query("SELECT * FROM education ORDER BY educational_level");
+                                                while($row = pg_fetch_assoc($sql_e))
+                                                {
+                                                    echo"<option value=".$row['education_id'].">".$row['educational_level']."</option>";
+                                                }
+                                            ?>
+                                        </select>
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary" type="button" onclick="cari_pendkk()"><i class="fa fa-search"></i></button>
+                                        </div>
+                                    </div>
+                                    </li>
+                                </ul>
                             </li> 
                             <li name="terbatas"><a href="javascript:void(0)" aria-expanded="true">Search By Construction Type</a>
                                 <ul class="collapse">
@@ -175,6 +314,29 @@ select {
                                 </ul>
                             </li>
                             <li><a href="javascript:void(0)" data-toggle="modal" data-target="#fas-umkm">Search By Facility</a>
+                            </li>
+                            <li name="terbatas"><a href="javascript:void(0)" aria-expanded="true">*Search By Income</a>
+                                <ul class="collapse">
+                                    <li>
+                                        <label style="color: white">Form:</label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">Rp</div>
+                                            </div>
+                                            <input type="text" id="penghasilan-umkm1" onkeyup="ceknominal_umkm1()">
+                                        </div>
+                                        <br/>
+                                        <label style="color: white">Until:</label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">Rp</div>
+                                            </div>
+                                            <input type="text" id="penghasilan-umkm2" onkeyup="ceknominal_umkm2()">
+                                        </div>
+                                        <br/>
+                                        <button class="btn btn-primary btn-sm" type="button" onclick="cari_idrumah()" style="width: 90%"><i class="fa fa-search"></i> <b>search</b></button>
+                                    </li>
+                                </ul>
                             </li>
                         </ul>
                     </li>
@@ -576,7 +738,7 @@ select {
                                     <div class="input-group mb-3">
                                         <select aria-label="Text input with dropdown button" id="jeniskesehatan">
                                             <?php                
-                                                $sql_j=pg_query("SELECT * FROM type_of_health_services ORDER BY name_of_type");
+                                                $sql_j=pg_query("SELECT * FROM type_of_health_building ORDER BY name_of_type");
                                                 while($row = pg_fetch_assoc($sql_j))
                                                 {
                                                     echo"<option value=".$row['type_id'].">".$row['name_of_type']."</option>";
@@ -623,7 +785,28 @@ select {
                             </li>
                         </ul>
                     </li>
-                    
+                    <li>
+                        <a href="javascript:void(0)" aria-expanded="true"><i class="fas fa-house-damage"></i><span>Search by Building Model
+                            </span></a>
+                        <ul class="collapse">
+                            <li>
+                                <div class="input-group mb-3">
+                                        <select aria-label="Text input with dropdown button" id="model">
+                                            <?php                
+                                                $sql_m=pg_query("SELECT * FROM building_model ORDER BY name_of_model");
+                                                while($row = pg_fetch_assoc($sql_m))
+                                                {
+                                                    echo"<option value=".$row['model_id'].">".$row['name_of_model']."</option>";
+                                                }
+                                            ?>
+                                        </select>
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary" type="button" onclick="carijorong_kesehatan()"><i class="fa fa-search"></i></button>
+                                        </div>
+                                    </div>
+                            </li>
+                        </ul>
+                    </ul>
                 </ul>
             </nav>
         </div>
@@ -835,6 +1018,43 @@ select {
       else {
         return true
       }
+    }
+
+    function ceknominal1() {
+        var rupiah = document.getElementById('penghasilan1');
+        rupiah.value = formatRupiah(rupiah.value, '');
+    }
+
+    function ceknominal2() {
+        var rupiah = document.getElementById('penghasilan2');
+        rupiah.value = formatRupiah(rupiah.value, '');
+    }
+
+    function ceknominal_umkm1() {
+        var rupiah = document.getElementById('penghasilan-umkm1');
+        rupiah.value = formatRupiah(rupiah.value, '');
+    }
+
+    function ceknominal_umkm2() {
+        var rupiah = document.getElementById('penghasilan-umkm2');
+        rupiah.value = formatRupiah(rupiah.value, '');
+    }
+
+    function formatRupiah(angka, prefix){
+        var number_string = angka.replace(/[^,\d]/g, '').toString(),
+        split           = number_string.split(','),
+        sisa            = split[0].length % 3,
+        rupiah          = split[0].substr(0, sisa),
+        ribuan          = split[0].substr(sisa).match(/\d{3}/gi);
+     
+        // tambahkan titik jika yang di input sudah menjadi angka ribuan
+        if(ribuan){
+            separator = sisa ? '.' : '';
+            rupiah += separator + ribuan.join('.');
+        }
+     
+        rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+        return prefix == undefined ? rupiah : (rupiah ? '' + rupiah : '');
     }
 </script>
 

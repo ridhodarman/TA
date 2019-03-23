@@ -74,7 +74,7 @@ function digitasirumah() {
     },
     error: function (xhr, ajaxOptions, thrownError) {
       $('#gagal').modal('show');
-      $('#notifikasi').append(xhr.status);
+      $('#notifikasi').empty();$('#notifikasi').append(xhr.status);
       $('#notifikasi').append(thrownError);
     }
   });
@@ -137,7 +137,7 @@ function digitasiumkm() {
     },
     error: function (xhr, ajaxOptions, thrownError) {
       $('#gagal').modal('show');
-      $('#notifikasi').append(xhr.status);
+      $('#notifikasi').empty();$('#notifikasi').append(xhr.status);
       $('#notifikasi').append(thrownError);
     }
   });
@@ -202,7 +202,7 @@ function digitasit4ibadah() {
     },
     error: function (xhr, ajaxOptions, thrownError) {
       $('#gagal').modal('show');
-      $('#notifikasi').append(xhr.status);
+      $('#notifikasi').empty();$('#notifikasi').append(xhr.status);
       $('#notifikasi').append(thrownError);
     }
   });
@@ -265,7 +265,7 @@ function digitasikantor() {
     },
     error: function (xhr, ajaxOptions, thrownError) {
       $('#gagal').modal('show');
-      $('#notifikasi').append(xhr.status);
+      $('#notifikasi').empty();$('#notifikasi').append(xhr.status);
       $('#notifikasi').append(thrownError);
     }
   });
@@ -328,7 +328,7 @@ function digitasipendidikan() {
     },
     error: function (xhr, ajaxOptions, thrownError) {
       $('#gagal').modal('show');
-      $('#notifikasi').append(xhr.status);
+      $('#notifikasi').empty();$('#notifikasi').append(xhr.status);
       $('#notifikasi').append(thrownError);
     }
   });
@@ -391,7 +391,7 @@ function digitasikesehatan() {
     },
     error: function (xhr, ajaxOptions, thrownError) {
       $('#gagal').modal('show');
-      $('#notifikasi').append(xhr.status);
+      $('#notifikasi').empty();$('#notifikasi').append(xhr.status);
       $('#notifikasi').append(thrownError);
     }
   });
@@ -462,7 +462,7 @@ function digitasijorong() {
     },
     error: function (xhr, ajaxOptions, thrownError) {
       $('#gagal').modal('show');
-      $('#notifikasi').append(xhr.status);
+      $('#notifikasi').empty();$('#notifikasi').append(xhr.status);
       $('#notifikasi').append(thrownError);
     }
   });

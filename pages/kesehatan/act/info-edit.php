@@ -20,7 +20,7 @@
 		$sql = pg_query("UPDATE health_building SET
 						health_building_id = '$id', 
 						name_of_health_building = '$nama', 
-						type_of_health_services = '$type', 
+						type_of_health_building = '$type', 
 						building_area = '$lbang', 
 						land_area = '$land', 
 						parking_area = '$parkir', 

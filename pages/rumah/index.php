@@ -220,10 +220,10 @@
                                                 <label>Building Model</label>
                                                 <select name="model" class="form-control" style="font-size: 85%">
                                                     <?php                
-                                                        $sql_j=pg_query("SELECT * FROM type_of_construction ORDER BY name_of_type");
+                                                        $sql_j=pg_query("SELECT * FROM building_model ORDER BY name_of_model");
                                                         while($row = pg_fetch_assoc($sql_j))
                                                         {
-                                                            echo"<option value=".$row['type_id'].">".$row['name_of_type']."</option>";
+                                                            echo"<option value=".$row['type_id'].">".$row['name_of_model']."</option>";
                                                         }
                                                     ?>
                                                 </select>

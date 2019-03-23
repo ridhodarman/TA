@@ -30,7 +30,7 @@
             <?php
                                 $sql=pg_query("SELECT H.health_building_id, H.name_of_health_building, H.address, J.name_of_type AS jenis
                                     FROM health_building AS H 
-                                    LEFT JOIN type_of_health_services AS J ON J.type_id=H.type_of_health_services");
+                                    LEFT JOIN type_of_health_building AS J ON J.type_id=H.type_of_health_building");
                                 while ($data=pg_fetch_assoc($sql)) {
                                     $id=$data['health_building_id'];
                                     $nama=$data['name_of_health_building'];
@@ -115,10 +115,10 @@
                                         <input type="text" class="form-control" name="nama" value="" required>
                                     </div>
                                     <div class="form-group col-sm-6">
-                                        <label><span style="color:red">*</span>Type of Health Service</label>
+                                        <label><span style="color:red">*</span>Type of Health Building</label>
                                         <select name="j-kes" class="form-control" style="font-size: 85%">
                                             <?php                
-                                                $sql_j=pg_query("SELECT * FROM type_of_health_services ORDER BY name_of_type");
+                                                $sql_j=pg_query("SELECT * FROM type_of_health_building ORDER BY name_of_type");
                                                 while($row = pg_fetch_assoc($sql_j))
                                                 {
                                                     echo"<option value=".$row['type_id'].">".$row['name_of_type']."</option>";
