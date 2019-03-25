@@ -116,7 +116,7 @@
             <div class="modal-body" style="font-size: 110%">
                 <div class="row">
                     <div class="form-group col-sm-6">
-                        <label><span style="color:red">*</span>ID Survey</label><b id="ids"></b>
+                        <label><span style="color:red">*</span>ID Survey</label><div id="ids"></div>
                         <input type="text" class="form-control" name="id" id="id" onkeyup="besarkan()" onchange="cekid()" required value="<?php echo $id ?>">
                         <input type="hidden" class="form-control" name="id-temp" value="<?php echo $id ?>">
                     </div>
@@ -215,6 +215,9 @@
         </div>
     </div>
 </div>
+<?php
+$id_ada = '<div class="alert alert-danger alert-dismissible fade show" role="alert">This <strong>ID</strong> is already registered</div>';
+?>
 
 <script type="text/javascript">
     function besarkan() {
@@ -233,8 +236,7 @@
             echo "if (id == \"".$idnya."\")";
             echo "{
                     ketemu=true;
-                    $('#ids').css('color', 'red');
-                    $('#ids').html('...This ID is already registered');
+                    $('#ids').html('".$id_ada."');
                     $('#simpan').prop('disabled', true);
                   }";
 
@@ -242,7 +244,7 @@
         ?>
          if (ketemu==false){
                 $('#ids').empty();
-                $$('#simpan').prop('disabled', false);
+                $('#simpan').prop('disabled', false);
             }
     }
 </script>

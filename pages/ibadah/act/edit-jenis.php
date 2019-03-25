@@ -6,7 +6,4 @@
 		$jenis = $_GET['jenis-edit'];
 		$sql = pg_query("UPDATE type_of_worship SET name_of_type = '$jenis' WHERE type_id = '$id'");
 	}
-	else {
-		echo '<script>window.location="../../../assets/403"</script>';
-	}
 ?>

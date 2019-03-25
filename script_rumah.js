@@ -276,7 +276,7 @@ function cari_pemilik() {
   }
   else {
     $.ajax({
-      url: 'act/rumah_file.php?nama=' + pemilik,
+      url: 'act/rumah_cari-pemilik.php?nama=' + pemilik,
       data: "",
       dataType: 'json',
       success: function (rows) {
@@ -300,7 +300,7 @@ function cari_penghuni() {
   }
   else {
     $.ajax({
-      url: 'act/rumah_file.php?nama=' + penghuni,
+      url: 'act/rumah_cari-penghuni.php?nama=' + penghuni,
       data: "",
       dataType: 'json',
       success: function (rows) {
@@ -324,7 +324,7 @@ function cari_kk() {
   }
   else {
     $.ajax({
-      url: 'act/rumah_file.php?kk=' + kk,
+      url: 'act/rumah_cari-kkpenghuni.php?kk=' + kk,
       data: "",
       dataType: 'json',
       success: function (rows) {
@@ -341,8 +341,9 @@ function cari_kk() {
 
 function cari_datuk() { 
   var datuk = document.getElementById("datuk").value;
+  console.log("cari rumah id datuk: " + datuk);
     $.ajax({
-      url: 'act/rumah_file.php?datuk=' + datuk,
+      url: 'act/rumah_cari-datuk.php?datuk=' + datuk,
       data: "",
       dataType: 'json',
       success: function (rows) {
@@ -359,7 +360,7 @@ function cari_datuk() {
 function cari_suku() { 
   var suku = document.getElementById("suku").value;
     $.ajax({
-      url: 'act/rumah_file.php?suku=' + suku,
+      url: 'act/rumah_cari-suku.php?suku=' + suku,
       data: "",
       dataType: 'json',
       success: function (rows) {
@@ -378,7 +379,7 @@ function cari_pendapatan() {
   var akhir = document.getElementById("penghasilan2").value;
   console.log("cari pendapatan keluarga dg: " + awal + " - " +akhir);
   $.ajax({
-    url: 'act/rumah_file.php?awal=' + awal + '&akhir=' + akhir,
+    url: 'act/rumah_cari-pendapatan.php?awal=' + awal + '&akhir=' + akhir,
     data: "",
     dataType: 'json',
     success: function (rows) {
@@ -395,7 +396,7 @@ function cari_pendapatan() {
 function cari_kampung() { 
   var kampung = document.getElementById("kampung").value;
     $.ajax({
-      url: 'act/rumah_file.php?kampung=' + kampung,
+      url: 'act/rumah_cari-kampung.php?kampung=' + kampung,
       data: "",
       dataType: 'json',
       success: function (rows) {
@@ -412,7 +413,7 @@ function cari_kampung() {
 function cari_pendkk() { 
   var pendkk = document.getElementById("pendkk").value;
     $.ajax({
-      url: 'act/rumah_file.php?pendkk=' + pendkk,
+      url: 'act/rumah_cari-pendkk.php?pendkk=' + pendkk,
       data: "",
       dataType: 'json',
       success: function (rows) {

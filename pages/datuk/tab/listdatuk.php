@@ -1,5 +1,5 @@
 <div style="text-align: center; padding-top: 3%; padding-bottom:3%">
-<button class="btn btn-default btn-lg" style="width: 90%; background-color: #fafafa" data-toggle="modal" data-target="#tambahdatuk">+
+<button class="btn btn-default btn-lg" style="width: 90%; background-color: #fafafa" onclick="load()" data-toggle="modal" data-target="#tambahdatuk">+
     Add Datuk Datuk</button>
 </div>
 
@@ -16,10 +16,9 @@
                         <label>Name of Datuk:</label>
                         <input type="text" class="form-control" id="nama" name="nama" value="" required>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" id="sukunya">
                         <label>Tribe:</label>
                         <select class="form-control" name="suku" id="daftarsuku" required>
-                            <option></option>
                             <?php                
                                 $sql_suku=pg_query("SELECT * FROM tribe ORDER BY name_of_tribe");
                                 while($row = pg_fetch_assoc($sql_suku))
@@ -31,7 +30,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                     <button type="button" class="btn btn-primary" id="tambahkandatuk">+ Add</button>
                 </div>
             </form>
@@ -125,7 +124,7 @@
                                             <input type="hidden" class="form-control" name="id" value="'.$id.'" required>
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                                             <button type="button" class="btn btn-primary" onclick="editdatuk('.$id.')""><i class="ti-save"></i> Save</button>
                                         </div>
                                     </div>
@@ -138,35 +137,6 @@
             ?>
         </tbody>
     </table>
-</div>
-
-<div class="modal fade" id="tambahdatuk">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Add Datuk</h5>
-                <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
-            </div>
-            <form role="form" action="act/tambahrumah.php" enctype="multipart/form-data" method="post"></form>
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label>Name of Datuk:</label>
-                        <input type="text" class="form-control" name="id" value="" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Tribe:</label>
-                        <select class="form-control" name="suku" value="" required>
-                            <option></option>
-                        </select>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">+ Add</button>
-                </div>
-            </form>
-        </div>
-    </div>
 </div>
 
 <script type="text/javascript">
@@ -249,6 +219,9 @@
             }
     }
 
+    function load() {
+        $('#sukunya').load("inc/combobox-suku.php");
+    }
 
     $(document).ready(function() {
             $('#listdatuk').DataTable();

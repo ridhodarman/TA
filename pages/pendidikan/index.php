@@ -48,7 +48,7 @@
                     <div class="card-body">
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
                             <li class="nav-item">
-                                <a onclick="muat_ulang()" class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true"><i class="ti-layout"></i> Manage Educational Building Data</a>
+                                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true"><i class="ti-layout"></i> Manage Educational Building Data</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false"><i class="fas fa-user-ninja"></i> Manage Data on Level of Education</a>
@@ -92,9 +92,5 @@
 <script type="text/javascript">
     function back(){
         window.location = "../";
-    }
-
-    function muat_ulang(){
-        location.reload();
     }
 </script>

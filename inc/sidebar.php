@@ -33,7 +33,7 @@ select {
                                     </li>
                                 </ul>
                             </li>
-                            <li name="terbatas"><a href="javascript:void(0)" aria-expanded="true">*Search By Owner Name</a>
+                            <li name="terbatas"><a href="javascript:void(0)" aria-expanded="true">Search By Owner Name</a>
                                 <ul class="collapse">
                                     <li>
                                     <div class="input-group mb-3">
@@ -45,7 +45,7 @@ select {
                                     </li>
                                 </ul>
                             </li>
-                            <li name="terbatas"><a href="javascript:void(0)" aria-expanded="true">*Search By Family Head of Householder</a>
+                            <li name="terbatas"><a href="javascript:void(0)" aria-expanded="true">Search By Family Head of Householder</a>
                                 <ul class="collapse">
                                     <li>
                                     <div class="input-group mb-3">
@@ -57,7 +57,7 @@ select {
                                     </li>
                                 </ul>
                             </li>
-                            <li name="terbatas"><a href="javascript:void(0)" aria-expanded="true">*Search By Family Card Number of Householder</a>
+                            <li name="terbatas"><a href="javascript:void(0)" aria-expanded="true">Search By Family Card Number of Householder</a>
                                 <ul class="collapse">
                                     <li>
                                     <div class="input-group mb-3">
@@ -69,7 +69,7 @@ select {
                                     </li>
                                 </ul>
                             </li>
-                            <li name="terbatas"><a href="javascript:void(0)" aria-expanded="true">*Search By Datuk of Head Family</a>
+                            <li name="terbatas"><a href="javascript:void(0)" aria-expanded="true">Search By Datuk of Head Family</a>
                                 <ul class="collapse">
                                     <li>
                                     <div class="input-group mb-3">
@@ -89,7 +89,7 @@ select {
                                     </li>
                                 </ul>
                             </li>  
-                            <li name="terbatas"><a href="javascript:void(0)" aria-expanded="true">*Search By Tribe of Head Family</a>
+                            <li name="terbatas"><a href="javascript:void(0)" aria-expanded="true">Search By Tribe of Head Family</a>
                                 <ul class="collapse">
                                     <li>
                                     <div class="input-group mb-3">
@@ -109,7 +109,7 @@ select {
                                     </li>
                                 </ul>
                             </li> 
-                            <li name="terbatas"><a href="javascript:void(0)" aria-expanded="true">*Search By Income of Head Family</a>
+                            <li name="terbatas"><a href="javascript:void(0)" aria-expanded="true">Search By Income of Head Family</a>
                                 <ul class="collapse">
                                     <li>
                                         <label style="color: white">Form:</label>
@@ -132,7 +132,7 @@ select {
                                     </li>
                                 </ul>
                             </li>
-                            <li name="terbatas"><a href="javascript:void(0)" aria-expanded="true">*Search By Village of Head Family</a>
+                            <li name="terbatas"><a href="javascript:void(0)" aria-expanded="true">Search By Village of Head Family</a>
                                 <ul class="collapse">
                                     <li>
                                     <div class="input-group mb-3">
@@ -152,7 +152,7 @@ select {
                                     </li>
                                 </ul>
                             </li> 
-                            <li name="terbatas"><a href="javascript:void(0)" aria-expanded="true">*Search By Education Level of Head Family</a>
+                            <li name="terbatas"><a href="javascript:void(0)" aria-expanded="true">Search By Education Level of Head Family</a>
                                 <ul class="collapse">
                                     <li>
                                     <div class="input-group mb-3">
@@ -315,7 +315,7 @@ select {
                             </li>
                             <li><a href="javascript:void(0)" data-toggle="modal" data-target="#fas-umkm">Search By Facility</a>
                             </li>
-                            <li name="terbatas"><a href="javascript:void(0)" aria-expanded="true">*Search By Income</a>
+                            <li name="terbatas"><a href="javascript:void(0)" aria-expanded="true">Search By Monthly Income</a>
                                 <ul class="collapse">
                                     <li>
                                         <label style="color: white">Form:</label>
@@ -334,7 +334,7 @@ select {
                                             <input type="text" id="penghasilan-umkm2" onkeyup="ceknominal_umkm2()">
                                         </div>
                                         <br/>
-                                        <button class="btn btn-primary btn-sm" type="button" onclick="cari_idrumah()" style="width: 90%"><i class="fa fa-search"></i> <b>search</b></button>
+                                        <button class="btn btn-primary btn-sm" type="button" onclick="cari_pendumkm()" style="width: 90%"><i class="fa fa-search"></i> <b>search</b></button>
                                     </li>
                                 </ul>
                             </li>

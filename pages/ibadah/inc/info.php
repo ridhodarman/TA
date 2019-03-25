@@ -88,7 +88,7 @@
             <div class="modal-body" style="font-size: 110%">
                 <div class="row">
                     <div class="form-group col-sm-6">
-                        <label> ID Survey</label><label id="ids"></label>
+                        <label> ID Survey</label><div id="ids"></div>
                         <input type="text" class="form-control" name="id" value="<?php echo $id ?>" id="id" onkeyup="besarkan()" onchange="cekid()" required>
                         <input type="hidden" name="id-temp" value="<?php echo $id ?>"/>
                     </div>
@@ -98,7 +98,7 @@
                     </div>
                     <div class="form-group col-sm-6">
                         <label>Worship Building Type</label>
-                        <select name="j-ibadah" class="form-control" style="font-size: 85%" required>
+                        <select name="j-ibadah" class="form-control" style="font-size: 85%">
                             <option value="<?php echo $tipe_i ?>"><?php echo $jenis; ?></option>
                             <?php                
                                 $sql_jibadah=pg_query("SELECT * FROM type_of_worship WHERE type_id != '$tipe_i' ORDER BY name_of_type");
@@ -111,7 +111,7 @@
                     </div>
                     <div class="form-group col-sm-6">
                         <label>Construction Type</label>
-                        <select name="konstruksi" class="form-control" style="font-size: 85%" required>
+                        <select name="konstruksi" class="form-control" style="font-size: 85%">
                             <option value="<?php echo $tipe_k ?>"><?php echo $konstruksi ?></option>
                             <?php                
                                 $sql_jibadah=pg_query("SELECT * FROM type_of_construction WHERE type_id != '$tipe_k' ORDER BY name_of_type");
@@ -149,13 +149,17 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                 <button type="submit" class="btn btn-primary" id="simpan">Save changes</button>
             </div>
             </form>
         </div>
     </div>
 </div>
+
+<?php
+$id_ada = '<div class="alert alert-danger alert-dismissible fade show" role="alert">This <strong>ID</strong> is already registered</div>';
+?>
 
 <script type="text/javascript">
     function besarkan() {
@@ -174,8 +178,7 @@
             echo "if (id == \"".$idnya."\")";
             echo "{
                     ketemu=true;
-                    $('#ids').css('color', 'red');
-                    $('#ids').html('...This ID is already registered');
+                    $('#ids').html('".$id_ada."');
                     $('#simpan').prop('disabled', true);
                   }";
 

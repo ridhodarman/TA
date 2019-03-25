@@ -7,10 +7,6 @@
 	    $id = $row["id"];
 	    $id2 = $id+1;
 		$jenis = $_POST['jenis'];
-
 		$sql = pg_query("INSERT INTO type_of_worship (type_id, name_of_type) VALUES ('$id2', '$jenis')");
-	}
-	else {
-		echo '<script>window.location="../../../assets/403"</script>';
 	}
 ?>

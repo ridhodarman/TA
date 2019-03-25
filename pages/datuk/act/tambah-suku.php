@@ -7,10 +7,6 @@
 	    $id = $row["id"];
 	    $id2 = $id+1;
 		$suku = $_POST['suku'];
-
 		$sql = pg_query("INSERT INTO tribe (tribe_id, name_of_tribe) VALUES ('$id2', '$suku')");
-	}
-	else {
-		echo '<script>window.location="../../../assets/403"</script>';
 	}
 ?>

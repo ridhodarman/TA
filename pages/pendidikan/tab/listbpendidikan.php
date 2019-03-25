@@ -10,7 +10,7 @@
 </style>
 
 <div style="text-align: center; padding-top: 3%; padding-bottom:3%">
-<button class="btn btn-default btn-lg" style="width: 90%; background-color: #fafafa" data-toggle="modal" data-target="#tambahbang">+
+<button class="btn btn-default btn-lg" style="width: 90%; background-color: #fafafa" onclick="load()" data-toggle="modal" data-target="#tambahbang">+
     Add Educational Building Data </button>
 </div>
 
@@ -100,11 +100,11 @@
                                 <div class="row">
                                     <div class="form-group col-sm-6">
                                         <label>Building Area (m<sup>2</sup>)</label><label id="lbangs"></label>
-                                        <input type="text" class="form-control" name="lbang" value="0" onkeypress="return hanyaAngka(event, '#lbangs')">
+                                        <input type="text" class="form-control" name="lbang" value="" onkeypress="return hanyaAngka(event, '#lbangs')">
                                     </div>
                                     <div class="form-group col-sm-6">
                                         <label>Land Area (m<sup>2</sup>)</label><label id="lahans"></label>
-                                        <input type="text" class="form-control" name="lahan" value="0" onkeypress="return hanyaAngka(event, '#lahans')">
+                                        <input type="text" class="form-control" name="lahan" value="" onkeypress="return hanyaAngka(event, '#lahans')">
                                     </div>
                                 </div>
                             </div>
@@ -113,7 +113,7 @@
                                 <!-- menampilkan form tambah-->
                                 <div class="row">
                                     <div class="form-group col-sm-6">
-                                        <label><span style="color:red">*</span>ID Survey</label><b id="ids"></b>
+                                        <label><span style="color:red">*</span>ID Survey</label><div id="ids"></div>
                                         <input type="text" class="form-control" name="id" id="id" onkeyup="besarkan()" onchange="cekid()" required>
                                     </div>
                                     <div class="form-group col-sm-6">
@@ -124,7 +124,7 @@
                                         <label>Headmaster Name</label>
                                         <input type="text" class="form-control" name="kepala" value="">
                                     </div>
-                                    <div class="form-group col-sm-6">
+                                    <div class="form-group col-sm-6" id="jenispend1">
                                         <label><span style="color:red">*</span>Level of Education</label>
                                         <select name="level" class="form-control" style="font-size: 85%">
                                             <?php                
@@ -138,11 +138,11 @@
                                     </div>
                                     <div class="form-group col-sm-6">
                                         <label>Total Teachers</label><label id="gurus"></label>
-                                        <input type="text" class="form-control" name="guru" value="0" onkeypress="return hanyaAngka(event, '#gurus')">
+                                        <input type="text" class="form-control" name="guru" value="" onkeypress="return hanyaAngka(event, '#gurus')">
                                     </div>
                                     <div class="form-group col-sm-6">
                                         <label>Total Students</label><label id="murids"></label>
-                                        <input type="text" class="form-control" name="murid" value="0" onkeypress="return hanyaAngka(event, '#murids')">
+                                        <input type="text" class="form-control" name="murid" value="" onkeypress="return hanyaAngka(event, '#murids')">
                                     </div>
                                     <div class="form-group col-sm-6">
                                         <label><span style="color:red">*</span> Coordinat</label>
@@ -155,7 +155,7 @@
                                     <div class="form-group col-sm-6">
                                         <label>School Type</label>
                                         <select name="jenis-s" class="form-control" style="font-size: 85%">
-                                            <option value="0">Public School</option>
+                                            <option value="">Public School</option>
                                             <option value="1">Private School</option>
                                         </select>
                                     </div>
@@ -173,15 +173,15 @@
                                     </div>
                                     <div class="form-group col-sm-6">
                                         <label>Electricity Capacity (kWh)</label><label id="listriks"></label>
-                                        <input type="text" class="form-control" name="listrik" value="0" onkeypress="return hanyaAngka(event, '#listriks')">
+                                        <input type="text" class="form-control" name="listrik" value="" onkeypress="return hanyaAngka(event, '#listriks')">
                                     </div>
                                     <div class="form-group col-sm-6">
                                         <label>Standing Year</label><label id="tahuns"></label>
-                                        <input type="text" class="form-control" name="tahun" value="0" onkeypress="return hanyaAngka(event, '#tahuns')">
+                                        <input type="text" class="form-control" name="tahun" value="" onkeypress="return hanyaAngka(event, '#tahuns')">
                                     </div>
                                     <div class="form-group col-sm-6">
                                         <label>Parking Area (m<sup>2</sup>)</label><label id="parkirs"></label>
-                                        <input type="text" class="form-control" name="parkir" value="0" onkeypress="return hanyaAngka(event, '#parkirs')">
+                                        <input type="text" class="form-control" name="parkir" value="" onkeypress="return hanyaAngka(event, '#parkirs')">
                                     </div>
                                 </div>
                             </div>
@@ -196,21 +196,14 @@
             </div>
         </div>
     </div>
-
+<?php
+$id_ada = '<div class="alert alert-danger alert-dismissible fade show" role="alert">This <strong>ID</strong> is already registered</div>';
+?>
 
 <script type="text/javascript">
     $(document).ready(function() {
         $('#listbang').DataTable();
     } );
-
-    // $(document).ready(function() {
-    //     if ($('#geom').val()=="") {
-    //         $('#tambahbangunan').prop('disabled', true);
-    //     }
-    //     else {
-    //         $('#tambahbangunan').prop('disabled', false);   
-    //     }
-    // } );
 
     function besarkan() {
         var id=document.getElementById('id').value.toUpperCase();
@@ -228,8 +221,7 @@
             echo "if (id == \"".$idnya."\")";
             echo "{
                     ketemu=true;
-                    $('#ids').css('color', 'red');
-                    $('#ids').html('...This ID is already registered');
+                    $('#ids').html('".$id_ada."');
                     $('#tambahbangunan').prop('disabled', true);
                   }";
 
@@ -263,4 +255,8 @@
         alertify.alert('<img src="../../inc/poligon.gif" width="150px"><br/>please draw the area with polygon on the map');
         return false;
     });
+
+    function load() {
+        $('#jenispend1').load("inc/combobox-jenis.php");
+    }
 </script>

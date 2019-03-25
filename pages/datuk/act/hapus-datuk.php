@@ -5,7 +5,4 @@
 		$id = base64_decode( $_GET['id'] );
 		$sql = pg_query("DELETE FROM datuk WHERE datuk_id = '$id'");
 	}
-	else {
-		echo '<script>window.location="../../../assets/403"</script>';
-	}
 ?>

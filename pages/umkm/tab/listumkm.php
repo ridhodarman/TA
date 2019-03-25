@@ -10,7 +10,7 @@
 </style>
 
 <div style="text-align: center; padding-top: 3%; padding-bottom:3%">
-<button class="btn btn-default btn-lg" style="width: 90%; background-color: #fafafa" data-toggle="modal" data-target="#tambahbang">+
+<button class="btn btn-default btn-lg" style="width: 90%; background-color: #fafafa" onclick="load()" data-toggle="modal" data-target="#tambahbang">+
     Add MSME Building Data </button>
 </div>
 
@@ -30,7 +30,7 @@
             <?php
                 $sql=pg_query("SELECT M.msme_building_id, M.name_of_msme_building, M.address, J.name_of_type AS jenis
                     FROM msme_building AS M 
-                    LEFT JOIN type_of_health_services AS J ON J.type_id=M.type_of_msme");
+                    LEFT JOIN type_of_msme AS J ON J.type_id=M.type_of_msme");
                 while ($data=pg_fetch_assoc($sql)) {
                     $id=$data['msme_building_id'];
                     $nama=$data['name_of_msme_building'];
@@ -102,11 +102,11 @@
                                     <div class="row">
                                         <div class="form-group col-sm-6">
                                             <label>Standing Year</label><label id="tahuns"></label>
-                                            <input type="text" class="form-control" name="tahun" value="0" onkeypress="return hanyaAngka(event, '#tahuns')">
+                                            <input type="text" class="form-control" name="tahun" value="" onkeypress="return hanyaAngka(event, '#tahuns')">
                                         </div>
                                         <div class="form-group col-sm-6">
                                             <label>Electricity Capacity (kWh)</label><label id="listriks"></label>
-                                            <input type="text" class="form-control" name="listrik" value="0" onkeypress="return hanyaAngka(event, '#listriks')">
+                                            <input type="text" class="form-control" name="listrik" value="" onkeypress="return hanyaAngka(event, '#listriks')">
                                         </div>
                                     </div>
                             </div>
@@ -115,14 +115,14 @@
                                 <!-- menampilkan form tambah-->
                                 <div class="row">
                                     <div class="form-group col-sm-6">
-                                        <label><span style="color:red">*</span>ID Survey</label><b id="ids"></b>
+                                        <label><span style="color:red">*</span>ID Survey</label><div id="ids"></div>
                                         <input type="text" class="form-control" name="id" id="id" onkeyup="besarkan()" onchange="cekid()" required>
                                     </div>
                                     <div class="form-group col-sm-6">
                                         <label><span style="color:red">*</span>Name</label>
                                         <input type="text" class="form-control" name="nama" value="" required>
                                     </div>
-                                    <div class="form-group col-sm-6">
+                                    <div class="form-group col-sm-6" id="jenisumkm">
                                         <label><span style="color:red">*</span>Type of MSME</label>
                                         <select name="jenis" class="form-control" style="font-size: 85%">
                                             <?php                
@@ -144,7 +144,7 @@
                                             <div class="input-group-prepend">
                                                 <div class="input-group-text">Rp</div>
                                             </div>
-                                            <input type="text" class="form-control" name="penghasilan" id="penghasilan" onkeyup="ceknominal()" value="0">
+                                            <input type="text" class="form-control" name="penghasilan" id="penghasilan" onkeyup="ceknominal()" value="">
                                         </div>
                                     </div>
                                     <div class="form-group col-sm-6">
@@ -153,7 +153,7 @@
                                     </div>
                                     <div class="form-group col-sm-6">
                                         <label>Number of Employee</label><label id="pegawais"></label>
-                                        <input type="text" class="form-control" name="pegawai" value="0" onkeypress="return hanyaAngka(event, '#pegawais')">
+                                        <input type="text" class="form-control" name="pegawai" value="" onkeypress="return hanyaAngka(event, '#pegawais')">
                                     </div>
                                     <div class="form-group col-sm-6">
                                         <label>Construction Type</label>
@@ -177,22 +177,22 @@
                                     </div>
                                     <div class="form-group col-sm-6">
                                         <label>Building Area (m<sup>2</sup>)</label><label id="lbangs"></label>
-                                        <input type="text" class="form-control" name="lbang" value="0" onkeypress="return hanyaAngka(event, '#lbangs')" value="<?php echo $bang ?>">
+                                        <input type="text" class="form-control" name="lbang" value="" onkeypress="return hanyaAngka(event, '#lbangs')" value="<?php echo $bang ?>">
                                     </div>
                                     <div class="form-group col-sm-6">
                                         <label>Land Area (m<sup>2</sup>)</label><label id="lahans"></label>
-                                        <input type="text" class="form-control" name="lahan" value="0" onkeypress="return hanyaAngka(event, '#lahans')">
+                                        <input type="text" class="form-control" name="lahan" value="" onkeypress="return hanyaAngka(event, '#lahans')">
                                     </div>
                                     <div class="form-group col-sm-6">
                                         <label>Parking Area (m<sup>2</sup>)</label><label id="parkirs"></label>
-                                        <input type="text" class="form-control" name="parkir" value="0" onkeypress="return hanyaAngka(event, '#parkirs')">
+                                        <input type="text" class="form-control" name="parkir" value="" onkeypress="return hanyaAngka(event, '#parkirs')">
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                         <button type="submit" class="btn btn-primary" id="tambahbangunan">+ Add</button>
                     </div>
                     </form>
@@ -200,21 +200,14 @@
             </div>
         </div>
     </div>
-
+<?php
+$id_ada = '<div class="alert alert-danger alert-dismissible fade show" role="alert">This <strong>ID</strong> is already registered</div>';
+?>
 
 <script type="text/javascript">
     $(document).ready(function() {
         $('#listbang').DataTable();
     } );
-
-    // $(document).ready(function() {
-    //     if ($('#geom').val()=="") {
-    //         $('#tambahbangunan').prop('disabled', true);
-    //     }
-    //     else {
-    //         $('#tambahbangunan').prop('disabled', false);   
-    //     }
-    // } );
 
     function besarkan() {
         var id=document.getElementById('id').value.toUpperCase();
@@ -232,8 +225,7 @@
             echo "if (id == \"".$idnya."\")";
             echo "{
                     ketemu=true;
-                    $('#ids').css('color', 'red');
-                    $('#ids').html('...This ID is already registered');
+                    $('#ids').html('".$id_ada."');
                     $('#tambahbangunan').prop('disabled', true);
                   }";
 
@@ -289,4 +281,8 @@
     $(".readonly").on('keydown paste', function(e){
         e.preventDefault();
     });
+
+    function load() {
+        $('#jenisumkm').load("inc/combobox-jenis.php");
+    }
 </script>

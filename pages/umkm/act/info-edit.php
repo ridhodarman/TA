@@ -8,17 +8,16 @@
 		$nama = $_POST['nama'];
 		$type= $_POST['jenis'];
 		$cons = $_POST['konstruksi'];
-		$lbang = $_POST['lbang'];
-		$land = $_POST['lahan'];
-		$parkir = $_POST['parkir'];
-		$elect = $_POST['listrik'];
+		$lbang = $_POST['lbang']; if (empty($_POST['lbang'])) {$lbang = "0"; }
+		$land = $_POST['lahan']; if (empty($_POST['lahan'])) {$land = "0"; }
+		$parkir = $_POST['parkir']; if (empty($_POST['parkir'])) {$parkir = "0"; }
+		$elect = $_POST['listrik']; if (empty($_POST['listrik'])) {$elect = "0"; }
 		$alamat = $_POST['alamat'];
-		$year = $_POST['tahun'];
-		$geom = $_POST['geom'];
+		$year = $_POST['tahun']; if (empty($_POST['tahun'])) {$year = "0"; }
 		$pemilik = $_POST['pemilik'];
-		$penghasilan = str_replace(".", "", $_POST['penghasilan']);
+		$penghasilan = str_replace(".", "", $_POST['penghasilan']); if (empty($_POST['penghasilan'])) {$penghasilan = "0"; }
 		$cp = $_POST['kontak'];
-		$pegawai = $_POST['pegawai'];
+		$pegawai = $_POST['pegawai']; if (empty($_POST['pegawai'])) {$pegawai = "0"; }
 				
 		$sql = pg_query("UPDATE msme_building SET
 						msme_building_id = '$id', 

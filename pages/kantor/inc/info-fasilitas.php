@@ -25,7 +25,7 @@
                                 ?>
                                 </select>
                                 <p>Quantity of facilities:<label id="fass"></label></p>
-                                <input type="text" class="form-control" name="total-fas" placeholder="quantity of facilities.." onkeypress="return hanyaAngka(event, '#fass')">
+                                <input type="text" class="form-control" name="total-fas" id="total-fas" placeholder="quantity of facilities.." onkeypress="return hanyaAngka(event, '#fass')" onkeyup="cek_t()">
                                 <input type="hidden" name="id" value="<?php echo $id ?>">
                             </div>
                             <div class="modal-footer">
@@ -53,6 +53,10 @@
                     LEFT JOIN office_building_facilities AS F ON F.facility_id=D.facility_id
                     WHERE D.office_building_id = '$id'
                     ");
+                $cekfas=pg_num_rows($sql);
+                if ($cekfas==0) {
+                    echo "<tr style='text-align: center;'><td colspan='3'>No facility data</td></tr>";
+                }
                 while ($data=pg_fetch_assoc($sql)) {
                     //$id_bang=str_replace(' ', '',$data['worship_building_id']);
                     $id_fas=$data['facility_id'];
@@ -77,18 +81,32 @@
                                     </div>
                                     <div class="modal-body">
                                         <p>Quantity of <b>'.$namafas.'</b>:<label id="fass2'.$nomor.'"></label></p>
-                                        <input type="text" class="form-control" name="total-fas-edit" placeholder="quantity of facilities.." onkeypress="return hanyaAngka(event, '."'".'#fass2'."$nomor'".')" value="'.$qty.'">
+                                        <input type="text" class="form-control" name="total-fas-edit" id="total-fas-edit'.$nomor.'" placeholder="quantity of facilities.." onkeypress="return hanyaAngka(event, '."'".'#fass2'."$nomor'".')" value="'.$qty.'" onkeyup="cek_e'.$nomor.'()">
                                             <input type="hidden" name="id-bang" value="'.$id.'">
                                             <input type="hidden" name="id-fas" value="'.$id_fas.'">
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                        <button type="submit" class="btn btn-primary"><i class="ti-save"></i> Save</button>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                        <button type="submit" class="btn btn-primary" name="fas-edit" id="fas-edit'.$nomor.'"><i class="ti-save"></i> Save</button>
                                     </div>
                                 </div>
                             </form>
                         </div>
                     </div>
+
+                    <script>
+                        function cek_e'.$nomor.'() {
+                            var e = document.getElementById("total-fas-edit'.$nomor.'").value;
+                            console.log(e);
+                            if (e >= 1) {
+                                $("#fas-edit'.$nomor.'").prop("disabled", false);
+                            }
+                            else {
+                                $("#fas-edit'.$nomor.'").prop("disabled", true);    
+                            }
+                        }
+                    </script>
+
 
                         <div class="modal fade" id="delete-fas'.$nomor.'">
                             <div class="modal-dialog">
@@ -119,3 +137,18 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+    $('#tambahkanfas').prop('disabled', true);
+    function cek_t() {
+        var t = document.getElementById('total-fas').value;
+        if (t >= 1) {
+            $('#tambahkanfas').prop('disabled', false);
+        }
+        else {
+            $('#tambahkanfas').prop('disabled', true);  
+        }
+    }
+
+    $("[name='fas-edit']").prop('disabled', true);
+</script>

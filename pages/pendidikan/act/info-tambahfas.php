@@ -1,26 +1,34 @@
 <?php
 	session_start();
     if(isset($_SESSION['username']) && $_POST['id'] != null ) {
-
 		include ('../../../inc/koneksi.php');
 		include ('../../inc/notif-act.php');
-
 		$id = $_POST['id'];
 		$fas = $_POST['fasilitas'];
-		$total = $_POST['total-fas'];
+		$total = $_POST['total-fas']; 
 
-		$sql = pg_query("INSERT INTO detail_educational_building_facilities (educational_building_id, facility_id, quantity_of_facilities) VALUES ('$id', '$fas', '$total')");
-		if ($sql){
+		$cek = pg_num_rows( pg_query("SELECT facility_id FROM detail_educational_building_facilities WHERE educational_building_id='$id' AND facility_id='$fas'") );
+		
+		if ($cek>0) {
 			echo '<script>
-				$("#sukses").modal("show");
-				</script>
-				';
+					$("#sudah").modal("show");
+					</script>
+					';
 		}
 		else {
-			echo '<script>
-				$("#gagal").modal("show");
-				</script>
-				';
+			$sql = pg_query("INSERT INTO detail_educational_building_facilities (educational_building_id, facility_id, quantity_of_facilities) VALUES ('$id', '$fas', '$total')");
+			if ($sql){
+				echo '<script>
+					$("#sukses").modal("show");
+					</script>
+					';
+			}
+			else {
+				echo '<script>
+					$("#gagal").modal("show");
+					</script>
+					';
+			}
 		}
 		echo '<meta http-equiv="REFRESH" content="1;url=../info-b-pendidikan.php?id='.$id.'">';
 	}

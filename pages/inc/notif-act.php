@@ -101,6 +101,23 @@
     </div>
 </div>
 
+<div class="modal fade" id="sudah">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <center>
+                        <div>
+                            <p style="font-size: 400%; color: #edd83b"><i class="fas fa-exclamation-circle"></i></p>
+                            <p>Facility data already exists</p>
+                        </div>
+                        <button type="button" class="btn btn-warning" data-dismiss="modal">OK</button>
+                    </center>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
 <script type="text/javascript">
 	function kembali2 () {
 		window.location.href ="../";

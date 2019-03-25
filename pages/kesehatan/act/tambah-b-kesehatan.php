@@ -7,16 +7,16 @@ if(isset($_SESSION['username']) && $_POST['id'] != null ) {
 	$nama = $_POST['nama'];
 	$type= $_POST['j-kes'];
 	$cons = $_POST['konstruksi'];
-	$lbang = $_POST['lbang'];
-	$land = $_POST['lahan'];
-	$parkir = $_POST['parkir'];
-	$elect = $_POST['listrik'];
+	$lbang = $_POST['lbang']; if (empty($_POST['lbang'])) {$lbang = "0"; }
+	$land = $_POST['lahan']; if (empty($_POST['lahan'])) {$land = "0"; }
+	$parkir = $_POST['parkir']; if (empty($_POST['parkir'])) {$parkir = "0"; }
+	$elect = $_POST['listrik']; if (empty($_POST['listrik'])) {$elect = "0"; }
 	$alamat = $_POST['alamat'];
-	$year = $_POST['tahun'];
+	$year = $_POST['tahun']; if (empty($_POST['tahun'])) {$year = "0"; }
 	$geom = $_POST['geom'];
 	$kepala = $_POST['kepala'];
-	$medis = $_POST['medis'];
-	$non = $_POST['non'];
+	$medis = $_POST['medis']; if (empty($_POST['medis'])) {$medis = "0"; }
+	$non = $_POST['non']; if (empty($_POST['non'])) {$non = "0"; }
 			
 	$sql = pg_query("INSERT INTO health_building (health_building_id, name_of_health_building, type_of_health_building, building_area, land_area, parking_area, standing_year, electricity_capacity, type_of_construction, address, name_of_head, number_of_medical_personnel, number_of_nonmedical_personnel, geom) 
 		VALUES ('$id', '$nama', '$type', '$lbang', '$land', '$parkir', '$year', '$elect', '$cons', '$alamat', '$kepala', '$medis', '$non', ST_GeomFromText('$geom'))");

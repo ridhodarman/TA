@@ -953,3 +953,91 @@ function refresh() {
   $('#legenda').empty();
   $('#legenda').append('<button class="btn btn-default" title="show legend" onclick="legenda()"><i class="fa fa-globe"></i></button>');
 }
+
+function cari_modelbang() { 
+  var model = document.getElementById("model").value;
+  console.log("cari model bangunan: " + model);
+  $.ajax({
+    url: 'act/ibadah_cari-model.php?model=' + model,
+    data: "",
+    dataType: 'json',
+    success: function (rows) {
+      cari_ibadah(rows);
+    },
+    error: function (xhr, ajaxOptions, thrownError) {
+      $('#gagal').modal('show');
+      $('#notifikasi').empty();$('#notifikasi').append(xhr.status);
+      $('#notifikasi').append(thrownError);
+    }
+  });
+
+  $.ajax({
+    url: 'act/rumah_cari-model.php?model=' + model,
+    data: "",
+    dataType: 'json',
+    success: function (rows) {
+      cari_rumah(rows);
+    },
+    error: function (xhr, ajaxOptions, thrownError) {
+      $('#gagal').modal('show');
+      $('#notifikasi').empty();$('#notifikasi').append(xhr.status);
+      $('#notifikasi').append(thrownError);
+    }
+  });
+
+    $.ajax({
+    url: 'act/kantor_cari-model.php?model=' + model,
+    data: "",
+    dataType: 'json',
+    success: function (rows) {
+      cari_kantor(rows);
+    },
+    error: function (xhr, ajaxOptions, thrownError) {
+      $('#gagal').modal('show');
+      $('#notifikasi').empty();$('#notifikasi').append(xhr.status);
+      $('#notifikasi').append(thrownError);
+    }
+  });
+
+  $.ajax({
+    url: 'act/pendidikan_cari-model.php?model=' + model,
+    data: "",
+    dataType: 'json',
+    success: function (rows) {
+      cari_pendidikan(rows);
+    },
+    error: function (xhr, ajaxOptions, thrownError) {
+      $('#gagal').modal('show');
+      $('#notifikasi').empty();$('#notifikasi').append(xhr.status);
+      $('#notifikasi').append(thrownError);
+    }
+  });
+
+  $.ajax({
+    url: 'act/kesehatan_cari-model.php?model=' + model,
+    data: "",
+    dataType: 'json',
+    success: function (rows) {
+      cari_kesehatan(rows);
+    },
+    error: function (xhr, ajaxOptions, thrownError) {
+      $('#gagal').modal('show');
+      $('#notifikasi').empty();$('#notifikasi').append(xhr.status);
+      $('#notifikasi').append(thrownError);
+    }
+  });
+
+  $.ajax({
+    url: 'act/umkm_cari-model.php?model=' + model,
+    data: "",
+    dataType: 'json',
+    success: function (rows) {
+      cari_umkm(rows);
+    },
+    error: function (xhr, ajaxOptions, thrownError) {
+      $('#gagal').modal('show');
+      $('#notifikasi').empty();$('#notifikasi').append(xhr.status);
+      $('#notifikasi').append(thrownError);
+    }
+  });
+}

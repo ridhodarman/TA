@@ -62,16 +62,16 @@
                                     </div>
                                     <form method="post" id="form-tambahadmin">
                                         <div class="modal-body">
-                                            <p>Username:</p><label id="ids"></label>
+                                            <p>Username:</p><div id="ids"></div>
                                             <input type="text" class="form-control" name="username" id="user1" placeholder="Enter username..." onchange="cekid('user1', 'ids', 'tambahkanadmin')" required >
                                             <p>Password:</p>
                                             <input type="password" class="form-control" name="password" id="pw1" onkeyup="cek('pw1', 'pw2', 'tambahkanadmin', 'samakan')" required>
                                             <p>Re-type Password:</p>
                                             <input type="password" class="form-control" id="pw2" onkeyup="cek('pw1', 'pw2', 'tambahkanadmin', 'samakan')" required>
-                                            <label id="samakan"></label>
+                                            <div id="samakan"></div>
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                                             <button type="button" class="btn btn-primary" id="tambahkanadmin" disabled>+ Add</button>
                                         </div>
                                     </form>
@@ -140,7 +140,7 @@
                                                                     <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
                                                                 </div>
                                                                 <div class="modal-body">
-                                                                    <p>Username:<label id="ids'.$username.'"></label></p>
+                                                                    <p>Username:<div id="ids'.$username.'"></div></p>
                                                                     <input type="hidden" name="usr-temp" value="'.$username.'">
                                                                     <input type="text" class="form-control" name="usr-edit" id="usr-edit'.$username.'" placeholder="Enter username..." value="'.$username.'" onchange="cekid2('.$usr2.', '.$ids.', '.$button.', '.$usr.')" required>
                                                                     <p>New Password:</p>
@@ -176,10 +176,17 @@
         </div>
         <!-- main content area end -->
         <!-- footer area start-->
-        <?php include('../inc/foot.php') ?>
         <input type="hidden" name="" id="cari">
+        <?php include('../inc/foot.php') ?>
 </body>
 </html>
+
+<?php
+$id_ada = '<div class="alert alert-danger alert-dismissible fade show" role="alert">This <strong>username</strong> is already registered</div>';
+
+$pass = '<div class="alert alert-warning alert-dismissible fade show" role="alert">The <strong>password</strong> entered must be the same!</div>';
+?>
+
 <script type="text/javascript">
 
     //tambah data
@@ -233,36 +240,6 @@
         });
     }
 
-    // //edit data
-    // function editadmin(username, input) {
-    //     console.log(username)
-    //     console.log(input)
-    //     var user = document.getElementById(input).value;
-    //         if (user==null || user=='') {
-    //             $('#datakosong').modal('show');
-    //         }
-    //         else {
-    //             var data = $('#form-editadmin'+username).serialize();
-    //             console.log(data)
-    //             $.ajax({
-    //                 type: 'POST',
-    //                 url: "act/edit-admin.php",
-    //                 data: data,
-    //                 success: function() {
-    //                     $('#tabel-admin').load("inc/load-user.php");
-    //                     $('#edit-admin'+username).modal('hide');
-    //                     $('#sukses-update').modal('show');
-    //                 },
-    //                 error: function (xhr, ajaxOptions, thrownError) {
-    //                     $("#notifikasi").empty();
-    //                     $('#gagal').modal('show');
-    //                     $("#notifikasi").append("<p>"+xhr.status+"</p>");
-    //                     $("#notifikasi").append("<p>"+thrownError+"</p>");
-    //                 }
-    //             });
-    //         }
-    // }
-
     function cek(input1, input2, button, label) {
         var pw1 = document.getElementById(input1).value;
         var pw2 = document.getElementById(input2).value;
@@ -274,7 +251,7 @@
         else {
              $('#'+button).prop('disabled', true);
              $('#'+label).css('color', 'red');
-             $('#'+label).html('the password entered must be the same!');
+             $('#'+label).html('<?php echo $pass ?>');
         }
 
         if (document.getElementById('cari').value == "true") {
@@ -294,8 +271,7 @@
             echo "if (user == \"".$cek."\")";
             echo "{
                     ketemu=true;
-                    $('#'+label).css('color', 'red');
-                    $('#'+label).html('...This username is already registered');
+                    $('#'+label).html('".$id_ada."');
                     $('#'+button).prop('disabled', true);
                   }";
 
@@ -319,8 +295,7 @@
             echo "if (user == \"".$cek."\")";
             echo "{
                     ketemu=true;
-                    $('#'+label).css('color', 'red');
-                    $('#'+label).html('...This username is already registered');
+                    $('#'+label).html('".$id_ada."');
                     $('#'+button).prop('disabled', true);
                     if (user == tempuser){
                         ketemu=false;

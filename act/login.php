@@ -15,44 +15,14 @@ if (isset($_POST['username'])) {
 		header("location: ../");
 		
 	}
-	else { ?>
-				<style type="text/css">
-					.salah {
-						animation: blink-animation 1s steps(5, start) infinite;
-						-webkit-animation: blink-animation 1s steps(5, start) infinite;
-					}
-					@keyframes blink-animation {
-						to {
-						visibility: hidden;
-						}
-					}
-					@-webkit-keyframes blink-animation {
-						to {
-						visibility: hidden;
-						}
-					}
-				</style>
-                <center>
-                	<p><h1 style="color: red" class="salah">Incorrect username or password !</h1></p>
-                    <a href="../"><img src="back.png" width="200px" /></a>
-                    <p>You will be directed to the main page automatically in <font id="waktu"></font> seconds</p>
-                </center>
-                
-                <script type="text/javascript">
-					var waktu = 4;
-					setInterval(function() {
-					waktu--;
-					if(waktu < 0) {
-					window.location.href = '../';
-					}else{
-					document.getElementById("waktu").innerHTML = waktu;
-					}
-					}, 1000);
+	else { 
+		include '../inc/notif-act.php';
+		echo '<script>
+				$("#salah").modal("show");
 				</script>
-			
-		';
-
-	<?php }
+				<meta http-equiv="REFRESH" content="1;url=../">
+				';
+	}
 }
 else {
 	header("location: ../assets/403");

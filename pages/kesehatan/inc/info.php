@@ -109,7 +109,7 @@
             <div class="modal-body" style="font-size: 110%">
                 <div class="row">
                     <div class="form-group col-sm-6">
-                        <label><span style="color:red">*</span>ID Survey</label><b id="ids"></b>
+                        <label><span style="color:red">*</span>ID Survey</label><div id="ids"></div>
                         <input type="text" class="form-control" name="id" id="id" onkeyup="besarkan()" onchange="cekid()" value="<?php echo $id; ?>" required>
                         <input type="hidden" name="id-temp" value="<?php echo $id; ?>">
                     </div>
@@ -182,13 +182,17 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                 <button type="submit" class="btn btn-primary" id="simpan">Save changes</button>
             </div>
             </form>
         </div>
     </div>
 </div>
+
+<?php
+$id_ada = '<div class="alert alert-danger alert-dismissible fade show" role="alert">This <strong>ID</strong> is already registered</div>';
+?>
 
 <script type="text/javascript">
     function besarkan() {
@@ -200,15 +204,14 @@
         var id=document.getElementById('id').value
         var ketemu=false;
         <?php 
-          $sql = pg_query("SELECT worship_building_id FROM worship_building WHERE worship_building_id NOT LIKE '$id'");
+          $sql = pg_query("SELECT health_building_id FROM health_building WHERE health_building_id NOT LIKE '$id'");
           while ($data = pg_fetch_array($sql))
           {
-            $idnya = $data['worship_building_id'];
+            $idnya = $data['health_building_id'];
             echo "if (id == \"".$idnya."\")";
             echo "{
                     ketemu=true;
-                    $('#ids').css('color', 'red');
-                    $('#ids').html('...This ID is already registered');
+                    $('#ids').html('".$id_ada."');
                     $('#simpan').prop('disabled', true);
                   }";
 

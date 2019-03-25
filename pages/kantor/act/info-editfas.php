@@ -5,7 +5,7 @@
 		include ('../../inc/notif-act.php');
 		$id_bang = $_POST['id-bang'];
 		$id_fas = $_POST['id-fas'];
-		$qty = $_POST['total-fas-edit'];
+		$qty = $_POST['total-fas-edit']; 
 		$sql = pg_query("UPDATE detail_office_building_facilities SET 
 						quantity_of_facilities = '$qty'
 						WHERE office_building_id = '$id_bang' and facility_id = '$id_fas'");

@@ -330,3 +330,22 @@ function carifasilitas_umkm(){
     });
   }
 }
+
+function cari_pendumkm() { 
+  var awal = document.getElementById("penghasilan-umkm1").value;
+  var akhir = document.getElementById("penghasilan-umkm2").value;
+  console.log("cari pendapatan umkm dari: " + awal + " - " +akhir);
+  $.ajax({
+    url: 'act/umkm_cari-pendapatan.php?awal=' + awal + '&akhir=' + akhir,
+    data: "",
+    dataType: 'json',
+    success: function (rows) {
+      cari_umkm(rows);
+    },
+    error: function (xhr, ajaxOptions, thrownError) {
+      $('#gagal').modal('show');
+      $('#notifikasi').empty();$('#notifikasi').append(xhr.status);
+      $('#notifikasi').append(thrownError);
+    }
+  });
+}

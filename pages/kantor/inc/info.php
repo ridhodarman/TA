@@ -88,7 +88,7 @@
             <div class="modal-body" style="font-size: 110%">
                 <div class="row">
                     <div class="form-group col-sm-6">
-                        <label><span style="color:red">*</span>ID Survey</label><b id="ids"></b>
+                        <label><span style="color:red">*</span>ID Survey</label><div id="ids"></div>
                         <input type="text" class="form-control" name="id" id="id" onkeyup="besarkan()" onchange="cekid()" required value="<?php echo $id ?>">
                         <input type="hidden" name="id-temp" value="<?php echo $id ?>">
                     </div>
@@ -157,6 +157,10 @@
     </div>
 </div>
 
+<?php
+$id_ada = '<div class="alert alert-danger alert-dismissible fade show" role="alert">This <strong>ID</strong> is already registered</div>';
+?>
+
 <script type="text/javascript">
     function besarkan() {
         var id=document.getElementById('id').value.toUpperCase();
@@ -167,15 +171,14 @@
         var id=document.getElementById('id').value
         var ketemu=false;
         <?php 
-          $sql = pg_query("SELECT worship_building_id FROM worship_building WHERE worship_building_id NOT LIKE '$id'");
+          $sql = pg_query("SELECT office_building_id FROM office_building WHERE office_building_id NOT LIKE '$id'");
           while ($data = pg_fetch_array($sql))
           {
-            $idnya = $data['worship_building_id'];
+            $idnya = $data['office_building_id'];
             echo "if (id == \"".$idnya."\")";
             echo "{
                     ketemu=true;
-                    $('#ids').css('color', 'red');
-                    $('#ids').html('...This ID is already registered');
+                    $('#ids').html('".$id_ada."');
                     $('#simpan').prop('disabled', true);
                   }";
 

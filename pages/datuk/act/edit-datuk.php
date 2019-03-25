@@ -10,7 +10,4 @@
 						tribe_id = '$suku'
 						WHERE datuk_id = '$id'");
 	}
-	else {
-		echo '<script>window.location="../../../assets/403"</script>';
-	}
 ?>

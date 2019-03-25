@@ -7,15 +7,15 @@ if(isset($_SESSION['username']) && $_POST['id'] != null ) {
 	$nama = $_POST['nama'];
 	$type= $_POST['jenis-s'];
 	$cons = $_POST['konstruksi'];
-	$lbang = $_POST['lbang'];
-	$land = $_POST['lahan'];
-	$parkir = $_POST['parkir'];
-	$elect = $_POST['listrik'];
+	$lbang = $_POST['lbang']; if (empty($_POST['lbang'])) {$lbang = "0"; }
+	$land = $_POST['lahan']; if (empty($_POST['lahan'])) {$land = "0"; }
+	$parkir = $_POST['parkir']; if (empty($_POST['parkir'])) {$parkir = "0"; }
+	$elect = $_POST['listrik']; if (empty($_POST['listrik'])) {$elect = "0"; }
 	$alamat = $_POST['alamat'];
-	$year = $_POST['tahun'];
+	$year = $_POST['tahun']; if (empty($_POST['tahun'])) {$year = "0"; }
 	$geom = $_POST['geom'];
-	$murid = $_POST['murid'];
-	$guru = $_POST['guru'];
+	$murid = $_POST['murid']; if (empty($_POST['murid'])) {$murid = "0"; }
+	$guru = $_POST['guru']; if (empty($_POST['guru'])) {$guru = "0"; }
 	$kepala = $_POST['kepala'];
 	$level = $_POST['level'];
 			

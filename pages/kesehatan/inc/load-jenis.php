@@ -17,7 +17,7 @@
             </thead>
             <tbody>
                 <?php
-                    $sql=pg_query("SELECT type_id, name_of_type FROM type_of_health_services ORDER BY name_of_type ASC");
+                    $sql=pg_query("SELECT type_id, name_of_type FROM type_of_health_building ORDER BY name_of_type ASC");
                     $no=1;
                     while ($data=pg_fetch_assoc($sql)) {
                         $id=$data['type_id'];
@@ -32,7 +32,7 @@
                             </td>';
                         echo "</tr>";
 
-                        $kes=pg_num_rows(pg_query("SELECT health_building_id FROM health_building WHERE type_of_health_services='$id'"));
+                        $kes=pg_num_rows(pg_query("SELECT health_building_id FROM health_building WHERE type_of_health_building='$id'"));
 
                         echo '
                             <div class="modal fade" id="delete-j'.$id.'">

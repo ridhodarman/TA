@@ -1,5 +1,5 @@
 <div style="text-align: center; padding-top: 3%; padding-bottom:3%">
-<button class="btn btn-default btn-lg" style="width: 90%; background-color: #fafafa" data-toggle="modal" data-target="#tambahholder">+
+<button class="btn btn-default btn-lg" style="width: 90%; background-color: #fafafa" onclick="load2()" data-toggle="modal" data-target="#tambahholder">+
     Add Householder Data </button>
 </div>
 
@@ -78,7 +78,7 @@
                         <div class="form-group col-sm-6">
                             Birth Date: <input class="form-control" type="date" name="tgl2" required>
                         </div>
-                        <div class="form-group col-sm-6">
+                        <div class="form-group col-sm-6" id="combobox-pend2">
                             Education Level:
                             <select class="form-control" name="pend2" required style="font-size: 81%; font-weight: bold">
                                 <?php                
@@ -90,7 +90,7 @@
                                 ?>
                             </select>
                         </div>
-                        <div class="form-group col-sm-6">
+                        <div class="form-group col-sm-6" id="combobox-kerja2">
                             Job: 
                             <select class="form-control" name="kerja2" required style="font-size: 81%; font-weight: bold">
                                 <?php                
@@ -125,7 +125,8 @@
                                 <option value="0">No</option>
                             </select>
                         </div>
-                        <div class="form-group col-sm-6">Village:
+                        <div class="form-group col-sm-6" id="combobox-kampung2">
+                        	Village:
                             <select class="form-control" name="kampung2" required style="font-size: 81%; font-weight: bold">
                                 <?php                
                                     $sql_v=pg_query("SELECT * FROM village ORDER BY village_name");
@@ -151,7 +152,7 @@
                                     }
                                 ?>
                             </select>
-                            <div id="suku2">Tribe: <?php echo $suku ?></div>
+                            <div id="suku2"></div>
                         </div>
                     </div>
                 </div>
@@ -256,4 +257,10 @@ function hapusholder(id, idtemp) {
         }
     });
 }
+
+    function load2() {
+        $('#combobox-pend2').load("inc/combobox-holder-pend.php");
+        $('#combobox-kerja2').load("inc/combobox-holder-kerja.php");
+        $('#combobox-kampung2').load("inc/combobox-holder-kampung.php");
+    }
 </script>

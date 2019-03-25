@@ -47,11 +47,9 @@
                             </div>
                         </div>
                         <!-- profile info & task notification -->
-                        <div class="clearfix">
+                        <div class="clearfix col-md-3 col-sm-8">
                             <ul class="notification-area pull-right">   
-                                <li><button class="btn btn-outline btn-primary" onclick="dashboard()"><i class="ti-direction-alt"></i> Back To Admin Dashboard</button></li>                         
-                                <li id="full-view"><i class="ti-fullscreen"></i></li>
-                                <li id="full-view-exit"><i class="ti-zoom-out"></i></li>
+                                <li><button class="btn btn-outline btn-primary" onclick="dashboard()"><i class="ti-direction-alt"></i> Back To Dashboard</button></li>                     
                                 <li class="user-name dropdown-toggle" data-toggle="dropdown"><i class="ti-settings"></i>
                                     <div class="dropdown-menu">
                                         <div class="icon-container" onclick="pengaturan()" style="font-size: 90%"><span class="icon-name">&emsp;<i class="fas fa-wrench"></i> Account Setting</span></div>

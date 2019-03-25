@@ -12,9 +12,7 @@
             <!-- profile info & task notification -->
             <div class="col-sm-3 clearfix">
                 <ul class="notification-area pull-right">   
-                    <li><button class="btn btn-outline btn-primary" onclick="back()"><i class="ti-arrow-left"></i> Back</button></li>                         
-                    <li id="full-view"><i class="ti-fullscreen"></i></li>
-                    <li id="full-view-exit"><i class="ti-zoom-out"></i></li>
+                    <li><button class="btn btn-outline btn-primary" onclick="back()"><i class="ti-arrow-left"></i> Back</button></li>
                     <li class="user-name dropdown-toggle" data-toggle="dropdown"><i class="ti-settings"></i>
                         <div class="dropdown-menu">
                             <div class="icon-container" onclick="pengaturan()" style="font-size: 90%"><span class="icon-name">&emsp;<i class="fas fa-wrench"></i> Account Setting</span></div>

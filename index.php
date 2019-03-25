@@ -59,13 +59,14 @@
                                 <span></span>
                                 <span></span>
                             </div>
+                            <div name="akses-admin" style="font-size: 120%; padding-left: 10%; padding-top: 2%"><label>Welcome <?php echo $_SESSION['username']; ?> !</label></div>
                         </div>
                         <!-- profile info & task notification -->
                         <div class="col-md-8 col-sm-4 clearfix">
                             <ul class="notification-area pull-right" style="padding-right: 32%">
                                 <li id="tombol-login"><button class="btn btn-outline btn-primary" data-toggle="modal" data-target="#login"><i class="fas fa-sign-in-alt"></i> Login</button></li>
-                                <li id="kelola"><button class="btn btn-outline btn-primary" onclick="keloladata()"><i class="ti-settings"></i> Manage Data</button></li>
-                                <li id="settingan" class="user-name dropdown-toggle" data-toggle="dropdown">
+                                <li name="akses-admin"><button class="btn btn-outline btn-primary" onclick="keloladata()"><i class="ti-settings"></i> Manage Data</button></li>
+                                <li name="akses-admin" class="user-name dropdown-toggle" data-toggle="dropdown">
                                     <i class="ti-settings"></i>
                                     <div class="dropdown-menu">
                                         <div class="icon-container" onclick="pengaturan()" style="font-size: 90%"><span class="icon-name">&emsp;<i class="fas fa-wrench"></i> Account Setting</span></div>
@@ -198,12 +199,6 @@
                 
             </div>
         </div>
-
-
-        <button class="btn btn-default" data-toggle="modal" data-target="#kosong">+ Not Found</button>
-
-        <button class="btn btn-default" data-toggle="modal" data-target="#atur-posisi">+ Posisinya</button>
-
 
         <!-- main content area end -->
         <!-- footer area start-->
@@ -361,8 +356,7 @@
     if ($akses==true) {
         echo '
             <script>
-                $("#kelola").show();
-                $("#settingan").show();
+                $("[name='."'".'akses-admin'."'".']").show();
                 $("#tombol-login").hide();
             </script>
         ';
@@ -370,12 +364,11 @@
     else {
         echo '
             <script>
-                $("#kelola").hide();
-                $("#settingan").hide();
+                $("[name='."'".'akses-admin'."'".']").hide();
                 $("#tombol-login").show();
             </script>
-        ';  
-    }
+        ';
+    } 
 ?>
 </html>
 <div class="modal fade bd-example-modal-lg modal-xl" id="info-bang">

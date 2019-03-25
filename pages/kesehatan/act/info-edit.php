@@ -8,15 +8,15 @@
 		$nama = $_POST['nama'];
 		$type= $_POST['j-kes'];
 		$cons = $_POST['konstruksi'];
-		$lbang = $_POST['lbang'];
-		$land = $_POST['lahan'];
-		$parkir = $_POST['parkir'];
-		$elect = $_POST['listrik'];
+		$lbang = $_POST['lbang']; if (empty($_POST['lbang'])) {$lbang = "0"; }
+		$land = $_POST['lahan']; if (empty($_POST['lahan'])) {$land = "0"; }
+		$parkir = $_POST['parkir']; if (empty($_POST['parkir'])) {$parkir = "0"; }
+		$elect = $_POST['listrik']; if (empty($_POST['listrik'])) {$elect = "0"; }
 		$alamat = $_POST['alamat'];
-		$year = $_POST['tahun'];
+		$year = $_POST['tahun']; if (empty($_POST['tahun'])) {$year = "0"; }
 		$kepala = $_POST['kepala'];
-		$medis = $_POST['medis'];
-		$non = $_POST['non'];
+		$medis = $_POST['medis']; if (empty($_POST['medis'])) {$medis = "0"; }
+		$non = $_POST['non']; if (empty($_POST['non'])) {$non = "0"; }
 		$sql = pg_query("UPDATE health_building SET
 						health_building_id = '$id', 
 						name_of_health_building = '$nama', 
