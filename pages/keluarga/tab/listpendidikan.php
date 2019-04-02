@@ -1,18 +1,18 @@
 <div style="text-align: center; padding-top: 3%; padding-bottom:3%">
 <button class="btn btn-default btn-lg" style="width: 90%; background-color: #fafafa" data-toggle="modal" data-target="#tambahpend">+
-    Add the type of education level</button>
+    Add Education Level Data</button>
 </div>
 
 <div class="modal fade" id="tambahpend">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Add the type of education level</h5>
+                <h5 class="modal-title">Add Education Level Data</h5>
                 <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
             </div>
             <form method="post" id="form-tambahpend">
             <div class="modal-body">
-                <p>Type of Education Level:</p>
+                <p>Education Level:</p>
                 <input type="text" class="form-control" name="pend" id="pend" placeholder="enter the name of the education level...">
             </div>
             <div class="modal-footer">
@@ -25,7 +25,7 @@
 </div>
 
 <div class="panel-body" style="padding-top: 2%; padding-left: 2%; padding-right: 2%" id="tabel-pendidikan">
-    <h4 style="text-align: center;">Level of Education List</h4>
+    <h4 style="text-align: center;">List of Education Levels</h4>
    
         <table width="100%" class="table table-striped table-bordered table-hover" id="listpendidikan">
             <thead>
@@ -63,7 +63,7 @@
     						                <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
     						            </div>
     						            <div class="modal-body">
-    						                <p>Are you sure to delete "'.$edu.'" from the type of education level ? <br/>
+    						                <p>Are you sure to delete "'.$edu.'" from the education level list? <br/>
     						                There are as many as <b>-</b> head(s) of family that have this education type.
     						                </p>
     						            </div>
@@ -85,7 +85,7 @@
                                                 <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
                                             </div>
                                             <div class="modal-body">
-                                                <p>Type of Education Level:</p>
+                                                <p>Education Level:</p>
                                                 <input type="text" class="form-control" id="pend-edit'.$id.'" placeholder="enter the name of the education level..." value="'.$edu.'">
                                             </div>
                                             <div class="modal-footer">

@@ -73,7 +73,7 @@
 <div class="modal fade bd-example-modal-lg modal-xl" id="tambahbang">
         <div class="modal-dialog modal-lg modal-xl">
             <div class="modal-content">
-                <div class="modal-header">Add Educational Building Data</h5>
+                <div class="modal-header"><h6>Add Educational Building Data</h6>
                     <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
                 </div>
                 <form role="form" action="act/tambah-b-pendidikan.php" method="post">
@@ -93,8 +93,8 @@
                                                     class="fa fa-trash"></i></button>
                                         </h3>
                                     </header>
-                                    <div class="panel-body" style="padding-top: 1%">
-                                        <div id="map" style="width:100%;height:420px;"></div>
+                                    <div style="padding-top: 1%">
+                                        <div id="map" style="width:100%;height:445px;"></div>
                                     </div>
                                 </section>
                                 <div class="row">
@@ -154,14 +154,14 @@
                                     </div>
                                     <div class="form-group col-sm-6">
                                         <label>School Type</label>
-                                        <select name="jenis-s" class="form-control" style="font-size: 85%">
+                                        <select name="jenis-s" class="form-control" style="height: 43px">
                                             <option value="">Public School</option>
                                             <option value="1">Private School</option>
                                         </select>
                                     </div>
                                     <div class="form-group col-sm-6">
                                         <label>Construction Type</label>
-                                        <select name="konstruksi" class="form-control" style="font-size: 85%">
+                                        <select name="konstruksi" class="form-control" style="height: 43px">
                                             <?php                
                                                 $sql_j=pg_query("SELECT * FROM type_of_construction ORDER BY name_of_type");
                                                 while($row = pg_fetch_assoc($sql_j))
@@ -182,6 +182,18 @@
                                     <div class="form-group col-sm-6">
                                         <label>Parking Area (m<sup>2</sup>)</label><label id="parkirs"></label>
                                         <input type="text" class="form-control" name="parkir" value="" onkeypress="return hanyaAngka(event, '#parkirs')">
+                                    </div>
+                                    <div class="form-group col-sm-6">
+                                        <label>Building Model</label>
+                                        <select name="model" class="form-control" style="height: 43px">
+                                            <?php                
+                                                $sql_j=pg_query("SELECT * FROM building_model ORDER BY name_of_model");
+                                                while($row = pg_fetch_assoc($sql_j))
+                                                {
+                                                    echo"<option value=".$row['model_id'].">".$row['name_of_model']."</option>";
+                                                }
+                                            ?>
+                                        </select>
                                     </div>
                                 </div>
                             </div>

@@ -1,5 +1,5 @@
 <label><span style="color:red">*</span>Worship Building Type</label>
-<select name="j-ibadah" class="form-control" style="font-size: 85%">
+<select name="j-ibadah" class="form-control" style="height: 43px">
     <?php                
     	include('../../../inc/koneksi.php');
         $sql_jibadah=pg_query("SELECT * FROM type_of_worship ORDER BY name_of_type");

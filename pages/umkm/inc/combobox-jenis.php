@@ -1,5 +1,5 @@
 <label><span style="color:red">*</span>Type of MSME</label>
-<select name="jenis" class="form-control" style="font-size: 85%">
+<select name="jenis" class="form-control" style="height: 43px">
     <?php               
     	include('../../../inc/koneksi.php'); 
         $sql_j=pg_query("SELECT * FROM type_of_msme ORDER BY name_of_type");

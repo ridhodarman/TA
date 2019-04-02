@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>house building</title>
+    <title>house building info</title>
     <?php 
         include('../../inc/koneksi.php');
         include('../inc/head.php');
@@ -262,11 +262,21 @@
                     </div>
 
                     <?php
-                        $query = pg_query("SELECT family_card_number, head_of_family, national_identity_number, birth_date, educational_id, job_id, income, insurance, savings, the_number_of_dependents, datuk_id, village_id FROM householder WHERE house_building_id='$id'");
+                        $query = pg_query("SELECT H.*,
+                                        D.datuk_name, T.name_of_tribe, V.village_name, J.job_name, E.educational_level
+                                        FROM householder AS H
+                                        JOIN datuk AS D ON H.datuk_id=D.datuk_id
+                                        JOIN tribe AS T ON D.tribe_id=T.tribe_id
+                                        JOIN village AS V ON H.village_id=V.village_id
+                                        JOIN job AS J ON H.job_id=J.job_id
+                                        JOIN education AS E ON H.educational_id=E.education_id
+                                        WHERE H.house_building_id='$id' 
+                                    ");
+
                         $jumlah_kk = pg_num_rows($query);
 
-                    ?>
-                            <div class="col-lg-12 mt-6">
+                    ?>      
+                            <div class="col-lg-12 mt-6" style="padding-top: 1%">
                                 <div class="card">
                                     <div class="card-body">
                                             <div class="media-body">
@@ -315,20 +325,24 @@
                                 </div>
                             </div>
                     <?php
+                        if ($jumlah_kk >0 ) {
+                            echo '<div class="col-12" style="padding-top: 2%;"><h5>Householder List:</h5></div>';
+                        
                         while ($data=pg_fetch_assoc($query)) {
                             $kk_penghuni = $data['family_card_number'];
                             $nama_kk = $data['head_of_family'];
                             $nik_kk = $data['national_identity_number'];
                             $tgl_penghuni = $data['birth_date'];
-                            $pdkk_penghuni = $data['educational_id'];
-                            $kerja_penghuni = $data ['job_id'];
+                            $pdkk_penghuni = $data['educational_level'];
+                            $kerja_penghuni = $data ['job_name'];
                             $penghasilan_penghuni = $data['income'];
                             $tabungan = $data['savings'];
                             $tanggungan_penghuni = $data['the_number_of_dependents'];
-                            $datu = $data['datuk_id'];
-                            $kampung = $data['kampung_id'];
+                            $datuk = $data['datuk_name'];
+                            $kampung = $data['village_name'];
+                            $suku = $data['name_of_tribe'];
 
-                            $asuransi_penghuni=null;
+                            $asuransi_penghuni="-";
                             if ($row['insurance']==1) {
                                  $asuransi_penghuni="Exist";
                              }
@@ -354,9 +368,6 @@
                                     <div class="card-body">
                                         <div class="media mb-5">
                                             <div class="media-body">
-                                            <a style="float: right; padding-right: 1%; padding-bottom: 6%; ">
-                                            <button type="button" class="btn btn-danger btn-sm btn-flat btn-lg mt-3" data-toggle="modal" data-target="#deletepenghuni<?php echo $kk_penghuni ?>"><i class="fas fa-user-slash"></i> Remove</button>
-                                            </a>
                                                 <table style="width: 100%">
                                                     <tr>
                                                         <td>Family Card Number </td>
@@ -422,13 +433,7 @@
                                                     <tr>
                                                         <td>Tribe </td>
                                                         <td>:
-                                                            sukunya
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Village </td>
-                                                        <td>:
-                                                            <?php echo $kampung ?>
+                                                            <?php echo $suku ?>
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -444,6 +449,14 @@
                                                         </td>
                                                     </tr>
                                                 </table>
+                                                <div style="float: right; padding-right: 1%; padding-bottom: 6%; ">
+                                                    <a>
+                                                    <button type="button" class="btn btn-danger btn-sm btn-flat btn-lg mt-3" data-toggle="modal" data-target="#deletepenghuni<?php echo $kk_penghuni ?>"><i class="fas fa-user-slash"></i> Remove</button>
+                                                    </a>
+                                                    <a href="../keluarga/info-holder.php?id=<?php echo $kk_penghuni ?>">
+                                                        <button type="button" class="btn btn-info btn-sm btn-flat btn-lg mt-3"><i class="fa fa-edit"></i> Edit</button>
+                                                    </a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -458,7 +471,7 @@
                                                 <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
                                             </div>
                                             <div class="modal-body">
-                                                <p>Are you sure to delete this householder from house ?</p>
+                                                <p>Are you sure to delete <b><?php echo $kk_penghuni ?> (Head of family: <?php echo $nama_kk?>)</b> from <?php echo $id ?> ?</p>
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
@@ -474,7 +487,7 @@
 
                     <?php
                         }
-
+                    }
                     ?>
 
                 </div>

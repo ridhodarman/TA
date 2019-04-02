@@ -195,6 +195,124 @@
                                 </td>
                             </tr>
                     </table>
+                    <h6>Asset List:</h6>
+                    <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#tambah-a" style="float: right;">+ Add</button>
+                    <div class="modal fade" id="tambah-a">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <form method="post" action="act/info-tambahaset.php">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Add Asset Data</h5>
+                                        <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>Name of Asset:</p>
+                                        <select class="form-control" name="aset" style="height: 50px;">
+                                        <?php
+                                            $sql_fas= pg_query("SELECT * FROM asset ORDER BY name_of_asset ASC");
+                                            while($row = pg_fetch_assoc($sql_fas))
+                                            {
+                                                echo"<option value=".$row['asset_id'].">".$row['name_of_asset']."</option>";
+                                            }
+                                        ?>
+                                        </select>
+                                        <p>Total Assets:<label id="j-a"></label></p>
+                                        <input type="text" class="form-control" name="total-a" id="total-fas" placeholder="the quantity of these assets ..." onkeypress="return hanyaAngka(event, '#j-a')" onkeyup="cek_t()">
+                                        <input type="hidden" name="id" value="<?php echo $id ?>">
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                        <button type="submit" class="btn btn-primary" id="tambahkanfas">+ Add</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <table class="table table-hover" style="width: 90%">
+                    <?php
+                            $sql=pg_query("SELECT D.family_card_number, D.asset_id, D.total_assets, A.name_of_asset
+                                FROM detail_asset_householder AS D 
+                                JOIN asset AS A ON A.asset_id=D.asset_id
+                                WHERE D.family_card_number = '$id'
+                                ");
+                            $cekfas=pg_num_rows($sql);
+                            if ($cekfas==0) {
+                                echo "<tr><td colspan='3'>No asset data . . . . .</td></tr>";
+                            }
+                            while ($data=pg_fetch_assoc($sql)) {
+                                //$id_bang=str_replace(' ', '',$data['worship_building_id']);
+                                $id_fas=$data['asset_id'];
+                                $namafas =$data['name_of_asset'];
+                                $qty = $data['total_asset'];
+                                echo "<tr>";
+                                echo "<td>".$namafas."</td>";
+                                echo "<td>".$qty."</td>";
+                                echo '<td>
+                                    <button class="btn btn-info btn-xs" data-toggle="modal" data-target="#edit-fas'.$nomor.'"><i class="fa fa-edit"></i> Edit</button>
+                                    <button class="btn btn-danger btn-xs" title="Hapus" data-toggle="modal" data-target="#delete-fas'.$nomor.'"><i class="fa fa-trash"></i> Delete</button>
+                                    </td>';
+                                echo "</tr>";
+                                echo '
+                                    <div class="modal fade" id="edit-fas'.$nomor.'">
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <form method="post" action="act/info-editfas.php">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">Edit</h5>
+                                                    <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p>Quantity of <b>'.$namafas.'</b>:<label id="fass2'.$nomor.'"></label></p>
+                                                    <input type="text" class="form-control" name="total-fas-edit" id="total-fas-edit'.$nomor.'" placeholder="quantity of facilities.." onkeypress="return hanyaAngka(event, '."'".'#fass2'."$nomor'".')" value="'.$qty.'" onkeyup="cek_e'.$nomor.'()">
+                                                        <input type="hidden" name="id-bang" value="'.$id.'">
+                                                        <input type="hidden" name="id-fas" value="'.$id_fas.'">
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                                    <button type="submit" class="btn btn-primary" name="fas-edit" id="fas-edit'.$nomor.'"><i class="ti-save"></i> Save</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+
+                                <script>
+                                    function cek_e'.$nomor.'() {
+                                        var e = document.getElementById("total-fas-edit'.$nomor.'").value;
+                                        console.log(e);
+                                        if (e >= 1) {
+                                            $("#fas-edit'.$nomor.'").prop("disabled", false);
+                                        }
+                                        else {
+                                            $("#fas-edit'.$nomor.'").prop("disabled", true);    
+                                        }
+                                    }
+                                </script>
+
+
+                                    <div class="modal fade" id="delete-fas'.$nomor.'">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">Delete '.$namafas.' ?</h5>
+                                                    <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p>Are you sure to delete "'.$namafas.'" from the list of facilities ?</p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                                    <a href="act/info-deletefas.php?id-bang='.$id.'&&id-fas='.$id_fas.'"><button type="button" class="btn btn-danger">Delete</button></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                ';
+                                $nomor=$nomor+1;
+                            }
+                        ?>
+                        </table>
                 </div>          
             </div>
 
@@ -331,8 +449,9 @@
         $("#asuransi select").val(<?php echo "'".$a."'" ?>);
 
         function back() {
-            window.location.href = "index.php";
+            window.history.back();
         }
+
 
 function ceknominal() {
     var rupiah = document.getElementById('penghasilan');

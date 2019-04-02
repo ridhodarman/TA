@@ -97,10 +97,20 @@
                                                     class="fa fa-trash"></i></button>
                                         </h3>
                                     </header>
-                                    <div class="panel-body" style="padding-top: 1%">
-                                        <div id="map" style="width:100%;height:420px;"></div>
+                                    <div style="padding-top: 1%">
+                                        <div id="map" style="width:100%;height:448px;"></div>
                                     </div>
                                 </section>
+                                <div class="row">
+                                    <div class="form-group col-sm-6">
+                                        <label>Electricity Capacity (kWh)</label><label id="listriks"></label>
+                                        <input type="text" class="form-control" name="listrik" value="" onkeypress="return hanyaAngka(event, '#listriks')">
+                                    </div>
+                                    <div class="form-group col-sm-6">
+                                        <label>Standing Year</label><label id="tahuns"></label>
+                                        <input type="text" class="form-control" name="tahun" value="" onkeypress="return hanyaAngka(event, '#tahuns')">
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="col-sm-6" id="hide3">
@@ -116,7 +126,7 @@
                                     </div>
                                     <div class="form-group col-sm-6" id="jeniskesehatan">
                                         <label><span style="color:red">*</span>Type of Health Building</label>
-                                        <select name="j-kes" class="form-control" style="font-size: 85%">
+                                        <select name="j-kes" class="form-control" style="height: 43px">
                                             <?php                
                                                 $sql_j=pg_query("SELECT * FROM type_of_health_building ORDER BY name_of_type");
                                                 while($row = pg_fetch_assoc($sql_j))
@@ -140,7 +150,7 @@
                                     </div>
                                     <div class="form-group col-sm-6">
                                         <label>Construction Type</label>
-                                        <select name="konstruksi" class="form-control" style="font-size: 85%">
+                                        <select name="konstruksi" class="form-control" style="height: 43px">
                                             <?php                
                                                 $sql_j=pg_query("SELECT * FROM type_of_construction ORDER BY name_of_type");
                                                 while($row = pg_fetch_assoc($sql_j))
@@ -171,12 +181,16 @@
                                         <textarea class="form-control" name="alamat"></textarea>
                                     </div>
                                     <div class="form-group col-sm-6">
-                                        <label>Electricity Capacity (kWh)</label><label id="listriks"></label>
-                                        <input type="text" class="form-control" name="listrik" value="" onkeypress="return hanyaAngka(event, '#listriks')">
-                                    </div>
-                                    <div class="form-group col-sm-6">
-                                        <label>Standing Year</label><label id="tahuns"></label>
-                                        <input type="text" class="form-control" name="tahun" value="" onkeypress="return hanyaAngka(event, '#tahuns')">
+                                        <label>Building Model</label>
+                                        <select name="model" class="form-control" style="height: 43px">
+                                            <?php                
+                                                $sql_j=pg_query("SELECT * FROM building_model ORDER BY name_of_model");
+                                                while($row = pg_fetch_assoc($sql_j))
+                                                {
+                                                    echo"<option value=".$row['model_id'].">".$row['name_of_model']."</option>";
+                                                }
+                                            ?>
+                                        </select>
                                     </div>
                                 </div>
                             </div>

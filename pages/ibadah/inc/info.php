@@ -98,7 +98,7 @@
                     </div>
                     <div class="form-group col-sm-6">
                         <label>Worship Building Type</label>
-                        <select name="j-ibadah" class="form-control" style="font-size: 85%">
+                        <select name="j-ibadah" class="form-control" style="font-size: 85%; height: 43px">
                             <option value="<?php echo $tipe_i ?>"><?php echo $jenis; ?></option>
                             <?php                
                                 $sql_jibadah=pg_query("SELECT * FROM type_of_worship WHERE type_id != '$tipe_i' ORDER BY name_of_type");
@@ -111,7 +111,7 @@
                     </div>
                     <div class="form-group col-sm-6">
                         <label>Construction Type</label>
-                        <select name="konstruksi" class="form-control" style="font-size: 85%">
+                        <select name="konstruksi" class="form-control" style="font-size: 85%; height: 43px">
                             <option value="<?php echo $tipe_k ?>"><?php echo $konstruksi ?></option>
                             <?php                
                                 $sql_jibadah=pg_query("SELECT * FROM type_of_construction WHERE type_id != '$tipe_k' ORDER BY name_of_type");
@@ -139,12 +139,24 @@
                         <input type="text" class="form-control" name="listrik" value="<?php echo $listrik ?>" onkeypress="return hanyaAngka(event, '#listriks')">
                     </div>
                     <div class="form-group col-sm-6">
-                        <label>Alamat</label>
-                        <textarea class="form-control" name="alamat"><?php echo $alamat ?></textarea>
-                    </div>
-                    <div class="form-group col-sm-6">
                         <label>Standing Year</label><label id="tahuns"></label>
                         <input type="text" class="form-control" name="tahun" value="<?php echo $tahun ?>" onkeypress="return hanyaAngka(event, '#tahuns')">
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>Building Model</label>
+                        <select name="model" class="form-control" style="font-size: 85%; height: 43px">
+                            <?php                
+                                $sql_j=pg_query("SELECT * FROM building_model ORDER BY name_of_model");
+                                while($row = pg_fetch_assoc($sql_j))
+                                {
+                                    echo"<option value=".$row['model_id'].">".$row['name_of_model']."</option>";
+                                }
+                            ?>
+                        </select>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>Alamat</label>
+                        <textarea class="form-control" name="alamat"><?php echo $alamat ?></textarea>
                     </div>
                 </div>
             </div>

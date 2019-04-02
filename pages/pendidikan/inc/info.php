@@ -130,7 +130,7 @@
                     </div>
                     <div class="form-group col-sm-6">
                         <label><span style="color:red">*</span>Level of Education</label>
-                        <select name="level" class="form-control" style="font-size: 85%">
+                        <select name="level" class="form-control" style="height: 43px">
                             <option value="<?php echo $id_l ?>"><?php echo $tingkat ?></option>
                             <?php                
                                 $sql_j=pg_query("SELECT * FROM level_of_education WHERE level_id != '$id_l' ORDER BY name_of_level");
@@ -151,7 +151,7 @@
                     </div>
                     <div class="form-group col-sm-6">
                         <label>School Type</label>
-                        <select name="jenis-s" class="form-control" style="font-size: 85%">
+                        <select name="jenis-s" class="form-control" style="height: 43px">
                             <?php
                             if ($id_t==0) {
                                 echo '
@@ -170,7 +170,7 @@
                     </div>
                     <div class="form-group col-sm-6">
                         <label>Construction Type</label>
-                        <select name="konstruksi" class="form-control" style="font-size: 85%">
+                        <select name="konstruksi" class="form-control" style="height: 43px">
                             <option value="<?php echo $id_k ?>"><?php echo $konstruksi ?></option>
                             <?php                
                                 $sql_j=pg_query("SELECT * FROM type_of_construction WHERE type_id != '$id_k' ORDER BY name_of_type");
@@ -202,13 +202,25 @@
                         <input type="text" class="form-control" name="lahan" value="<?php echo $lahan ?>" onkeypress="return hanyaAngka(event, '#lahans')">
                     </div>
                     <div class="form-group col-sm-6">
+                        <label>Building Model</label>
+                        <select name="model" class="form-control" style="height: 43px">
+                            <?php                
+                                $sql_j=pg_query("SELECT * FROM building_model ORDER BY name_of_model");
+                                while($row = pg_fetch_assoc($sql_j))
+                                {
+                                    echo"<option value=".$row['model_id'].">".$row['name_of_model']."</option>";
+                                }
+                            ?>
+                        </select>
+                    </div>
+                    <div class="form-group col-sm-6">
                         <label>Alamat</label>
                         <textarea class="form-control" name="alamat"><?php echo $alamat ?></textarea>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                 <button type="submit" class="btn btn-primary" id="simpan">Save changes</button>
             </div>
             </form>

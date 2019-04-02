@@ -1,5 +1,5 @@
 <label><span style="color:red">*</span>Type of Health Building</label>
-<select name="j-kes" class="form-control" style="font-size: 85%">
+<select name="j-kes" class="form-control" style="height: 43px">
     <?php                
     	include('../../../inc/koneksi.php');
         $sql_j=pg_query("SELECT * FROM type_of_health_building ORDER BY name_of_type");

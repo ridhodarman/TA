@@ -128,7 +128,7 @@
                                     </div>
                                     <div class="form-group col-sm-6">
                                         <label>Construction Type</label>
-                                        <select name="konstruksi" class="form-control" style="font-size: 85%">
+                                        <select name="konstruksi" class="form-control" style="height: 43px">
                                             <?php                
                                                 $sql_j=pg_query("SELECT * FROM type_of_construction ORDER BY name_of_type");
                                                 while($row = pg_fetch_assoc($sql_j))
@@ -165,6 +165,18 @@
                                     <div class="form-group col-sm-6">
                                         <label>Standing Year</label><label id="tahuns"></label>
                                         <input type="text" class="form-control" name="tahun" value="" onkeypress="return hanyaAngka(event, '#tahuns')">
+                                    </div>
+                                    <div class="form-group col-sm-6">
+                                        <label>Building Model</label>
+                                        <select name="model" class="form-control" style="height: 43px">
+                                            <?php                
+                                                $sql_j=pg_query("SELECT * FROM building_model ORDER BY name_of_model");
+                                                while($row = pg_fetch_assoc($sql_j))
+                                                {
+                                                    echo"<option value=".$row['model_id'].">".$row['name_of_model']."</option>";
+                                                }
+                                            ?>
+                                        </select>
                                     </div>
                                 </div>
                             </div>

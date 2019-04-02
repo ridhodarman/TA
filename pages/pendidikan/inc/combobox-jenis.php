@@ -1,5 +1,5 @@
 <label><span style="color:red">*</span>Level of Education</label>
-<select name="level" class="form-control" style="font-size: 85%">
+<select name="level" class="form-control" style="height: 43px">
     <?php                
     include('../../../inc/koneksi.php');
         $sql_j=pg_query("SELECT * FROM level_of_education ORDER BY name_of_level");

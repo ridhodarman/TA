@@ -99,8 +99,8 @@
     </div>
   
     <script type="text/javascript">
-        function back(){
-            window.location = "../";
+        function back() {
+            window.history.back();
         }
 
         $("#keluarga").addClass("active");

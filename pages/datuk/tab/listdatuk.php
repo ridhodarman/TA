@@ -1,6 +1,6 @@
 <div style="text-align: center; padding-top: 3%; padding-bottom:3%">
 <button class="btn btn-default btn-lg" style="width: 90%; background-color: #fafafa" onclick="load()" data-toggle="modal" data-target="#tambahdatuk">+
-    Add Datuk Datuk</button>
+    Add Datuk Data</button>
 </div>
 
 <div class="modal fade" id="tambahdatuk">

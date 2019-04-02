@@ -1,5 +1,5 @@
 <div style="text-align: center; padding-top: 3%; padding-bottom:3%">
-<button class="btn btn-default btn-lg" style="width: 90%; background-color: #fafafa" data-toggle="modal" data-target="#tambahowner">+
+<button class="btn btn-default btn-lg" style="width: 90%; background-color: #fafafa" onclick="load()" data-toggle="modal" data-target="#tambahowner">+
     Add House Owner Data </button>
 </div>
 
@@ -76,7 +76,7 @@
                         <div class="form-group col-sm-6">
                             Birth Date: <input class="form-control" type="date" name="" value="<?php echo $tgl ?>">
                         </div>
-                        <div class="form-group col-sm-6">
+                        <div class="form-group col-sm-6" id="combobox-pend">
                             Education Level:
                             <select class="form-control" name="kerja" required style="font-size: 81%; font-weight: bold">
                                 <option></option>
@@ -89,7 +89,7 @@
                                 ?>
                             </select>
                         </div>
-                        <div class="form-group col-sm-6">
+                        <div class="form-group col-sm-6" id="combobox-kerja">
                             Job: 
                             <select class="form-control" name="kerja" required style="font-size: 81%; font-weight: bold">
                                 <option></option>
@@ -139,9 +139,10 @@
                                     }
                                 ?>
                             </select>
-                            <div id="suku">Tribe: <?php echo $suku ?></div>
+                            <div id="suku"></div>
                         </div>
-                        <div class="form-group col-sm-6">Village:
+                        <div class="form-group col-sm-6" id="combobox-kampung">
+                            Village:
                             <select class="form-control" name="kampung" required style="font-size: 81%; font-weight: bold">
                                 <option></option>
                                 <?php                
@@ -197,4 +198,9 @@ function ceksuku() {
     $("#suku").empty()
     $("#suku").load("inc/suku.php?id_datuk="+iddatuk);
 }
+    function load2() {
+        $('#combobox-pend').load("inc/combobox-holder-pend.php");
+        $('#combobox-kerja').load("inc/combobox-holder-kerja.php");
+        $('#combobox-kampung').load("inc/combobox-holder-kampung.php");
+    }
 </script>

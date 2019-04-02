@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>educational building</title>
+    <title>educational building info</title>
     <?php 
         include('../../inc/koneksi.php');
         include('../inc/head.php');

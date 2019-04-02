@@ -15,7 +15,7 @@
                             </div>
                             <div class="modal-body">
                                 <p>Name of Worship Facilities:</p>
-                                <select class="form-control" name="fasilitas" style="height: 50px;">
+                                <select class="form-control" name="fasilitas" style="height: 43px">
                                 <?php
                                     $sql_fas= pg_query("SELECT * FROM worship_building_facilities ORDER BY name_of_facility ASC");
                                     while($row = pg_fetch_assoc($sql_fas))
@@ -24,6 +24,7 @@
                                     }
                                 ?>
                                 </select>
+                                <br/>
                                 <p>Quantity of facilities:<label id="fass"></label></p>
                                 <input type="text" class="form-control" name="total-fas" id="total-fas" placeholder="quantity of facilities.." onkeypress="return hanyaAngka(event, '#fass')" onkeyup="cek_t()">
                                 <input type="hidden" name="id" value="<?php echo $id ?>">

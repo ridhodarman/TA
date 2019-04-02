@@ -98,7 +98,7 @@
                     </div>
                     <div class="form-group col-sm-6">
                         <label><span style="color:red">*</span>Type of Office</label>
-                        <select name="jenis" class="form-control" style="font-size: 85%" required>
+                        <select name="jenis" class="form-control" style="height: 43px">
                             <option value="<?php echo $id_o ?>"><?php echo $jenis; ?></option>
                             <?php                
                                 $sql_j=pg_query("SELECT * FROM type_of_office WHERE type_id != '$id_o' ORDER BY name_of_type");
@@ -111,7 +111,7 @@
                     </div>
                     <div class="form-group col-sm-6">
                         <label>Construction Type</label>
-                        <select name="konstruksi" class="form-control" style="font-size: 85%">
+                        <select name="konstruksi" class="form-control" style="height: 43px">
                             <option value="<?php echo $id_k ?>"><?php echo $konstruksi ?></option>
                             <?php                
                                 $sql_j=pg_query("SELECT * FROM type_of_construction WHERE type_id != '$id_k' ORDER BY name_of_type");
@@ -143,13 +143,25 @@
                         <input type="text" class="form-control" name="listrik" value="<?php echo $listrik ?>" onkeypress="return hanyaAngka(event, '#listriks')">
                     </div>
                     <div class="form-group col-sm-6">
+                        <label>Building Model</label>
+                        <select name="model" class="form-control" style="height: 43px">
+                            <?php                
+                                $sql_j=pg_query("SELECT * FROM building_model ORDER BY name_of_model");
+                                while($row = pg_fetch_assoc($sql_j))
+                                {
+                                    echo"<option value=".$row['model_id'].">".$row['name_of_model']."</option>";
+                                }
+                            ?>
+                        </select>
+                    </div>
+                    <div class="form-group col-sm-6">
                         <label>Alamat</label>
                         <textarea class="form-control" name="alamat"><?php echo $alamat ?></textarea>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                 <button type="submit" class="btn btn-primary" id="simpan">Save changes</button>
             </div>
             </form>
