@@ -1,3 +1,22 @@
+<!-- <div id='ajax-wait'>
+ <center>
+  <img alt='loading...' src='inc/loading-x.gif' width='40' height='40'/>
+  &emsp;
+  <font color="#5186db" size="4pt"> Loading...</font>
+ </center>
+</div>
+<script type="text/javascript">
+    $( document ).ajaxStart( function() {
+  $( "#ajax-wait" ).css({
+    left: ( $( window ).width() - 32 ) / 2 + "px", // 32 = lebar gambar
+    top: ( $( window ).height() - 32 ) / 2 + "px", // 32 = tinggi gambar
+    display: "block"
+  })
+}).ajaxComplete( function() {
+  $( "#ajax-wait" ).fadeOut();
+});
+</script> -->
+
 <script src="pages/inc/slideshow/jquery.resize.js"></script>
 <script src="pages/inc/slideshow/jquery.waitforimages.min.js"></script>
 <script src="pages/inc/slideshow/modernizr.js"></script>

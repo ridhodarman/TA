@@ -99,7 +99,7 @@ function detailrumah_infow(id){  //menampilkan informasi rumah
             map.setZoom(18); 
             infowindow = new google.maps.InfoWindow({
             position: centerBaru,
-            content: "<span style=color:black><center><b>Information</b><br>"+image+"<br><i class='fa fa-home'></i> "+id+"</center><a role='button' class='btn btn-default fa fa-car' onclick='callRoute(centerLokasi, centerBaru);rutetampil();'> Show Route</a> <a role='button' class='btn btn-default fa fa-info-circle' target='_blank' href='detailrumah.php?id="+id+"'> View Details</a>&nbsp</span>",
+            content: "<span style=color:black><center><b>Information</b><br>"+image+"<br><i class='fa fa-home'></i> "+id+"</center><a role='button' class='btn btn-default fa fa-car' onclick='callRoute(centerLokasi, centerBaru);rutetampil();'> Show Route</a> <a role='button' class='btn btn-default fa fa-info-circle' onclick='detailrumah("+'"'+id+'"'+")'> View Details</a>&nbsp</span>",
             pixelOffset: new google.maps.Size(0, -33)
             });
             infoDua.push(infowindow); 

@@ -379,6 +379,13 @@
                 <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
             </div>
             <div class="modal-body" style="background-color: #eee">
+                <div id='ajax-wait'>
+                     <center>
+                      <img alt='loading...' src='inc/loading-x.gif' width='40' height='40'/>
+                      &emsp;
+                      <font color="#5186db" size="4pt"> Loading...</font>
+                     </center>
+                    </div>
                 <div id="konten-bang"></div>
             </div>
             <div class="modal-footer">
@@ -387,39 +394,56 @@
         </div>
     </div>
 </div>
+
 <script type="text/javascript">
     function detailumkm(id) {
         $("#jenis-bang").empty()
         $("#jenis-bang").append("<i class='fas fa-store-alt'></i> Micro, Small, Medium, Enterprise Building Info")
-        $('#konten-bang').load("info-umkm.php?id="+id);
         $('#info-bang').modal('show');
+        $('#konten-bang').load("info-umkm.php?id="+id);
     }
 
     function detailibadah(id) {
         $("#jenis-bang").empty()
         $("#jenis-bang").append("<i class='fas fa-mosque'></i> Worship Building Info")
-        $('#konten-bang').load("info-ibadah.php?id="+id);
         $('#info-bang').modal('show');
+        $('#konten-bang').load("info-ibadah.php?id="+id);
     }
 
     function detailpendidikan(id) {
         $("#jenis-bang").empty()
         $("#jenis-bang").append("<i class='fas fa-school'></i> Educational Building Info")
-        $('#konten-bang').load("info-pendidikan.php?id="+id);
         $('#info-bang').modal('show');
+        $('#konten-bang').load("info-pendidikan.php?id="+id);
     }
 
     function detailkesehatan(id) {
         $("#jenis-bang").empty()
         $("#jenis-bang").append("<i class='fas fa-hospital-alt'></i> Health Building Info")
-        $('#konten-bang').load("info-kesehatan.php?id="+id);
         $('#info-bang').modal('show');
+        $('#konten-bang').load("info-kesehatan.php?id="+id);
     }
 
     function detailkantor(id) {
         $("#jenis-bang").empty()
         $("#jenis-bang").append("<i class='fa fa-bank'></i> Office Building Info")
-        $('#konten-bang').load("info-kantor.php?id="+id);
         $('#info-bang').modal('show');
+        $('#konten-bang').load("info-kantor.php?id="+id);
     }
+
+    function detailrumah(id) {
+        $("#jenis-bang").empty()
+        $("#jenis-bang").append("<i class='ti-home'></i> House Building Info")
+        $('#info-bang').modal('show');
+        $('#konten-bang').load("info-rumah.php?id="+id);
+    }
+            $( document ).ajaxStart( function() {
+              $( "#ajax-wait" ).css({
+                left: ( $( window ).width() - 32 ) / 2 + "px", // 32 = lebar gambar
+                top: ( $( window ).height() - 32 ) / 2 + "px", // 32 = tinggi gambar
+                display: "block"
+              })
+            }).ajaxComplete( function() {
+              $( "#ajax-wait" ).fadeOut();
+            });
 </script>

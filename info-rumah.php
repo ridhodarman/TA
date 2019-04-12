@@ -1,48 +1,14 @@
-<?php session_start(); ?>
-<!doctype html>
-<html class="no-js" lang="en">
-
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>house building info</title>
-    <?php 
-        include('../../inc/koneksi.php');
-        include('../inc/head.php');
-        include('../inc/headinfodanslideshow.php');
-    ?>
-    <script type="text/javascript" src="../../script.js"></script>
-</head>
-
-<body>
-    <!--[if lt IE 8]>
-            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
-    <!-- preloader area start -->
-    <div id="preloader">
-        <div class="wrapper">
-            <div class="circle circle-1"></div>
-            <div class="circle circle-1a"></div>
-            <div class="circle circle-2"></div>
-            <div class="circle circle-3"></div>
-        </div>
-        <h1 style="font-size: 200%">Loading&hellip;</h1>
-    </div>
-    <!-- preloader area end -->
-    <!-- page container area start -->
-    <div class="page-container">
-        <!-- sidebar menu area start -->
-        <?php include('../inc/sidebar.php') ?>
-        <!-- sidebar menu area end -->
-        <!-- main content area start -->
-        <div class="main-content">
-            <!-- header area start -->
-            <?php include ('../inc/header2.php'); ?>
-            <!-- header area end -->
-            <!-- page title area start -->
-            <br>
-            <!-- page title area end -->
+<script src="pages/inc/slideshow/jquery.resize.js"></script>
+<script src="pages/inc/slideshow/jquery.waitforimages.min.js"></script>
+<script src="pages/inc/slideshow/modernizr.js"></script>
+<script src="pages/inc/slideshow/jquery.carousel-3d.js"></script>
+<link rel="stylesheet" href="pages/inc/slideshow/jquery.carousel-3d.default.css">
+<link rel="stylesheet" href="assets/alertify/themes/alertify.core.css" />
+<link rel="stylesheet" href="assets/alertify/themes/alertify.default.css" id="toggleCSS" />
+<meta name="viewport" content="width=device-width">
+<script src="assets/alertify/lib/alertify.min.js"></script>
             <?php
+            include ("inc/koneksi.php");
                 $id=$_GET['id'];
 
                 $querysearch = "SELECT H.fcn_owner, H.address, H.standing_year, H.land_building_tax, H.type_of_construction, H.electricity_capacity, H.tap_water, H.building_status,
@@ -143,18 +109,18 @@
                         $n++;
                     }
 
-                    $server='../../foto/rumah/';
+                    $server='foto/rumah/';
                     echo '<div data-carousel-3d>';
                     if ($cek<1) {
                         echo '
                                 <div style="min-width: 320px; min-height: 213px; max-height: 700px; max-height: 500px; text-align-last: center;  vertical-align: middle; display: table-cell;">
-                                    <img src="../../foto/rumah.png" />
+                                    <img src="foto/rumah.png" />
                                     <a class="icon-container" style="background-color: #d8dbff" href="#">
                                         <span class="ti-na"></span><span class="icon-name">No Image Available</span>
                                     </a>
                                 </div>
                                 <div style="min-width: 320px; min-height: 213px; max-height: 700px; max-height: 500px; text-align-last: center;  vertical-align: middle; display: table-cell;">
-                                    <img src="../../foto/rumah.png" />
+                                    <img src="foto/rumah.png" />
                                     <a class="icon-container" style="background-color: #d8dbff" href="#">
                                         <span class="ti-na"></span><span class="icon-name">No Image Available</span>
                                     </a>
@@ -197,69 +163,247 @@
             ?>
 
             <div class="main-content-inner">
-                <h3>House Building Info</h3>
                 <div class="row">
-                    <div class="col-lg-6 mt-5">
-                        <?php include ('inc/info.php') ?>
-                    </div>
-                    <div class="col-lg-6 mt-5">
-                        <div class="card">
+
+                    <div class="col-lg-12 mt-5">
+                        <center>
+                        <div class="card" style="width: 70%;">
                             <div class="card-body">
                                 <div class="media mb-5">
                                     <div class="media-body">
-                                        <?php include ('inc/editfoto.php') ?>
                                         <h5 class="mb-3">Foto
-                                            <button data-toggle="modal" data-target="#ukuranpenuh" class="btn btn-warning btn-sm"
-                                                title="show all images in full screen">
+                                            <!-- <button id="ukuranpenuh" class="btn btn-warning btn-sm" title="show all images in full screen">
                                                 <i class="ti-fullscreen"></i>
-                                            </button>
+                                            </button> -->
                                         </h5>
                                         <?php tampilfoto() ?>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        </center>
                     </div>
-                    <div class="col-lg-6 mt-5">
-                                        <?php include('inc/info-pemilik.php') ?>
-                    </div>
+
                     <div class="col-lg-6 mt-5">
                         <div class="card">
                             <div class="card-body">
                                 <div class="media mb-5">
                                     <div class="media-body">
-                                        <h5 class="mb-3">Location</h5>
-                                        <?php include ('inc/editspasial.php') ?>
-                                        <div style="padding-left: 1%; padding-bottom: 1%;">
-                                            <?php include('../../inc/aturlayer.php') ?>
-                                        </div>
-                                        <div style="width:100%; height: 360px;" id="map2"></div>
-                                        <script>
-                                            function initMap() {
-                                                posisi = {lat: <?php echo $latitude ?>, lng: <?php echo $longitude ?>}
-                                                map = new google.maps.Map(document.getElementById('map2'), {
-                                                    center: posisi,
-                                                    zoom: 19,
-                                                    mapTypeId: 'satellite'
-                                                });
-                                                server='../../'
-                                                semuadigitasi();
-
-                                                var marker = new google.maps.Marker({
-                                                position: posisi,
-                                                icon:server+'assets/ico/home.png',
-                                                animation: google.maps.Animation.BOUNCE,
-                                                map: map
-                                                });
-                                            }
-
-                                            initMap();
-                                        </script>
+                                        <h6>ID:
+                                            <?php echo $id ?>
+                                        </h6>
+                                        <br />
+                                        <table style="width: 100%;">
+                                            <table style="width: 100%;">
+                                                <tr>
+                                                    <td>Standing Year </td>
+                                                    <td>:</td>
+                                                    <td>
+                                                        <?php echo $tahun ?>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Land and Building Tax </td>
+                                                    <td>:</td>
+                                                    <td>Rp.
+                                                        <?php echo number_format($pbb); ?>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Type of Construction </td>
+                                                    <td>:</td>
+                                                    <td>
+                                                        <?php echo $jkonstruksi ?>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Tap Water </td>
+                                                    <td>:</td>
+                                                    <td>
+                                                        <?php echo $pdam ?>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Status </td>
+                                                    <td>:</td>
+                                                    <td>
+                                                        <?php echo $status ?>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Address </td>
+                                                    <td>:</td>
+                                                    <td>
+                                                        <?php echo $alamat ?>
+                                                    </td>
+                                                </tr>
+                                        </table>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+
+<?php
+
+                $querysearch = "SELECT H.fcn_owner, O.*,
+                                        D.datuk_name, T.name_of_tribe, V.village_name, J.job_name, E.educational_level
+                                FROM house_building AS H
+                                JOIN house_building_owner AS O ON H.fcn_owner=O.national_identity_number
+                                JOIN datuk AS D ON O.datuk_id=D.datuk_id
+                                JOIN tribe AS T ON D.tribe_id=T.tribe_id
+                                JOIN village AS V ON O.village_id=V.village_id
+                                JOIN job AS J ON O.job_id=J.job_id
+                                JOIN education AS E ON O.educational_id=E.education_id
+                                WHERE H.house_building_id='$id' 
+                            ";
+
+                $hasil = pg_query($querysearch);
+                while ($row = pg_fetch_array($hasil)) {
+                    $nama = $row['owner_name'];
+                    $nokk = $row['family_card_number'];
+                    $tgl = $row['birth_date'];
+
+                    $id_pendidikan = $row['educational_id'];
+                    $pendidikan = $row['educational_level'];
+                    
+                    $id_kerja = $row['job_id'];
+                    $pekerjaan = $row['job_name'];
+                    
+                    $asuransi="-";
+                    if ($row['savings']!=null) {
+                        if ($row['insurance']==1) {
+                             $asuransi="Exist";
+                         }
+                        else if ($row['insurance']==0) {
+                            $asuransi="do not have";
+                        } 
+                    }
+
+                    $pendapatan = $row['income'];
+
+                    $tab = $row['savings'];
+                    $tabungan="-";
+                    if ($row['savings']!=null) {
+                        if ($row['savings']==1) {
+                         $tabungan="Exist";
+                         }
+                        else if ($row['savings']==0) {
+                            $tabungan="do not have";
+                        }
+                    }
+
+                    $id_datuk = $row['datuk_id'];
+                    $datuk = $row['datuk_name'];
+
+                    $id_suku = $row['tribe_id'];
+                    $suku = $row['name_of_tribe'];
+
+                    $id_kampung = $row['village_id'];
+                    $kampung = $row['village_name'];
+                }
+
+?>
+
+                    <div class="col-lg-6 mt-5">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="media mb-5">
+                                    <div class="media-body">
+                                    <h5 class="mb-3">Owner</h5>
+
+                                        <table style="width: 100%">
+                                            <tr>
+                                                <td>Name </td>
+                                                <td>:
+                                                    <?php echo $nama ?>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>National ID Number </td>
+                                                <td>:
+                                                    <?php echo $nik?>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Family Card Number </td>
+                                                <td>:
+                                                    <?php echo $nokk ?>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Birth Date </td>
+                                                <td>:
+                                                    <?php
+                                                        $tgl2 = date('Y-m-d');
+                                                        if ($tgl!=null && $tgl!=$tgl2) {
+                                                             echo date("d - F - Y",strtotime($tgl)); 
+                                                         } 
+                                                        
+                                                    ?>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Education Level </td>
+                                                <td>:
+                                                    <?php echo $pendidikan ?>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Job </td>
+                                                <td>:
+                                                    <?php echo $pekerjaan ?>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Income </td>
+                                                <td>:
+                                                    <?php
+                                                        if ($pendapatan!=null) {
+                                                             echo "Rp. ". number_format($pendapatan); 
+                                                         } 
+                                                        
+                                                    ?>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Take Insurance</td>
+                                                <td>:
+                                                    <?php echo $asuransi ?>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Savings </td>
+                                                <td>:
+                                                    <?php echo $tabungan ?>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Datuk </td>
+                                                <td>:
+                                                    <?php echo $datuk ?>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Tribe </td>
+                                                <td>:
+                                                    <?php echo $suku ?>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Village </td>
+                                                <td>:
+                                                    <?php echo $kampung ?>
+                                                </td>
+                                            </tr>
+                                        </table>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
 
                     <?php
                         $query = pg_query("SELECT H.*,
@@ -281,11 +425,6 @@
                                     <div class="card-body">
                                             <div class="media-body">
                                                 <h6 class="mb-3" style="float: left; padding-right: 2px;">Number of Family Heads: <?php echo $jumlah_kk ?></h6>
-                                                <div style="float: right">
-                                                    <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#tambahpenghuni">
-                                                        <b><i class="fa fa-user-plus"></i> Add Family Head Data</b>
-                                                    </button>
-                                                </div>
                                             </div>
                                     </div>
                                 </div>
@@ -449,34 +588,8 @@
                                                         </td>
                                                     </tr>
                                                 </table>
-                                                <div style="float: right; padding-right: 1%; padding-bottom: 6%; ">
-                                                    <a>
-                                                    <button type="button" class="btn btn-danger btn-sm btn-flat btn-lg mt-3" data-toggle="modal" data-target="#deletepenghuni<?php echo $kk_penghuni ?>"><i class="fas fa-user-slash"></i> Remove</button>
-                                                    </a>
-                                                    <a href="../keluarga/info-holder.php?id=<?php echo $kk_penghuni ?>">
-                                                        <button type="button" class="btn btn-info btn-sm btn-flat btn-lg mt-3"><i class="fa fa-edit"></i> Edit</button>
-                                                    </a>
-                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="modal fade" id="deletepenghuni<?php echo $kk_penghuni ?>">
-                                <div class="modal-dialog modal-dialog-centered" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title">Delete householder ?</h5>
-                                                <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <p>Are you sure to delete <b><?php echo $kk_penghuni ?> (Head of family: <?php echo $nama_kk?>)</b> from <?php echo $id ?> ?</p>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                                <a href="act/hapuspenghuni.php?id=<?php echo base64_encode($kk_penghuni) ?>&bang=<?php echo $id ?>"><button type="button" class="btn btn-danger">Delete</button></a>
-                                            </div>
                                     </div>
                                 </div>
                             </div>
@@ -490,39 +603,12 @@
                     }
                     ?>
 
+
+
+
                 </div>
             </div> <!-- SAMPAI DISINI BATAS ROW-->
 
-            <div class="modal fade bd-example-modal-lg modal-xl" id="ukuranpenuh">
-                <div class="modal-dialog modal-lg modal-xl">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Photo</h5>
-                            <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
-                        </div>
-                        <div class="modal-body">
-                            <?php tampilfoto() ?>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
             <!-- main content area end -->
             <!-- footer area start-->
-<?php include('../inc/foot.php') ?>
-
-
-<script type="text/javascript">
-    
-    function back() {
-        window.location = "index.php";
-    }
-
-    document.getElementById("penghuni").value=document.getElementById("kk").value;
-    function simpanpenghuni() {
-        document.getElementById("penghuni").value=document.getElementById("kk").value;
-    }
-</script>
-</body>
-
-</html>
