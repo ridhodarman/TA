@@ -9,7 +9,7 @@
         <table width="100%" class="table table-striped table-bordered table-hover" id="listholder">
             <thead>
                 <tr style="text-align: center">
-                    <th>No. Family Card</th>
+                    <th>Family Card Number</th>
                     <th>Name of Head Family</th>
                     <th>Action</th>
                 </tr>
@@ -80,7 +80,7 @@
                         </div>
                         <div class="form-group col-sm-6" id="combobox-pend2">
                             Education Level:
-                            <select class="form-control" name="pend2" required style="font-size: 81%; font-weight: bold">
+                            <select class="form-control" name="pend2" required style="height: 43px">
                                 <?php                
                                     $sql_p=pg_query("SELECT * FROM education ORDER BY educational_level");
                                     while($row = pg_fetch_assoc($sql_p))
@@ -92,7 +92,7 @@
                         </div>
                         <div class="form-group col-sm-6" id="combobox-kerja2">
                             Job: 
-                            <select class="form-control" name="kerja2" required style="font-size: 81%; font-weight: bold">
+                            <select class="form-control" name="kerja2" required style="height: 43px">
                                 <?php                
                                     $sql_k=pg_query("SELECT * FROM job ORDER BY job_name");
                                     while($row = pg_fetch_assoc($sql_k))
@@ -113,21 +113,21 @@
                         </div>
                         <div class="form-group col-sm-6">
                             Take Insurance:
-                             <select class="form-control" name="asuransi2" required style="font-size: 81%; font-weight: bold">
+                             <select class="form-control" name="asuransi2" required style="height: 43px">
                                 <option value="1">Yes</option>
                                 <option value="0">No</option>
                             </select>
                         </div>
                         <div class="form-group col-sm-6">
                             Savings:
-                            <select class="form-control" name="tabungan2" required style="font-size: 81%; font-weight: bold">
+                            <select class="form-control" name="tabungan2" required style="height: 43px">
                                 <option value="1">Yes</option>
                                 <option value="0">No</option>
                             </select>
                         </div>
                         <div class="form-group col-sm-6" id="combobox-kampung2">
                         	Village:
-                            <select class="form-control" name="kampung2" required style="font-size: 81%; font-weight: bold">
+                            <select class="form-control" name="kampung2" required style="height: 43px">
                                 <?php                
                                     $sql_v=pg_query("SELECT * FROM village ORDER BY village_name");
                                     while($row = pg_fetch_assoc($sql_v))
@@ -143,7 +143,7 @@
                         </div>
                         <div class="form-group col-sm-6">
                             Datuk:
-                            <select class="form-control" name="datuk2" required onchange="ceksuku2()" id="iddatuk2" style="font-size: 81%; font-weight: bold">
+                            <select class="form-control" name="datuk2" required onchange="ceksuku2()" id="iddatuk2" style="height: 43px">
                                 <?php                
                                     $sql_suku=pg_query("SELECT * FROM datuk ORDER BY datuk_name");
                                     while($row = pg_fetch_assoc($sql_suku))

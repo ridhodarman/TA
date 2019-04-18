@@ -3,10 +3,6 @@
 <script src="pages/inc/slideshow/modernizr.js"></script>
 <script src="pages/inc/slideshow/jquery.carousel-3d.js"></script>
 <link rel="stylesheet" href="pages/inc/slideshow/jquery.carousel-3d.default.css">
-<link rel="stylesheet" href="assets/alertify/themes/alertify.core.css" />
-<link rel="stylesheet" href="assets/alertify/themes/alertify.default.css" id="toggleCSS" />
-<meta name="viewport" content="width=device-width">
-<script src="assets/alertify/lib/alertify.min.js"></script>
             <?php
                 include ("inc/koneksi.php");
                  $id=$_GET['id'];

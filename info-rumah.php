@@ -3,21 +3,17 @@
 <script src="pages/inc/slideshow/modernizr.js"></script>
 <script src="pages/inc/slideshow/jquery.carousel-3d.js"></script>
 <link rel="stylesheet" href="pages/inc/slideshow/jquery.carousel-3d.default.css">
-<link rel="stylesheet" href="assets/alertify/themes/alertify.core.css" />
-<link rel="stylesheet" href="assets/alertify/themes/alertify.default.css" id="toggleCSS" />
-<meta name="viewport" content="width=device-width">
-<script src="assets/alertify/lib/alertify.min.js"></script>
             <?php
             include ("inc/koneksi.php");
                 $id=$_GET['id'];
 
-                $querysearch = "SELECT H.fcn_owner, H.address, H.standing_year, H.land_building_tax, H.type_of_construction, H.electricity_capacity, H.tap_water, H.building_status,
+                $querysearch = "SELECT H.owner_id, H.address, H.standing_year, H.land_building_tax, H.type_of_construction, H.electricity_capacity, H.tap_water, H.building_status,
                                 ST_X(ST_Centroid(H.geom)) AS longitude, ST_Y(ST_CENTROID(H.geom)) AS latitude, ST_AsText(H.geom) AS geom,
                                 T.name_of_type AS jkonstruksi,
                                 O.*
                                 FROM house_building AS H
                                 LEFT JOIN type_of_construction AS T ON H.type_of_construction=T.type_id
-                                JOIN house_building_owner AS O ON H.fcn_owner=O.national_identity_number
+                                JOIN house_building_owner AS O ON H.owner_id=O.national_identity_number
                                 WHERE H.house_building_id='$id' 
                             ";
 
@@ -25,7 +21,7 @@
                 while ($row = pg_fetch_array($hasil)) {
                     $longitude = $row['longitude'];
                     $latitude = $row['latitude'];
-                    $nik = $row['fcn_owner'];
+                    $nik = $row['owner_id'];
                     $alamat = $row['address'];
                     $tahun = $row['standing_year'];
                     $pbb = $row['land_building_tax'];
@@ -246,10 +242,10 @@
 
 <?php
 
-                $querysearch = "SELECT H.fcn_owner, O.*,
+                $querysearch = "SELECT H.owner_id, O.*,
                                         D.datuk_name, T.name_of_tribe, V.village_name, J.job_name, E.educational_level
                                 FROM house_building AS H
-                                JOIN house_building_owner AS O ON H.fcn_owner=O.national_identity_number
+                                JOIN house_building_owner AS O ON H.owner_id=O.national_identity_number
                                 JOIN datuk AS D ON O.datuk_id=D.datuk_id
                                 JOIN tribe AS T ON D.tribe_id=T.tribe_id
                                 JOIN village AS V ON O.village_id=V.village_id

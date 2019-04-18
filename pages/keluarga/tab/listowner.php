@@ -9,7 +9,7 @@
         <table width="100%" class="table table-striped table-bordered table-hover" id="listowner">
             <thead>
                 <tr style="text-align: center">
-                    <th>ID</th>
+                    <th>National ID Number</th>
                     <th>Owner Name</th>
                     <th>Action</th>
                 </tr>
@@ -26,7 +26,7 @@
                     echo "<td>".$id."</td>";
                     echo "<td>".$nama."</td>";
                     echo '<td>
-                        <a href="info-holder.php?id='.$id.'"><button class="btn btn-info btn-xs" title="View Detail"><i class="fa fa-info-circle"></i> View Detail</button></a>
+                        <a href="info-owner.php?id='.$id.'"><button class="btn btn-info btn-xs" title="View Detail"><i class="fa fa-info-circle"></i> View Detail</button></a>
                         <button class="btn btn-danger btn-xs" title="Hapus" data-toggle="modal" data-target="#delete-bang'.$id.'"><i class="fa fa-trash"></i> Delete</button>
                         </td>';
                     echo "</tr>";
@@ -40,11 +40,11 @@
                                         <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
                                     </div>
                                     <div class="modal-body">
-                                        <p>Are you sure to delete '.$id.' (Head of Family: '.$nama.') from  householder data ?</p>
+                                        <p>Are you sure to delete '.$id.' ('.$nama.') from  house owner data ?</p>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                        <a href="act/hapus-holder.php?id='.$id2.'"><button type="button" class="btn btn-danger">Delete</button></a>
+                                        <a href="act/hapus-owner.php?id='.$id2.'"><button type="button" class="btn btn-danger">Delete</button></a>
                                     </div>
                                 </div>
                             </div>
@@ -68,18 +68,17 @@
                 <div class="modal-body" style="font-size: 110%">
                     <div class="row">
                         <div class="form-group col-sm-6">
-                            Family Card Number: <input class="form-control" type="text" name="" value="<?php echo $nokk ?>">
+                            National Identity Number: <input class="form-control" type="text" name="" value="">
                         </div>
                         <div class="form-group col-sm-6">
-                            Name: <input class="form-control" type="text" name="" value="<?php echo $nama ?>">
+                            Name: <input class="form-control" type="text" name="" value="">
                         </div>
                         <div class="form-group col-sm-6">
-                            Birth Date: <input class="form-control" type="date" name="" value="<?php echo $tgl ?>">
+                            Birth Date: <input class="form-control" type="date" name="" value="">
                         </div>
                         <div class="form-group col-sm-6" id="combobox-pend">
                             Education Level:
-                            <select class="form-control" name="kerja" required style="font-size: 81%; font-weight: bold">
-                                <option></option>
+                            <select class="form-control" name="kerja" required style="height: 43px">
                                 <?php                
                                     $sql_p=pg_query("SELECT * FROM education ORDER BY educational_level");
                                     while($row = pg_fetch_assoc($sql_p))
@@ -91,8 +90,7 @@
                         </div>
                         <div class="form-group col-sm-6" id="combobox-kerja">
                             Job: 
-                            <select class="form-control" name="kerja" required style="font-size: 81%; font-weight: bold">
-                                <option></option>
+                            <select class="form-control" name="kerja" required style="height: 43px">
                                 <?php                
                                     $sql_k=pg_query("SELECT * FROM job ORDER BY job_name");
                                     while($row = pg_fetch_assoc($sql_k))
@@ -113,24 +111,21 @@
                         </div>
                         <div class="form-group col-sm-6">
                             Take Insurance:
-                             <select class="form-control" name="asuransi" required style="font-size: 81%; font-weight: bold">
-                                <option></option>
+                             <select class="form-control" name="asuransi" required style="height: 43px">
                                 <option value="1">Yes</option>
                                 <option value="0">No</option>
                             </select>
                         </div>
                         <div class="form-group col-sm-6">
                             Savings:
-                            <select class="form-control" name="tabungan" required style="font-size: 81%; font-weight: bold">
-                                <option></option>
+                            <select class="form-control" name="tabungan" required style="height: 43px">
                                 <option value="1">Yes</option>
                                 <option value="0">No</option>
                             </select>
                         </div>
                         <div class="form-group col-sm-6">
                             Datuk:
-                            <select class="form-control" name="datuk" required onchange="ceksuku()" id="iddatuk" style="font-size: 81%; font-weight: bold">
-                                <option></option>
+                            <select class="form-control" name="datuk" required onchange="ceksuku()" id="iddatuk" style="height: 43px">
                                 <?php                
                                     $sql_suku=pg_query("SELECT * FROM datuk ORDER BY datuk_name");
                                     while($row = pg_fetch_assoc($sql_suku))
@@ -143,8 +138,7 @@
                         </div>
                         <div class="form-group col-sm-6" id="combobox-kampung">
                             Village:
-                            <select class="form-control" name="kampung" required style="font-size: 81%; font-weight: bold">
-                                <option></option>
+                            <select class="form-control" name="kampung" required style="height: 43px">
                                 <?php                
                                     $sql_v=pg_query("SELECT * FROM village ORDER BY village_name");
                                     while($row = pg_fetch_assoc($sql_v))

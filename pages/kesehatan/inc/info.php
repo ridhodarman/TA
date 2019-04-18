@@ -101,23 +101,23 @@
 <div class="modal fade" id="editinfo">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
+            <form method="post" action="act/info-edit.php" style="width: 150%; background-color: white; border-radius: 1%">
             <div class="modal-header">
-                <h6 class="modal-title">Edit Info</h6>
+                <h6 class="modal-title">Edit Health Building Info</h6>
                 <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
             </div>
-            <form method="post" action="act/info-edit.php">
-            <div class="modal-body" style="font-size: 110%">
+            <div class="modal-body">
                 <div class="row">
-                    <div class="form-group col-sm-6">
+                    <div class="form-group col-sm-4">
                         <label><span style="color:red">*</span>ID Survey</label><div id="ids"></div>
                         <input type="text" class="form-control" name="id" id="id" onkeyup="besarkan()" onchange="cekid()" value="<?php echo $id; ?>" required>
                         <input type="hidden" name="id-temp" value="<?php echo $id; ?>">
                     </div>
-                    <div class="form-group col-sm-6">
+                    <div class="form-group col-sm-4">
                         <label><span style="color:red">*</span>Name</label>
                         <input type="text" class="form-control" name="nama" value="<?php echo $nama; ?>" required>
                     </div>
-                    <div class="form-group col-sm-6">
+                    <div class="form-group col-sm-4">
                         <label><span style="color:red">*</span>Type of Health Building</label>
                         <select name="j-kes" class="form-control" style="height: 43px">
                             <option value="<?php echo $id_h; ?>"><?php echo $jenis; ?></option>
@@ -130,19 +130,19 @@
                             ?>
                         </select>
                     </div>
-                    <div class="form-group col-sm-6">
+                    <div class="form-group col-sm-4">
                         <label>Head Name</label>
                         <input type="text" class="form-control" name="kepala" value="<?php echo $kepala; ?>">
                     </div>
-                    <div class="form-group col-sm-6">
+                    <div class="form-group col-sm-4">
                         <label>Number of Medical Personnel</label><label id="mediss"></label>
                         <input type="text" class="form-control" name="medis" value="<?php echo $medis; ?>" onkeypress="return hanyaAngka(event, '#mediss')">
                     </div>
-                    <div class="form-group col-sm-6">
+                    <div class="form-group col-sm-4">
                         <label>Number of Non-Medical Personnel</label><label id="nons"></label>
                         <input type="text" class="form-control" name="non" value="<?php echo $non; ?>" onkeypress="return hanyaAngka(event, '#nons')">
                     </div>
-                    <div class="form-group col-sm-6">
+                    <div class="form-group col-sm-4">
                         <label>Construction Type</label>
                         <select name="konstruksi" class="form-control" style="height: 43px">
                             <option value="<?php echo $id_k; ?>"><?php echo $konstruksi; ?></option>
@@ -155,31 +155,27 @@
                             ?>
                         </select>
                     </div>
-                    <div class="form-group col-sm-6">
+                    <div class="form-group col-sm-4">
                         <label>Building Area (m<sup>2</sup>)</label><label id="lbangs"></label>
                         <input type="text" class="form-control" name="lbang" value="<?php echo $bang; ?>" onkeypress="return hanyaAngka(event, '#lbangs')" value="<?php echo $bang ?>">
                     </div>
-                    <div class="form-group col-sm-6">
+                    <div class="form-group col-sm-4">
                         <label>Land Area (m<sup>2</sup>)</label><label id="lahans"></label>
                         <input type="text" class="form-control" name="lahan" value="<?php echo $lahan; ?>" onkeypress="return hanyaAngka(event, '#lahans')">
                     </div>
-                    <div class="form-group col-sm-6">
+                    <div class="form-group col-sm-4">
                         <label>Parking Area (m<sup>2</sup>)</label><label id="parkirs"></label>
                         <input type="text" class="form-control" name="parkir" value="<?php echo $parkir; ?>" onkeypress="return hanyaAngka(event, '#parkirs')">
                     </div>
-                    <div class="form-group col-sm-6">
+                    <div class="form-group col-sm-4">
                         <label>Electricity Capacity (kWh)</label><label id="listriks"></label>
                         <input type="text" class="form-control" name="listrik" value="<?php echo $listrik; ?>" onkeypress="return hanyaAngka(event, '#listriks')">
                     </div>
-                    <div class="form-group col-sm-6">
+                    <div class="form-group col-sm-4">
                         <label>Standing Year</label><label id="tahuns"></label>
                         <input type="text" class="form-control" name="tahun" value="<?php echo $tahun; ?>" onkeypress="return hanyaAngka(event, '#tahuns')">
                     </div>
-                    <div class="form-group col-sm-6">
-                        <label>Alamat</label>
-                        <textarea class="form-control" name="alamat"><?php echo $alamat; ?></textarea>
-                    </div>
-                    <div class="form-group col-sm-6">
+                    <div class="form-group col-sm-4">
                         <label>Building Model</label>
                         <select name="model" class="form-control" style="height: 43px">
                             <?php                
@@ -190,6 +186,10 @@
                                 }
                             ?>
                         </select>
+                    </div>
+                    <div class="form-group col-sm-4">
+                        <label>Alamat</label>
+                        <textarea class="form-control" name="alamat"><?php echo $alamat; ?></textarea>
                     </div>
                 </div>
             </div>

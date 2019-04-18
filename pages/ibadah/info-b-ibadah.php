@@ -70,6 +70,7 @@
                     $jenis = $row['type'];
                     $tipe_k = $row['type_of_construction'];
                     $tipe_i = $row['type_of_worship'];
+                    $geom = $row['geom'];
                 }
 
                 

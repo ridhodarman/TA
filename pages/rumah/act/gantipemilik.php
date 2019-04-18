@@ -6,7 +6,7 @@
 		$id_bang = $_POST['id-bang'];
 		$owner = $_POST['pemilik'];
 		$sql = pg_query("UPDATE house_building SET 
-						fcn_owner = '$owner'
+						owner_id = '$owner'
 						WHERE house_building_id = '$id_bang'");
 		if ($sql){
 			echo '<script>

@@ -80,25 +80,25 @@
 <div class="modal fade" id="editinfo">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
+            <form method="post" action="act/info-edit.php" style="width: 150%; background-color: white; border-radius: 1%">
             <div class="modal-header">
-                <h6 class="modal-title">Edit Info</h6>
+                <h6 class="modal-title">Edit Worship Building Info</h6>
                 <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
             </div>
-            <form method="post" action="act/info-edit.php">
-            <div class="modal-body" style="font-size: 110%">
+            <div class="modal-body">
                 <div class="row">
-                    <div class="form-group col-sm-6">
+                    <div class="form-group col-sm-4">
                         <label> ID Survey</label><div id="ids"></div>
                         <input type="text" class="form-control" name="id" value="<?php echo $id ?>" id="id" onkeyup="besarkan()" onchange="cekid()" required>
                         <input type="hidden" name="id-temp" value="<?php echo $id ?>"/>
                     </div>
-                    <div class="form-group col-sm-6">
+                    <div class="form-group col-sm-4">
                         <label>Name</label>
                         <input type="text" class="form-control" name="nama" value="<?php echo $nama ?>" required>
                     </div>
-                    <div class="form-group col-sm-6">
+                    <div class="form-group col-sm-4">
                         <label>Worship Building Type</label>
-                        <select name="j-ibadah" class="form-control" style="font-size: 85%; height: 43px">
+                        <select name="j-ibadah" class="form-control" style="height: 43px">
                             <option value="<?php echo $tipe_i ?>"><?php echo $jenis; ?></option>
                             <?php                
                                 $sql_jibadah=pg_query("SELECT * FROM type_of_worship WHERE type_id != '$tipe_i' ORDER BY name_of_type");
@@ -109,9 +109,9 @@
                             ?>
                         </select>
                     </div>
-                    <div class="form-group col-sm-6">
+                    <div class="form-group col-sm-4">
                         <label>Construction Type</label>
-                        <select name="konstruksi" class="form-control" style="font-size: 85%; height: 43px">
+                        <select name="konstruksi" class="form-control" style="height: 43px">
                             <option value="<?php echo $tipe_k ?>"><?php echo $konstruksi ?></option>
                             <?php                
                                 $sql_jibadah=pg_query("SELECT * FROM type_of_construction WHERE type_id != '$tipe_k' ORDER BY name_of_type");
@@ -122,29 +122,29 @@
                             ?>
                         </select>
                     </div>
-                    <div class="form-group col-sm-6">
+                    <div class="form-group col-sm-4">
                         <label>Building Area (m<sup>2</sup>)</label><label id="lbangs"></label>
                         <input type="text" class="form-control" name="lbang" id="lbang" onkeypress="return hanyaAngka(event, '#lbangs')" value="<?php echo $bang ?>">
                     </div>
-                    <div class="form-group col-sm-6">
+                    <div class="form-group col-sm-4">
                         <label>Land Area (m<sup>2</sup>)</label><label id="lahans"></label>
                         <input type="text" class="form-control" name="lahan" value="<?php echo $lahan ?>" onkeypress="return hanyaAngka(event, '#lahans')">
                     </div>
-                    <div class="form-group col-sm-6">
+                    <div class="form-group col-sm-4">
                         <label>Parking Area (m<sup>2</sup>)</label><label id="parkirs"></label>
                         <input type="text" class="form-control" name="parkir" value="<?php echo $parkir ?>" onkeypress="return hanyaAngka(event, '#parkirs')">
                     </div>
-                    <div class="form-group col-sm-6">
+                    <div class="form-group col-sm-4">
                         <label>Electricity Capacity (kWh)</label><label id="listriks"></label>
                         <input type="text" class="form-control" name="listrik" value="<?php echo $listrik ?>" onkeypress="return hanyaAngka(event, '#listriks')">
                     </div>
-                    <div class="form-group col-sm-6">
+                    <div class="form-group col-sm-4">
                         <label>Standing Year</label><label id="tahuns"></label>
                         <input type="text" class="form-control" name="tahun" value="<?php echo $tahun ?>" onkeypress="return hanyaAngka(event, '#tahuns')">
                     </div>
-                    <div class="form-group col-sm-6">
+                    <div class="form-group col-sm-4">
                         <label>Building Model</label>
-                        <select name="model" class="form-control" style="font-size: 85%; height: 43px">
+                        <select name="model" class="form-control" style="height: 43px">
                             <?php                
                                 $sql_j=pg_query("SELECT * FROM building_model ORDER BY name_of_model");
                                 while($row = pg_fetch_assoc($sql_j))
@@ -154,7 +154,7 @@
                             ?>
                         </select>
                     </div>
-                    <div class="form-group col-sm-6">
+                    <div class="form-group col-sm-4">
                         <label>Alamat</label>
                         <textarea class="form-control" name="alamat"><?php echo $alamat ?></textarea>
                     </div>

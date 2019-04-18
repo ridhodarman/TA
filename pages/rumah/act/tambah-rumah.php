@@ -21,7 +21,7 @@ if(isset($_SESSION['username']) && $_POST['id'] != null ) {
 	// }
 	
 	$query="INSERT INTO house_building 
-		(house_building_id, address, standing_year, land_building_tax, type_of_construction, electricity_capacity, tap_water, building_status, fcn_owner, geom) 
+		(house_building_id, address, standing_year, land_building_tax, type_of_construction, electricity_capacity, tap_water, building_status, owner_id, geom) 
 		VALUES 
 		('$id', '$address', '$year', '$pbb', '$cons', '$elect', '$tap', '$status', '$owner', ST_GeomFromText('$geom'))";
 

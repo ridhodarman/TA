@@ -1,10 +1,10 @@
 <link rel="stylesheet" href="../dist/css/bootstrap-select.css">
 <?php
 
-                $querysearch = "SELECT H.fcn_owner, O.*,
+                $querysearch = "SELECT H.owner_id, O.*,
                                         D.datuk_name, T.name_of_tribe, V.village_name, J.job_name, E.educational_level
                                 FROM house_building AS H
-                                JOIN house_building_owner AS O ON H.fcn_owner=O.national_identity_number
+                                JOIN house_building_owner AS O ON H.owner_id=O.national_identity_number
                                 JOIN datuk AS D ON O.datuk_id=D.datuk_id
                                 JOIN tribe AS T ON D.tribe_id=T.tribe_id
                                 JOIN village AS V ON O.village_id=V.village_id

@@ -5,7 +5,7 @@ include('koneksi.php');
 $sql  = "SELECT  
 			ST_AsGeoJSON(geom) AS geometry,
 			house_building_id,
-			fcn_owner
+			owner_id
 		FROM house_building
 		";
 		$geojson = array(

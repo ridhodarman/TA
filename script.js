@@ -8,15 +8,28 @@ var npendidikan = 0; var digitpendidikan = [];
 var nkesehatan = 0; var digitkesehatan = [];
 var map;
 var server="";
+
+
+var myStyle = [ { "featureType": "administrative", "elementType": "geometry", "stylers": [ { "visibility": "off" } ] }, { "featureType": "landscape.man_made", "elementType": "geometry.fill", "stylers": [ { "visibility": "simplified" } ] }, { "featureType": "landscape.man_made", "elementType": "geometry.stroke", "stylers": [ { "color": "#eeeeee" }, { "visibility": "on" } ] }, { "featureType": "poi", "stylers": [ { "visibility": "off" } ] }, { "featureType": "road", "elementType": "labels.icon", "stylers": [ { "visibility": "off" } ] }, { "featureType": "road.local", "elementType": "geometry.fill", "stylers": [ { "visibility": "off" } ] }, { "featureType": "road.local", "elementType": "geometry.stroke", "stylers": [ { "weight": 1 } ] }, { "featureType": "transit", "stylers": [ { "visibility": "off" } ] } ];
 function loadpeta() {
+  // map = new google.maps.Map(document.getElementById('map'), {
+  //   center: {
+  //     lat: -0.323489,
+  //     lng: 100.349190
+  //   },
+  //   zoom: 14.5,
+  //   mapTypeId: 'satellite'
+  // });
+
   map = new google.maps.Map(document.getElementById('map'), {
-    center: {
-      lat: -0.323489,
-      lng: 100.349190
-    },
-    zoom: 14.5,
-    mapTypeId: 'satellite'
-  });
+       mapTypeControlOptions: {
+         mapTypeIds: ['mystyle', google.maps.MapTypeId.SATELLITE, google.maps.MapTypeId.ROADMAP, google.maps.MapTypeId.TERRAIN]
+       },
+       center: new google.maps.LatLng(-0.323489, 100.349190),
+       zoom: 14.5,
+       mapTypeId: 'satellite'
+     });
+     map.mapTypes.set('mystyle', new google.maps.StyledMapType(myStyle, { name: 'Styled Map' }));
 }
 
 function digitasirumah() {
@@ -29,7 +42,7 @@ function digitasirumah() {
         var data = arrays.features[i];
         var arrayGeometries = data.geometry.coordinates;
         var jenis = data.jenis;
-        var link = "<button class='btn btn-info btn-xs fa fa-info-circle' title='View Details' onclick='detailumkm("+'"'+data.properties.id+'"'+")'></button>";
+        var link = "<button class='btn btn-info btn-xs fa fa-info-circle' title='View Details' onclick='detailrumah("+'"'+data.properties.id+'"'+")'></button>";
         var p1 = ' ID: ' + data.properties.id;
         var p2 = '<p>' + data.properties.nama + '</p>';
         var p3 = link + p1 + p2 +'('+jenis+') ';
@@ -221,7 +234,7 @@ function digitasikantor() {
         var data = arrays.features[i];
         var arrayGeometries = data.geometry.coordinates;
         var jenis = data.jenis;
-        var link = "<button class='btn btn-info btn-xs fa fa-info-circle' title='View Details' onclick='detailumkm("+'"'+data.properties.id+'"'+")'></button>";
+        var link = "<button class='btn btn-info btn-xs fa fa-info-circle' title='View Details' onclick='detailkantor("+'"'+data.properties.id+'"'+")'></button>";
         var p1 = ' ID: ' + data.properties.id;
         var p2 = '<p>' + data.properties.nama + '</p>';
         var p3 = link + p1 + p2 +'('+jenis+') ';
@@ -284,7 +297,7 @@ function digitasipendidikan() {
         var data = arrays.features[i];
         var arrayGeometries = data.geometry.coordinates;
         var jenis = data.jenis;
-        var link = "<button class='btn btn-info btn-xs fa fa-info-circle' title='View Details' onclick='detailumkm("+'"'+data.properties.id+'"'+")'></button>";
+        var link = "<button class='btn btn-info btn-xs fa fa-info-circle' title='View Details' onclick='detailpendidikan("+'"'+data.properties.id+'"'+")'></button>";
         var p1 = ' ID: ' + data.properties.id;
         var p2 = '<p>' + data.properties.nama + '</p>';
         var p3 = link + p1 + p2 +'('+jenis+') ';
@@ -347,7 +360,7 @@ function digitasikesehatan() {
         var data = arrays.features[i];
         var arrayGeometries = data.geometry.coordinates;
         var jenis = data.jenis;
-        var link = "<button class='btn btn-info btn-xs fa fa-info-circle' title='View Details' onclick='detailumkm("+'"'+data.properties.id+'"'+")'></button>";
+        var link = "<button class='btn btn-info btn-xs fa fa-info-circle' title='View Details' onclick='detailkesehatan("+'"'+data.properties.id+'"'+")'></button>";
         var p1 = ' ID: ' + data.properties.id;
         var p2 = '<p>' + data.properties.nama + '</p>';
         var p3 = link + p1 + p2 +'('+jenis+') ';
@@ -439,18 +452,18 @@ function digitasijorong() {
           idTitik += 1;
         }
         if (data.properties.id == 1) {
-          var warna = 'orange';
+          var warna = 'yellow';
         } else if (data.properties.id == 2) {
-          var warna = '#90EE90';
+          var warna = 'green';
         } else if (data.properties.id == 3) {
-          var warna = '#663399';
+          var warna = '#478dff';
         }
 
         digitjorong[njorong] = new google.maps.Polygon({
           paths: hitungTitik,
-          strokeColor: 'black',
-          strokeOpacity: 0.4,
-          strokeWeight: 2.5,
+          strokeColor: 'gray',
+          strokeOpacity: 0.6,
+          strokeWeight: 1.5,
           fillColor: warna,
           fillOpacity: 0.2,
           zIndex: 0,
@@ -725,18 +738,16 @@ function legenda() {
     var div = document.createElement('div');
     var isilegend = document.createElement('div');
     var content = [];
-    content.push('<font style="color:red;"><b><sup>___</sup></b></font>Nagari Border<p/>');
-    content.push('<p><div class="color a"></div>Jorong Ganting</p>');
-    content.push('<p><div class="color b"></div>Jorong Koto Gadang</p>');
-    content.push('<p><div class="color c"></div>Jorong Sutijo</p>');
-    content.push('<p><div class="color e"></div>Place of Worship</p>');
-    content.push('<p><div class="color f"></div>Tourism</p>');
-    content.push('<p><div class="color g"></div>Small Industry</p>');
-    content.push('<p><div class="color h"></div>Restaurant</p>');
-    content.push('<p><div class="color i"></div>Hotel</p>');
-    content.push('<p><div class="color j"></div>Culinary</p>');
-    content.push('<p><div class="color k"></div>Souvenir</p>');
-    content.push('<p><div class="color l"></div>Route Angkot</p>');
+    content.push('<p><div class="batas nagari"></div>Nagari Border</p>');
+    content.push('<p><div class="digit gantiang"></div>Jorong Ganting</p>');
+    content.push('<p><div class="digit koto"></div>Jorong Koto Gadang</p>');
+    content.push('<p><div class="digit sutijo"></div>Jorong Sutijo</p>');
+    content.push('<p><div class="digit rumah"></div>House Building</p>');
+    content.push('<p><div class="digit ibadah"></div>Worship Building</p>');
+    content.push('<p><div class="digit umkm"></div>Mirco, Small, Medium, Enterprise (MSME) Building</p>');
+    content.push('<p><div class="digit kantor"></div>Office Building</p>');
+    content.push('<p><div class="digit pendidikan"></div>Educational Building</p>');
+    content.push('<p><div class="digit kesehatan"></div>Health Building</p>');
     isilegend.innerHTML = content.join('');
     legend.appendChild(isilegend);
     map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(legend);

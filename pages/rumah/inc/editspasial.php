@@ -22,19 +22,22 @@
                     <!-- menampilkan peta-->
                     <div class="row">
                         <div class="col-lg-8">
-                            <section class="panel">
-                                <header class="panel-heading">
-                                <h3>                    
-                                <input id="latlng" type="text" class="form-control" value="" placeholder="Latitude, Longitude"> <p/>
+                            <header class="panel-heading">
+                                <h3>
+                                <div class="row">
+                                 <div class="col-lg-8">                    
+                                  <input id="latlng" type="text" class="form-control" value="" placeholder="Latitude, Longitude"> <p/>
+                                 </div>
+                                 <div class="col-lg-4">
                                   <button class="btn btn-default my-btn" id="btnlatlng" type="button" title="Geocode"><i class="fa fa-search"></i></button>
                                   <button class="btn btn-default my-btn" type="button" title="Hapus Marker" onclick="hapusmarkerdankoor()"><i class="fa fa-ban"></i></button>
                                   <button class="btn btn-default my-btn" id="delete-button" type="button" title="Remove shape"><i class="fa fa-trash"></i></button> 
+                                 </div>
                                 </h3>
                                 </header>
-                                  <div class="panel-body" style="padding-top: 3%">
-                                      <div id="map" style="width:100%;height:420px;"></div>
-                                  </div>
-                            </section>
+                              <div class="panel-body">
+                                  <div id="map" style="width:100%;height:420px;"></div>
+                              </div>
                         </div>
                         <div class="col-lg-4">
                             <input type="hidden" class="form-control" name="id-bang" value="<?php echo $id ?>">

@@ -45,13 +45,13 @@
             <?php
                 $id=$_GET['id'];
 
-                $querysearch = "SELECT H.fcn_owner, H.address, H.standing_year, H.land_building_tax, H.type_of_construction, H.electricity_capacity, H.tap_water, H.building_status,
+                $querysearch = "SELECT H.owner_id, H.address, H.standing_year, H.land_building_tax, H.type_of_construction, H.electricity_capacity, H.tap_water, H.building_status,
                                 ST_X(ST_Centroid(H.geom)) AS longitude, ST_Y(ST_CENTROID(H.geom)) AS latitude, ST_AsText(H.geom) AS geom,
                                 T.name_of_type AS jkonstruksi,
                                 O.*
                                 FROM house_building AS H
                                 LEFT JOIN type_of_construction AS T ON H.type_of_construction=T.type_id
-                                JOIN house_building_owner AS O ON H.fcn_owner=O.national_identity_number
+                                JOIN house_building_owner AS O ON H.owner_id=O.national_identity_number
                                 WHERE H.house_building_id='$id' 
                             ";
 
@@ -59,7 +59,7 @@
                 while ($row = pg_fetch_array($hasil)) {
                     $longitude = $row['longitude'];
                     $latitude = $row['latitude'];
-                    $nik = $row['fcn_owner'];
+                    $nik = $row['owner_id'];
                     $alamat = $row['address'];
                     $tahun = $row['standing_year'];
                     $pbb = $row['land_building_tax'];

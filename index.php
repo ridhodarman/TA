@@ -18,8 +18,67 @@
     <script type="text/javascript" src="script_office.js"></script>
     <script type="text/javascript" src="script_pendidikan.js"></script>
     <script type="text/javascript" src="script_kesehatan.js"></script>
+    <script type="text/javascript">
+        tunggu=true;
+    </script>
 </head>
-
+<style type="text/css">
+      #legend {
+    background-color: white;
+    padding: 10px;
+    margin: 5px;
+    font-size: 12px;
+    font-color: blue;
+    font-family: Arial, sans-serif;
+    opacity: 1;
+  }
+  .digit {
+    border: 1px solid;
+    height: 12px;
+    width: 12px;
+    margin-right: 3px;
+    float: left;
+    border-color: white;
+  }
+  .batas {
+    border: 1px solid;
+    height: 12px;
+    width: 12px;
+    margin-right: 3px;
+    float: left;
+    border-radius: 2px;
+  }
+  .nagari {
+    border-color: red;
+  }
+  .gantiang {
+    background: lightgreen;
+  }
+  .koto {
+    background: #fffc84;
+  }
+  .sutijo {
+    background: lightblue;
+  }
+  .rumah {
+    background: #CC8F8F;
+  }
+  .ibadah {
+    background: green;
+  }
+  .kantor {
+    background: blue;
+  }
+  .umkm {
+    background: purple;
+  }
+  .pendidikan {
+    background: gray;
+  }
+  .kesehatan {
+    background: red;
+  }
+</style>
 <body>
     <div id="legend" class="panel panel-primary">
         <div style="text-align: center;"><h6>LEGEND</h6></div>
@@ -59,7 +118,11 @@
                                 <span></span>
                                 <span></span>
                             </div>
-                            <div name="akses-admin" style="font-size: 120%; padding-left: 10%; padding-top: 2%"><label>Welcome <?php echo $_SESSION['username']; ?> !</label></div>
+                            <div name="akses-admin" style="font-size: 120%; padding-left: 10%; padding-top: 2%"><label>Welcome <?php echo $_SESSION['username']; ?> !</label>
+                            </div>
+                            <ridho id='ajax-wait2' style="z-index: 999; position: fixed;">
+                                  <font color="#5186db" size="3pt" style="text-shadow: #ffffff 0 0 30px;"><b> Loading...</b></font>
+                            </ridho>
                         </div>
                         <!-- profile info & task notification -->
                         <div class="col-md-8 col-sm-4 clearfix">
@@ -163,8 +226,6 @@
                 <?php include('inc/aturlayer.php') ?>
 
                 <button class="btn btn-default" title="refresh" onclick="refresh()"><i class="fa fa-refresh"></i></button>
-
-                
 
                 <p/>
 
@@ -379,13 +440,13 @@
                 <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
             </div>
             <div class="modal-body" style="background-color: #eee">
-                <div id='ajax-wait'>
+                <div id='ajax-wait' style="z-index: 999; position: fixed;">
                      <center>
-                      <img alt='loading...' src='inc/loading-x.gif' width='40' height='40'/>
+                      <img alt='loading...' src='inc/loading-x.gif' width='65' height='65'/>
                       &emsp;
-                      <font color="#5186db" size="4pt"> Loading...</font>
+                      <font color="#5186db" size="5pt"><b> Loading...</b></font>
                      </center>
-                    </div>
+                </div>
                 <div id="konten-bang"></div>
             </div>
             <div class="modal-footer">
@@ -397,6 +458,7 @@
 
 <script type="text/javascript">
     function detailumkm(id) {
+        load_popup();
         $("#jenis-bang").empty()
         $("#jenis-bang").append("<i class='fas fa-store-alt'></i> Micro, Small, Medium, Enterprise Building Info")
         $('#info-bang').modal('show');
@@ -404,6 +466,7 @@
     }
 
     function detailibadah(id) {
+        load_popup();
         $("#jenis-bang").empty()
         $("#jenis-bang").append("<i class='fas fa-mosque'></i> Worship Building Info")
         $('#info-bang').modal('show');
@@ -411,6 +474,7 @@
     }
 
     function detailpendidikan(id) {
+        load_popup();
         $("#jenis-bang").empty()
         $("#jenis-bang").append("<i class='fas fa-school'></i> Educational Building Info")
         $('#info-bang').modal('show');
@@ -418,6 +482,7 @@
     }
 
     function detailkesehatan(id) {
+        load_popup();
         $("#jenis-bang").empty()
         $("#jenis-bang").append("<i class='fas fa-hospital-alt'></i> Health Building Info")
         $('#info-bang').modal('show');
@@ -425,6 +490,7 @@
     }
 
     function detailkantor(id) {
+        load_popup();
         $("#jenis-bang").empty()
         $("#jenis-bang").append("<i class='fa fa-bank'></i> Office Building Info")
         $('#info-bang').modal('show');
@@ -432,18 +498,39 @@
     }
 
     function detailrumah(id) {
+        load_popup();
         $("#jenis-bang").empty()
         $("#jenis-bang").append("<i class='ti-home'></i> House Building Info")
         $('#info-bang').modal('show');
         $('#konten-bang').load("info-rumah.php?id="+id);
     }
-            $( document ).ajaxStart( function() {
-              $( "#ajax-wait" ).css({
+
+    function load_popup(){
+        $( document ).ajaxStart( function() {
+            $( "#ajax-wait" ).css({
+            left: ( $( window ).width() - 32 ) / 2 + "px", // 32 = lebar gambar
+            top: ( $( window ).height() - 32 ) / 2 + "px", // 32 = tinggi gambar
+            display: "block"
+          })
+        }).ajaxComplete( function() {
+          $( "#ajax-wait" ).fadeOut();
+        });
+    }
+
+    
+        $( document ).ajaxStart( function() {
+            $( "#ajax-wait2" ).fadeIn();
+                $( "#ajax-wait2" ).css({
                 left: ( $( window ).width() - 32 ) / 2 + "px", // 32 = lebar gambar
                 top: ( $( window ).height() - 32 ) / 2 + "px", // 32 = tinggi gambar
                 display: "block"
               })
-            }).ajaxComplete( function() {
-              $( "#ajax-wait" ).fadeOut();
-            });
+        }).ajaxComplete( function() {
+          $( "#ajax-wait2" ).fadeOut();
+        });
+        if (tunggu==true) {
+            $( "#ajax-wait2" ).fadeOut();
+            tunggu=false;
+        }
+
 </script>

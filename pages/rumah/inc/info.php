@@ -61,7 +61,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h6 class="modal-title">Edit Info</h6>
+                <h6 class="modal-title">Edit House Building Info</h6>
                 <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
             </div>
             <form method="post" action="act/info-edit.php">
@@ -87,7 +87,7 @@
                     </div>
                     <div class="form-group col-sm-6">
                         <label>Construction Type</label>
-                        <select name="konstruksi" class="form-control" style="font-size: 85%" required>
+                        <select name="konstruksi" class="form-control" style="height: 43px" required>
                             <option value="<?php echo $tipe_k ?>"><?php echo $jkonstruksi ?></option>
                             <?php                
                                 $sql_jibadah=pg_query("SELECT * FROM type_of_construction WHERE type_id != '$tipe_k' ORDER BY name_of_type");
@@ -104,7 +104,7 @@
                     </div>
                     <div class="form-group col-sm-6" id="water">
                         <label>Tap Water</label>
-                        <select name="water" class="form-control" style="font-size: 85%">
+                        <select name="water" class="form-control" style="height: 43px">
                             <option value="0">Available</option>
                             <option value="1">Not Available</option>
                         </select>
@@ -113,19 +113,19 @@
                         <div class="row">
                             <div class="form-group col-sm-12">
                                 <label>Status</label>
-                                <select name="status" class="form-control" style="font-size: 85%">
+                                <select name="status" class="form-control" style="height: 43px">
                                     <option value="0">Unhabited</option>
                                     <option value="1">Inhabited</option>
                                 </select>
                             </div>
                             <div class="form-group col-sm-12">
                                 <label>Building Model</label>
-                                <select name="model" class="form-control" style="font-size: 85%">
+                                <select name="model" class="form-control" style="height: 43px">
                                     <?php                
-                                        $sql_j=pg_query("SELECT * FROM type_of_construction ORDER BY name_of_type");
+                                        $sql_j=pg_query("SELECT * FROM building_model ORDER BY name_of_model");
                                         while($row = pg_fetch_assoc($sql_j))
                                         {
-                                            echo"<option value=".$row['type_id'].">".$row['name_of_type']."</option>";
+                                            echo"<option value=".$row['model_id'].">".$row['name_of_model']."</option>";
                                         }
                                     ?>
                                 </select>
@@ -139,7 +139,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                 <button type="submit" class="btn btn-primary" id="simpan">Save changes</button>
             </div>
             </form>
