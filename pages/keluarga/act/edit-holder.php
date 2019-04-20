@@ -5,6 +5,7 @@
 		include ('../../inc/notif-act.php');
 		$kk = $_POST['kk'];
 		$kk2 = $_POST['kk-temp'];
+		$nik = $_POST['nik'];
 		$nama = $_POST['nama'];
 		$tgl = $_POST['tgl'];
 		$pend = $_POST['pend'];
@@ -13,10 +14,10 @@
 		$asuransi = $_POST['asuransi'];
 		$tab = $_POST['tabungan'];
 		$kampung = $_POST['kampung'];
-		$tanggung = $_POST['tanggung'];
 		$datuk = $_POST['datuk'];
 
-		$sql = pg_query("UPDATE householder SET
+		$sql = pg_query("UPDATE family_card SET
+						national_identity_number = '$nik',
 						family_card_number = '$kk',
 			 			head_of_family = '$nama',
 			 			birth_date = '$tgl',
@@ -26,21 +27,20 @@
 			 			datuk_id = '$datuk',
 			 			insurance = '$asuransi',
 			 			savings = '$tab',
-			 			income = '$income',
-			 			the_number_of_dependents = '$tanggung'
+			 			income = '$income'
 						WHERE family_card_number = '$kk2'");
 		if ($sql){
 			echo '<script>
 				$("#updated").modal("show");
 				</script>
-				<meta http-equiv="REFRESH" content="1;url=../info-holder.php?id='.$kk.'">
+				<meta http-equiv="REFRESH" content="1;url=../info-kk.php?id='.$kk.'">
 				';
 		}
 		else {
 			echo '<script>
 				$("#gagal").modal("show");
 				</script>
-				<meta http-equiv="REFRESH" content="1;url=../info-holder.php?id='.$kk2.'">
+				<meta http-equiv="REFRESH" content="1;url=../info-kk.php?id='.$kk2.'">
 				';
 		}
 	}

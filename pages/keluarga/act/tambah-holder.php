@@ -27,8 +27,7 @@
 			$tanggung=0;
 		}
 
-		$sql = pg_query("INSERT INTO householder 
-			(family_card_number, head_of_family, birth_date, educational_id, job_id, village_id, datuk_id, insurance, savings, income, the_number_of_dependents) 
+		$sql = pg_query("INSERT INTO family_card (family_card_number, head_of_family, birth_date, educational_id, job_id, village_id, datuk_id, insurance, savings, income, the_number_of_dependents) 
 			VALUES ('$kk', '$nama', '$tgl', '$pend', '$job', '$kampung', '$datuk', '$asuransi', '$tab', '$income', '$tanggung')");
 	}
 	else {

@@ -157,7 +157,7 @@
                                 <div class="media mb-5">
                                     <div class="media-body">
                                         <?php include ('inc/editfoto.php') ?>
-                                        <h5 class="mb-3">Foto
+                                        <h5 class="mb-3">Photo
                                             <button data-toggle="modal" data-target="#ukuranpenuh" class="btn btn-warning btn-sm"
                                                 title="show all images in full screen">
                                                 <i class="ti-fullscreen"></i>

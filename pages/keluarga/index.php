@@ -47,7 +47,7 @@
                                 <a class="nav-link active" id="home-tab2" data-toggle="tab" href="#home2" role="tab" aria-controls="home2" aria-selected="true"><i class="fas fa-user-edit"></i> House Owner</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true"><i class="fa fa-users"></i> Householder</a>
+                                <a class="nav-link" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true"><i class="fa fa-users"></i> Family Card</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" id="pendidikan-tab" data-toggle="tab" href="#pendidikan" role="tab" aria-controls="pendidikan" aria-selected="false"><i class="fas fa-user-ninja"></i>Education List</a>
@@ -67,7 +67,7 @@
                                 <?php include ("tab/listowner.php") ?>
                             </div>
                             <div class="tab-pane fade" id="home" role="tabpanel" aria-labelledby="home-tab">
-                                <?php include ("tab/listholder.php") ?>
+                                <?php include ("tab/listkk.php") ?>
                             </div>
                             <div class="tab-pane fade" id="pendidikan" role="tabpanel" aria-labelledby="pendidikan-tab">
                                     <?php include ("tab/listpendidikan.php") ?>

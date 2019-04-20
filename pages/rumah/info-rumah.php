@@ -208,7 +208,7 @@
                                 <div class="media mb-5">
                                     <div class="media-body">
                                         <?php include ('inc/editfoto.php') ?>
-                                        <h5 class="mb-3">Foto
+                                        <h5 class="mb-3">Photo
                                             <button data-toggle="modal" data-target="#ukuranpenuh" class="btn btn-warning btn-sm"
                                                 title="show all images in full screen">
                                                 <i class="ti-fullscreen"></i>
@@ -262,15 +262,15 @@
                     </div>
 
                     <?php
-                        $query = pg_query("SELECT H.*,
+                        $query = pg_query("SELECT C.*,
                                         D.datuk_name, T.name_of_tribe, V.village_name, J.job_name, E.educational_level
-                                        FROM householder AS H
-                                        JOIN datuk AS D ON H.datuk_id=D.datuk_id
-                                        JOIN tribe AS T ON D.tribe_id=T.tribe_id
-                                        JOIN village AS V ON H.village_id=V.village_id
-                                        JOIN job AS J ON H.job_id=J.job_id
-                                        JOIN education AS E ON H.educational_id=E.education_id
-                                        WHERE H.house_building_id='$id' 
+                                        FROM family_card AS C
+                                        LEFT JOIN datuk AS D ON C.datuk_id=D.datuk_id
+                                        LEFT JOIN tribe AS T ON D.tribe_id=T.tribe_id
+                                        LEFT JOIN village AS V ON C.village_id=V.village_id
+                                        LEFT JOIN job AS J ON C.job_id=J.job_id
+                                        LEFT JOIN education AS E ON C.educational_id=E.education_id
+                                        WHERE C.house_building_id='$id' 
                                     ");
 
                         $jumlah_kk = pg_num_rows($query);
@@ -303,7 +303,7 @@
                                                 <select class="selectpicker form-control" id="kk" data-container="body" data-live-search="true" title="Choose FCN" data-hide-disabled="true" style="font-size: 89%; font-weight: bold" onchange="simpanpenghuni()">
                                                     <option></option>
                                                     <?php                
-                                                        $sql_d=pg_query("SELECT family_card_number, head_of_family FROM householder ORDER BY head_of_family");
+                                                        $sql_d=pg_query("SELECT family_card_number, head_of_family FROM family_card ORDER BY head_of_family");
                                                         while($row = pg_fetch_assoc($sql_d))
                                                         {
                                                             echo"<option value=".$row['family_card_number'].">(".$row['family_card_number'].") ".$row['head_of_family']."</option>";
@@ -467,7 +467,7 @@
                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title">Delete householder ?</h5>
+                                            <h5 class="modal-title">Delete family_card ?</h5>
                                                 <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
                                             </div>
                                             <div class="modal-body">

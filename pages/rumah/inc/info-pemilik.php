@@ -5,11 +5,11 @@
                                         D.datuk_name, T.name_of_tribe, V.village_name, J.job_name, E.educational_level
                                 FROM house_building AS H
                                 JOIN house_building_owner AS O ON H.owner_id=O.national_identity_number
-                                JOIN datuk AS D ON O.datuk_id=D.datuk_id
-                                JOIN tribe AS T ON D.tribe_id=T.tribe_id
-                                JOIN village AS V ON O.village_id=V.village_id
-                                JOIN job AS J ON O.job_id=J.job_id
-                                JOIN education AS E ON O.educational_id=E.education_id
+                                LEFT JOIN datuk AS D ON O.datuk_id=D.datuk_id
+                                LEFT JOIN tribe AS T ON D.tribe_id=T.tribe_id
+                                LEFT JOIN village AS V ON O.village_id=V.village_id
+                                LEFT JOIN job AS J ON O.job_id=J.job_id
+                                LEFT JOIN education AS E ON O.educational_id=E.education_id
                                 WHERE H.house_building_id='$id' 
                             ";
 

@@ -19,7 +19,7 @@
         </thead>
         <tbody>
             <?php
-                                $sql=pg_query("SELECT family_card_number, head_of_family FROM householder");
+                                $sql=pg_query("SELECT family_card_number, head_of_family FROM family_card");
                                 while ($data=pg_fetch_assoc($sql)) {
                                     $id=$data['family_card_number'];
                                     $nama = $data['head_of_family'];
@@ -42,7 +42,7 @@
                                                         <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <p>Are you sure to delete '.$id.' (Head of Family: '.$nama.') from  householder data ?</p>
+                                                        <p>Are you sure to delete '.$id.' (Head of Family: '.$nama.') from  family_card data ?</p>
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>

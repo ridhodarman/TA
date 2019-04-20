@@ -11,7 +11,7 @@ select {
 <div class="sidebar-menu">
     <div class="sidebar-header">
         <div class="logo">
-            <a href="index.html"><img src="assets/images/icon/logo.png" alt="logo"></a>
+            <a href="javascript:void(0)"><img src="inc/m.png" width="50px" /><h6 style="color: white;">GIS KOTO GADANG</h6></a>
         </div>
     </div>
     <div class="main-menu">

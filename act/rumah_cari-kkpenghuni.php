@@ -6,7 +6,7 @@ if(isset($_SESSION['username'])) {
 
 	$querysearch = " 	SELECT H.house_building_id, ST_X(ST_Centroid(H.geom)) AS longitude, ST_Y(ST_CENTROID(H.geom)) AS latitude
 						FROM house_building AS H
-						JOIN householder AS O ON H.house_building_id=O.house_building_id
+						JOIN family_card AS O ON H.house_building_id=O.house_building_id
 						WHERE upper(O.family_card_number) LIKE '%$kk%' ORDER BY house_building_id
 					";
 

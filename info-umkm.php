@@ -154,13 +154,18 @@
                                                     <?php echo $pegawai; ?>
                                                 </td>
                                             </tr>
+                                            <?php
+                                            if ($akses==true) {
+                                                echo '
                                             <tr>
                                                 <td>Monthly Income</td>
                                                 <td>:</td>
                                                 <td>Rp. 
-                                                    <?php echo number_format($penghasilan); ?>
+                                                    <?php '.number_format($penghasilan).'
                                                 </td>
-                                            </tr>
+                                            </tr>';
+                                            }
+                                            ?>
                                             <tr>
                                                 <td>Building Size </td>
                                                 <td>:</td>
@@ -221,7 +226,7 @@
                             <div class="card-body">
                                 <div class="media mb-5">
                                     <div class="media-body">
-                                        <h5 class="mb-3">Foto
+                                        <h5 class="mb-3">Photo
                                             <!-- <button id="ukuranpenuh" class="btn btn-warning btn-sm" title="show all images in full screen">
                                                 <i class="ti-fullscreen"></i>
                                             </button> -->
@@ -262,7 +267,7 @@
                                                 }
                                             }
                                             else {
-                                                echo '</tbody><td colspan="2">no facility data</td>';
+                                                echo '</tbody><td colspan="2">No facility data</td>';
                                             }
                                         ?>   
                                     </table>

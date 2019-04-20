@@ -18,7 +18,7 @@
         </thead>
         <tbody>
             <?php
-                                $sql=pg_query("SELECT family_card_number, head_of_family FROM householder");
+                                $sql=pg_query("SELECT family_card_number, head_of_family FROM family_card");
                                 while ($data=pg_fetch_assoc($sql)) {
                                     $id=$data['family_card_number'];
                                     $nama = $data['head_of_family'];
@@ -28,7 +28,7 @@
                                     echo "<td>".$id."</td>";
                                     echo "<td>".$nama."</td>";
                                     echo '<td>
-                                        <a href="info-holder.php?id='.$id.'"><button class="btn btn-info btn-xs" title="View Detail"><i class="fa fa-info-circle"></i> View Detail</button></a>
+                                        <a href="info-kk.php?id='.$id.'"><button class="btn btn-info btn-xs" title="View Detail"><i class="fa fa-info-circle"></i> View Detail</button></a>
                                         <button class="btn btn-danger btn-xs" title="Hapus" data-toggle="modal" data-target="#delete-h'.$id.'"><i class="fa fa-trash"></i> Delete</button>
                                         </td>';
                                     echo "</tr>";
@@ -41,7 +41,7 @@
                                                         <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <p>Are you sure to delete '.$id.' (Head of Family: '.$nama.') from  householder data ?</p>
+                                                        <p>Are you sure to delete '.$id.' (Head of Family: '.$nama.') from  family_card data ?</p>
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
@@ -205,7 +205,7 @@ $(document).ready(function(){
         else {
             var ketemu = false;
             <?php 
-                $sql = pg_query("SELECT family_card_number FROM householder");
+                $sql = pg_query("SELECT family_card_number FROM family_card");
                 while ($data = pg_fetch_array($sql))
                 {
                 $idnya = $data['family_card_number'];

@@ -67,7 +67,7 @@
                              $asuransi="Exist";
                          }
                         else if ($row['insurance']==0) {
-                            $asuransi="do not have";
+                            $asuransi="Do not have";
                         } 
                     }
 
@@ -159,7 +159,7 @@
             ?>
 
             <div class="main-content-inner">
-                <div class="row">
+                <div class="row" id="skip">
 
                     <div class="col-lg-12 mt-5">
                         <center>
@@ -167,7 +167,7 @@
                             <div class="card-body">
                                 <div class="media mb-5">
                                     <div class="media-body">
-                                        <h5 class="mb-3">Foto
+                                        <h5 class="mb-3">Photo
                                             <!-- <button id="ukuranpenuh" class="btn btn-warning btn-sm" title="show all images in full screen">
                                                 <i class="ti-fullscreen"></i>
                                             </button> -->
@@ -246,11 +246,11 @@
                                         D.datuk_name, T.name_of_tribe, V.village_name, J.job_name, E.educational_level
                                 FROM house_building AS H
                                 JOIN house_building_owner AS O ON H.owner_id=O.national_identity_number
-                                JOIN datuk AS D ON O.datuk_id=D.datuk_id
-                                JOIN tribe AS T ON D.tribe_id=T.tribe_id
-                                JOIN village AS V ON O.village_id=V.village_id
-                                JOIN job AS J ON O.job_id=J.job_id
-                                JOIN education AS E ON O.educational_id=E.education_id
+                                LEFT JOIN datuk AS D ON O.datuk_id=D.datuk_id
+                                LEFT JOIN tribe AS T ON D.tribe_id=T.tribe_id
+                                LEFT JOIN village AS V ON O.village_id=V.village_id
+                                LEFT JOIN job AS J ON O.job_id=J.job_id
+                                LEFT JOIN education AS E ON O.educational_id=E.education_id
                                 WHERE H.house_building_id='$id' 
                             ";
 
@@ -402,15 +402,15 @@
                     
 
                     <?php
-                        $query = pg_query("SELECT H.*,
+                        $query = pg_query("SELECT C.*,
                                         D.datuk_name, T.name_of_tribe, V.village_name, J.job_name, E.educational_level
-                                        FROM householder AS H
-                                        JOIN datuk AS D ON H.datuk_id=D.datuk_id
-                                        JOIN tribe AS T ON D.tribe_id=T.tribe_id
-                                        JOIN village AS V ON H.village_id=V.village_id
-                                        JOIN job AS J ON H.job_id=J.job_id
-                                        JOIN education AS E ON H.educational_id=E.education_id
-                                        WHERE H.house_building_id='$id' 
+                                        FROM family_card AS C
+                                        LEFT JOIN datuk AS D ON C.datuk_id=D.datuk_id
+                                        LEFT JOIN tribe AS T ON D.tribe_id=T.tribe_id
+                                        LEFT JOIN village AS V ON C.village_id=V.village_id
+                                        LEFT JOIN job AS J ON C.job_id=J.job_id
+                                        LEFT JOIN education AS E ON C.educational_id=E.education_id
+                                        WHERE C.house_building_id='$id' 
                                     ");
 
                         $jumlah_kk = pg_num_rows($query);
@@ -438,7 +438,7 @@
                                                 <select class="selectpicker form-control" id="kk" data-container="body" data-live-search="true" title="Choose FCN" data-hide-disabled="true" style="font-size: 89%; font-weight: bold" onchange="simpanpenghuni()">
                                                     <option></option>
                                                     <?php                
-                                                        $sql_d=pg_query("SELECT family_card_number, head_of_family FROM householder ORDER BY head_of_family");
+                                                        $sql_d=pg_query("SELECT family_card_number, head_of_family FROM family_card ORDER BY head_of_family");
                                                         while($row = pg_fetch_assoc($sql_d))
                                                         {
                                                             echo"<option value=".$row['family_card_number'].">(".$row['family_card_number'].") ".$row['head_of_family']."</option>";
@@ -602,9 +602,100 @@
 
 
 
-                </div>
-            </div> <!-- SAMPAI DISINI BATAS ROW-->
+                </div> <!-- SAMPAI DISINI BATAS ROW-->
+
+
+                <div class="row" id="oke">
+
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="media mb-5">
+                                    <div class="media-body">
+                                        <h6>ID:
+                                            <?php echo $id ?>
+                                        </h6>
+                                        <br />
+                                        <table style="width: 100%;">
+                                            <table style="width: 100%;">
+                                                <tr>
+                                                    <td>Standing Year </td>
+                                                    <td>:</td>
+                                                    <td>
+                                                        <?php echo $tahun ?>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Type of Construction </td>
+                                                    <td>:</td>
+                                                    <td>
+                                                        <?php echo $jkonstruksi ?>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Tap Water </td>
+                                                    <td>:</td>
+                                                    <td>
+                                                        <?php echo $pdam ?>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Address </td>
+                                                    <td>:</td>
+                                                    <td>
+                                                        <?php echo $alamat ?>
+                                                    </td>
+                                                </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="media mb-5">
+                                    <div class="media-body">
+                                        <h5 class="mb-3">Photo
+                                            <!-- <button id="ukuranpenuh" class="btn btn-warning btn-sm" title="show all images in full screen">
+                                                <i class="ti-fullscreen"></i>
+                                            </button> -->
+                                        </h5>
+                                        <?php tampilfoto() ?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div> <!-- SAMPAI DISINI BATAS ROW-->
+
+
+
+            </div> <!-- BATAS MAIN KONTEN -->
 
 
             <!-- main content area end -->
             <!-- footer area start-->
+
+<?php
+@session_start();
+    if(isset($_SESSION['username'])){
+        echo '
+            <script>
+                $("#skip").show()
+                $("#oke").hide()
+            </script>
+        ';
+    }
+    else {
+        echo '
+            <script>
+                $("#skip").hide()
+                $("#oke").show()
+            </script>
+        ';  
+    }
+?>

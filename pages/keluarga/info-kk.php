@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Info Householder</title>
+    <title>Info family_card</title>
 
     <?php 
         include('../inc/head.php') 
@@ -45,21 +45,21 @@
             <div class="main-content-inner">
                 <div class="card">
                     <div class="card-body">
-                        <h5>Householder Info</h5>
+                        <h5>Family Card Info</h5>
                             <button type="button" class="btn btn-info" data-toggle="modal" data-target="#edit" style="float: right;"><i class="fa fa-edit"></i> Edit</button>
                         <br/>
                         <table class="table table-hover" style="width: 90%">
                             <?php
                                 $id = $_GET['id'];
-                                 $querysearch = "SELECT H.*,
+                                 $querysearch = "SELECT C.*,
                                             D.datuk_name, T.name_of_tribe, V.village_name, J.job_name, E.educational_level
-                                    FROM householder AS H
-                                    LEFT JOIN datuk AS D ON H.datuk_id=D.datuk_id
+                                    FROM family_card AS C
+                                    LEFT JOIN datuk AS D ON C.datuk_id=D.datuk_id
                                     LEFT JOIN tribe AS T ON D.tribe_id=T.tribe_id
-                                    LEFT JOIN village AS V ON H.village_id=V.village_id
-                                    LEFT JOIN job AS J ON H.job_id=J.job_id
-                                    LEFT JOIN education AS E ON H.educational_id=E.education_id
-                                    WHERE H.family_card_number='$id' 
+                                    LEFT JOIN village AS V ON C.village_id=V.village_id
+                                    LEFT JOIN job AS J ON C.job_id=J.job_id
+                                    LEFT JOIN education AS E ON C.educational_id=E.education_id
+                                    WHERE C.family_card_number='$id' 
                                 ";
 
                                 $hasil = pg_query($querysearch);
@@ -239,7 +239,7 @@
                     <table class="table table-hover" style="width: 90%">
                     <?php
                             $sql=pg_query("SELECT D.family_card_number, D.asset_id, D.total_assets, A.name_of_asset
-                                FROM detail_asset_householder AS D 
+                                FROM detail_asset_family AS D 
                                 JOIN asset AS A ON A.asset_id=D.asset_id
                                 WHERE D.family_card_number = '$id'
                                 ");
@@ -498,7 +498,7 @@ function cek_kk(){
         $('#alertH').empty();
         var ketemu = false;
         <?php 
-            $sql = pg_query("SELECT family_card_number FROM householder");
+            $sql = pg_query("SELECT family_card_number FROM family_card");
             while ($data = pg_fetch_array($sql))
             {
             $idnya = $data['family_card_number'];

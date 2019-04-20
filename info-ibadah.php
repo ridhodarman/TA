@@ -207,7 +207,7 @@
                             <div class="card-body">
                                 <div class="media mb-5">
                                     <div class="media-body">
-                                        <h5 class="mb-3">Foto
+                                        <h5 class="mb-3">Photo
                                             <!-- <button id="ukuranpenuh" class="btn btn-warning btn-sm" title="show all images in full screen">
                                                 <i class="ti-fullscreen"></i>
                                             </button> -->
