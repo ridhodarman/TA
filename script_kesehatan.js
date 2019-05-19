@@ -132,7 +132,7 @@ function detailkesehatan_infow(id) { //menampilkan informas
           var image = "There are no photos for this building";
         }
         else {
-          var image = "<img src='foto/kesehatan/"+row.image+"' alt='building photo' width='165'>";
+          var image = "<img src='foto/b-kesehatan/"+row.image+"' alt='there are no photos of this building' width='165'>";
         }
         var latitude = row.latitude;
         var longitude = row.longitude;

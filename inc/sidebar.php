@@ -801,7 +801,7 @@ select {
                                             ?>
                                         </select>
                                         <div class="input-group-append">
-                                            <button class="btn btn-primary" type="button" onclick="carijorong_kesehatan()"><i class="fa fa-search"></i></button>
+                                            <button class="btn btn-primary" type="button" onclick="carimodel()"><i class="fa fa-search"></i></button>
                                         </div>
                                     </div>
                             </li>
