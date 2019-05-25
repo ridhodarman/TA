@@ -2,14 +2,6 @@
 <button class="btn btn-default btn-lg" style="width: 90%; background-color: #fafafa" data-toggle="modal" data-target="#tambahpend">+
     Add Education Level Data</button>
 </div>
-<?php
-$result = pg_query("SELECT MAX(education_id) AS id FROM education");
-        $row = pg_fetch_array($result);
-        $id = $row["id"];
-        echo $id2 = $id+1;
-        echo "string";
-?>
-dsdsdadsadsad
 <div class="modal fade" id="tambahpend">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">

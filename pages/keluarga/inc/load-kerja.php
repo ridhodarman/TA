@@ -22,6 +22,7 @@
                     while ($data=pg_fetch_assoc($sql)) {
                         $id=$data['job_id'];
                         $id_enc= "'".base64_encode($id)."'";
+                        $ids="'".$id."'";
                         $pekerjaan=$data['job_name'];
                         echo "<tr>";
                         echo "<td>".$no."</td>";
@@ -47,7 +48,7 @@
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                            <button type="button" class="btn btn-danger" onclick="hapuskerja('.$id_enc.','.$id.')">Delete</button>
+                                            <button type="button" class="btn btn-danger" onclick="hapuskerja('.$id_enc.','.$ids.')">Delete</button>
                                         </div>
                                     </div>
                                 </div>
@@ -68,7 +69,7 @@
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                                <button type="button" class="btn btn-primary" onclick="editkerja('.$id.')"><i class="ti-save"></i> Save</button>
+                                                <button type="button" class="btn btn-primary" onclick="editkerja('.$ids.')"><i class="ti-save"></i> Save</button>
                                             </div>
                                         </form>
                                     </div>

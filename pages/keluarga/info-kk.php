@@ -66,6 +66,7 @@
                                             $hasil = pg_query($querysearch);
                                             while ($row = pg_fetch_array($hasil)) {
                                                 $nokk = $row['family_card_number'];
+                                                $c=$row['category'];
                                                 $kategori = $row['category'];
                                                     if ($row['category']!=null) {
                                                         if ($kategori==0) {
@@ -291,7 +292,7 @@
                         Family Card Number: <input class="form-control" type="text" name="kk2" id="kk2" required value="<?php echo $nokk ?>">
                         <input type="hidden" name="kk" value="<?php echo $nokk ?>">
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" id="kategori">
                         Category: 
                         <select class="form-control" name="kategori" style="height: 43px">
                             <option></option>
@@ -303,9 +304,9 @@
                         House ID:
                         <select class="selectpicker form-control" data-container="body" data-live-search="true"
                             title="Select house.." data-hide-disabled=" true" name="rumah">
-                            <option></option>
                             <?php                
-                                $sql_k=pg_query("SELECT house_building_id FROM house_building ORDER BY house_building_id");
+                                echo"<option value=".$id_rumah.">".$id_rumah."</option>";
+                                $sql_k=pg_query("SELECT house_building_id FROM house_building WHERE house_building_id != '$id_rumah' ORDER BY house_building_id");
                                 while($row = pg_fetch_assoc($sql_k))
                                 {
                                     echo"<option value=".$row['house_building_id'].">".$row['house_building_id']."</option>";
@@ -337,12 +338,7 @@ $kk_ada = '<div class="alert alert-danger alert-dismissible fade show" role="ale
 ?>
 </html>
     <script type="text/javascript">
-        $("#kampung select").val(<?php echo "'".$id_kampung."'" ?>);
-        $("#datuk select").val(<?php echo "'".$id_datuk."'" ?>);
-        $("#tabungan select").val(<?php echo "'".$tab."'" ?>);
-        $("#kerja select").val(<?php echo "'".$id_kerja."'" ?>);
-        $("#pendidikan select").val(<?php echo "'".$id_pendidikan."'" ?>);
-        $("#asuransi select").val(<?php echo "'".$a."'" ?>);
+        $("#kategori select").val(<?php echo "'".$c."'" ?>);
 
         function back() {
             window.history.back();
@@ -370,13 +366,6 @@ function formatRupiah(angka, prefix){
     return prefix == undefined ? rupiah : (rupiah ? '' + rupiah : '');
 }
 
-
-function ceksuku() {
-    var iddatuk = document.getElementById('iddatuk').value; 
-    //alert(iddatuk)
-    $("#suku").empty()
-    $("#suku").load("inc/suku.php?id_datuk="+iddatuk);
-}
 
 function cek_kk(){
         var kk = document.getElementById('kk').value;

@@ -11,13 +11,13 @@
         <thead>
             <tr style="text-align: center">
                 <th>National ID Number</th>
-                <th>Owner Name</th>
+                <th>Name</th>
                 <th>Action</th>
             </tr>
         </thead>
         <tbody>
             <?php
-                $sql=pg_query("SELECT national_identity_number, name FROM citizen LIMIT 12");
+                $sql=pg_query("SELECT national_identity_number, name FROM citizen");
                 while ($data=pg_fetch_assoc($sql)) {
                     $id=$data['national_identity_number'];
                     $nama = $data['name'];
@@ -39,11 +39,11 @@
                                         <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
                                     </div>
                                     <div class="modal-body">
-                                        <p>Are you sure to delete '.$id.' ('.$nama.') from  house owner data ?</p>
+                                        <p>Are you sure to delete '.$id.' ('.$nama.') from  citizen data ?</p>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                        <a href="act/hapus-owner.php?id='.$id2.'"><button type="button" class="btn btn-danger">Delete</button></a>
+                                        <a href="act/hapus-citizen.php?id='.$id2.'"><button type="button" class="btn btn-danger">Delete</button></a>
                                     </div>
                                 </div>
                             </div>
@@ -59,7 +59,7 @@
 <div class="modal fade" id="tambahowner">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
-            <form>
+            <form action="act/tambah-citizen.php" method="post">
                 <div class="modal-header">
                     <h6 class="modal-title">Add Citizen</h6>
                     <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
@@ -67,17 +67,17 @@
                 <div class="modal-body" style="font-size: 110%">
                     <div class="row">
                         <div class="form-group col-sm-6">
-                            National Identity Number: <input class="form-control" type="text" name="" value="">
+                            National Identity Number: <input class="form-control" type="text" name="nik" value="">
                         </div>
                         <div class="form-group col-sm-6">
-                            Name: <input class="form-control" type="text" name="" value="">
+                            Name: <input class="form-control" type="text" name="nama" value="">
                         </div>
                         <div class="form-group col-sm-6">
-                            Birth Date: <input class="form-control" type="date" name="" value="">
+                            Birth Date: <input class="form-control" type="date" name="tgl" value="">
                         </div>
                         <div class="form-group col-sm-6" id="combobox-pend">
                             Education Level:
-                            <select class="form-control" name="kerja" required style="height: 43px">
+                            <select class="form-control" name="pend" required style="height: 43px">
                                 <?php                
                                     $sql_p=pg_query("SELECT * FROM education ORDER BY educational_level");
                                     while($row = pg_fetch_assoc($sql_p))
@@ -106,7 +106,7 @@
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">Rp</div>
                                 </div>
-                                <input type="text" class="form-control" id="penghasilan" onkeyup="ceknominal()">
+                                <input type="text" class="form-control" id="penghasilan" onkeyup="ceknominal()" name="penghasilan">
                             </div>
                         </div>
                         <div class="form-group col-sm-6">
@@ -150,7 +150,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
+                        <button type="submit" class="btn btn-primary" name="tambahcitizen">+ Add</button>
                     </div>
                     
                 </div>
@@ -196,6 +196,5 @@ function ceksuku() {
 function load2() {
     $('#combobox-pend').load("inc/combobox-holder-pend.php");
     $('#combobox-kerja').load("inc/combobox-holder-kerja.php");
-    $('#combobox-kampung').load("inc/combobox-holder-kampung.php");
 }
 </script>

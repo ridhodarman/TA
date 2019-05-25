@@ -10,7 +10,11 @@
     <?php 
         include('../inc/head.php') 
     ?>
-
+    <link rel="stylesheet" href="../dist/css/bootstrap-select.css">
+    <link rel="stylesheet" href="../../assets/alertify/themes/alertify.core.css" />
+    <link rel="stylesheet" href="../../assets/alertify/themes/alertify.default.css" id="toggleCSS" />
+    <meta name="viewport" content="width=device-width">
+    <script src="../../assets/alertify/lib/alertify.min.js"></script>
 </head>
 
 <body>
@@ -74,7 +78,7 @@
                                     
                                     $id_kerja = $row['job_id'];
                                     $pekerjaan = $row['job_name'];
-
+                                    $stat = $row['status_in_family'];
                                     $status = $row['status_in_family'];
                                     if ($row['status_in_family']!=null) {
                                         if ($status==1) {
@@ -162,7 +166,7 @@
                             <tr>
                                 <td>Family Card Number</td>
                                 <td>:
-                                    <?php echo $id ?>    
+                                    <?php echo $nokk ?>    
                                 </td>
                             </tr>
                             <tr>
@@ -180,7 +184,7 @@
 <div class="modal fade" id="edit">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
-            <form action="act/edit-holder.php" method="post">
+            <form action="act/edit-citizen.php" method="post">
                 <div class="modal-header">
                     <h6 class="modal-title">Edit Owner Data</h6>
                     <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
@@ -188,12 +192,8 @@
                 <div class="modal-body" style="font-size: 110%">
                     <div class="row">
                         <div class="form-group col-sm-6">
-                            National Identity Number: <input class="form-control" type="text" name="kk" value="<?php echo $nik ?>">
-                            <input type="hidden" name="kk-temp" value="<?php echo $nokk ?>">
-                        </div>
-                        <div class="form-group col-sm-6">
-                            Family Card Number: <input class="form-control" type="text" name="kk" value="<?php echo $nokk ?>">
-                            <input type="hidden" name="kk-temp" value="<?php echo $nokk ?>">
+                            National Identity Number: <input class="form-control" type="text" name="nik" value="<?php echo $nik ?>">
+                            <input type="hidden" name="nik-temp" value="<?php echo $nik ?>">
                         </div>
                         <div class="form-group col-sm-6">
                             Name: <input class="form-control" type="text" name="nama" value="<?php echo $nama ?>">
@@ -236,20 +236,27 @@
                                 <input type="text" class="form-control" id="penghasilan" name="penghasilan" onkeyup="ceknominal()" value="<?php echo $pendapatan ?>">
                             </div>
                         </div>
-                        <div class="form-group col-sm-6" id="asuransi">
-                            Take Insurance:
-                             <select class="form-control" name="asuransi" required style="height: 43px">
-                                <option></option>
-                                <option value="1">Yes</option>
-                                <option value="0">No</option>
+                        <div class="form-group col-sm-6">
+                            Family Card Number:
+                            <select class="selectpicker form-control" data-container="body" data-live-search="true"
+                                title="Select a number" data-hide-disabled="true" name="kk" style="height: 43px">
+                                <?php                
+                                    $sql_d=pg_query("SELECT family_card_number FROM family_card");
+                                    while($row = pg_fetch_assoc($sql_d))
+                                    {
+                                        echo"<option value=".$row['family_card_number'].">".$row['family_card_number']."</option>";
+                                    }
+                                ?>
                             </select>
                         </div>
-                        <div class="form-group col-sm-6" id="tabungan">
-                            Savings:
-                            <select class="form-control" name="tabungan" required style="height: 43px">
+                        <div class="form-group col-sm-6" id="status">
+                            Status in Family:
+                             <select class="form-control" name="status" style="height: 43px">
                                 <option></option>
-                                <option value="1">Yes</option>
-                                <option value="0">No</option>
+                                <option value="1">Head of Family</option>
+                                <option value="2">Wife</option>
+                                <option value="3">Child</option>
+                                <option value="2">Another Family</option>
                             </select>
                         </div>
                         <div class="form-group col-sm-6" id="datuk">
@@ -288,12 +295,10 @@
 </body>
 </html>
     <script type="text/javascript">
-        $("#kampung select").val(<?php echo "'".$id_kampung."'" ?>);
         $("#datuk select").val(<?php echo "'".$id_datuk."'" ?>);
-        $("#tabungan select").val(<?php echo "'".$tab."'" ?>);
+        $("#status select").val(<?php echo "'".$stat."'" ?>);
         $("#kerja select").val(<?php echo "'".$id_kerja."'" ?>);
         $("#pendidikan select").val(<?php echo "'".$id_pendidikan."'" ?>);
-        $("#asuransi select").val(<?php echo "'".$a."'" ?>);
         function back() {
             window.history.back();
         }
@@ -329,3 +334,6 @@ function ceksuku() {
     $("#suku").load("inc/suku.php?id_datuk="+iddatuk);
 }
     </script>
+
+<link rel="stylesheet" href="../../js/bootstrap.bundle.min.js" />
+    <script src="../dist/js/bootstrap-select.js"></script>

@@ -57,13 +57,7 @@
                                 <a class="nav-link" id="pendidikan-tab" data-toggle="tab" href="#pendidikan" role="tab" aria-controls="pendidikan" aria-selected="false"><i class="fas fa-user-ninja"></i>Education List</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="kampung-tab" data-toggle="tab" href="#kampung" role="tab" aria-controls="kampung" aria-selected="false"><i class="fab fa-pied-piper-alt"></i>Village List</a>
-                            </li>
-                            <li class="nav-item">
                                 <a class="nav-link" id="kerja-tab" data-toggle="tab" href="#kerja" role="tab" aria-controls="kerja" aria-selected="false"><i class="fas fa-chalkboard-teacher"></i>Job List</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="aset-tab" data-toggle="tab" href="#aset" role="tab" aria-controls="aset" aria-selected="false"><i class="fa fa-cube"></i>Asset List</a>
                             </li>
                         </ul>
                         <div class="tab-content mt-3" id="myTabContent">
@@ -76,14 +70,8 @@
                             <div class="tab-pane fade" id="pendidikan" role="tabpanel" aria-labelledby="pendidikan-tab">
                                     <?php include ("tab/listpendidikan.php") ?>
                             </div>
-                            <div class="tab-pane fade" id="kampung" role="tabpanel" aria-labelledby="kampung-tab">
-                                <?php include ("tab/listkampung.php") ?>
-                            </div>
                             <div class="tab-pane fade" id="kerja" role="tabpanel" aria-labelledby="kerja-tab">
                                 <?php include ("tab/listkerja.php") ?>
-                            </div>
-                            <div class="tab-pane fade" id="aset" role="tabpanel" aria-labelledby="aset-tab">
-                                <?php include ("tab/listaset.php") ?>
                             </div>
                         </div>
                     </div>
