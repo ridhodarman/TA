@@ -12,7 +12,7 @@
                                 <a href="<?php echo $loc; ?>index.php" aria-expanded="true"><i class="fas fa-city"></i></i><span>Manage Building Data</span></a>
                             </li>
                             <li id="keluarga">
-                                <a href="<?php echo $loc; ?>keluarga" aria-expanded="true"><i class="fas fa-user-friends"></i><span>Manage Citizen & Family Card Data</span></a>
+                                <a href="<?php echo $loc; ?>keluarga" aria-expanded="true"><i class="fas fa-user-friends"></i><span>Manage Family Card & Citizen Data</span></a>
                             </li>
                             <li id="datuk">
                                 <a href="<?php echo $loc; ?>datuk" aria-expanded="true"><i class="ti-pie-chart"></i><span>Manage Datuk & Tribe Data</span></a>

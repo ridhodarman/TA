@@ -9,10 +9,7 @@
 
     <?php include('../inc/head.php'); ?>
     <link rel="stylesheet" href="../dist/css/bootstrap-select.css">
-    <link rel="stylesheet" href="../../assets/alertify/themes/alertify.core.css" />
-    <link rel="stylesheet" href="../../assets/alertify/themes/alertify.default.css" id="toggleCSS" />
     <meta name="viewport" content="width=device-width">
-    <script src="../../assets/alertify/lib/alertify.min.js"></script>
 </head>
 
 <body>
@@ -47,11 +44,11 @@
                 <div class="card">
                     <div class="card-body">
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
-                        	<li class="nav-item">
-                                <a class="nav-link active" id="home-tab2" data-toggle="tab" href="#home2" role="tab" aria-controls="home2" aria-selected="true"><i class="fas fa-user-edit"></i> Citizen</a>
+                            <li class="nav-item">
+                                <a class="nav-link active" id="home-tab2" data-toggle="tab" href="#home2" role="tab" aria-controls="home2" aria-selected="true"><i class="fa fa-users"></i> Family Card</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true"><i class="fa fa-users"></i> Family Card</a>
+                                <a onclick="loadcitizen()" class="nav-link" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true"><i class="fas fa-user-edit"></i> Citizen</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" id="pendidikan-tab" data-toggle="tab" href="#pendidikan" role="tab" aria-controls="pendidikan" aria-selected="false"><i class="fas fa-user-ninja"></i>Education List</a>
@@ -61,11 +58,11 @@
                             </li>
                         </ul>
                         <div class="tab-content mt-3" id="myTabContent">
-                        	<div class="tab-pane fade show active" id="home2" role="tabpanel" aria-labelledby="home-tab2">
-                                <?php include ("tab/listpenduduk.php") ?>
+                            <div class="tab-pane fade show active" id="home2" role="tabpanel" aria-labelledby="home-tab2">
+                                <?php include ("tab/listkk.php") ?>
                             </div>
                             <div class="tab-pane fade" id="home" role="tabpanel" aria-labelledby="home-tab">
-                                <?php include ("tab/listkk.php") ?>
+                                <?php include ("tab/listpenduduk.php") ?>
                             </div>
                             <div class="tab-pane fade" id="pendidikan" role="tabpanel" aria-labelledby="pendidikan-tab">
                                     <?php include ("tab/listpendidikan.php") ?>
@@ -77,7 +74,7 @@
                     </div>
                 </div>          
             </div>
-
+<input type="hidden" id="cekload" name="" value="0">
     <!-- SAMPAI DISINI -->
     
                 
@@ -96,6 +93,14 @@
         }
 
         $("#keluarga").addClass("active");
+
+        function loadcitizen() {
+            var l =  document.getElementById('cekload').value;
+            if (l==0) {
+                $('#tabel-citizen').load("inc/load-citizen.php");
+                document.getElementById('cekload').value=1;    
+            }
+        }
     </script>
     <link rel="stylesheet" href="../../js/bootstrap.bundle.min.js" />
     <script src="../dist/js/bootstrap-select.js"></script>
