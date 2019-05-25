@@ -143,7 +143,6 @@ $(document).ready(function(){
                     url: "act/tambah-kk.php",
                     data: data,
                     success: function() {
-                        alert(data)
                         $('#tabel-holder').load("inc/load-kk.php");
                         $('#tambahholder').modal('hide');
                         $('#sukses-tambah').modal('show');

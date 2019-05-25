@@ -1,13 +1,13 @@
 <div style="text-align: center; padding-top: 3%; padding-bottom:3%">
     <button class="btn btn-default btn-lg" style="width: 90%; background-color: #fafafa" onclick="load()"
-        data-toggle="modal" data-target="#tambahowner">+
+        data-toggle="modal" data-target="#tambahcitizen">+
         Add Citizen Data </button>
 </div>
 
-<div class="panel-body" style="padding-top: 2%; padding-left: 2%; padding-right: 2%">
+<div class="panel-body" style="padding-top: 2%; padding-left: 2%; padding-right: 2%" id="tabel-citizen">
     <h4 style="text-align: center;">Citizen List</h4>
 
-    <table width="100%" class="table table-striped table-bordered table-hover" id="listowner">
+    <table width="100%" class="table table-striped table-bordered table-hover" id="listcitizen">
         <thead>
             <tr style="text-align: center">
                 <th>National ID Number</th>
@@ -29,7 +29,8 @@
                         <button class="btn btn-danger btn-xs" title="Hapus" data-toggle="modal" data-target="#delete-c'.$id.'"><i class="fa fa-trash"></i> Delete</button>
                         </td>';
                     echo "</tr>";
-                    $id2 = base64_encode($id);
+                    $id_enc = "'".base64_encode($id)."'";
+                    $id2 = "'".$id."'";
                     echo '
                         <div class="modal fade" id="delete-c'.$id.'">
                             <div class="modal-dialog">
@@ -43,7 +44,7 @@
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                        <a href="act/hapus-citizen.php?id='.$id2.'"><button type="button" class="btn btn-danger">Delete</button></a>
+                                        <button type="button" class="btn btn-danger" onclick="hapuscitizen('.$id_enc.','.$id2.')">Delete</button>
                                     </div>
                                 </div>
                             </div>
@@ -56,18 +57,18 @@
 </div>
 
 
-<div class="modal fade" id="tambahowner">
+<div class="modal fade" id="tambahcitizen">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
-            <form action="act/tambah-citizen.php" method="post">
+            <form id="form-tambahcitizen">
                 <div class="modal-header">
-                    <h6 class="modal-title">Add Citizen</h6>
+                    <h6 class="modal-title">Add Citizen Data</h6>
                     <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
                 </div>
                 <div class="modal-body" style="font-size: 110%">
                     <div class="row">
                         <div class="form-group col-sm-6">
-                            National Identity Number: <input class="form-control" type="text" name="nik" value="">
+                            National Identity Number: <input class="form-control" type="text" name="nik" id="nik" value="">
                         </div>
                         <div class="form-group col-sm-6">
                             Name: <input class="form-control" type="text" name="nama" value="">
@@ -79,12 +80,12 @@
                             Education Level:
                             <select class="form-control" name="pend" required style="height: 43px">
                                 <?php                
-                                    $sql_p=pg_query("SELECT * FROM education ORDER BY educational_level");
-                                    while($row = pg_fetch_assoc($sql_p))
-                                    {
-                                        echo"<option value=".$row['education_id'].">".$row['educational_level']."</option>";
-                                    }
-                                ?>
+                                            $sql_p=pg_query("SELECT * FROM education ORDER BY educational_level");
+                                            while($row = pg_fetch_assoc($sql_p))
+                                            {
+                                                echo"<option value=".$row['education_id'].">".$row['educational_level']."</option>";
+                                            }
+                                        ?>
                             </select>
                         </div>
                         <div class="form-group col-sm-6" id="combobox-kerja">
@@ -92,12 +93,12 @@
                             <select class="selectpicker form-control" data-container="body" data-live-search="true"
                                 title="Select job.." data-hide-disabled=" true" name="kerja">
                                 <?php                
-                                    $sql_k=pg_query("SELECT * FROM job ORDER BY job_name");
-                                    while($row = pg_fetch_assoc($sql_k))
-                                    {
-                                        echo"<option value=".$row['job_id'].">".$row['job_name']."</option>";
-                                    }
-                                ?>
+                                            $sql_k=pg_query("SELECT * FROM job ORDER BY job_name");
+                                            while($row = pg_fetch_assoc($sql_k))
+                                            {
+                                                echo"<option value=".$row['job_id'].">".$row['job_name']."</option>";
+                                            }
+                                        ?>
                             </select>
                         </div>
                         <div class="form-group col-sm-6">
@@ -106,7 +107,8 @@
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">Rp</div>
                                 </div>
-                                <input type="text" class="form-control" id="penghasilan" onkeyup="ceknominal()" name="penghasilan">
+                                <input type="text" class="form-control" id="penghasilan" onkeyup="ceknominal()"
+                                    name="penghasilan">
                             </div>
                         </div>
                         <div class="form-group col-sm-6">
@@ -135,8 +137,7 @@
                         <div class="form-group col-sm-6">
                             Datuk:
                             <select class="selectpicker form-control" data-container="body" data-live-search="true"
-                                title="Select datuk.." data-hide-disabled="true" name="datuk" onchange="ceksuku()"
-                                id="iddatuk">
+                                title="Select datuk.." data-hide-disabled="true" name="datuk" onchange="ceksuku()" id="iddatuk">
                                 <?php                
                                     $sql_suku=pg_query("SELECT * FROM datuk ORDER BY datuk_name");
                                     while($row = pg_fetch_assoc($sql_suku))
@@ -150,18 +151,21 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary" name="tambahcitizen">+ Add</button>
+                        <button type="button" class="btn btn-primary" id="tambahkancitizen">+ Add</button>
                     </div>
-                    
                 </div>
             </form>
         </div>
     </div>
 </div>
+<?php
+$p_nik = '<div class="alert alert-warning alert-dismissible fade show" role="alert"><strong>National identity number</strong> cannot be emptied.&emsp;&emsp;<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span class="fa fa-times"></span></button></div>';
 
+$nik_ada = '<div class="alert alert-danger alert-dismissible fade show" role="alert"><strong>National identity number</strong> already registered.&emsp;&emsp;<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span class="fa fa-times"></span></button></div>';
+?>
 <script type="text/javascript">
 $(document).ready(function() {
-    $('#listowner').DataTable();
+    $('#listcitizen').DataTable();
 });
 
 function ceknominal() {
@@ -193,8 +197,70 @@ function ceksuku() {
     $("#suku").load("inc/suku.php?id_datuk=" + iddatuk);
 }
 
-function load2() {
-    $('#combobox-pend').load("inc/combobox-holder-pend.php");
-    $('#combobox-kerja').load("inc/combobox-holder-kerja.php");
+function load() {
+    $('#combobox-pend').load("inc/combobox-owner-pend.php");
+    $('#combobox-kerja').load("inc/combobox-owner-kerja.php");
+}
+
+$(document).ready(function() {
+    $("#tambahkancitizen").click(function() {
+        var nik = document.getElementById('nik').value;
+        $('#alertH').empty();
+        if (nik == null || nik == '') {
+            $('#alertH').append('<?php echo $p_nik ?>');
+        } else {
+            var ketemu = false;
+            <?php 
+                $sql = pg_query("SELECT national_identity_number FROM citizen");
+                while ($data = pg_fetch_array($sql))
+                {
+                $idnya = $data['national_identity_number'];
+                echo "if (nik == \"".$idnya."\")";
+                echo "{
+                        ketemu=true;
+                        $('#alertH').append('".$nik_ada."'); 
+                      }";
+
+                }
+            ?>
+            if (ketemu == false) {
+                var data = $('#form-tambahcitizen').serialize();
+                $.ajax({
+                    type: 'POST',
+                    url: "act/tambah-citizen.php",
+                    data: data,
+                    success: function() {
+                        $('#tabel-citizen').load("inc/load-citizen.php");
+                        $('#tambahcitizen').modal('hide');
+                        $('#sukses-tambah').modal('show');
+                    },
+                    error: function(xhr, ajaxOptions, thrownError) {
+                        $("#notifikasi").empty();
+                        $('#gagal').modal('show');
+                        $("#notifikasi").append("<p>" + xhr.status + "</p>");
+                        $("#notifikasi").append("<p>" + thrownError + "</p>");
+                    }
+                });
+            }
+        }
+    });
+});
+
+function hapuscitizen(id, idtemp) {
+    $.ajax({ 
+        url: 'act/hapus-citizen.php?id='+id,
+        data: "",
+        success: function() {
+            $('#tabel-citizen').load("inc/load-citizen.php");
+            $('#delete-c'+idtemp).modal('hide');
+            $('#sukses-hapus').modal('show');
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+            $("#notifikasi").empty();
+            $('#gagal').modal('show');
+            $("#notifikasi").append("<p>"+xhr.status+"</p>");
+            $("#notifikasi").append("<p>"+thrownError+"</p>");
+        }
+    });
 }
 </script>
