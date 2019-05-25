@@ -4,7 +4,7 @@
 	$user = "postgres";
 	$pass = "root";
 	$port = "5432";
-	$dbname = "test_a";
+	$dbname = "ta2";
 
 	// $host = "otto.db.elephantsql.com";
 	// $user = "mlfkcwyr";

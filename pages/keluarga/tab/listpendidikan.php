@@ -2,7 +2,14 @@
 <button class="btn btn-default btn-lg" style="width: 90%; background-color: #fafafa" data-toggle="modal" data-target="#tambahpend">+
     Add Education Level Data</button>
 </div>
-
+<?php
+$result = pg_query("SELECT MAX(education_id) AS id FROM education");
+        $row = pg_fetch_array($result);
+        $id = $row["id"];
+        echo $id2 = $id+1;
+        echo "string";
+?>
+dsdsdadsadsad
 <div class="modal fade" id="tambahpend">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
@@ -41,6 +48,7 @@
                     $no=1;
                     while ($data=pg_fetch_assoc($sql)) {
                         $id=$data['education_id'];
+                        $ids="'".$id."'";
                         $id_enc= "'".base64_encode($id)."'";
                         $edu=$data['educational_level'];
                         echo "<tr>";
@@ -69,7 +77,7 @@
     						            </div>
     						            <div class="modal-footer">
     						                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-    						                <button type="button" class="btn btn-danger" onclick="hapuspend('.$id_enc.','.$id.')">Delete</button>
+    						                <button type="button" class="btn btn-danger" onclick="hapuspend('.$id_enc.','.$ids.')">Delete</button>
     						            </div>
     						        </div>
     						    </div>
@@ -78,7 +86,7 @@
 
                             <div class="modal fade" id="edit-pend'.$id.'">
                                 <div class="modal-dialog modal-dialog-centered" role="document">
-                                    <form method="post" id="form-editpend">
+                                    <form method="post" id="form-editpend'.$id.'">
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <h5 class="modal-title">Edit</h5>
@@ -90,7 +98,7 @@
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                                <button type="button" class="btn btn-primary" onclick="editpend('.$id.')"><i class="ti-save"></i> Save</button>
+                                                <button type="button" class="btn btn-primary" onclick="editpend('.$ids.')"><i class="ti-save"></i> Save</button>
                                             </div>
                                         </div>
                                     </form>
@@ -179,7 +187,6 @@
                 $('#datakosong').modal('show');
             }
             else {
-                var data = $('#form-editpend'+id).serialize();
                 $.ajax({
                     url: "act/edit-pend.php?id="+id+"&pend-edit="+pend_edit,
                     data: "",

@@ -12,7 +12,7 @@ if (isset($_GET['id_datuk'])) {
 			if($jml2 > 0){
 				while($h=pg_fetch_array($sql)){
 					$suku = $h['name_of_tribe'];
-					echo '<div class="alert alert-dark alert-dismissible fade show" role="alert">Tribe: <strong>'.$suku.'</strong></div>';
+					echo '<div class="alert alert-light alert-dismissible fade show" role="alert">Tribe: <strong>'.$suku.'</strong></div>';
 				}
 			}
 		}

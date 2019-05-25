@@ -177,7 +177,6 @@
                 $('#datakosong').modal('show');
             }
             else {
-                var data = $('#form-editkampung'+id).serialize();
                 $.ajax({
                     url: "act/edit-kampung.php?id="+id+"&kampung-edit="+kampung_edit,
                     data: "",

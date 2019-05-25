@@ -10,7 +10,11 @@
     <?php 
         include('../inc/head.php') 
     ?>
-
+    <link rel="stylesheet" href="../dist/css/bootstrap-select.css">
+    <link rel="stylesheet" href="../../assets/alertify/themes/alertify.core.css" />
+    <link rel="stylesheet" href="../../assets/alertify/themes/alertify.default.css" id="toggleCSS" />
+    <meta name="viewport" content="width=device-width">
+    <script src="../../assets/alertify/lib/alertify.min.js"></script>
 </head>
 
 <body>
@@ -43,193 +47,150 @@
             <br>
             <!-- page title area end -->
             <div class="main-content-inner">
-                <div class="card">
-                    <div class="card-body">
-                        <h5>Family Card Info</h5>
-                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#edit" style="float: right;"><i class="fa fa-edit"></i> Edit</button>
-                        <br/>
-                        <table class="table table-hover" style="width: 90%">
-                            <?php
-                                $id = $_GET['id'];
-                                 $querysearch = "SELECT C.*,
-                                            D.datuk_name, T.name_of_tribe, V.village_name, J.job_name, E.educational_level
-                                    FROM family_card AS C
-                                    LEFT JOIN datuk AS D ON C.datuk_id=D.datuk_id
-                                    LEFT JOIN tribe AS T ON D.tribe_id=T.tribe_id
-                                    LEFT JOIN village AS V ON C.village_id=V.village_id
-                                    LEFT JOIN job AS J ON C.job_id=J.job_id
-                                    LEFT JOIN education AS E ON C.educational_id=E.education_id
-                                    WHERE C.family_card_number='$id' 
-                                ";
+                        <div class="row">
+                            <div class="col-lg-6 mt-6">
+                                <div class="card"><div class="card-body">
+                                    <h6>Family Card Info
+                                        <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#edit" style="float: right;"><i class="fa fa-edit"></i> Edit</button></h6>
+                                    <br/>
+                                    <table class="table table-hover" style="width: 90%">
+                                        <?php
+                                            $id = $_GET['id'];
+                                             $querysearch = "SELECT F.family_card_number, F.house_building_id, F.category, H.address,
+                                                            ST_X(ST_Centroid(H.geom)) AS longitude, ST_Y(ST_CENTROID(H.geom)) AS latitude
+                                                            FROM family_card AS F
+                                                            LEFT JOIN house_building AS H ON F.house_building_id=H.house_building_id
+                                                            WHERE F.family_card_number='$id'
+                                            ";
 
-                                $hasil = pg_query($querysearch);
-                                while ($row = pg_fetch_array($hasil)) {
-                                    $nama = $row['head_of_family'];
-                                    $nokk = $row['family_card_number'];
-                                    $nik = $row['national_identity_number'];
-                                    $tgl = $row['birth_date'];
+                                            $hasil = pg_query($querysearch);
+                                            while ($row = pg_fetch_array($hasil)) {
+                                                $nokk = $row['family_card_number'];
+                                                $kategori = $row['category'];
+                                                    if ($row['category']!=null) {
+                                                        if ($kategori==0) {
+                                                            $kategori="Poor Family";
+                                                        }
+                                                        else {
+                                                            $kategori="Capable Family";
+                                                        }
+                                                    }
+                                                    
+                                                $id_rumah = $row['house_building_id'];
+                                                $alamat = $row['address'];
+                                                $longitude = $row['longitude'];
+                                                $latitude = $row['latitude'];
+                                            }
+                                        ?>
+                                        <tr>
+                                            <td>Family Card Number</td>
+                                            <td>:
+                                                <?php echo $id ?>    
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Category</td>
+                                            <td>:
+                                                <?php echo $kategori ?>        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>House Building ID</td>
+                                            <td>:
+                                                <?php echo $id_rumah; ?>        
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Address </td>
+                                            <td>:
+                                                <?php echo $alamat; ?>
+                                            </td>
+                                        </tr>
+                                </table>
+                            </div></div>
+                        </div>
+                        <div class="col-lg-6 mt-6">
+                            <div class="card"><div class="card-body">
+                                <h7 id="layer"><?php include('../../inc/aturlayer.php') ?></h7>
+                                <h6 class="mb-3">Location of Residence
+                                        <a href="../rumah/info-rumah.php?id=<?php echo $id_rumah ?>" class="btn btn-info btn-sm" style="float: right;" id="lihat-info"><i class="fa fa-info"></i> View House Building Info</a></h6>
+                                </h6>
+                                <?php 
+                                    if ($latitude!=null && $longitude!=null) {
+                                ?>
+                                <div class="media-body">
+                                    <?php include('../inc/headinfodanslideshow.php'); ?>
+                                    <div style="padding-left: 1%; padding-bottom: 1%;">
+                                        <script type="text/javascript" src="../../script.js"></script>
+                                    </div>
+                                    <div style="width:100%; height: 360px;" id="map2"></div>
+                                    <script>
+                                        function initMap() {
+                                            posisi = {lat: <?php echo $latitude ?>, lng: <?php echo $longitude ?>}
+                                            map = new google.maps.Map(document.getElementById('map2'), {
+                                                center: posisi,
+                                                zoom: 19,
+                                                mapTypeId: 'satellite'
+                                            });
+                                            server='../../'
+                                            semuadigitasi();
 
-                                    $id_pendidikan = $row['educational_id'];
-                                    $pendidikan = $row['educational_level'];
-                                    
-                                    $id_kerja = $row['job_id'];
-                                    $pekerjaan = $row['job_name'];
-                                    
-                                    $tanggung = $row['the_number_of_dependents'];
-
-                                    $asuransi="-";
-                                    if ($row['savings']!=null) {
-                                        if ($row['insurance']==1) {
-                                             $asuransi="Exist";
-                                         }
-                                        else if ($row['insurance']==0) {
-                                            $asuransi="Do not have";
-                                        } 
-                                    }
-
-                                    $pendapatan = $row['income'];
-
-                                    $tab = $row['savings'];
-                                    $tabungan="-";
-                                    if ($row['savings']!=null) {
-                                        if ($row['savings']==1) {
-                                         $tabungan="Exist";
-                                         }
-                                        else if ($row['savings']==0) {
-                                            $tabungan="Do not have";
+                                            var marker = new google.maps.Marker({
+                                            position: posisi,
+                                            icon:server+'assets/ico/home.png',
+                                            animation: google.maps.Animation.BOUNCE,
+                                            map: map
+                                            });
                                         }
+
+                                        initMap();
+                                    </script>
+                                </div>
+                                <?php }
+                                    else {
+                                        echo "<center>";
+                                        echo '<h3><i class="fas fa-question-circle"></i></h3>';
+                                        echo "location of the house or residence not found !";
+                                        echo "</cente>";
+                                        echo '<script>
+                                                document.getElementById("lihat-info").style.display="none";
+                                                document.getElementById("layer").style.display="none"
+                                            </script>';
                                     }
-
-                                    $id_datuk = $row['datuk_id'];
-                                    $datuk = $row['datuk_name'];
-
-                                    $id_suku = $row['tribe_id'];
-                                    $suku = $row['name_of_tribe'];
-
-                                    $id_kampung = $row['village_id'];
-                                    $kampung = $row['village_name'];
-
-                                    $a=$row['insurance'];
-                                }
-                            ?>
-                            <tr>
-                                <td>Family Card Number</td>
-                                <td>:
-                                    <?php echo $id ?>    
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Name of Family Head</td>
-                                <td>:
-                                    <?php echo $nama ?>        
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>National Identity Number of Head Family</td>
-                                <td>:
-                                    <?php echo $nik ?>        
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Birth Date </td>
-                                <td>:
-                                    <?php
-                                        $tgl2 = date('Y-m-d');
-                                        if ($tgl!=null && $tgl!=$tgl2) {
-                                             echo date("d - F - Y",strtotime($tgl)); 
-                                         } 
-                                        
-                                    ?>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Education Level </td>
-                                <td>:
-                                    <?php echo $pendidikan ?>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Job </td>
-                                <td>:
-                                    <?php echo $pekerjaan ?>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Income </td>
-                                <td>:
-                                    <?php
-                                        if ($pendapatan!=null) {
-                                             echo "Rp. ". number_format($pendapatan); 
-                                         } 
-                                        
-                                    ?>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Take Insurance</td>
-                                <td>:
-                                    <?php echo $asuransi ?>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Savings </td>
-                                <td>:
-                                    <?php echo $tabungan ?>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Number of Dependents</td>
-                                <td>:
-                                    <?php echo $tanggung ?>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Datuk </td>
-                                <td>:
-                                    <?php echo $datuk ?>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Tribe </td>
-                                <td>:
-                                    <?php echo $suku ?>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Village </td>
-                                <td>:
-                                    <?php echo $kampung ?>
-                                </td>
-                            </tr>
-                    </table>
-                    <h6>Asset List:</h6>
-                    <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#tambah-a" style="float: right;">+ Add</button>
+                                ?>
+                            </div></div>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="card"><div class="card-body">
+                    <h6>Family Card Member:
+                        <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#tambah-a" style="float: right;">+ Add</button>
+                    </h6>
                     <div class="modal fade" id="tambah-a">
                         <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
-                                <form method="post" action="act/info-tambahaset.php">
+                                <form method="post" action="act/info-tambahanggotakk.php">
                                     <div class="modal-header">
-                                        <h5 class="modal-title">Add Asset Data</h5>
+                                        <h5 class="modal-title">Add Family Card Member</h5>
                                         <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
                                     </div>
                                     <div class="modal-body">
-                                        <p>Name of Asset:</p>
-                                        <select class="form-control" name="aset" style="height: 50px;">
-                                        <?php
-                                            $sql_fas= pg_query("SELECT * FROM asset ORDER BY name_of_asset ASC");
-                                            while($row = pg_fetch_assoc($sql_fas))
-                                            {
-                                                echo"<option value=".$row['asset_id'].">".$row['name_of_asset']."</option>";
-                                            }
-                                        ?>
+                                        <select class="selectpicker form-control" data-container="body" data-live-search="true"
+                                            title="Select citizen" data-hide-disabled=" true" name="nik4">
+                                            <option></option>
+                                            <?php                
+                                                $sql_k=pg_query("SELECT national_identity_number, name FROM citizen ORDER BY name");
+                                                while($row = pg_fetch_assoc($sql_k))
+                                                {
+                                                    echo"<option value=".$row['national_identity_number'].">(".$row['national_identity_number'].") ".$row['name']."</option>";
+                                                }
+                                            ?>
                                         </select>
-                                        <p>Total Assets:<label id="j-a"></label></p>
-                                        <input type="text" class="form-control" name="total-a" id="total-fas" placeholder="the quantity of these assets ..." onkeypress="return hanyaAngka(event, '#j-a')" onkeyup="cek_t()">
-                                        <input type="hidden" name="id" value="<?php echo $id ?>">
+                                        <input type="hidden" name="kk4" value="<?php echo $nokk ?>">
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                        <button type="submit" class="btn btn-primary" id="tambahkanfas">+ Add</button>
+                                        <button type="submit" class="btn btn-primary" name="anggotakk">+ Add</button>
                                     </div>
                                 </form>
                             </div>
@@ -237,89 +198,81 @@
                     </div>
 
                     <table class="table table-hover" style="width: 90%">
+                    <tr>
+                        <th>National ID Number</th>
+                        <th>Name</th>
+                        <th>Birth Date</th>
+                        <th>Status in Family</th>
+                        <th><center> Action</center></th>
+                    </tr>
                     <?php
-                            $sql=pg_query("SELECT D.family_card_number, D.asset_id, D.total_assets, A.name_of_asset
-                                FROM detail_asset_family AS D 
-                                JOIN asset AS A ON A.asset_id=D.asset_id
-                                WHERE D.family_card_number = '$id'
+                            $sql=pg_query("SELECT national_identity_number, name, birth_date, status_in_family
+                                FROM citizen WHERE family_card_number = '$id' ORDER BY status_in_family
                                 ");
                             $cekfas=pg_num_rows($sql);
                             if ($cekfas==0) {
-                                echo "<tr><td colspan='3'>No asset data . . . . .</td></tr>";
+                                echo "<tr><td colspan='5'>No member data . . . . .</td></tr>";
                             }
                             while ($data=pg_fetch_assoc($sql)) {
-                                //$id_bang=str_replace(' ', '',$data['worship_building_id']);
-                                $id_fas=$data['asset_id'];
-                                $namafas =$data['name_of_asset'];
-                                $qty = $data['total_asset'];
+                                $nik = $data['national_identity_number'];
+                                $nama = $data['name'];
+                                $tgl = $data['birth_date'];
+                                $status = $data['status_in_family'];
+                                if ($data['status_in_family']!=null) {
+                                    if ($status==1) {
+                                     $status="Head of Family";
+                                     }
+                                    else if ($status==2) {
+                                        $status="Wife";
+                                    }
+                                    else if ($status==3) {
+                                        $status="Child";
+                                    }
+                                    else if ($status==4) {
+                                        $status="Another Family";
+                                    }
+                                }
+                                $tgl2 = date('Y-m-d');
+                                if ($tgl!=null && $tgl!=$tgl2) {
+                                     $tgl = date("d - F - Y",strtotime($tgl)); 
+                                 } 
                                 echo "<tr>";
-                                echo "<td>".$namafas."</td>";
-                                echo "<td>".$qty."</td>";
+                                echo "<td>".$nik."</td>";
+                                echo "<td>".$nama."</td>";
+                                echo "<td>".$tgl."</td>";
+                                echo "<td>".$status."</td>";
                                 echo '<td>
-                                    <button class="btn btn-info btn-xs" data-toggle="modal" data-target="#edit-fas'.$nomor.'"><i class="fa fa-edit"></i> Edit</button>
-                                    <button class="btn btn-danger btn-xs" title="Hapus" data-toggle="modal" data-target="#delete-fas'.$nomor.'"><i class="fa fa-trash"></i> Delete</button>
-                                    </td>';
+                                    <a href="info-citizen.php?id='.$nik.'" class="btn btn-info btn-xs">
+                                        <i class="fa fa-info"></i> View Details</a> 
+                                    <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#coret-kk'.$nik.'">
+                                        <i class="fas fa-user-minus"></i> Remove</button>
+                                    <td>';
                                 echo "</tr>";
                                 echo '
-                                    <div class="modal fade" id="edit-fas'.$nomor.'">
-                                        <div class="modal-dialog modal-dialog-centered" role="document">
-                                        <form method="post" action="act/info-editfas.php">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title">Edit</h5>
-                                                    <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <p>Quantity of <b>'.$namafas.'</b>:<label id="fass2'.$nomor.'"></label></p>
-                                                    <input type="text" class="form-control" name="total-fas-edit" id="total-fas-edit'.$nomor.'" placeholder="quantity of facilities.." onkeypress="return hanyaAngka(event, '."'".'#fass2'."$nomor'".')" value="'.$qty.'" onkeyup="cek_e'.$nomor.'()">
-                                                        <input type="hidden" name="id-bang" value="'.$id.'">
-                                                        <input type="hidden" name="id-fas" value="'.$id_fas.'">
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                                    <button type="submit" class="btn btn-primary" name="fas-edit" id="fas-edit'.$nomor.'"><i class="ti-save"></i> Save</button>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-
-                                <script>
-                                    function cek_e'.$nomor.'() {
-                                        var e = document.getElementById("total-fas-edit'.$nomor.'").value;
-                                        console.log(e);
-                                        if (e >= 1) {
-                                            $("#fas-edit'.$nomor.'").prop("disabled", false);
-                                        }
-                                        else {
-                                            $("#fas-edit'.$nomor.'").prop("disabled", true);    
-                                        }
-                                    }
-                                </script>
-
-
-                                    <div class="modal fade" id="delete-fas'.$nomor.'">
+                                    <div class="modal fade" id="coret-kk'.$nik.'">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title">Delete '.$namafas.' ?</h5>
+                                                    <h5 class="modal-title">Delete '.$edu.' ?</h5>
                                                     <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <p>Are you sure to delete "'.$namafas.'" from the list of facilities ?</p>
+                                                    <p>Are you sure to delete "'.$nama.'" from family card member? <br/>
+                                                    </p>
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                                    <a href="act/info-deletefas.php?id-bang='.$id.'&&id-fas='.$id_fas.'"><button type="button" class="btn btn-danger">Delete</button></a>
+                                                    <a href="act/coret-kk.php?nik='.$nik.'&kk='.$nokk.'" ><button type="button" class="btn btn-danger" ">Remove</button></a>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 ';
-                                $nomor=$nomor+1;
+                                
                             }
                         ?>
                         </table>
+                    </div></div>
                 </div>          
             </div>
 
@@ -327,106 +280,38 @@
 <div class="modal fade" id="edit">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
-            <form action="act/edit-holder.php" method="post" style="width: 115%; background-color: white; border-radius: 1%">
+            <form action="act/edit-kk.php" method="post" style="width: 115%; background-color: white; border-radius: 1%">
                 <div class="modal-header">
                     <h6 class="modal-title">Edit Family Card Data</h6>
                     <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
                 </div>
                 <div class="modal-body"">
-                    <div class="row">
-                        <div id="alertH"></div>
-                        <div class="form-group col-sm-6">
-                            Family Card Number: <input class="form-control" type="text" name="kk" id="kk" onchange="cek_kk()" value="<?php echo $nokk ?>" required>
-                            <input type="hidden" name="kk-temp" value="<?php echo $nokk ?>">
-                        </div>
-                        <div class="form-group col-sm-6">
-                            Name of Family Head: <input class="form-control" type="text" name="nama" value="<?php echo $nama ?>" required>
-                        </div>
-                        <div class="form-group col-sm-6">
-                            National ID Number of Family Head: <input class="form-control" type="text" name="nik" value="<?php echo $nik ?>" required>
-                            <input type="hidden" name="kk-temp" value="<?php echo $nokk ?>">
-                        </div>
-                        <div class="form-group col-sm-6">
-                            Birth Date: <input class="form-control" type="date" name="tgl" value="<?php echo $tgl ?>">
-                        </div>
-                        <div class="form-group col-sm-6" id="pendidikan">
-                            Education Level:
-                            <select class="form-control" name="pend" style="height: 43px">
-                                <option></option>
-                                <?php                
-                                    $sql_p=pg_query("SELECT * FROM education ORDER BY educational_level");
-                                    while($row = pg_fetch_assoc($sql_p))
-                                    {
-                                        echo"<option value=".$row['education_id'].">".$row['educational_level']."</option>";
-                                    }
-                                ?>
-                            </select>
-                        </div>
-                        <div class="form-group col-sm-6" id="kerja">
-                            Job: 
-                            <select class="form-control" name="kerja" style="height: 43px">
-                                <option></option>
-                                <?php                
-                                    $sql_k=pg_query("SELECT * FROM job ORDER BY job_name");
-                                    while($row = pg_fetch_assoc($sql_k))
-                                    {
-                                        echo"<option value=".$row['job_id'].">".$row['job_name']."</option>";
-                                    }
-                                ?>
-                            </select>
-                        </div>
-                        <div class="form-group col-sm-6">
-                            Income:
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <div class="input-group-text">Rp</div>
-                                </div>
-                                <input type="text" class="form-control" id="penghasilan" name="penghasilan" onkeyup="ceknominal()" value="<?php echo $pendapatan ?>">
-                            </div>
-                        </div>
-                        <div class="form-group col-sm-6" id="asuransi">
-                            Take Insurance:
-                             <select class="form-control" name="asuransi" style="height: 43px">
-                                <option></option>
-                                <option value="1">Yes</option>
-                                <option value="0">No</option>
-                            </select>
-                        </div>
-                        <div class="form-group col-sm-6" id="tabungan">
-                            Savings:
-                            <select class="form-control" name="tabungan" style="height: 43px">
-                                <option></option>
-                                <option value="1">Yes</option>
-                                <option value="0">No</option>
-                            </select>
-                        </div>
-                        <div class="form-group col-sm-6" id="kampung">
-                            Village:
-                            <select class="form-control" name="kampung" style="height: 43px">
-                                <option></option>
-                                <?php                
-                                    $sql_v=pg_query("SELECT * FROM village ORDER BY village_name");
-                                    while($row = pg_fetch_assoc($sql_v))
-                                    {
-                                        echo"<option value=".$row['village_id'].">".$row['village_name']."</option>";
-                                    }
-                                ?>
-                            </select>
-                        </div>
-                        <div class="form-group col-sm-6" id="datuk">
-                            Datuk:
-                            <select class="form-control" name="datuk" id="iddatuk" style="height: 43px" onchange="ceksuku()">
-                                <option></option>
-                                <?php                
-                                    $sql_d=pg_query("SELECT * FROM datuk ORDER BY datuk_name");
-                                    while($row = pg_fetch_assoc($sql_d))
-                                    {
-                                        echo"<option value=".$row['datuk_id'].">".$row['datuk_name']."</option>";
-                                    }
-                                ?>
-                            </select>
-                            <div id="suku"></div>
-                        </div>
+                    <div id="alertH"></div>
+                    <div class="form-group">
+                        Family Card Number: <input class="form-control" type="text" name="kk2" id="kk2" required value="<?php echo $nokk ?>">
+                        <input type="hidden" name="kk" value="<?php echo $nokk ?>">
+                    </div>
+                    <div class="form-group">
+                        Category: 
+                        <select class="form-control" name="kategori" style="height: 43px">
+                            <option></option>
+                            <option value="0">Poor Family</option>
+                            <option value="1">Capable Family</option>
+                        </select>
+                    </div>
+                    <div class="form-group" id="combobox-rumah">
+                        House ID:
+                        <select class="selectpicker form-control" data-container="body" data-live-search="true"
+                            title="Select house.." data-hide-disabled=" true" name="rumah">
+                            <option></option>
+                            <?php                
+                                $sql_k=pg_query("SELECT house_building_id FROM house_building ORDER BY house_building_id");
+                                while($row = pg_fetch_assoc($sql_k))
+                                {
+                                    echo"<option value=".$row['house_building_id'].">".$row['house_building_id']."</option>";
+                                }
+                            ?>
+                        </select>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -498,7 +383,7 @@ function cek_kk(){
         $('#alertH').empty();
         var ketemu = false;
         <?php 
-            $sql = pg_query("SELECT family_card_number FROM family_card");
+            $sql = pg_query("SELECT family_card_number FROM family_card WHERE family_card_number != '$nokk'");
             while ($data = pg_fetch_array($sql))
             {
             $idnya = $data['family_card_number'];
@@ -518,3 +403,6 @@ function cek_kk(){
 }
 
     </script>
+
+<link rel="stylesheet" href="../../js/bootstrap.bundle.min.js" />
+<script src="../dist/js/bootstrap-select.js"></script>

@@ -62,7 +62,7 @@
     function wordlimit($text,$limit){
 
     if(strlen($text)>$limit) {
-        $word = substr($text, 0, $limit)."...";
+        $word = substr($text, 0, $limit)."..";
     }
     else {
         $word = $text;
