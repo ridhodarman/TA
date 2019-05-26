@@ -250,7 +250,7 @@
 	                                        }
                                         }
                                         else {
-                                        	echo '<td colspan="2">no data</td>';
+                                        	echo '<td colspan="2"><center>no facility data</center></td>';
                                         }
                                         
                                     ?>
