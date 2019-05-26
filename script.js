@@ -981,7 +981,6 @@ function carimodel() {
     success: function (rows) {
       model_ibadah(rows);
       var ibadah = rows.length;
-      alert(ibadah)
     },
     error: function (xhr, ajaxOptions, thrownError) {
       $('#gagal').modal('show');
@@ -1010,7 +1009,7 @@ function carimodel() {
     data: "",
     dataType: 'json',
     success: function (rows) {
-      cari_kantor(rows);
+      model_kantor(rows);
     },
     error: function (xhr, ajaxOptions, thrownError) {
       $('#gagal').modal('show');
@@ -1024,7 +1023,7 @@ function carimodel() {
     data: "",
     dataType: 'json',
     success: function (rows) {
-      cari_pendidikan(rows);
+      model_pendidikan(rows);
     },
     error: function (xhr, ajaxOptions, thrownError) {
       $('#gagal').modal('show');
@@ -1038,7 +1037,7 @@ function carimodel() {
     data: "",
     dataType: 'json',
     success: function (rows) {
-      cari_kesehatan(rows);
+      model_kesehatan(rows);
     },
     error: function (xhr, ajaxOptions, thrownError) {
       $('#gagal').modal('show');
@@ -1052,7 +1051,7 @@ function carimodel() {
     data: "",
     dataType: 'json',
     success: function (rows) {
-      cari_umkm(rows);
+      model_umkm(rows);
     },
     error: function (xhr, ajaxOptions, thrownError) {
       $('#gagal').modal('show');
@@ -1089,7 +1088,7 @@ function model_rumah(rows)
 {   
   for (var i in rows) 
     {   
-    var row     = rows[i];
+      var row     = rows[i];
       var id   = row.id;
       var latitude  = row.latitude ;
       var longitude = row.longitude ;
@@ -1108,4 +1107,97 @@ function model_rumah(rows)
           tampilkanhasilcari();
           $('#hasilcari').append("<tr><td><i class='ti-home'></i> "+id+"</td><td style='text-align: center'><button class='btn btn-theme04 btn-xs' onclick='detailrumah_infow(\""+id+"\");' title='tampilkan info'><i class='fa fa-search-plus'></i></button></td></tr>");
     }
+}
+
+function model_kantor(rows) {
+  for (var i in rows) {
+    var row = rows[i];
+    var id = row.id;
+    var name = row.name;
+    var latitude = row.latitude;
+    var longitude = row.longitude;
+    centerBaru = new google.maps.LatLng(latitude, longitude);
+    marker = new google.maps.Marker({
+      position: centerBaru,
+      icon: 'assets/ico/kantor.png',
+      map: map,
+      animation: google.maps.Animation.DROP,
+    });
+    markersDua.push(marker);
+    map.setCenter(centerBaru);
+    klikInfoWindowkantor(id);
+    map.setZoom(15);
+    tampilkanhasilcari();
+    $('#hasilcari').append("<tr><td>" + name + "</td><td style='text-align: center'><button class='btn btn-theme04 btn-xs' onclick='detailkantor_infow(\"" + id + "\");' title='tampilkan info'><i class='fa fa-search-plus'></i></button></td></tr>");
+  }
+}
+
+function model_pendidikan(rows) {
+  for (var i in rows) {
+    var row = rows[i];
+    var id = row.id;
+    var name = row.name;
+    var latitude = row.latitude;
+    var longitude = row.longitude;
+    centerBaru = new google.maps.LatLng(latitude, longitude);
+    marker = new google.maps.Marker({
+      position: centerBaru,
+      icon: 'assets/ico/sekolah.png',
+      map: map,
+      animation: google.maps.Animation.DROP,
+    });
+    markersDua.push(marker);
+    map.setCenter(centerBaru);
+    klikInfoWindowpendidikan(id);
+    map.setZoom(15);
+    tampilkanhasilcari();
+    $('#hasilcari').append("<tr><td>" + name + "</td><td style='text-align: center'><button class='btn btn-theme04 btn-xs' onclick='detailpendidikan_infow(\"" + id + "\");' title='tampilkan info'><i class='fa fa-search-plus'></i></button></td></tr>");
+  }
+}
+
+function model_kesehatan(rows) {
+  var a = 0;
+  for (var i in rows) {
+    var row = rows[i];
+    var id = row.id;
+    var name = row.name;
+    var latitude = row.latitude;
+    var longitude = row.longitude;
+    centerBaru = new google.maps.LatLng(latitude, longitude);
+    marker = new google.maps.Marker({
+      position: centerBaru,
+      icon: 'assets/ico/kesehatan.png',
+      map: map,
+      animation: google.maps.Animation.DROP,
+    });
+    markersDua.push(marker);
+    map.setCenter(centerBaru);
+    klikInfoWindowkesehatan(id);
+    map.setZoom(15);
+    tampilkanhasilcari();
+    $('#hasilcari').append("<tr><td>" + name + "</td><td style='text-align: center'><button class='btn btn-theme04 btn-xs' onclick='detailkesehatan_infow(\"" + id + "\");' title='tampilkan info'><i class='fa fa-search-plus'></i></button></td></tr>");
+  }
+}
+
+function model_umkm(rows) {
+  for (var i in rows) {
+    var row = rows[i];
+    var id = row.id;
+    var name = row.name;
+    var latitude = row.latitude;
+    var longitude = row.longitude;
+    centerBaru = new google.maps.LatLng(latitude, longitude);
+    marker = new google.maps.Marker({
+      position: centerBaru,
+      icon: 'assets/ico/kadai.png',
+      map: map,
+      animation: google.maps.Animation.DROP,
+    });
+    markersDua.push(marker);
+    map.setCenter(centerBaru);
+    klikInfoWindowumkm(id);
+    map.setZoom(14);
+    tampilkanhasilcari();
+    $('#hasilcari').append("<tr><td>" + name + "</td><td style='text-align: center'><button class='btn btn-theme04 btn-xs' onclick='detailumkm_infow(\"" + id + "\");' title='tampilkan info'><i class='fa fa-search-plus'></i></button></td></tr>");
+  }
 }
