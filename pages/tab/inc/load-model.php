@@ -22,6 +22,7 @@
                     $id=$data['model_id'];
                     $id_enc = "'".base64_encode($id)."'";
                     $model=$data['name_of_model'];
+                    $ids="'".$id."'";
                     echo "<tr>";
                     echo "<td>".$no."</td>";
                     echo "<td>".$model."</td>";
@@ -30,12 +31,12 @@
                             <button class="btn btn-danger btn-xs" title="Hapus" data-toggle="modal" data-target="#delete-model'.$id.'"><i class="fa fa-trash"></i> Delete</button>
                           </td>';
                     echo "</tr>";
-                    $rumah=pg_num_rows(pg_query("SELECT house_building_id FROM house_building WHERE type_of_construction='$id'"));
-                    $umkm=pg_num_rows(pg_query("SELECT msme_building_id FROM msme_building WHERE type_of_construction='$id'"));
-                    $pendidikan=pg_num_rows(pg_query("SELECT educational_building_id FROM educational_building WHERE type_of_construction='$id'"));
-                    $kesehatan=pg_num_rows(pg_query("SELECT health_building_id FROM health_building WHERE type_of_construction='$id'"));
-                    $ibadah=pg_num_rows(pg_query("SELECT worship_building_id FROM worship_building WHERE type_of_construction='$id'"));
-                    $kantor=pg_num_rows(pg_query("SELECT office_building_id FROM office_building WHERE type_of_construction='$id'"));
+                    $rumah=pg_num_rows(pg_query("SELECT house_building_id FROM house_building WHERE model_id='$id'"));
+                    $umkm=pg_num_rows(pg_query("SELECT msme_building_id FROM msme_building WHERE model_id='$id'"));
+                    $pendidikan=pg_num_rows(pg_query("SELECT educational_building_id FROM educational_building WHERE model_id='$id'"));
+                    $kesehatan=pg_num_rows(pg_query("SELECT health_building_id FROM health_building WHERE model_id='$id'"));
+                    $ibadah=pg_num_rows(pg_query("SELECT worship_building_id FROM worship_building WHERE model_id='$id'"));
+                    $kantor=pg_num_rows(pg_query("SELECT office_building_id FROM office_building WHERE model_id='$id'"));
                     $total=$rumah+$umkm+$pendidikan+$kesehatan+$ibadah+$kantor;
                     echo '
                             <div class="modal fade" id="delete-model'.$id.'">
@@ -52,7 +53,7 @@
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                            <button type="button" class="btn btn-danger" onclick="hapusmodel('.$id_enc.','.$id.')">Delete</button>
+                                            <button type="button" class="btn btn-danger" onclick="hapusmodel('.$id_enc.','.$ids.')">Delete</button>
                                         </div>
                                     </div>
                                 </div>
@@ -76,7 +77,7 @@
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                            <button type="button" class="btn btn-primary" id="tombol-edit" onclick="editmodel('.$id.')"><i class="ti-save"></i> Save</button>
+                                            <button type="button" class="btn btn-primary" id="tombol-edit" onclick="editmodel('.$ids.')"><i class="ti-save"></i> Save</button>
                                         </div>
                                     </div>
                                 </form>
