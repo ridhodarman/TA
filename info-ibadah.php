@@ -123,10 +123,10 @@
 
             <div class="main-content-inner">
                 <div class="row">
-                    <div class="col-lg-5 mt-5">
+                    <div class="col-lg-4">
                         <div class="card">
                             <div class="card-body">
-                                <div class="media mb-5">
+                                <div class="media">
                                     <div class="media-body">
                                         <h6>ID:
                                             <?php echo $id ?>
@@ -202,30 +202,30 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-7 mt-5">
+                    <div class="col-lg-6">
                         <div class="card">
                             <div class="card-body">
-                                <div class="media mb-5">
+                                <div class="media">
                                     <div class="media-body">
-                                        <h5 class="mb-3">Photo
+                                        <h5>Photo
                                             <!-- <button id="ukuranpenuh" class="btn btn-warning btn-sm" title="show all images in full screen">
                                                 <i class="ti-fullscreen"></i>
                                             </button> -->
-                                        </h5>
+                                        </h5><br/>
                                         <?php tampilfoto() ?>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-5 mt-5">
+                    <div class="col-lg-2">
                         <div class="card">
                             <div class="card-body">
-                                <div class="media mb-5">
+                                <div class="media">
                                     <div class="media-body">
-                                    <h5 class="mb-3">Facility</h5>
-
-                                    <table width="100%" class="table table-striped table-bordered table-hover">
+                                    <h6>Facility</h6>
+                                    <br/>
+                                    <table width="100%" class="table-striped table-bordered table-hover">
                                         <thead style="text-align: center;">
                                             <th>Name of Facility</th>
                                             <th>Qty</th>
@@ -243,9 +243,9 @@
 	                                            $id_fas=$data['facility_id'];
 	                                            $namafas =$data['name_of_facility'];
 	                                            $qty = $data['quantity_of_facilities'];
-	                                            echo "<tr>";
+	                                            echo '<tr style="height: 200%">';
 	                                            echo "<td>".$namafas."</td>";
-	                                            echo "<td>".$qty."</td>";
+	                                            echo "<td><center>".$qty."</center></td>";
 	                                            echo "</tr>";
 	                                        }
                                         }
