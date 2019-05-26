@@ -13,7 +13,7 @@
             <form method="post" id="form-tambahjenis">
                 <div class="modal-body">
                     <p>Office Building Type:</p>
-                    <input type="text" class="form-control" name="jenis" id="jenis" placeholder="Enter the type of office building...">
+                    <input type="text" class="form-control" name="jenis" id="jenis" placeholder="Enter the type of office building..." value="">
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -43,6 +43,7 @@
                         $id=$data['type_id'];
                         $id_enc= "'".base64_encode($id)."'";
                         $jenis=$data['name_of_type'];
+                        $ids="'".$id."'";
                         echo "<tr>";
                         echo "<td>".$no."</td>";
                         echo "<td>".$jenis."</td>";
@@ -69,7 +70,7 @@
     						            </div>
     						            <div class="modal-footer">
     						                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-    						                <button type="button" class="btn btn-danger" onclick="hapusjenis('.$id_enc.','.$id.')">Delete</button>
+    						                <button type="button" class="btn btn-danger" onclick="hapusjenis('.$id_enc.','.$ids.')">Delete</button>
     						            </div>
     						        </div>
     						    </div>
@@ -90,7 +91,7 @@
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                                <button type="button" class="btn btn-primary" onclick="editjenis('.$id.')"><i class="ti-save"></i> Save</button>
+                                                <button type="button" class="btn btn-primary" onclick="editjenis('.$ids.')"><i class="ti-save"></i> Save</button>
                                             </div>
                                         </div>
                                     </form>
@@ -162,7 +163,6 @@
                 $('#datakosong').modal('show');
             }
             else {
-                var data = $('#form-editjenis'+id).serialize();
                 $.ajax({
                     url: "act/edit-jenis.php?id="+id+"&jenis-edit="+jenis_edit,
                     data: "",

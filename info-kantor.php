@@ -104,10 +104,10 @@
 
             <div class="main-content-inner">
                 <div class="row">
-                    <div class="col-lg-5 mt-5">
+                    <div class="col-lg-4">
                         <div class="card">
                             <div class="card-body">
-                                <div class="media mb-5">
+                                <div class="media">
                                     <div class="media-body">
                                     <h6>ID:
                                         <?php echo $id ?>
@@ -183,10 +183,10 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-7 mt-5">
+                    <div class="col-lg-5">
                         <div class="card">
                             <div class="card-body">
-                                <div class="media mb-5">
+                                <div class="media">
                                     <div class="media-body">
                                         <h5 class="mb-3">Photo
                                             <!-- <button id="ukuranpenuh" class="btn btn-warning btn-sm" title="show all images in full screen">
@@ -199,13 +199,13 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-5 mt-5">
+                    <div class="col-lg-3">
                         <div class="card">
                             <div class="card-body">
-                                <div class="media mb-5">
+                                <div class="media">
                                     <div class="media-body">
                                         <h5 class="mb-3">Facility</h5>
-                                        <table width="100%" class="table table-striped table-bordered table-hover">
+                                        <table width="100%" class="table-striped table-bordered table-hover">
                                             <thead style="text-align: center;">
                                                 <th>Name of Facility</th>
                                                 <th>Qty</th>
@@ -229,7 +229,7 @@
                                                     }
                                                 }
                                                 else {
-                                                    echo '</tbody><td colspan="2">no facility data</td>';
+                                                    echo '</tbody><td colspan="2"><center>no facility data</center></td>';
                                                 }
                                             ?>
                                             </tbody>
