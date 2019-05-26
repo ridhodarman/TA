@@ -22,6 +22,7 @@
                     $id=$data['type_id'];
                     $id_enc = "'".base64_encode($id)."'";
                     $jenis=$data['name_of_type'];
+                    $ids="'".$id."'";
                     echo "<tr>";
                     echo "<td>".$no."</td>";
                     echo "<td>".$jenis."</td>";
@@ -52,7 +53,7 @@
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                            <button type="button" class="btn btn-danger" onclick="hapusjenis('.$id_enc.','.$id.')">Delete</button>
+                                            <button type="button" class="btn btn-danger" onclick="hapusjenis('.$id_enc.','.$ids.')">Delete</button>
                                         </div>
                                     </div>
                                 </div>
@@ -75,8 +76,8 @@
                                             <input type="hidden" class="form-control" name="id-jenisk" value="'.$id.'">
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                            <button type="button" class="btn btn-primary" id="tombol-edit" onclick="editjenis('.$id.')"><i class="ti-save"></i> Save</button>
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                            <button type="button" class="btn btn-primary" id="tombol-edit" onclick="editjenis('.$ids.')"><i class="ti-save"></i> Save</button>
                                         </div>
                                     </div>
                                 </form>
