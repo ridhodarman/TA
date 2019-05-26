@@ -23,6 +23,7 @@
                         $id=$data['level_id'];
                         $id_enc= "'".base64_encode($id)."'";
                         $tingkat=$data['name_of_level'];
+                        $ids="'".$id."'";
                         echo "<tr>";
                         echo "<td>".$no."</td>";
                         echo "<td>".$tingkat."</td>";
@@ -49,7 +50,7 @@
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                            <button type="button" class="btn btn-danger" onclick="hapustingkat('.$id_enc.','.$id.')">Delete</button>
+                                            <button type="button" class="btn btn-danger" onclick="hapustingkat('.$id_enc.','.$ids.')">Delete</button>
                                         </div>
                                     </div>
                                 </div>
@@ -70,7 +71,7 @@
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                                <button type="button" class="btn btn-primary" onclick="edittingkat('.$id.')"><i class="ti-save"></i> Save</button>
+                                                <button type="button" class="btn btn-primary" onclick="edittingkat('.$ids.')"><i class="ti-save"></i> Save</button>
                                             </div>
                                         </div>
                                     </form>

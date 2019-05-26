@@ -43,6 +43,7 @@
                         $id=$data['facility_id'];
                         $id_enc= "'".base64_encode($id)."'";
                         $fas=$data['name_of_facility'];
+                        $ids="'".$id."'";
                         echo "<tr>";
                         echo "<td>".$no."</td>";
                         echo "<td>".$fas."</td>";
@@ -69,7 +70,7 @@
     						            </div>
     						            <div class="modal-footer">
     						                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-    						                <button type="button" class="btn btn-danger" onclick="hapusfas('.$id_enc.','.$id.')">Delete</button>
+    						                <button type="button" class="btn btn-danger" onclick="hapusfas('.$id_enc.','.$ids.')">Delete</button>
     						            </div>
     						        </div>
     						    </div>
@@ -90,7 +91,7 @@
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                            <button type="button" class="btn btn-primary" onclick="editfas('.$id.')"><i class="ti-save"></i> Save</button>
+                                            <button type="button" class="btn btn-primary" onclick="editfas('.$ids.')"><i class="ti-save"></i> Save</button>
                                         </div>
                                     </div>
                                 </form>
@@ -120,7 +121,6 @@
                     url: "act/tambah-fasilitas.php",
                     data: data,
                     success: function() {
-                        alert (data)
                         $('#tabel-fasilitas').load("inc/load-fasilitas.php");
                         $('#tambahfasilitas').modal('hide');
                         $('#sukses-tambah').modal('show');

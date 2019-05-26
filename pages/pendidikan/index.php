@@ -67,9 +67,6 @@
                             <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                                     <?php include ("tab/listtingkat.php") ?>
                             </div>
-                            <div class="tab-pane fade" id="jenis" role="tabpanel" aria-labelledby="jenis-tab">
-                                    <?php include ("tab/listjenis.php") ?>
-                            </div>
                             <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
                                 <?php include ("tab/fasilitas.php") ?>
                             </div>
