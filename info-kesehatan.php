@@ -7,20 +7,16 @@
                 include ("inc/koneksi.php");
                  $id=$_GET['id'];
 
-                $querysearch = "SELECT H.health_building_id, H.name_of_health_building, H.building_area, H.land_area, H.parking_area, H.standing_year, H.electricity_capacity, H.address, H.type_of_construction, H.type_of_health_building, H.name_of_head, H.number_of_medical_personnel, H.number_of_nonmedical_personnel,
-                                ST_X(ST_Centroid(H.geom)) AS longitude, ST_Y(ST_CENTROID(H.geom)) As latitude,
-                                T.name_of_type as constr, J.name_of_type as type,
-                                ST_AsText(geom) as geom
-                                FROM health_building as H
-                                LEFT JOIN type_of_construction as T ON H.type_of_construction=T.type_id
-                                LEFT JOIN type_of_health_building as J ON H.type_of_health_building=J.type_id
-                                WHERE H.health_building_id='$id' 
+                $querysearch = "SELECT H.health_building_id, H.name_of_health_building, H.building_area, H.land_area, H.parking_area, H.standing_year, H.electricity_capacity, H.address, H.type_of_construction, H.type_of_health_building, H.name_of_head, H.number_of_medical_personnel, H.number_of_nonmedical_personnel, T.name_of_type as constr, J.name_of_type as type, M.name_of_model
+                    FROM health_building as H
+                    LEFT JOIN type_of_construction as T ON H.type_of_construction=T.type_id
+                    LEFT JOIN type_of_health_building as J ON H.type_of_health_building=J.type_id
+                    LEFT JOIN building_model AS M ON M.model_id=H.model_id
+                    WHERE H.health_building_id='$id' 
                             ";
 
                 $hasil = pg_query($querysearch);
                 while ($row = pg_fetch_array($hasil)) {
-                    $longitude = $row['longitude'];
-                    $latitude = $row['latitude'];
                     $nama = $row['name_of_health_building'];
                     $bang = $row['building_area'];
                     $lahan = $row['land_area'];
@@ -35,7 +31,7 @@
                     $kepala = $row['name_of_head'];
                     $medis = $row['number_of_medical_personnel'];
                     $non = $row['number_of_nonmedical_personnel'];
-                    $geom = $row['geom'];
+                    $model = $row['name_of_model'];
                 }
 
 
@@ -199,6 +195,13 @@
                                             <td>:</td>
                                             <td>
                                                 <?php echo $alamat; ?>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Building Model </td>
+                                            <td>:</td>
+                                            <td>
+                                                <?php echo $model ?>
                                             </td>
                                         </tr>
                                     </table>

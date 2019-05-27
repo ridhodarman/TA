@@ -7,20 +7,16 @@
                 include ("inc/koneksi.php");
                 $id=$_GET['id'];
 
-                $querysearch = "SELECT E.educational_building_id, E.name_of_educational_building, E.building_area, E.land_area, E.parking_area, E.standing_year, E.electricity_capacity, E.address, E.type_of_construction, E.id_level_of_education, E.headmaster_name, E.total_students, E.total_teachers, E.school_type,
-                                ST_X(ST_Centroid(E.geom)) AS longitude, ST_Y(ST_CENTROID(E.geom)) As latitude,
-                                T.name_of_type as constr, L.name_of_level as level,
-                                ST_AsText(geom) as geom
-                                FROM educational_building as E
-                                LEFT JOIN type_of_construction as T ON E.type_of_construction=T.type_id
-                                LEFT JOIN level_of_education as L ON E.id_level_of_education=L.level_id
+                $querysearch = "SELECT E.educational_building_id, E.name_of_educational_building, E.building_area, E.land_area, E.parking_area, E.standing_year, E.electricity_capacity, E.address, E.type_of_construction, E.headmaster_name, E.total_students, E.total_teachers, E.school_type, M.name_of_model, T.name_of_type AS constr, L.name_of_level AS level
+                                FROM educational_building AS E
+                                LEFT JOIN type_of_construction AS T ON E.type_of_construction=T.type_id
+                                LEFT JOIN level_of_education AS L ON E.id_level_of_education=L.level_id
+                                LEFT JOIN building_model AS M ON M.model_id=E.model_id
                                 WHERE E.educational_building_id='$id' 
                             ";
 
                 $hasil = pg_query($querysearch);
                 while ($row = pg_fetch_array($hasil)) {
-                    $longitude = $row['longitude'];
-                    $latitude = $row['latitude'];
                     $nama = $row['name_of_educational_building'];
                     $bang = $row['building_area'];
                     $lahan = $row['land_area'];
@@ -33,8 +29,6 @@
                     $kepala = $row['headmaster_name'];
                     $murid = $row['total_students'];
                     $guru = $row['total_teachers'];
-                    $id_k = $row['type_of_construction'];
-                    $id_l = $row['id_level_of_education'];
                     $id_t = $row['school_type'];
                     if ($id_t==0) {
                         $jenis = "Public School";
@@ -42,7 +36,7 @@
                     else if ($id_t==1) {
                         $jenis = "Private School";
                     }
-                    $geom = $row['geom'];
+                    $model = $row['name_of_model'];
                 }
 
 
@@ -215,6 +209,13 @@
                                                 <?php echo $alamat; ?>
                                             </td>
                                         </tr>
+                                        <tr>
+                                            <td>Building Model: </td>
+                                            <td>:</td>
+                                            <td>
+                                                <?php echo $model; ?>
+                                            </td>
+                                        </tr>
                                     </table>
                                 </div>
                                 </div>
@@ -243,7 +244,7 @@
                                 <div class="media">
                                     <div class="media-body">
                                         <h5 class="mb-3">Facility</h5>
-                                        <table width="100%" class="table table-striped table-bordered table-hover">
+                                        <table width="100%" class="table-striped table-bordered table-hover">
                                             <thead style="text-align: center;">
                                                 <th>Name of Facility</th>
                                                 <th>Qty</th>

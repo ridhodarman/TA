@@ -8,20 +8,16 @@
             include ("inc/koneksi.php");
                 $id=$_GET['id'];
 
-                $querysearch = "SELECT M.msme_building_id, M.name_of_msme_building, M.building_area, M.land_area, M.parking_area, M.standing_year, M.electricity_capacity, M.address, M.type_of_construction, M.type_of_msme, M.owner_name, M.number_of_employee, M.monthly_income, M.contact_person,
-                                ST_X(ST_Centroid(M.geom)) AS longitude, ST_Y(ST_CENTROID(M.geom)) As latitude,
-                                T.name_of_type as constr, J.name_of_type as type,
-                                ST_AsText(geom) as geom
-					            FROM msme_building as M
-                                LEFT JOIN type_of_construction as T ON M.type_of_construction=T.type_id
-                                LEFT JOIN type_of_msme as J ON M.type_of_msme=J.type_id
-                                WHERE M.msme_building_id='$id' 
+                $querysearch = "SELECT M.msme_building_id, M.name_of_msme_building, M.building_area, M.land_area, M.parking_area, M.standing_year, M.electricity_capacity, M.address, M.type_of_construction, M.type_of_msme, M.owner_name, M.number_of_employee, M.monthly_income, M.contact_person, T.name_of_type AS constr, J.name_of_type AS type, B.name_of_model
+		            FROM msme_building AS M
+                    LEFT JOIN type_of_construction AS T ON M.type_of_construction=T.type_id
+                    LEFT JOIN type_of_msme AS J ON M.type_of_msme=J.type_id
+                    LEFT JOIN building_model AS B ON M.model_id=M.model_id
+                    WHERE M.msme_building_id='$id' 
 				            ";
 
                 $hasil = pg_query($querysearch);
                 while ($row = pg_fetch_array($hasil)) {
-                    $longitude = $row['longitude'];
-                    $latitude = $row['latitude'];
                     $nama = $row['name_of_msme_building'];
                     $bang = $row['building_area'];
                     $lahan = $row['land_area'];
@@ -37,7 +33,7 @@
                     $pegawai = $row['number_of_employee'];
                     $penghasilan = $row['monthly_income'];
                     $kontak = $row['contact_person'];
-                    $geom = $row['geom'];
+                    $model = $row['name_of_model'];
                 }
 
                 
@@ -214,6 +210,13 @@
                                                 <td>:</td>
                                                 <td>
                                                     <?php echo $alamat; ?>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Building Model: </td>
+                                                <td>:</td>
+                                                <td>
+                                                    <?php echo $model; ?>
                                                 </td>
                                             </tr>
                                         </table>
