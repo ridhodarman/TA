@@ -18,7 +18,7 @@
                     </div>
                     <div class="form-group" id="sukunya">
                         <label>Tribe:</label>
-                        <select class="form-control" name="suku" id="daftarsuku" required>
+                        <select class="form-control" name="suku" id="daftarsuku" required style="height: 45px">
                             <?php                
                                 $sql_suku=pg_query("SELECT * FROM tribe ORDER BY name_of_tribe");
                                 while($row = pg_fetch_assoc($sql_suku))

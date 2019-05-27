@@ -3,11 +3,11 @@
     if(isset($_SESSION['username'])) {
 		include ('../../../inc/koneksi.php');
 		include ('../../inc/notif-act.php');
-		$penghuni = base64_decode($_GET['id']);
+		$kk = $_GET['kk'];
 		$id_bang = $_GET['bang'];
-		$sql = pg_query("UPDATE householder SET 
+		$sql = pg_query("UPDATE family_card SET 
 						house_building_id = null
-						WHERE family_card_number = '$penghuni'");
+						WHERE family_card_number = '$kk'");
 		if ($sql){
 			echo '<script>
 				$("#updated").modal("show");

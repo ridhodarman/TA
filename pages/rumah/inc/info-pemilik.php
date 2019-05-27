@@ -1,62 +1,30 @@
 <link rel="stylesheet" href="../dist/css/bootstrap-select.css">
 <?php
 
-                $querysearch = "SELECT H.owner_id, O.*,
-                                        D.datuk_name, T.name_of_tribe, V.village_name, J.job_name, E.educational_level
+                $querysearch = "SELECT H.owner_id, C.*,
+                                        D.datuk_name, T.name_of_tribe, J.job_name, E.educational_level
                                 FROM house_building AS H
-                                JOIN house_building_owner AS O ON H.owner_id=O.national_identity_number
-                                LEFT JOIN datuk AS D ON O.datuk_id=D.datuk_id
+                                JOIN citizen AS C ON H.owner_id=C.national_identity_number
+                                LEFT JOIN datuk AS D ON C.datuk_id=D.datuk_id
                                 LEFT JOIN tribe AS T ON D.tribe_id=T.tribe_id
-                                LEFT JOIN village AS V ON O.village_id=V.village_id
-                                LEFT JOIN job AS J ON O.job_id=J.job_id
-                                LEFT JOIN education AS E ON O.educational_id=E.education_id
+                                LEFT JOIN job AS J ON C.job_id=J.job_id
+                                LEFT JOIN education AS E ON C.education_id=E.education_id
                                 WHERE H.house_building_id='$id' 
                             ";
 
-                // $querysearch = "SELECT H.national_identity_owner, H.address, H.standing_year, H.land_building_tax, H.type_of_construction, H.electricity_capacity, H.tap_water, H.building_status,
-                //                 ST_X(ST_Centroid(H.geom)) AS longitude, ST_Y(ST_CENTROID(H.geom)) As latitude, ST_AsText(geom) as geom,
-                //                 T.name_of_type as jkonstruksi,
-                //                 O.*
-                //                 FROM house_building as H
-                //                 LEFT JOIN type_of_construction as T ON H.type_of_construction=T.type_id
-                //                 JOIN house_building_owner as O ON H.national_identity_owner=O.national_identity_number
-                //                 WHERE H.house_building_id='$id' 
-                //             ";
-
                 $hasil = pg_query($querysearch);
                 while ($row = pg_fetch_array($hasil)) {
-                    $nama = $row['owner_name'];
+                    $nama = $row['name'];
                     $nokk = $row['family_card_number'];
                     $tgl = $row['birth_date'];
 
-                    $id_pendidikan = $row['educational_id'];
+                    $id_pendidikan = $row['education_id'];
                     $pendidikan = $row['educational_level'];
                     
                     $id_kerja = $row['job_id'];
                     $pekerjaan = $row['job_name'];
-                    
-                    $asuransi="-";
-                    if ($row['savings']!=null) {
-                        if ($row['insurance']==1) {
-                             $asuransi="Exist";
-                         }
-                        else if ($row['insurance']==0) {
-                            $asuransi="do not have";
-                        } 
-                    }
 
                     $pendapatan = $row['income'];
-
-                    $tab = $row['savings'];
-                    $tabungan="-";
-                    if ($row['savings']!=null) {
-                        if ($row['savings']==1) {
-                         $tabungan="Exist";
-                         }
-                        else if ($row['savings']==0) {
-                            $tabungan="do not have";
-                        }
-                    }
 
                     $id_datuk = $row['datuk_id'];
                     $datuk = $row['datuk_name'];
@@ -76,7 +44,7 @@
                                         <div style="float: right; padding-right: 1%; padding-bottom: 6%; ">
 
                                             <?php
-                                                if ($nik=="0") {
+                                                if (empty($nik)) {
                                                     echo '
                                                         <button type="button" class="btn btn-info btn-sm btn-flat btn-lg mt-3" data-toggle="modal" data-target="#gantipemilik">
                                                         <b> <i class="fas fa-id-card-alt"></i> Edit Owner</b></button>
@@ -84,7 +52,7 @@
                                                 }
                                                 else {
                                                     echo '
-                                                        <button type="button" class="btn btn-info btn-sm btn-flat btn-lg mt-3" data-toggle="modal" data-target="#editpemilik"><i class="fa fa-edit"></i> Edit</button>
+                                                        <a href="../keluarga/info-citizen.php?id='.$nik.'"><button type="button" class="btn btn-info btn-sm btn-flat btn-lg mt-3"><i class="fa fa-edit"></i> Edit</button></a>
 
                                                         <button type="button" class="btn btn-warning btn-sm btn-flat btn-lg mt-3" data-toggle="modal" data-target="#gantipemilik">
                                                         <b> <i class="fas fa-id-card-alt"></i> Change Owner</b></button>
@@ -151,18 +119,6 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td>Take Insurance</td>
-                                                <td>:
-                                                    <?php echo $asuransi ?>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Savings </td>
-                                                <td>:
-                                                    <?php echo $tabungan ?>
-                                                </td>
-                                            </tr>
-                                            <tr>
                                                 <td>Datuk </td>
                                                 <td>:
                                                     <?php echo $datuk ?>
@@ -172,12 +128,6 @@
                                                 <td>Tribe </td>
                                                 <td>:
                                                     <?php echo $suku ?>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Village </td>
-                                                <td>:
-                                                    <?php echo $kampung ?>
                                                 </td>
                                             </tr>
                                         </table>
@@ -303,34 +253,26 @@
                     <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
                 </div>
                 <div class="modal-body">
-                    <div class="custom-control custom-radio">
-                        <input type="radio" id="unknown" name="customRadio" class="custom-control-input" onclick="cekhuni(0)">
-                        <label class="custom-control-label" for="unknown">Unknown</label>
-                    </div>
-                    <div class="custom-control custom-radio">
-                        <input type="radio" checked id="known" name="customRadio" class="custom-control-input" onclick="cekhuni(1)">
-                        <label class="custom-control-label" for="known">Known (Choose Owner)</label>
-                    </div>
                     <div id="nik2">
-                        <select class="selectpicker form-control" id="nik" data-container="body" data-live-search="true" title="Choose FCN" data-hide-disabled="true" style="font-size: 89%; font-weight: bold" onchange="simpanpemilik()">
+                        <select name="pemilik" class="selectpicker form-control" id="nik" data-container="body" data-live-search="true" title="Choose owner" data-hide-disabled="true" style="font-size: 89%; font-weight: bold" onchange="simpanpemilik()">
+                            <option></option>
                             <?php                
-                                $sql_d=pg_query("SELECT national_identity_number, owner_name FROM house_building_owner WHERE national_identity_number !='0' ORDER BY owner_name");
+                                $sql_d=pg_query("SELECT national_identity_number, name FROM citizen ORDER BY name");
                                 while($row = pg_fetch_assoc($sql_d))
                                 {
-                                    echo"<option value=".$row['national_identity_number'].">(".$row['national_identity_number'].") ".$row['owner_name']."</option>";
+                                    echo"<option value=".$row['national_identity_number'].">(".$row['national_identity_number'].") ".$row['name']."</option>";
                                 }
                             ?>
                         </select>
                         <a href="../keluarga">
-                            <button type="button" class="btn btn-primary btn-xs btn-flat btn-lg mt-3"><i class="fas fa-user-edit"></i> Manage House Owner Data</button>
+                            <button type="button" class="btn btn-success btn-xs btn-flat btn-lg mt-3"><i class="fas fa-user-edit"></i> Manage House Owner Data</button>
                         </a>
                     </div>
-                    <input type="hidden" name="pemilik" id="pemilik">
                     <input type="hidden" name="id-bang" value="<?php echo $id ?>"/>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-success">Save changes</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
                 </div>
             </form>
         </div>
@@ -343,23 +285,6 @@
     $("#tabungan select").val(<?php echo "'".$tab."'" ?>);
     $("#kerja select").val(<?php echo "'".$id_kerja."'" ?>);
     $("#pendidikan select").val(<?php echo "'".$id_pendidikan."'" ?>);
-
-    function cekhuni(val) {
-        if (val==0) {
-            document.getElementById("nik").value = "0";
-            $('#nik2').hide();
-            document.getElementById("pemilik").value=0;
-        }
-        else {
-            $('#nik2').show();
-        }
-    }
-
-    document.getElementById("pemilik").value=document.getElementById("nik").value;
-    function simpanpemilik() {
-        document.getElementById("pemilik").value=document.getElementById("nik").value;
-    }
-
 
 
 function ceknominal() {

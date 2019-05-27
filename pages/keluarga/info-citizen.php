@@ -165,8 +165,9 @@
                             </tr>
                             <tr>
                                 <td>Family Card Number</td>
-                                <td>:
-                                    <?php echo $nokk ?>    
+                                <td>:<a href="info-kk.php?id=<?php echo $nokk ?>">
+                                    <?php echo $nokk ?>
+                                    </a>    
                                 </td>
                             </tr>
                             <tr>

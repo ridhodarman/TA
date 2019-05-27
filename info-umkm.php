@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <script src="pages/inc/slideshow/jquery.resize.js"></script>
 <script src="pages/inc/slideshow/jquery.waitforimages.min.js"></script>
 <script src="pages/inc/slideshow/modernizr.js"></script>
@@ -154,14 +155,14 @@
                                                     <?php echo $pegawai; ?>
                                                 </td>
                                             </tr>
-                                            <?php
-                                            if ($akses==true) {
+                                            <?php                                            
+                                            if(isset($_SESSION['username'])) {
                                                 echo '
                                             <tr>
                                                 <td>Monthly Income</td>
                                                 <td>:</td>
                                                 <td>Rp. 
-                                                    <?php '.number_format($penghasilan).'
+                                                    '.number_format($penghasilan).'
                                                 </td>
                                             </tr>';
                                             }

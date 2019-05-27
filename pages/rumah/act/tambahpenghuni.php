@@ -5,7 +5,7 @@
 		include ('../../inc/notif-act.php');
 		$id_bang = $_POST['id-bang2'];
 		$penghuni = $_POST['penghuni'];
-		$sql = pg_query("UPDATE householder SET 
+		$sql = pg_query("UPDATE family_card SET 
 						house_building_id = '$id_bang'
 						WHERE family_card_number = '$penghuni'");
 		if ($sql){

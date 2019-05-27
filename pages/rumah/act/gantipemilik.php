@@ -4,9 +4,9 @@
 		include ('../../../inc/koneksi.php');
 		include ('../../inc/notif-act.php');
 		$id_bang = $_POST['id-bang'];
-		$owner = $_POST['pemilik'];
+		$owner = "'".$_POST['pemilik']."'"; ; if (empty($_POST['pemilik'])){$owner =	"null";}	
 		$sql = pg_query("UPDATE house_building SET 
-						owner_id = '$owner'
+						owner_id = ".$owner."
 						WHERE house_building_id = '$id_bang'");
 		if ($sql){
 			echo '<script>

@@ -858,7 +858,7 @@ select {
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Choose Worship Facility</h5>
+                <h6 class="modal-title">Choose Worship Facility</h6>
                 <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
             </div>
             <div class="modal-body">
