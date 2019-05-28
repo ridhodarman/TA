@@ -14,6 +14,7 @@
 		$elect = $_POST['listrik']; if (empty($_POST['listrik'])) {$elect = "0"; }
 		$alamat = $_POST['alamat'];
 		$year = $_POST['tahun']; if (empty($_POST['tahun'])) {$year = "0"; }
+		$model = $_POST['model'];
 		$sql = pg_query("UPDATE worship_building SET
 						worship_building_id = '$id', 
 						name_of_worship_building = '$nama',
@@ -24,7 +25,8 @@
 						standing_year = '$year',
 						electricity_capacity = '$elect',
 						type_of_construction = '$cons',
-						address = '$alamat'
+						address = '$alamat',
+						model_id = '$model'
 						WHERE worship_building_id = '$id_temp'");
 		if ($sql){
 			echo '<script>

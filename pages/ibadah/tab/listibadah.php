@@ -29,44 +29,44 @@
         </thead>
         <tbody>
             <?php
-                                $sql=pg_query("SELECT worship_building_id, name_of_worship_building, address, ST_X(ST_Centroid(geom)) AS longitude, ST_Y(ST_CENTROID(geom)) AS latitude
-                                    FROM worship_building");
-                                while ($data=pg_fetch_assoc($sql)) {
-                                    $id=$data['worship_building_id'];
-                                    $nama=$data['name_of_worship_building'];
-                                    echo "<tr>";
-                                    echo "<td>".$id."</td>";
-                                    echo "<td>".$nama."</td>";
-                                    echo "<td>".wordlimit($data['address'],43)."</td>";
-                                    echo "<td>".wordlimit($data['latitude'],8).", ".wordlimit($data['longitude'],8)."</td>";
-                                    // echo "<td>".$data['jenis']."</td>";
-                                    echo '<td>
-                                        <a href="info-b-ibadah.php?id='.$id.'"><button class="btn btn-info btn-xs" title="View Detail"><i class="fa fa-info-circle"></i> View Detail</button></a>
-                                        <button class="btn btn-danger btn-xs" title="Hapus" data-toggle="modal" data-target="#delete-bang'.$id.'"><i class="fa fa-trash"></i> Delete</button>
-                                        </td>';
-                                    echo "</tr>";
-                                    $id2 = base64_encode($id);
-                                    echo '
-                                        <div class="modal fade" id="delete-bang'.$id.'">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title">Delete '.$nama.' ?</h5>
-                                                        <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <p>Are you sure to delete "'.$nama.'" from  the worship building data ?</p>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                                        <a href="act/hapus-b-ibadah.php?id='.$id2.'"><button type="button" class="btn btn-danger">Delete</button></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    ';
-                                }
-                            ?>
+                $sql=pg_query("SELECT worship_building_id, name_of_worship_building, address, ST_X(ST_Centroid(geom)) AS longitude, ST_Y(ST_CENTROID(geom)) AS latitude
+                    FROM worship_building");
+                while ($data=pg_fetch_assoc($sql)) {
+                    $id=$data['worship_building_id'];
+                    $nama=$data['name_of_worship_building'];
+                    echo "<tr>";
+                    echo "<td>".$id."</td>";
+                    echo "<td>".$nama."</td>";
+                    echo "<td>".wordlimit($data['address'],43)."</td>";
+                    echo "<td>".wordlimit($data['latitude'],8).", ".wordlimit($data['longitude'],8)."</td>";
+                    // echo "<td>".$data['jenis']."</td>";
+                    echo '<td>
+                        <a href="info-b-ibadah.php?id='.$id.'"><button class="btn btn-info btn-xs" title="View Detail"><i class="fa fa-info-circle"></i> View Detail</button></a>
+                        <button class="btn btn-danger btn-xs" title="Hapus" data-toggle="modal" data-target="#delete-bang'.$id.'"><i class="fa fa-trash"></i> Delete</button>
+                        </td>';
+                    echo "</tr>";
+                    $id2 = base64_encode($id);
+                    echo '
+                        <div class="modal fade" id="delete-bang'.$id.'">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Delete '.$nama.' ?</h5>
+                                        <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>Are you sure to delete "'.$nama.'" from  the worship building data ?</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                        <a href="act/hapus-b-ibadah.php?id='.$id2.'"><button type="button" class="btn btn-danger">Delete</button></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    ';
+                }
+            ?>
         </tbody>
     </table>
 </div>

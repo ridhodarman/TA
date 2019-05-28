@@ -14,9 +14,10 @@ if(isset($_SESSION['username']) && $_POST['id'] != null ) {
 	$alamat = $_POST['alamat'];
 	$year = $_POST['tahun']; if (empty($_POST['tahun'])) {$year = "0"; }
 	$geom = $_POST['geom'];
+	$model = $_POST['model'];
 			
-	$sql = pg_query("INSERT INTO worship_building (worship_building_id, name_of_worship_building, type_of_worship, building_area, land_area, parking_area, standing_year, electricity_capacity, type_of_construction, address, geom) 
-		VALUES ('$id', '$nama', '$type', $lbang, '$land', '$parkir', '$year', '$elect', '$cons', '$alamat', ST_GeomFromText('$geom'))");
+	$sql = pg_query("INSERT INTO worship_building (worship_building_id, name_of_worship_building, type_of_worship, building_area, land_area, parking_area, standing_year, electricity_capacity, type_of_construction, address, geom, model_id) 
+		VALUES ('$id', '$nama', '$type', $lbang, '$land', '$parkir', '$year', '$elect', '$cons', '$alamat', ST_GeomFromText('$geom'), '$model')");
 
 
 	if ($sql){

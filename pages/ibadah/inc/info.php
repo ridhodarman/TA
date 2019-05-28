@@ -71,6 +71,13 @@
                             <?php echo $alamat; ?>
                         </td>
                     </tr>
+                    <tr>
+                        <td>Building Model </td>
+                        <td>:</td>
+                        <td>
+                            <?php echo $model ?>
+                        </td>
+                    </tr>
                 </table>
             </div>
         </div>
@@ -96,12 +103,11 @@
                         <label>Name</label>
                         <input type="text" class="form-control" name="nama" value="<?php echo $nama ?>" required>
                     </div>
-                    <div class="form-group col-sm-4">
+                    <div class="form-group col-sm-4" id="jenis">
                         <label>Worship Building Type</label>
                         <select name="j-ibadah" class="form-control" style="height: 43px">
-                            <option value="<?php echo $tipe_i ?>"><?php echo $jenis; ?></option>
                             <?php                
-                                $sql_jibadah=pg_query("SELECT * FROM type_of_worship WHERE type_id != '$tipe_i' ORDER BY name_of_type");
+                                $sql_jibadah=pg_query("SELECT * FROM type_of_worship ORDER BY name_of_type");
                                 while($row = pg_fetch_assoc($sql_jibadah))
                                 {
                                     echo"<option value=".$row['type_id'].">".$row['name_of_type']."</option>";
@@ -109,12 +115,11 @@
                             ?>
                         </select>
                     </div>
-                    <div class="form-group col-sm-4">
+                    <div class="form-group col-sm-4" id="konstruksi">
                         <label>Construction Type</label>
                         <select name="konstruksi" class="form-control" style="height: 43px">
-                            <option value="<?php echo $tipe_k ?>"><?php echo $konstruksi ?></option>
                             <?php                
-                                $sql_jibadah=pg_query("SELECT * FROM type_of_construction WHERE type_id != '$tipe_k' ORDER BY name_of_type");
+                                $sql_jibadah=pg_query("SELECT * FROM type_of_construction ORDER BY name_of_type");
                                 while($row = pg_fetch_assoc($sql_jibadah))
                                 {
                                     echo"<option value=".$row['type_id'].">".$row['name_of_type']."</option>";
@@ -142,7 +147,7 @@
                         <label>Standing Year</label><label id="tahuns"></label>
                         <input type="text" class="form-control" name="tahun" value="<?php echo $tahun ?>" onkeypress="return hanyaAngka(event, '#tahuns')">
                     </div>
-                    <div class="form-group col-sm-4">
+                    <div class="form-group col-sm-4" id="model">
                         <label>Building Model</label>
                         <select name="model" class="form-control" style="height: 43px">
                             <?php                
@@ -174,6 +179,10 @@ $id_ada = '<div class="alert alert-danger alert-dismissible fade show" role="ale
 ?>
 
 <script type="text/javascript">
+        $("#jenis select").val(<?php echo "'".$id_jenis."'" ?>);
+        $("#konstruksi select").val(<?php echo "'".$id_kons."'" ?>);
+        $("#model select").val(<?php echo "'".$id_model."'" ?>);
+
     function besarkan() {
         var id=document.getElementById('id').value.toUpperCase();
         document.getElementById('id').value=id;

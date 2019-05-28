@@ -45,13 +45,14 @@
             <?php
                 $id=$_GET['id'];
 
-                $querysearch = "SELECT W.worship_building_id, W.name_of_worship_building, W.building_area, W.land_area, W.parking_area, W.standing_year, W.electricity_capacity, W.address, W.type_of_construction, W.type_of_worship,
+                $querysearch = "SELECT W.worship_building_id, W.name_of_worship_building, W.building_area, W.land_area, W.parking_area, W.standing_year, W.electricity_capacity, W.address, W.type_of_construction, W.type_of_worship, M.name_of_model,
                                 ST_X(ST_Centroid(W.geom)) AS longitude, ST_Y(ST_CENTROID(W.geom)) As latitude,
-                                T.name_of_type as constr, J.name_of_type as type,
-                                ST_AsText(geom) as geom
-					            FROM worship_building as W
-                                LEFT JOIN type_of_construction as T ON W.type_of_construction=T.type_id
-                                LEFT JOIN type_of_worship as J ON W.type_of_worship=J.type_id
+                                T.name_of_type AS constr, J.name_of_type AS type, ST_AsText(geom) AS geom, 
+                                T.type_id AS constr_id, J.type_id AS type_wid, W.model_id
+					            FROM worship_building AS W
+                                LEFT JOIN type_of_construction AS T ON W.type_of_construction=T.type_id
+                                LEFT JOIN type_of_worship AS J ON W.type_of_worship=J.type_id
+                                LEFT JOIN building_model AS M ON M.model_id=W.model_id
                                 WHERE W.worship_building_id='$id' 
 				            ";
 
@@ -68,9 +69,11 @@
                     $alamat = $row['address'];
                     $konstruksi = $row['constr'];
                     $jenis = $row['type'];
-                    $tipe_k = $row['type_of_construction'];
-                    $tipe_i = $row['type_of_worship'];
+                    $id_kons = $row['constr_id'];
+                    $id_jenis = $row['type_wid'];
                     $geom = $row['geom'];
+                    $model = $row['name_of_model'];
+                    $id_model = $row['model_id'];
                 }
 
                 
