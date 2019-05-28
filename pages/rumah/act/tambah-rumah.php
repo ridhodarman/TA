@@ -13,17 +13,18 @@ if(isset($_SESSION['username']) && $_POST['id'] != null ) {
 	$tap = $_POST['water'];
 	$status = $_POST['status'];
 	$address = $_POST['alamat'];
-	$owner = $_POST['pemilik'];
+	$owner = "'".$_POST['pemilik']."'"; if (empty($_POST['pemilik'])) {$owner = "null"; }
 	$geom = $_POST['geom'];
+	$model = $_POST['model'];
 
 	// if ($owner==null) {
 	// 	$owner = "0";
 	// }
 	
 	$query="INSERT INTO house_building 
-		(house_building_id, address, standing_year, land_building_tax, type_of_construction, electricity_capacity, tap_water, building_status, owner_id, geom) 
+		(house_building_id, address, standing_year, land_building_tax, type_of_construction, electricity_capacity, tap_water, building_status, owner_id, geom, model_id) 
 		VALUES 
-		('$id', '$address', '$year', '$pbb', '$cons', '$elect', '$tap', '$status', '$owner', ST_GeomFromText('$geom'))";
+		('$id', '$address', '$year', '$pbb', '$cons', '$elect', '$tap', '$status', ".$owner.", ST_GeomFromText('$geom'), '$model')";
 
 	$sql = pg_query($query);
 

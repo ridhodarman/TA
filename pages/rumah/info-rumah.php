@@ -47,11 +47,12 @@
 
                 $querysearch = "SELECT H.owner_id, H.address, H.standing_year, H.land_building_tax, H.type_of_construction, H.electricity_capacity, H.tap_water, H.building_status,
                                 ST_X(ST_Centroid(H.geom)) AS longitude, ST_Y(ST_CENTROID(H.geom)) AS latitude, ST_AsText(H.geom) AS geom,
-                                T.name_of_type AS jkonstruksi,
+                                T.name_of_type AS jkonstruksi, M.name_of_model, H.model_id,
                                 C.*
                                 FROM house_building AS H
                                 LEFT JOIN type_of_construction AS T ON H.type_of_construction=T.type_id
-                                JOIN citizen AS C ON H.owner_id=C.national_identity_number
+                                LEFT JOIN citizen AS C ON H.owner_id=C.national_identity_number
+                                LEFT JOIN building_model AS M ON M.model_id=H.model_id
                                 WHERE H.house_building_id='$id' 
                             ";
 
@@ -98,34 +99,15 @@
                     $tgl = $row['birth_date'];
                     $pendidikan = $row['educational_id'];
                     $pekerjaan = $row['job_id'];
-                    
-                    $asuransi=null;
-                    if ($row['savings']!=null) {
-                        if ($row['insurance']==1) {
-                             $asuransi="Exist";
-                         }
-                        else if ($row['insurance']==0) {
-                            $asuransi="do not have";
-                        } 
-                    }
 
                     $pendapatan = $row['income'];
 
-                    $tabungan="-";
-                    if ($row['savings']!=null) {
-                        if ($row['savings']==1) {
-                         $tabungan="Exist";
-                         }
-                        else if ($row['savings']==0) {
-                            $tabungan="do not have";
-                        }
-                    }
-
                     $datuk = $row['datuk_id'];
 
-                    $kampung = $row['village_id'];
-
                     $geom = $row['geom'];
+
+                    $model = $row['name_of_model'];
+                    $id_model = $row['model_id'];
                 }
 
                 

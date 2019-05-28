@@ -31,6 +31,13 @@
                             </td>
                         </tr>
                         <tr>
+                            <td>Electricity Capacity</td>
+                            <td>:</td>
+                            <td>
+                                <?php echo $listrik ?>
+                            </td>
+                        </tr>
+                        <tr>
                             <td>Tap Water </td>
                             <td>:</td>
                             <td>
@@ -49,6 +56,13 @@
                             <td>:</td>
                             <td>
                                 <?php echo $alamat ?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Building Model </td>
+                            <td>:</td>
+                            <td>
+                                <?php echo $model ?>
                             </td>
                         </tr>
                 </table>
@@ -105,20 +119,20 @@
                     <div class="form-group col-sm-6" id="water">
                         <label>Tap Water</label>
                         <select name="water" class="form-control" style="height: 43px">
-                            <option value="0">Available</option>
-                            <option value="1">Not Available</option>
+                            <option value="0">Not Available</option>
+                            <option value="1">Available</option>
                         </select>
                     </div>
                     <div class="form-group col-sm-6">
                         <div class="row">
-                            <div class="form-group col-sm-12">
+                            <div class="form-group col-sm-12" id="status">
                                 <label>Status</label>
                                 <select name="status" class="form-control" style="height: 43px">
                                     <option value="0">Unhabited</option>
                                     <option value="1">Inhabited</option>
                                 </select>
                             </div>
-                            <div class="form-group col-sm-12">
+                            <div class="form-group col-sm-12" id="model">
                                 <label>Building Model</label>
                                 <select name="model" class="form-control" style="height: 43px">
                                     <?php                
@@ -150,6 +164,7 @@
 <script type="text/javascript">
     $("#water select").val(<?php echo "'".$i_water."'" ?>);
     $("#status select").val(<?php echo "'".$i_status."'" ?>);
+    $("#model select").val(<?php echo "'".$id_model."'" ?>);
 
     function besarkan() {
         var id=document.getElementById('id').value.toUpperCase();

@@ -5,8 +5,8 @@
 
     function initialize() {
         map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: -0.914742, lng: 100.460899},
-          zoom: 16,
+          center: {lat: -0.3178298, lng: 100.3441758},
+          zoom: 14,
           mapTypeId: google.maps.MapTypeId.SATELLITE,
           disableDefaultUI: true,
           zoomControl: true,

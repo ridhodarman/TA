@@ -16,6 +16,7 @@
 		$address = $_POST['alamat'];
 		$owner = $_POST['pemilik'];
 		$geom = $_POST['geom'];
+		$model = $_POST['model'];
 
 		$sql = pg_query("UPDATE house_building SET 
 						house_building_id = '$id', 
@@ -25,7 +26,8 @@
 						type_of_construction = '$cons', 
 						electricity_capacity = '$elect', 
 						tap_water = '$tap', 
-						building_status = '$status'
+						building_status = '$status',
+						model_id = '$model'
 						WHERE house_building_id = '$id_temp'");
 
 		if ($sql){

@@ -170,7 +170,7 @@
                                     </div>
                                     <div class="form-group col-sm-6">
                                         <label>Construction Type</label>
-                                        <select name="konstruksi" class="form-control" style="font-size: 85%">
+                                        <select name="konstruksi" class="form-control" style="height: 45px">
                                             <?php                
                                                 $sql_j=pg_query("SELECT * FROM type_of_construction ORDER BY name_of_type");
                                                 while($row = pg_fetch_assoc($sql_j))
@@ -194,9 +194,9 @@
                                     </div>
                                     <div class="form-group col-sm-6">
                                         <label>Tap Water</label>
-                                        <select name="water" class="form-control" style="font-size: 85%">
-                                            <option value="0">Available</option>
-                                            <option value="1">Not Available</option>
+                                        <select name="water" class="form-control" style="height: 45px">
+                                            <option value="0">Not Available</option>
+                                            <option value="1">Available</option>
                                         </select>
                                     </div>
                                     <div class="form-group col-sm-6">
@@ -211,19 +211,19 @@
                                         <div class="row">
                                             <div class="form-group col-sm-12">
                                                 <label>Status</label>
-                                                <select name="status" class="form-control" style="font-size: 85%">
+                                                <select name="status" class="form-control" style="height: 45px">
                                                     <option value="0">Unhabited</option>
                                                     <option value="1">Inhabited</option>
                                                 </select>
                                             </div>
                                             <div class="form-group col-sm-12">
                                                 <label>Building Model</label>
-                                                <select name="model" class="form-control" style="font-size: 85%">
+                                                <select name="model" class="form-control" style="height: 45px">
                                                     <?php                
                                                         $sql_j=pg_query("SELECT * FROM building_model ORDER BY name_of_model");
                                                         while($row = pg_fetch_assoc($sql_j))
                                                         {
-                                                            echo"<option value=".$row['type_id'].">".$row['name_of_model']."</option>";
+                                                            echo"<option value=".$row['model_id'].">".$row['name_of_model']."</option>";
                                                         }
                                                     ?>
                                                 </select>
@@ -231,19 +231,9 @@
                                         </div>
                                     </div>
                                     <div class="form-group col-sm-6">
-                                        <label>Owner:
-                                        <div class="custom-control custom-radio">
-                                            <input type="radio" checked id="unknown" name="customRadio" class="custom-control-input" onclick="cekhuni(0)">
-                                            <label class="custom-control-label" for="unknown">Unknown</label>
-                                        </div>
-                                        <div class="custom-control custom-radio">
-                                            <input type="radio" id="known" name="customRadio" class="custom-control-input" onclick="cekhuni(1)">
-                                            <label class="custom-control-label" for="known">Known (Choose Owner)</label>
-                                        </div>
-                                        </label>
-                                        <div id="nik2">
-                                            <select class="selectpicker form-control" id="nik" data-container="body" data-live-search="true" title="Select a number" data-hide-disabled="true" onchange="simpanpemilik()">
-                                                <option value="0">Unknown</option>
+                                        <label>Owner:</label>
+                                            <select name="pemilik" class="form-control selectpicker" data-container="body" data-live-search="true" title="Select NIK" data-hide-disabled="true" style="width: 100%">
+                                                <option></option>
                                                 <?php                
                                                     $sql_d=pg_query("SELECT national_identity_number, owner_name FROM house_building_owner ORDER BY owner_name");
                                                     while($row = pg_fetch_assoc($sql_d))
@@ -252,11 +242,6 @@
                                                     }
                                                 ?>
                                             </select>
-                                            <a href="../keluarga">
-                                                <button type="button" class="btn btn-primary btn-xs btn-flat btn-lg mt-3"><i class="fas fa-user-edit"></i> Manage House Owner Data</button>
-                                            </a>
-                                        </div>
-                                        <input type="hidden" name="pemilik" id="pemilik">
                                     </div>
                                 </div>
                             </div>
@@ -343,23 +328,7 @@
         return false;
     });
 
-    function cekhuni(val) {
-        if (val==0) {
-            document.getElementById("nik").value = "0";
-            $('#nik2').hide();
-            document.getElementById("pemilik").value=document.getElementById("nik").value;
-        }
-        else {
-            $('#nik2').show();
-        }
-    }
-    document.getElementById("nik").value = "0";
-    $('#nik2').hide();
-
-    document.getElementById("pemilik").value=document.getElementById("nik").value;
-    function simpanpemilik() {
-        document.getElementById("pemilik").value=document.getElementById("nik").value;
-    }
+  
 
 </script>
 <link rel="stylesheet" href="../../js/bootstrap.bundle.min.js" />
