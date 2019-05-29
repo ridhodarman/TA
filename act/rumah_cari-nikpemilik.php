@@ -2,12 +2,12 @@
 require '../inc/koneksi.php';
 session_start();
 if(isset($_SESSION['username'])) {	
-	$nama = strtolower($_GET["nama"]);
+	$nik = strtolower($_GET["nik"]);
 
-	$querysearch = " 	SELECT H.house_building_id, C.name, ST_X(ST_Centroid(H.geom)) AS longitude, ST_Y(ST_CENTROID(H.geom)) AS latitude
+	$querysearch = " 	SELECT H.house_building_id, C.national_identity_number, ST_X(ST_Centroid(H.geom)) AS longitude, ST_Y(ST_CENTROID(H.					geom)) AS latitude
 						FROM house_building AS H
 						JOIN citizen AS C ON H.owner_id=C.national_identity_number
-						WHERE lower(C.name) LIKE'%$nama%' ORDER BY house_building_id
+						WHERE lower(C.national_identity_number) LIKE'%$nik%' ORDER BY house_building_id
 					";
 
 	$hasil = pg_query($querysearch);
@@ -15,8 +15,8 @@ if(isset($_SESSION['username'])) {
 	    $id = $row['house_building_id'];
 	    $longitude = $row['longitude'];
 	    $latitude = $row['latitude'];
-	    $nama = $row['name'];
-	    $lokasirumah ="<b>".$id."</b> (".$nama.")";
+	    $nik = $row['national_identity_number'];
+	    $lokasirumah ="<b>".$id."</b> (".$nik.")";
 	    $dataarray[] = array('id' => $lokasirumah, 'longitude' => $longitude, 'latitude' => $latitude);
 	}
 	echo json_encode($dataarray);

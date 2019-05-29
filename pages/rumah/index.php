@@ -100,7 +100,7 @@
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                                                <a href="act/hapus-b-ibadah.php?id='.$id2.'"><button type="button" class="btn btn-danger">Delete</button></a>
+                                                                <a href="act/hapus-rumah.php?id='.$id2.'"><button type="button" class="btn btn-danger">Delete</button></a>
                                                             </div>
                                                         </div>
                                                     </div>

@@ -291,16 +291,64 @@ function cari_pemilik() {
   }
 }
 
+function cari_nikpemilik() { 
+  var nikpemilik = document.getElementById("nikpemilik").value;
+  if (nikpemilik==null || nikpemilik=="") {
+    $('#ket-p').empty();
+    $('#peringatan').modal('show');
+    $('#ket-p').append('enter National ID Number of owner !');
+  }
+  else {
+    $.ajax({
+      url: 'act/rumah_cari-nikpemilik.php?nik=' + nikpemilik,
+      data: "",
+      dataType: 'json',
+      success: function (rows) {
+        cari_rumah(rows);
+      },
+      error: function (xhr, ajaxOptions, thrownError) {
+        $('#gagal').modal('show');
+        $('#notifikasi').empty();$('#notifikasi').append(xhr.status);
+        $('#notifikasi').append(thrownError);
+      }
+    });
+  }
+}
+
 function cari_penghuni() { 
   var penghuni = document.getElementById("penghuni").value;
   if (penghuni==null || penghuni=="") {
     $('#ket-p').empty();
     $('#peringatan').modal('show');
-    $('#ket-p').append('enter the name of family head of householder !');
+    $('#ket-p').append('enter householder name !');
   }
   else {
     $.ajax({
       url: 'act/rumah_cari-penghuni.php?nama=' + penghuni,
+      data: "",
+      dataType: 'json',
+      success: function (rows) {
+        cari_rumah(rows);
+      },
+      error: function (xhr, ajaxOptions, thrownError) {
+        $('#gagal').modal('show');
+        $('#notifikasi').empty();$('#notifikasi').append(xhr.status);
+        $('#notifikasi').append(thrownError);
+      }
+    });
+  }
+}
+
+function cari_nikpenghuni() { 
+  var nikpenghuni = document.getElementById("nikpenghuni").value;
+  if (nikpenghuni==null || nikpenghuni=="") {
+    $('#ket-p').empty();
+    $('#peringatan').modal('show');
+    $('#ket-p').append('enter National ID Number of householder !');
+  }
+  else {
+    $.ajax({
+      url: 'act/rumah_cari-nikpenghuni.php?nik=' + nikpenghuni,
       data: "",
       dataType: 'json',
       success: function (rows) {
@@ -339,23 +387,23 @@ function cari_kk() {
   }
 }
 
-function cari_datuk() { 
-  var datuk = document.getElementById("datuk").value;
-  console.log("cari rumah id datuk: " + datuk);
-    $.ajax({
-      url: 'act/rumah_cari-datuk.php?datuk=' + datuk,
-      data: "",
-      dataType: 'json',
-      success: function (rows) {
-        cari_rumah(rows);
-      },
-      error: function (xhr, ajaxOptions, thrownError) {
-        $('#gagal').modal('show');
-        $('#notifikasi').empty();$('#notifikasi').append(xhr.status);
-        $('#notifikasi').append(thrownError);
-      }
-    });
-}
+// function cari_datuk() { 
+//   var datuk = document.getElementById("datuk").value;
+//   console.log("cari rumah id datuk: " + datuk);
+//     $.ajax({
+//       url: 'act/rumah_cari-datuk.php?datuk=' + datuk,
+//       data: "",
+//       dataType: 'json',
+//       success: function (rows) {
+//         cari_rumah(rows);
+//       },
+//       error: function (xhr, ajaxOptions, thrownError) {
+//         $('#gagal').modal('show');
+//         $('#notifikasi').empty();$('#notifikasi').append(xhr.status);
+//         $('#notifikasi').append(thrownError);
+//       }
+//     });
+// }
 
 function cari_suku() { 
   var suku = document.getElementById("suku").value;
@@ -374,24 +422,24 @@ function cari_suku() {
     });
 }
 
-function cari_pendapatan() { 
-  var awal = document.getElementById("penghasilan1").value;
-  var akhir = document.getElementById("penghasilan2").value;
-  console.log("cari pendapatan keluarga dg: " + awal + " - " +akhir);
-  $.ajax({
-    url: 'act/rumah_cari-pendapatan.php?awal=' + awal + '&akhir=' + akhir,
-    data: "",
-    dataType: 'json',
-    success: function (rows) {
-      cari_rumah(rows);
-    },
-    error: function (xhr, ajaxOptions, thrownError) {
-      $('#gagal').modal('show');
-      $('#notifikasi').empty();$('#notifikasi').append(xhr.status);
-      $('#notifikasi').append(thrownError);
-    }
-  });
-}
+// function cari_pendapatan() { 
+//   var awal = document.getElementById("penghasilan1").value;
+//   var akhir = document.getElementById("penghasilan2").value;
+//   console.log("cari pendapatan keluarga dg: " + awal + " - " +akhir);
+//   $.ajax({
+//     url: 'act/rumah_cari-pendapatan.php?awal=' + awal + '&akhir=' + akhir,
+//     data: "",
+//     dataType: 'json',
+//     success: function (rows) {
+//       cari_rumah(rows);
+//     },
+//     error: function (xhr, ajaxOptions, thrownError) {
+//       $('#gagal').modal('show');
+//       $('#notifikasi').empty();$('#notifikasi').append(xhr.status);
+//       $('#notifikasi').append(thrownError);
+//     }
+//   });
+// }
 
 function cari_kampung() { 
   var kampung = document.getElementById("kampung").value;

@@ -45,13 +45,37 @@ select {
                                     </li>
                                 </ul>
                             </li>
-                            <li name="terbatas"><a href="javascript:void(0)" aria-expanded="true">Search By Family Head of Householder</a>
+                            <li name="terbatas"><a href="javascript:void(0)" aria-expanded="true">Search By National ID Number of Owner</a>
+                                <ul class="collapse">
+                                    <li>
+                                    <div class="input-group mb-3">
+                                        <input type="text" aria-label="Text input with dropdown button" id="nikpemilik">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary" type="button" onclick="cari_nikpemilik()"><i class="fa fa-search"></i></button>
+                                        </div>
+                                    </div>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li name="terbatas"><a href="javascript:void(0)" aria-expanded="true">Search By Name of Householder</a>
                                 <ul class="collapse">
                                     <li>
                                     <div class="input-group mb-3">
                                         <input type="text" aria-label="Text input with dropdown button" id="penghuni">
                                         <div class="input-group-append">
                                             <button class="btn btn-primary" type="button" onclick="cari_penghuni()"><i class="fa fa-search"></i></button>
+                                        </div>
+                                    </div>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li name="terbatas"><a href="javascript:void(0)" aria-expanded="true">Search By National ID Number of Householder</a>
+                                <ul class="collapse">
+                                    <li>
+                                    <div class="input-group mb-3">
+                                        <input type="text" aria-label="Text input with dropdown button" id="nikpenghuni">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary" type="button" onclick="cari_nikpenghuni()"><i class="fa fa-search"></i></button>
                                         </div>
                                     </div>
                                     </li>
@@ -68,28 +92,8 @@ select {
                                     </div>
                                     </li>
                                 </ul>
-                            </li>
-                            <li name="terbatas"><a href="javascript:void(0)" aria-expanded="true">Search By Datuk of Head Family</a>
-                                <ul class="collapse">
-                                    <li>
-                                    <div class="input-group mb-3">
-                                        <select aria-label="Text input with dropdown button" id="datuk">
-                                            <?php                
-                                                $sql_d=pg_query("SELECT * FROM datuk ORDER BY datuk_name");
-                                                while($row = pg_fetch_assoc($sql_d))
-                                                {
-                                                    echo"<option value=".$row['datuk_id'].">".$row['datuk_name']."</option>";
-                                                }
-                                            ?>
-                                        </select>
-                                        <div class="input-group-append">
-                                            <button class="btn btn-primary" type="button" onclick="cari_datuk()"><i class="fa fa-search"></i></button>
-                                        </div>
-                                    </div>
-                                    </li>
-                                </ul>
-                            </li>  
-                            <li name="terbatas"><a href="javascript:void(0)" aria-expanded="true">Search By Tribe of Head Family</a>
+                            </li> 
+                            <li name="terbatas"><a href="javascript:void(0)" aria-expanded="true">Search By Tribe of Owner</a>
                                 <ul class="collapse">
                                     <li>
                                     <div class="input-group mb-3">
@@ -109,7 +113,7 @@ select {
                                     </li>
                                 </ul>
                             </li> 
-                            <li name="terbatas"><a href="javascript:void(0)" aria-expanded="true">Search By Income of Head Family</a>
+<!--                             <li name="terbatas"><a href="javascript:void(0)" aria-expanded="true">Search By Income of Head Family</a>
                                 <ul class="collapse">
                                     <li>
                                         <label style="color: white">Form:</label>
@@ -131,7 +135,7 @@ select {
                                         <button class="btn btn-primary btn-sm" type="button" onclick="cari_pendapatan()" style="width: 90%"><i class="fa fa-search"></i> <b>search</b></button>
                                     </li>
                                 </ul>
-                            </li>
+                            </li> -->
                             <li name="terbatas"><a href="javascript:void(0)" aria-expanded="true">Search By Village of Head Family</a>
                                 <ul class="collapse">
                                     <li>
