@@ -71,6 +71,13 @@
                             <?php echo $alamat; ?>
                         </td>
                     </tr>
+                    <tr>
+                        <td>Building Model </td>
+                        <td>:</td>
+                        <td>
+                            <?php echo $model ?>
+                        </td>
+                    </tr>
                 </table>
             </div>
         </div>
@@ -96,12 +103,11 @@
                         <label><span style="color:red">*</span>Name</label>
                         <input type="text" class="form-control" name="nama" value="<?php echo $nama ?>" required>
                     </div>
-                    <div class="form-group col-sm-4">
+                    <div class="form-group col-sm-4" id="jenis">
                         <label><span style="color:red">*</span>Type of Office</label>
                         <select name="jenis" class="form-control" style="height: 43px">
-                            <option value="<?php echo $id_o ?>"><?php echo $jenis; ?></option>
                             <?php                
-                                $sql_j=pg_query("SELECT * FROM type_of_office WHERE type_id != '$id_o' ORDER BY name_of_type");
+                                $sql_j=pg_query("SELECT * FROM type_of_office");
                                 while($row = pg_fetch_assoc($sql_j))
                                 {
                                     echo"<option value=".$row['type_id'].">".$row['name_of_type']."</option>";
@@ -109,12 +115,11 @@
                             ?>
                         </select>
                     </div>
-                    <div class="form-group col-sm-4">
+                    <div class="form-group col-sm-4" id="konstruksi">
                         <label>Construction Type</label>
-                        <select name="konstruksi" class="form-control" style="height: 43px">
-                            <option value="<?php echo $id_k ?>"><?php echo $konstruksi ?></option>
+                        <select name="konstruksi" class="form-control" style="height: 43px" id="konstruksi">
                             <?php                
-                                $sql_j=pg_query("SELECT * FROM type_of_construction WHERE type_id != '$id_k' ORDER BY name_of_type");
+                                $sql_j=pg_query("SELECT * FROM type_of_construction");
                                 while($row = pg_fetch_assoc($sql_j))
                                 {
                                     echo"<option value=".$row['type_id'].">".$row['name_of_type']."</option>";
@@ -142,7 +147,7 @@
                         <label>Electricity Capacity (kWh)</label><label id="listriks"></label>
                         <input type="text" class="form-control" name="listrik" value="<?php echo $listrik ?>" onkeypress="return hanyaAngka(event, '#listriks')">
                     </div>
-                    <div class="form-group col-sm-4">
+                    <div class="form-group col-sm-4" id="model">
                         <label>Building Model</label>
                         <select name="model" class="form-control" style="height: 43px">
                             <?php                
@@ -174,6 +179,10 @@ $id_ada = '<div class="alert alert-danger alert-dismissible fade show" role="ale
 ?>
 
 <script type="text/javascript">
+    $("#jenis select").val(<?php echo "'".$id_jenis."'" ?>);
+    $("#konstruksi select").val(<?php echo "'".$id_kons."'" ?>);
+    $("#model select").val(<?php echo "'".$id_model."'" ?>);
+
     function besarkan() {
         var id=document.getElementById('id').value.toUpperCase();
         document.getElementById('id').value=id;

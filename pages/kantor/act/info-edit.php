@@ -15,6 +15,7 @@
 		$alamat = $_POST['alamat'];
 		$year = $_POST['tahun']; if (empty($_POST['tahun'])) {$year = "0"; }
 		$geom = $_POST['geom'];
+		$model = $_POST['model'];
 				
 		$sql = pg_query("UPDATE office_building SET 
 			office_building_id = '$id', 
@@ -26,7 +27,8 @@
 			standing_year = '$year', 
 			electricity_capacity = '$elect', 
 			type_of_construction = '$cons', 
-			address = '$alamat'
+			address = '$alamat',
+			model_id = '$model'
 			WHERE office_building_id = '$id_temp'");
 		if ($sql){
 			echo '<script>

@@ -45,13 +45,14 @@
             <?php
                 $id=$_GET['id'];
 
-                $querysearch = "SELECT O.office_building_id, O.name_of_office_building, O.building_area, O.land_area, O.parking_area, O.standing_year, O.electricity_capacity, O.address, O.type_of_construction, O.type_of_office,
+                $querysearch = "SELECT O.office_building_id, O.name_of_office_building, O.building_area, O.land_area, O.parking_area, O.standing_year, O.electricity_capacity, O.address, O.type_of_construction, O.type_of_office, M.name_of_model,
                                 ST_X(ST_Centroid(O.geom)) AS longitude, ST_Y(ST_CENTROID(O.geom)) As latitude,
-                                T.name_of_type as constr, J.name_of_type as type,
-                                ST_AsText(geom) as geom
+                                T.name_of_type as constr, J.name_of_type as type, ST_AsText(geom) as geom,
+                                T.type_id AS constr_id, J.type_id AS type_oid, O.model_id
 					            FROM office_building as O
                                 LEFT JOIN type_of_construction as T ON O.type_of_construction=T.type_id
                                 LEFT JOIN type_of_office as J ON O.type_of_office=J.type_id
+                                LEFT JOIN building_model AS M ON M.model_id=O.model_id
                                 WHERE O.office_building_id='$id' 
 				            ";
 
@@ -68,9 +69,11 @@
                     $alamat = $row['address'];
                     $konstruksi = $row['constr'];
                     $jenis = $row['type'];
-                    $id_k = $row['type_of_construction'];
-                    $id_o = $row['type_of_office'];
                     $geom = $row['geom'];
+                    $id_kons = $row['constr_id'];
+                    $id_jenis = $row['type_oid'];
+                    $model = $row['name_of_model'];
+                    $id_model = $row['model_id'];
                 }
 
                 

@@ -136,17 +136,17 @@ select {
                                     </li>
                                 </ul>
                             </li> -->
-                            <li name="terbatas"><a href="javascript:void(0)" aria-expanded="true">Search By Village of Head Family</a>
+<!--                             <li name="terbatas"><a href="javascript:void(0)" aria-expanded="true">Search By Village of Head Family</a>
                                 <ul class="collapse">
                                     <li>
                                     <div class="input-group mb-3">
                                         <select aria-label="Text input with dropdown button" id="kampung">
                                             <?php                
-                                                $sql_k=pg_query("SELECT * FROM village ORDER BY village_name");
-                                                while($row = pg_fetch_assoc($sql_k))
-                                                {
-                                                    echo"<option value=".$row['village_id'].">".$row['village_name']."</option>";
-                                                }
+                                                // $sql_k=pg_query("SELECT * FROM village ORDER BY village_name");
+                                                // while($row = pg_fetch_assoc($sql_k))
+                                                // {
+                                                //     echo"<option value=".$row['village_id'].">".$row['village_name']."</option>";
+                                                // }
                                             ?>
                                         </select>
                                         <div class="input-group-append">
@@ -162,11 +162,11 @@ select {
                                     <div class="input-group mb-3">
                                         <select aria-label="Text input with dropdown button" id="pendkk">
                                             <?php                
-                                                $sql_e=pg_query("SELECT * FROM education ORDER BY educational_level");
-                                                while($row = pg_fetch_assoc($sql_e))
-                                                {
-                                                    echo"<option value=".$row['education_id'].">".$row['educational_level']."</option>";
-                                                }
+                                                // $sql_e=pg_query("SELECT * FROM education ORDER BY educational_level");
+                                                // while($row = pg_fetch_assoc($sql_e))
+                                                // {
+                                                //     echo"<option value=".$row['education_id'].">".$row['educational_level']."</option>";
+                                                // }
                                             ?>
                                         </select>
                                         <div class="input-group-append">
@@ -175,7 +175,7 @@ select {
                                     </div>
                                     </li>
                                 </ul>
-                            </li> 
+                            </li>  -->
                             <li name="terbatas"><a href="javascript:void(0)" aria-expanded="true">Search By Construction Type</a>
                                 <ul class="collapse">
                                     <li>

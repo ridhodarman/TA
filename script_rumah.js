@@ -441,36 +441,36 @@ function cari_suku() {
 //   });
 // }
 
-function cari_kampung() { 
-  var kampung = document.getElementById("kampung").value;
-    $.ajax({
-      url: 'act/rumah_cari-kampung.php?kampung=' + kampung,
-      data: "",
-      dataType: 'json',
-      success: function (rows) {
-        cari_rumah(rows);
-      },
-      error: function (xhr, ajaxOptions, thrownError) {
-        $('#gagal').modal('show');
-        $('#notifikasi').empty();$('#notifikasi').append(xhr.status);
-        $('#notifikasi').append(thrownError);
-      }
-    });
-}
+// function cari_kampung() { 
+//   var kampung = document.getElementById("kampung").value;
+//     $.ajax({
+//       url: 'act/rumah_cari-kampung.php?kampung=' + kampung,
+//       data: "",
+//       dataType: 'json',
+//       success: function (rows) {
+//         cari_rumah(rows);
+//       },
+//       error: function (xhr, ajaxOptions, thrownError) {
+//         $('#gagal').modal('show');
+//         $('#notifikasi').empty();$('#notifikasi').append(xhr.status);
+//         $('#notifikasi').append(thrownError);
+//       }
+//     });
+// }
 
-function cari_pendkk() { 
-  var pendkk = document.getElementById("pendkk").value;
-    $.ajax({
-      url: 'act/rumah_cari-pendkk.php?pendkk=' + pendkk,
-      data: "",
-      dataType: 'json',
-      success: function (rows) {
-        cari_rumah(rows);
-      },
-      error: function (xhr, ajaxOptions, thrownError) {
-        $('#gagal').modal('show');
-        $('#notifikasi').empty();$('#notifikasi').append(xhr.status);
-        $('#notifikasi').append(thrownError);
-      }
-    });
-}
+// function cari_pendkk() { 
+//   var pendkk = document.getElementById("pendkk").value;
+//     $.ajax({
+//       url: 'act/rumah_cari-pendkk.php?pendkk=' + pendkk,
+//       data: "",
+//       dataType: 'json',
+//       success: function (rows) {
+//         cari_rumah(rows);
+//       },
+//       error: function (xhr, ajaxOptions, thrownError) {
+//         $('#gagal').modal('show');
+//         $('#notifikasi').empty();$('#notifikasi').append(xhr.status);
+//         $('#notifikasi').append(thrownError);
+//       }
+//     });
+// }
