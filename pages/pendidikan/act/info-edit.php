@@ -18,6 +18,7 @@ if(isset($_SESSION['username']) && $_POST['id'] != null ) {
 	$guru = $_POST['guru']; if (empty($_POST['guru'])) {$guru = "0"; }
 	$kepala = $_POST['kepala'];
 	$level = $_POST['level'];
+	$model = $_POST['model'];
 			
 	$sql = pg_query("UPDATE educational_building SET
 					educational_building_id = '$id', 
@@ -33,7 +34,8 @@ if(isset($_SESSION['username']) && $_POST['id'] != null ) {
 					parking_area = '$parkir', 
 					electricity_capacity = '$elect', 
 					type_of_construction = '$cons', 
-					address = '$alamat' 
+					address = '$alamat',
+					model = '$model' 
 					WHERE educational_building_id = '$id_temp'");
 
 

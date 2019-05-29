@@ -18,10 +18,10 @@ if(isset($_SESSION['username']) && $_POST['id'] != null ) {
 	$guru = $_POST['guru']; if (empty($_POST['guru'])) {$guru = "0"; }
 	$kepala = $_POST['kepala'];
 	$level = $_POST['level'];
+	$model = $_POST['model'];
 			
-	$sql = pg_query("INSERT INTO educational_building (educational_building_id, name_of_educational_building, headmaster_name, total_students, total_teachers, school_type, id_level_of_education, standing_year, building_area, land_area, parking_area, electricity_capacity, type_of_construction, address, geom) 
-		VALUES ('$id', '$nama', '$kepala', '$murid', '$guru', '$type', '$level', '$year', '$lbang', '$land', '$parkir', '$elect', '$cons', '$alamat', ST_GeomFromText('$geom'))");
-
+	$sql = pg_query("INSERT INTO educational_building (educational_building_id, name_of_educational_building, headmaster_name, total_students, total_teachers, school_type, id_level_of_education, standing_year, building_area, land_area, parking_area, electricity_capacity, type_of_construction, address, geom, model_id) 
+		VALUES ('$id', '$nama', '$kepala', '$murid', '$guru', '$type', '$level', '$year', '$lbang', '$land', '$parkir', '$elect', '$cons', '$alamat', ST_GeomFromText('$geom'), '$model')");
 
 	if ($sql){
 		echo '<script>
@@ -42,6 +42,4 @@ else {
 	echo '<script>window.location="../../../assets/403"</script>';
 }
 	
-
-
 ?>

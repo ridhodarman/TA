@@ -45,13 +45,15 @@
             <?php
                 $id=$_GET['id'];
 
-                $querysearch = "SELECT E.educational_building_id, E.name_of_educational_building, E.building_area, E.land_area, E.parking_area, E.standing_year, E.electricity_capacity, E.address, E.type_of_construction, E.id_level_of_education, E.headmaster_name, E.total_students, E.total_teachers, E.school_type,
+                $querysearch = "SELECT E.educational_building_id, E.name_of_educational_building, E.building_area, E.land_area, E.parking_area, E.standing_year, E.electricity_capacity, E.address, E.type_of_construction, E.id_level_of_education, E.headmaster_name, E.total_students, E.total_teachers, E.school_type, M.name_of_model,
                                 ST_X(ST_Centroid(E.geom)) AS longitude, ST_Y(ST_CENTROID(E.geom)) As latitude,
                                 T.name_of_type as constr, L.name_of_level as level,
-                                ST_AsText(geom) as geom
+                                ST_AsText(geom) as geom,
+                                T.type_id AS constr_id, L.level_id AS l_eid, E.model_id
 					            FROM educational_building as E
                                 LEFT JOIN type_of_construction as T ON E.type_of_construction=T.type_id
                                 LEFT JOIN level_of_education as L ON E.id_level_of_education=L.level_id
+                                LEFT JOIN building_model AS M ON M.model_id=E.model_id
                                 WHERE E.educational_building_id='$id' 
 				            ";
 
@@ -71,8 +73,7 @@
                     $kepala = $row['headmaster_name'];
                     $murid = $row['total_students'];
                     $guru = $row['total_teachers'];
-                    $id_k = $row['type_of_construction'];
-                    $id_l = $row['id_level_of_education'];
+                    
                     $id_t = $row['school_type'];
                     if ($id_t==0) {
                         $jenis = "Public School";
@@ -81,6 +82,11 @@
                         $jenis = "Private School";
                     }
                     $geom = $row['geom'];
+
+                    $id_kons = $row['constr_id'];
+                    $id_level = $row['l_eid'];
+                    $model = $row['name_of_model'];
+                    $id_model = $row['model_id'];
                 }
 
                 
