@@ -17,6 +17,7 @@
 		$kepala = $_POST['kepala'];
 		$medis = $_POST['medis']; if (empty($_POST['medis'])) {$medis = "0"; }
 		$non = $_POST['non']; if (empty($_POST['non'])) {$non = "0"; }
+		$model = $_POST['model'];
 		$sql = pg_query("UPDATE health_building SET
 						health_building_id = '$id', 
 						name_of_health_building = '$nama', 
@@ -30,7 +31,8 @@
 						address = '$alamat', 
 						name_of_head = '$kepala', 
 						number_of_medical_personnel = '$medis', 
-						number_of_nonmedical_personnel = '$non'
+						number_of_nonmedical_personnel = '$non',
+						model_id = '$model'
 						WHERE health_building_id = '$id_temp'");
 		if ($sql){
 			echo '<script>

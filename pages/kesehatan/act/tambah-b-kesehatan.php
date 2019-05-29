@@ -17,10 +17,10 @@ if(isset($_SESSION['username']) && $_POST['id'] != null ) {
 	$kepala = $_POST['kepala'];
 	$medis = $_POST['medis']; if (empty($_POST['medis'])) {$medis = "0"; }
 	$non = $_POST['non']; if (empty($_POST['non'])) {$non = "0"; }
+	$model = $_POST['model'];
 			
-	$sql = pg_query("INSERT INTO health_building (health_building_id, name_of_health_building, type_of_health_building, building_area, land_area, parking_area, standing_year, electricity_capacity, type_of_construction, address, name_of_head, number_of_medical_personnel, number_of_nonmedical_personnel, geom) 
-		VALUES ('$id', '$nama', '$type', '$lbang', '$land', '$parkir', '$year', '$elect', '$cons', '$alamat', '$kepala', '$medis', '$non', ST_GeomFromText('$geom'))");
-
+	$sql = pg_query("INSERT INTO health_building (health_building_id, name_of_health_building, type_of_health_building, building_area, land_area, parking_area, standing_year, electricity_capacity, type_of_construction, address, name_of_head, number_of_medical_personnel, number_of_nonmedical_personnel, geom, model_id) 
+		VALUES ('$id', '$nama', '$type', '$lbang', '$land', '$parkir', '$year', '$elect', '$cons', '$alamat', '$kepala', '$medis', '$non', ST_GeomFromText('$geom'), '$model')");
 
 	if ($sql){
 		echo '<script>
@@ -41,6 +41,4 @@ else {
 	echo '<script>window.location="../../../assets/403"</script>';
 }
 	
-
-
 ?>
