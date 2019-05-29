@@ -18,10 +18,10 @@ if(isset($_SESSION['username']) && $_POST['id'] != null ) {
 	$penghasilan = str_replace(".", "", $_POST['penghasilan']); if (empty($_POST['penghasilan'])) {$penghasilan = "0"; }
 	$cp = $_POST['kontak'];
 	$pegawai = $_POST['pegawai']; if (empty($_POST['pegawai'])) {$pegawai = "0"; }
+	$model = $_POST['model'];
 			
-	$sql = pg_query("INSERT INTO msme_building (msme_building_id, name_of_msme_building, type_of_msme, building_area, land_area, parking_area, standing_year, electricity_capacity, type_of_construction, address, owner_name, number_of_employee, monthly_income, contact_person, geom) 
-		VALUES ('$id', '$nama', '$type', '$lbang', '$land', '$parkir', '$year', '$elect', '$cons', '$alamat', '$pemilik', '$pegawai', '$penghasilan', '$cp', ST_GeomFromText('$geom'))");
-
+	$sql = pg_query("INSERT INTO msme_building (msme_building_id, name_of_msme_building, type_of_msme, building_area, land_area, parking_area, standing_year, electricity_capacity, type_of_construction, address, owner_name, number_of_employee, monthly_income, contact_person, geom, model_id) 
+		VALUES ('$id', '$nama', '$type', '$lbang', '$land', '$parkir', '$year', '$elect', '$cons', '$alamat', '$pemilik', '$pegawai', '$penghasilan', '$cp', ST_GeomFromText('$geom'), '$model')");
 
 	if ($sql){
 		echo '<script>
@@ -42,6 +42,4 @@ else {
 	echo '<script>window.location="../../../assets/403"</script>';
 }
 	
-
-
 ?>

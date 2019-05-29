@@ -18,6 +18,7 @@
 		$penghasilan = str_replace(".", "", $_POST['penghasilan']); if (empty($_POST['penghasilan'])) {$penghasilan = "0"; }
 		$cp = $_POST['kontak'];
 		$pegawai = $_POST['pegawai']; if (empty($_POST['pegawai'])) {$pegawai = "0"; }
+		$model = $_POST['model'];
 				
 		$sql = pg_query("UPDATE msme_building SET
 						msme_building_id = '$id', 
@@ -33,7 +34,8 @@
 						owner_name = '$alamat', 
 						number_of_employee = '$pegawai', 
 						monthly_income = '$penghasilan', 
-						contact_person = '$cp'
+						contact_person = '$cp',
+						model_id = '$model'
 						WHERE msme_building_id = '$id_temp'");
 		if ($sql){
 			echo '<script>
