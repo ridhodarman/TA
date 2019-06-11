@@ -18,7 +18,6 @@ if(isset($_SESSION['username']) && $_POST['jenis'] != null ) {
     	$id2="H".$id;
     }
 	$jenis = $_POST['jenis'];
-
 	$sql = pg_query("INSERT INTO type_of_health_building (type_id, name_of_type) VALUES ('$id2', '$jenis')");
 }
 ?>

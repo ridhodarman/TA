@@ -451,11 +451,11 @@ function digitasijorong() {
           };
           idTitik += 1;
         }
-        if (data.properties.id == 1) {
+        if (data.properties.id == "KG") {
           var warna = 'yellow';
-        } else if (data.properties.id == 2) {
+        } else if (data.properties.id == "GT") {
           var warna = 'green';
-        } else if (data.properties.id == 3) {
+        } else if (data.properties.id == "SJ") {
           var warna = '#478dff';
         }
 
@@ -1156,7 +1156,6 @@ function model_pendidikan(rows) {
 }
 
 function model_kesehatan(rows) {
-  var a = 0;
   for (var i in rows) {
     var row = rows[i];
     var id = row.id;

@@ -5,13 +5,12 @@ require '../inc/koneksi.php';
 $j_id = $_GET["j"];
 
 $querysearch = " 	SELECT 
-					W.educational_building_id,
-					W.name_of_educational_building,
-					W.geom,
-					ST_X(ST_CENTROID(W.geom)) as longitude,
-					ST_Y(ST_CENTROID(W.geom)) as latitude 
-					FROM educational_building AS W, jorong AS J 
-					WHERE ST_CONTAINS(J.geom, W.geom) and J.jorong_id='$j_id'";
+					E.educational_building_id,
+					E.name_of_educational_building,
+					ST_X(ST_CENTROID(E.geom)) AS longitude,
+					ST_Y(ST_CENTROID(E.geom)) AS latitude 
+					FROM educational_building AS E, jorong AS J 
+					WHERE ST_CONTAINS(J.geom, E.geom) AND J.jorong_id='$j_id'";
 
 $hasil = pg_query($querysearch);
 while ($row = pg_fetch_array($hasil)) {

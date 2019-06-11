@@ -22,23 +22,23 @@
                 <th>ID</th>
                 <th>Health Building Name</th>
                 <th>Address</th>
-                <th>Type of Health Building</th>
+                <th>Lat, Long</th>
                 <th>Action</th>
             </tr>
         </thead>
         <tbody>
             <?php
-                                $sql=pg_query("SELECT H.health_building_id, H.name_of_health_building, H.address, J.name_of_type AS jenis
-                                    FROM health_building AS H 
-                                    LEFT JOIN type_of_health_building AS J ON J.type_id=H.type_of_health_building");
+                                $sql=pg_query("SELECT health_building_id, name_of_health_building, address, ST_X(ST_Centroid(geom)) AS longitude, ST_Y(ST_CENTROID(geom)) AS latitude
+                                    FROM health_building
+                                    ");
                                 while ($data=pg_fetch_assoc($sql)) {
                                     $id=$data['health_building_id'];
                                     $nama=$data['name_of_health_building'];
                                     echo "<tr>";
                                     echo "<td>".$id."</td>";
                                     echo "<td>".$nama."</td>";
-                                    echo "<td>".wordlimit($data['address'],50)."</td>";
-                                    echo "<td>".$data['jenis']."</td>";
+                                    echo "<td>".wordlimit($data['address'],43)."</td>";
+                                    echo "<td>".wordlimit($data['latitude'],8).", ".wordlimit($data['longitude'],8)."</td>";
                                     echo '<td>
                                         <a href="info-b-kesehatan.php?id='.$id.'"><button class="btn btn-info btn-xs" title="View Detail"><i class="fa fa-info-circle"></i> View Detail</button></a>
                                         <button class="btn btn-danger btn-xs" title="Hapus" data-toggle="modal" data-target="#delete-bang'.$id.'"><i class="fa fa-trash"></i> Delete</button>

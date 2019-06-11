@@ -1,7 +1,7 @@
 <?php
 require '../inc/koneksi.php';
 
-$querysearch = " 	SELECT health_building_id, name_of_health_building ,ST_X(ST_Centroid(geom)) AS longitude, ST_Y(ST_CENTROID(geom)) As latitude
+$querysearch = " 	SELECT health_building_id, name_of_health_building ,ST_X(ST_Centroid(geom)) AS longitude, ST_Y(ST_CENTROID(geom)) AS latitude
 					FROM health_building ORDER BY name_of_health_building
 				";
 

@@ -8,12 +8,14 @@
             include ("inc/koneksi.php");
                 $id=$_GET['id'];
 
-                $querysearch = "SELECT M.msme_building_id, M.name_of_msme_building, M.building_area, M.land_area, M.parking_area, M.standing_year, M.electricity_capacity, M.address, M.type_of_construction, M.type_of_msme, M.owner_name, M.number_of_employee, M.monthly_income, M.contact_person, T.name_of_type AS constr, J.name_of_type AS type, B.name_of_model
-		            FROM msme_building AS M
-                    LEFT JOIN type_of_construction AS T ON M.type_of_construction=T.type_id
-                    LEFT JOIN type_of_msme AS J ON M.type_of_msme=J.type_id
-                    LEFT JOIN building_model AS B ON M.model_id=M.model_id
-                    WHERE M.msme_building_id='$id' 
+                $querysearch = "SELECT M.msme_building_id, M.name_of_msme_building, J.name_of_type AS type, M.owner_name, 
+                                M.contact_person, M.number_of_employee, M.monthly_income, M.building_area, M.land_area, 
+                                M.parking_area, M.standing_year, T.name_of_type AS constr, M.electricity_capacity, M.address, 
+                                B.name_of_model FROM msme_building AS M
+                                LEFT JOIN type_of_construction AS T ON M.type_of_construction=T.type_id
+                                LEFT JOIN type_of_msme AS J ON M.type_of_msme=J.type_id
+                                LEFT JOIN building_model AS B ON M.model_id=B.model_id
+                                WHERE M.msme_building_id='$id' 
 				            ";
 
                 $hasil = pg_query($querysearch);

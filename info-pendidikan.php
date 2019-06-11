@@ -7,8 +7,10 @@
                 include ("inc/koneksi.php");
                 $id=$_GET['id'];
 
-                $querysearch = "SELECT E.educational_building_id, E.name_of_educational_building, E.building_area, E.land_area, E.parking_area, E.standing_year, E.electricity_capacity, E.address, E.type_of_construction, E.headmaster_name, E.total_students, E.total_teachers, E.school_type, M.name_of_model, T.name_of_type AS constr, L.name_of_level AS level
-                                FROM educational_building AS E
+                $querysearch = "SELECT E.educational_building_id, E.name_of_educational_building, L.name_of_level AS level, 
+                                E.school_type, E.headmaster_name, E.total_students, E.total_teachers, E.building_area, E.land_area, 
+                                E.parking_area, E.standing_year, T.name_of_type AS constr, E.electricity_capacity, E.address, 
+                                M.name_of_model FROM educational_building AS E
                                 LEFT JOIN type_of_construction AS T ON E.type_of_construction=T.type_id
                                 LEFT JOIN level_of_education AS L ON E.id_level_of_education=L.level_id
                                 LEFT JOIN building_model AS M ON M.model_id=E.model_id

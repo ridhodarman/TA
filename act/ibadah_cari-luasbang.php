@@ -1,10 +1,9 @@
 <?php
 require '../inc/koneksi.php';
-
 $awal = $_GET["awal"];
 $akhir = $_GET["akhir"];
 
-$querysearch = " 	SELECT worship_building_id, name_of_worship_building ,ST_X(ST_Centroid(geom)) AS longitude, ST_Y(ST_CENTROID(geom)) As latitude
+$querysearch = " 	SELECT worship_building_id, name_of_worship_building ,ST_X(ST_Centroid(geom)) AS longitude, ST_Y(ST_CENTROID(geom)) AS latitude
 					FROM worship_building WHERE building_area BETWEEN '$awal' AND '$akhir' ORDER BY name_of_worship_building
 				";
 

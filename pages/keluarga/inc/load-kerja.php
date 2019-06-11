@@ -43,7 +43,6 @@
                                         </div>
                                         <div class="modal-body">
                                             <p>Are you sure to delete "'.$pekerjaan.'" from the job list? <br/>
-                                            There are as many as <b>-</b> head(s) of family(ies) who have this job.
                                             </p>
                                         </div>
                                         <div class="modal-footer">

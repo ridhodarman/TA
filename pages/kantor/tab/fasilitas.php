@@ -86,8 +86,8 @@
                                             <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
                                         </div>
                                         <div class="modal-body">
-                                            <p>MSME Facilities:</p>
-                                            <input type="text" class="form-control" name="fas-edit" id="fas-edit'.$id.'" placeholder="Enter the name of the msme facility..." value="'.$fas.'">
+                                            <p>Name of Office Facility:</p>
+                                            <input type="text" class="form-control" name="fas-edit" id="fas-edit'.$id.'" placeholder="Enter the name of the office facility..." value="'.$fas.'">
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

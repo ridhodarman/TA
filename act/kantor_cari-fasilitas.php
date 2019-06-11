@@ -1,6 +1,5 @@
 <?php
 require '../inc/koneksi.php';
-
 $fas=$_GET['fas'];
 $fas = explode(",", $fas);
 $f = "";

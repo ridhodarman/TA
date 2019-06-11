@@ -241,8 +241,9 @@
                             Family Card Number:
                             <select class="selectpicker form-control" data-container="body" data-live-search="true"
                                 title="Select a number" data-hide-disabled="true" name="kk" style="height: 43px">
-                                <?php                
-                                    $sql_d=pg_query("SELECT family_card_number FROM family_card");
+                                <?php
+                                    echo"<option value=".$nokk.">".$nokk."</option>";
+                                    $sql_d=pg_query("SELECT family_card_number FROM family_card WHERE family_card_number != '$nokk' ");
                                     while($row = pg_fetch_assoc($sql_d))
                                     {
                                         echo"<option value=".$row['family_card_number'].">".$row['family_card_number']."</option>";
@@ -262,7 +263,7 @@
                         </div>
                         <div class="form-group col-sm-6" id="datuk">
                             Datuk:
-                            <select class="form-control" name="datuk" id="iddatuk" required style="height: 43px" onchange="ceksuku()">
+                            <select class="form-control" name="datuk" id="iddatuk" style="height: 43px" onchange="ceksuku()">
                                 <option></option>
                                 <?php                
                                     $sql_d=pg_query("SELECT * FROM datuk ORDER BY datuk_name");

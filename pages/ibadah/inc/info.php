@@ -179,9 +179,9 @@ $id_ada = '<div class="alert alert-danger alert-dismissible fade show" role="ale
 ?>
 
 <script type="text/javascript">
-        $("#jenis select").val(<?php echo "'".$id_jenis."'" ?>);
-        $("#konstruksi select").val(<?php echo "'".$id_kons."'" ?>);
-        $("#model select").val(<?php echo "'".$id_model."'" ?>);
+    $("#jenis select").val(<?php echo "'".$id_jenis."'" ?>);
+    $("#konstruksi select").val(<?php echo "'".$id_kons."'" ?>);
+    $("#model select").val(<?php echo "'".$id_model."'" ?>);
 
     function besarkan() {
         var id=document.getElementById('id').value.toUpperCase();

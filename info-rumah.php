@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <script src="pages/inc/slideshow/jquery.resize.js"></script>
 <script src="pages/inc/slideshow/jquery.waitforimages.min.js"></script>
 <script src="pages/inc/slideshow/modernizr.js"></script>
@@ -17,6 +18,21 @@
                                 LEFT JOIN building_model AS M ON M.model_id=H.model_id
                                 WHERE H.house_building_id='$id' 
                             ";
+
+                            // SELECT H.house_building_id, H.standing_year, H.land_building_tax, T.name_of_type, H.tap_water, 
+                            //     H.electricity_capacity, H.building_status, H.address, M.name_of_model,
+                            //     C.name, C.national_identity_number, C.family_card_number, C.birth_date, E.educational_level, 
+                            //     J.job_name, C.income, D.datuk_name, T.name_of_tribe
+                            //     FROM house_building AS H
+                            //     LEFT JOIN type_of_construction AS T ON H.type_of_construction=T.type_id
+                            //     LEFT JOIN citizen AS C ON H.owner_id=C.national_identity_number
+                            //     LEFT JOIN building_model AS M ON M.model_id=H.model_id
+                            //     LEFT JOIN datuk AS D ON C.datuk_id=D.datuk_id
+                            //     LEFT JOIN tribe AS T ON D.tribe_id=T.tribe_id
+                            //     LEFT JOIN job AS J ON C.job_id=J.job_id
+                            //     LEFT JOIN education AS E ON C.education_id=E.education_id
+                            //     WHERE H.house_building_id='$id' 
+                            
 
                 $hasil = pg_query($querysearch);
                 while ($row = pg_fetch_array($hasil)) {
@@ -179,6 +195,13 @@
                                                     <td>:</td>
                                                     <td>
                                                         <?php echo $pdam ?>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Electricity Capacity </td>
+                                                    <td>:</td>
+                                                    <td>
+                                                        <?php echo $listrik ?> kWh
                                                     </td>
                                                 </tr>
                                                 <tr>

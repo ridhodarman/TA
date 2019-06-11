@@ -4,9 +4,9 @@ $latit = $_GET["lat"];
 $longi = $_GET["lng"];
 $rad = $_GET["rad"];
 
-$querysearch = "SELECT msme_building_id, name_of_msme_building ,ST_X(ST_CENTROID(geom)) as lon, ST_Y(ST_CENTROID(geom)) as lat,
+$querysearch = "SELECT msme_building_id, name_of_msme_building ,ST_X(ST_CENTROID(geom)) AS lon, ST_Y(ST_CENTROID(geom)) AS lat,
 				ST_DISTANCE_SPHERE(ST_GeomFromText('POINT(" . $longi . " " . $latit . ")',-1), geom) as jarak
-				FROM msme_building where ST_DISTANCE_SPHERE(ST_GeomFromText('POINT(" . $longi . " " . $latit . ")',-1),
+				FROM msme_building WHERE ST_DISTANCE_SPHERE(ST_GeomFromText('POINT(" . $longi . " " . $latit . ")',-1),
 				geom) <= " . $rad . " ORDER BY jarak
 				";
 

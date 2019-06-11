@@ -2,11 +2,11 @@
 <?php
 require '../inc/koneksi.php';
 
-$nama = strtoupper($_GET["cari_nama"]);
+$nama = strtolower($_GET["cari_nama"]);
 
-$querysearch = " 	SELECT msme_building_id, name_of_msme_building ,ST_X(ST_Centroid(geom)) AS longitude, ST_Y(ST_CENTROID(geom)) As latitude
+$querysearch = " 	SELECT msme_building_id, name_of_msme_building ,ST_X(ST_Centroid(geom)) AS longitude, ST_Y(ST_CENTROID(geom)) AS latitude
 					FROM msme_building 
-                    WHERE upper(name_of_msme_building) like '%$nama%' order by name_of_msme_building
+                    WHERE LOWER(name_of_msme_building) like '%$nama%' order by name_of_msme_building
 				";
 
 $hasil = pg_query($querysearch);

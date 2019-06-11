@@ -23,14 +23,14 @@
                 <th>Name of MSME Building</th>
                 <!-- <th>Type of MSME</th> -->
                 <th>Address</th>
+                <th>Lat, Long</th>
                 <th>Action</th>
             </tr>
         </thead>
         <tbody>
             <?php
-                $sql=pg_query("SELECT M.msme_building_id, M.name_of_msme_building, M.address, J.name_of_type AS jenis
-                    FROM msme_building AS M 
-                    LEFT JOIN type_of_msme AS J ON J.type_id=M.type_of_msme");
+                $sql=pg_query("SELECT msme_building_id, name_of_msme_building, address, ST_X(ST_Centroid(geom)) AS longitude, ST_Y(ST_CENTROID(geom)) AS latitude
+                    FROM msme_building ");
                 while ($data=pg_fetch_assoc($sql)) {
                     $id=$data['msme_building_id'];
                     $nama=$data['name_of_msme_building'];
@@ -38,7 +38,8 @@
                     echo "<td>".$id."</td>";
                     echo "<td>".$nama."</td>";
                     // echo "<td>".$data['jenis']."</td>";
-                    echo "<td>".wordlimit($data['address'],40)."</td>";
+                    echo "<td>".wordlimit($data['address'],50)."</td>";
+                    echo "<td>".wordlimit($data['latitude'],8).", ".wordlimit($data['longitude'],8)."</td>";
                     echo '<td>
                         <a href="info-umkm.php?id='.$id.'"><button class="btn btn-info btn-xs" title="View Detail"><i class="fa fa-info-circle"></i> View Detail</button></a>
                         <button class="btn btn-danger btn-xs" title="Hapus" data-toggle="modal" data-target="#delete-bang'.$id.'"><i class="fa fa-trash"></i> Delete</button>

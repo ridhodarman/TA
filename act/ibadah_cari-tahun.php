@@ -1,6 +1,5 @@
 <?php
 require '../inc/koneksi.php';
-
 $awal = $_GET["awal"];
 $akhir = $_GET["akhir"];
 

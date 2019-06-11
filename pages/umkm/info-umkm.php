@@ -201,7 +201,7 @@
 
                                                 var marker = new google.maps.Marker({
                                                 position: posisi,
-                                                icon:server+'assets/ico/musajik.png',
+                                                icon:server+'assets/ico/kadai.png',
                                                 animation: google.maps.Animation.BOUNCE,
                                                 map: map
                                                 });

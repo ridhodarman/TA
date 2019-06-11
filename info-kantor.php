@@ -7,8 +7,9 @@
                 include ("inc/koneksi.php");
                 $id=$_GET['id'];
 
-                $querysearch = "SELECT O.office_building_id, O.name_of_office_building, O.building_area, O.land_area, O.parking_area, O.standing_year, O.electricity_capacity, O.address, O.type_of_construction, O.type_of_office, T.name_of_type as constr, J.name_of_type as type, M.name_of_model
-                                FROM office_building as O
+                $querysearch = "SELECT O.office_building_id, O.name_of_office_building, J.name_of_type AS type, O.building_area, 
+                                O.land_area, O.parking_area, O.standing_year, T.name_of_type AS constr, O.electricity_capacity, 
+                                O.address, M.name_of_model, ST_AsText(geom) AS geom FROM office_building as O
                                 LEFT JOIN type_of_construction as T ON O.type_of_construction=T.type_id
                                 LEFT JOIN type_of_office as J ON O.type_of_office=J.type_id
                                 LEFT JOIN building_model AS M ON M.model_id=O.model_id
@@ -26,8 +27,6 @@
                     $alamat = $row['address'];
                     $konstruksi = $row['constr'];
                     $jenis = $row['type'];
-                    $id_k = $row['type_of_construction'];
-                    $id_o = $row['type_of_office'];
                     $model = $row['name_of_model'];
                 }
 
@@ -215,7 +214,7 @@
                                             </thead>
                                             <tbody>
                                             <?php
-                                                $sql=pg_query("SELECT D.office_building_id, D.facility_id, D.quantity_of_facilities, F.name_of_facility
+                                                $sql=pg_query("SELECT D.quantity_of_facilities, F.name_of_facility
                                                     FROM detail_office_building_facilities AS D 
                                                     LEFT JOIN office_building_facilities AS F ON F.facility_id=D.facility_id
                                                     WHERE D.office_building_id = '$id'

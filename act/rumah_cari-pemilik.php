@@ -17,7 +17,7 @@ if(isset($_SESSION['username'])) {
 	    $latitude = $row['latitude'];
 	    $nama = $row['name'];
 	    $lokasirumah ="<b>".$id."</b> (".$nama.")";
-	    $dataarray[] = array('id' => $lokasirumah, 'longitude' => $longitude, 'latitude' => $latitude);
+	    $dataarray[] = array('id' => $id, 'nama' => $lokasirumah, 'longitude' => $longitude, 'latitude' => $latitude);
 	}
 	echo json_encode($dataarray);
 }

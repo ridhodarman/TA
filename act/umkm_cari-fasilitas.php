@@ -39,7 +39,7 @@ for($i=0;$i<$total;$i++){
 }
 $querysearch="	SELECT M.msme_building_id, M.name_of_msme_building, ST_X(ST_Centroid(M.geom)) AS lng, ST_Y(ST_CENTROID(M.geom)) AS lat 
 				FROM msme_building AS M 
-				JOIN detail_msme_building_facilities AS F on M.msme_building_id=F.msme_building_id 
+				JOIN detail_msme_building_facilities AS F ON M.msme_building_id=F.msme_building_id 
 				WHERE F.facility_id IN ($f) GROUP BY F.msme_building_id, M.msme_building_id, M.name_of_msme_building
 				HAVING COUNT(*) = '$total'";
 $hasil=pg_query($querysearch);

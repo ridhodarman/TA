@@ -26,6 +26,4 @@ $sql  = "SELECT
 			);
 			array_push($geojson['features'], $feature);
 		}
-
-
 		echo json_encode($geojson);

@@ -19,7 +19,6 @@ if(isset($_SESSION['username']) && $_POST['id'] != null ) {
 	$sql = pg_query("INSERT INTO office_building (office_building_id, name_of_office_building, type_of_office, building_area, land_area, parking_area, standing_year, electricity_capacity, type_of_construction, address, geom, model_id) 
 		VALUES ('$id', '$nama', '$type', '$lbang', '$land', '$parkir', '$year', '$elect', '$cons', '$alamat', ST_GeomFromText('$geom'), '$model')");
 
-
 	if ($sql){
 		echo '<script>
 			$("#sukses").modal("show");
@@ -38,7 +37,4 @@ if(isset($_SESSION['username']) && $_POST['id'] != null ) {
 else {
 	echo '<script>window.location="../../../assets/403"</script>';
 }
-	
-
-
 ?>

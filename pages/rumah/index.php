@@ -68,19 +68,21 @@
                                         <th>ID</th>
                                         <!-- <th>Owner</th> -->
                                         <th>Address</th>
+                                        <th>Lat, Long</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php
-                                        $sql=pg_query("SELECT house_building_id, address FROM house_building");
+                                        $sql=pg_query("SELECT house_building_id, address, ST_X(ST_Centroid(geom)) AS longitude, ST_Y(ST_CENTROID(geom)) AS latitude FROM house_building");
                                         while ($data=pg_fetch_assoc($sql)) {
                                             $id=$data['house_building_id'];
                                             //$nama=$data['name_of_worship_building'];
                                             echo "<tr>";
                                             echo "<td>".$id."</td>";
                                             //echo "<td>".$nama."</td>";
-                                            echo "<td>".wordlimit($data['address'],50)."</td>";
+                                            echo "<td>".wordlimit($data['address'],45)."</td>";
+                                            echo "<td>".$data['latitude'].", ".$data['longitude']."</td>";
                                             echo '<td>
                                                 <a href="info-rumah.php?id='.$id.'"><button class="btn btn-info btn-xs" title="View Detail"><i class="fa fa-info-circle"></i> View Detail</button></a>
                                                 <button class="btn btn-danger btn-xs" title="Hapus" data-toggle="modal" data-target="#delete-bang'.$id.'"><i class="fa fa-trash"></i> Delete</button>

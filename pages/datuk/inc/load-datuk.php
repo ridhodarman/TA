@@ -21,12 +21,14 @@
                 $sql=pg_query("SELECT D.datuk_id, D.datuk_name, D.tribe_id, T.name_of_tribe 
                                 FROM datuk AS D
                                 JOIN tribe AS T ON D.tribe_id=T.tribe_id
+                                ORDER BY datuk_name
                             ");
                 while ($data=pg_fetch_assoc($sql)) {
                     $id=$data['datuk_id'];
                     $id_enc= "'".base64_encode($id)."'";
                     $id_suku=$data['D.tribe_id'];
                     $nama=$data['datuk_name'];
+                    $ids="'".$id."'";
                     echo "<tr>";
                     echo "<td>".$no."</td>";
                     echo "<td>".$nama."</td>";
@@ -54,7 +56,7 @@
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                            <button type="button" class="btn btn-danger" onclick="hapusdatuk('.$id_enc.','.$id.')">Delete</button>
+                                            <button type="button" class="btn btn-danger" onclick="hapusdatuk('.$id_enc.','.$ids.')">Delete</button>
                                         </div>
                                     </div>
                                 </div>
@@ -76,7 +78,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <label>Tribe:</label>
-                                                <select class="form-control" id="edit-suku'.$id.'" value="'.$suku.'" required>
+                                                <select class="form-control" id="edit-suku'.$id.'" value="'.$suku.'" required style="height: 45px">
                                                 <option></option>';
                                                 $sql_suku=pg_query("SELECT * FROM tribe ORDER BY name_of_tribe");
                                                 while($row = pg_fetch_assoc($sql_suku))
@@ -90,8 +92,8 @@
                                             <input type="hidden" class="form-control" name="id" value="'.$id.'" required>
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                            <button type="button" class="btn btn-primary" onclick="editdatuk('.$id.')""><i class="ti-save"></i> Save</button>
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                            <button type="button" class="btn btn-primary" onclick="editdatuk('.$ids.')""><i class="ti-save"></i> Save</button>
                                         </div>
                                     </div>
                                 </form>

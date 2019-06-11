@@ -1,5 +1,5 @@
 <?php
-    // if(isset($_SESSION['username']) ) {
+    if(isset($_SESSION['username']) ) {
         if (isset($_POST["kirim"])) {
             $id = $_POST["id-bang"];
             $tgl = $_POST["tgl"];
@@ -52,8 +52,8 @@
                     ';
             }
         }
-    // }
-    // else {
-    //     echo '<script>window.location="../../../assets/403"</script>';
-    // } 
+    }
+    else {
+        echo '<script>window.location="../../../assets/403"</script>';
+    } 
 ?>

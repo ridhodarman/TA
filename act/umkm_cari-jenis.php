@@ -1,7 +1,5 @@
-
 <?php
 require '../inc/koneksi.php';
-
 $jenis = $_GET["type"];
 
 $querysearch = " 	SELECT msme_building_id, name_of_msme_building ,ST_X(ST_Centroid(geom)) AS longitude, ST_Y(ST_CENTROID(geom)) As latitude

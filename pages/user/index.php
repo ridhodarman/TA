@@ -318,4 +318,6 @@ $pass = '<div class="alert alert-warning alert-dismissible fade show" role="aler
     function back() {
         window.history.back();
     }
+
+    $("#aksessuper").addClass("active");
 </script>

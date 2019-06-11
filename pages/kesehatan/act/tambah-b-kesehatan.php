@@ -40,5 +40,4 @@ if(isset($_SESSION['username']) && $_POST['id'] != null ) {
 else {
 	echo '<script>window.location="../../../assets/403"</script>';
 }
-	
 ?>

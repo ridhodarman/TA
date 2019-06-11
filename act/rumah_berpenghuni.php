@@ -10,7 +10,6 @@ if(isset($_SESSION['username'])) {
   while($row = pg_fetch_array($hasil))
       {
             $id=$row['house_building_id'];
-            //$name=$row['name'];
             $longitude=$row['longitude'];
             $latitude=$row['latitude'];
             $dataarray[]=array('id'=>$id, 'longitude'=>$longitude,'latitude'=>$latitude);

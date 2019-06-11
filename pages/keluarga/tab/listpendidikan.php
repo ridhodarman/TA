@@ -64,7 +64,6 @@
     						            </div>
     						            <div class="modal-body">
     						                <p>Are you sure to delete "'.$edu.'" from the education level list? <br/>
-    						                There are as many as <b>-</b> head(s) of family that have this education type.
     						                </p>
     						            </div>
     						            <div class="modal-footer">

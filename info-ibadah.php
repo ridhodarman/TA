@@ -26,8 +26,17 @@
             include ("inc/koneksi.php");
                 $id=$_GET['id'];
 
-                $querysearch = "SELECT W.worship_building_id, W.name_of_worship_building, W.building_area, W.land_area, W.parking_area, W.standing_year, W.electricity_capacity, W.address, W.type_of_construction, W.type_of_worship, T.name_of_type as constr, J.name_of_type as type, M.name_of_model
-                                FROM worship_building as W
+                // $querysearch = "SELECT W.worship_building_id, W.name_of_worship_building, W.building_area, W.land_area, W.parking_area, W.standing_year, W.electricity_capacity, W.address, W.type_of_construction, W.type_of_worship, T.name_of_type as constr, J.name_of_type as type, M.name_of_model
+                //                 FROM worship_building as W
+                //                 LEFT JOIN type_of_construction as T ON W.type_of_construction=T.type_id
+                //                 LEFT JOIN type_of_worship as J ON W.type_of_worship=J.type_id
+                //                 LEFT JOIN building_model AS M ON M.model_id=W.model_id
+                //                 WHERE W.worship_building_id='$id' 
+                //             ";
+
+                $querysearch = "SELECT W.worship_building_id, W.name_of_worship_building, J.name_of_type as type, W.building_area, 
+                                W.land_area, W.parking_area, W.standing_year, T.name_of_type as constr, W.electricity_capacity, 
+                                W.address, M.name_of_model FROM worship_building as W
                                 LEFT JOIN type_of_construction as T ON W.type_of_construction=T.type_id
                                 LEFT JOIN type_of_worship as J ON W.type_of_worship=J.type_id
                                 LEFT JOIN building_model AS M ON M.model_id=W.model_id
@@ -237,7 +246,7 @@
                                         <tbody>
                                         <?php
                                         $nomor=1;
-                                        $sql=pg_query("SELECT D.worship_building_id, D.facility_id, D.quantity_of_facilities, F.name_of_facility
+                                        $sql=pg_query("SELECT F.name_of_facility, D.quantity_of_facilities 
                                             FROM detail_worship_building_facilities AS D 
                                             LEFT JOIN worship_building_facilities AS F ON F.facility_id=D.facility_id
                                             WHERE D.worship_building_id = '$id'

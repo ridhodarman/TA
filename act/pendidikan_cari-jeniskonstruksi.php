@@ -4,7 +4,7 @@ require '../inc/koneksi.php';
 
 $type = $_GET["k"];
 
-$querysearch = " 	SELECT educational_building_id, name_of_educational_building ,ST_X(ST_Centroid(geom)) AS longitude, ST_Y(ST_CENTROID(geom)) As latitude
+$querysearch = " 	SELECT educational_building_id, name_of_educational_building ,ST_X(ST_Centroid(geom)) AS longitude, ST_Y(ST_CENTROID(geom)) AS latitude
 					FROM educational_building 
                     WHERE type_of_construction = '$type' order by name_of_educational_building
 				";

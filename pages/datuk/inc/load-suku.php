@@ -23,6 +23,7 @@
                         $id=$data['tribe_id'];
                         $id_enc= "'".base64_encode($id)."'";
                         $suku=$data['name_of_tribe'];
+                        $ids="'".$id."'";
                         echo "<tr>";
                         echo "<td>".$no."</td>";
                         echo "<td>".$suku."</td>";
@@ -44,12 +45,11 @@
                                         </div>
                                         <div class="modal-body"><center>
                                             <p>Are you sure to delete "'.$suku.'" from tribe list ? <br/>
-                                            There are as many as <b>'.$j_datuk.'</b> datuk that have this tribe.
                                             </center>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                            <button type="button" class="btn btn-danger" onclick="hapussuku('.$id_enc.','.$id.')">Delete</button>
+                                            <button type="button" class="btn btn-danger" onclick="hapussuku('.$id_enc.','.$ids.')">Delete</button>
                                         </div>
                                     </div>
                                 </div>
@@ -69,7 +69,7 @@
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                                <button type="button" class="btn btn-primary" onclick="editsuku('.$id.')""><i class="ti-save"></i> Save</button>
+                                                <button type="button" class="btn btn-primary" onclick="editsuku('.$ids.')""><i class="ti-save"></i> Save</button>
                                             </div>
                                         </div>
                                     </form>

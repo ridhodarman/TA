@@ -1,12 +1,9 @@
 <?php
-	session_start();
-    if(isset($_SESSION['username'])) {
-		include ('../../../inc/koneksi.php');
-		$id = $_GET['id'];
-		$fas = $_GET['fas'];
-		$sql = pg_query("UPDATE msme_building_facilities SET name_of_facility = '$fas' WHERE facility_id = '$id'");
-	}
-	else {
-		echo '<script>window.location="../../../assets/403"</script>';
-	}
+session_start();
+if(isset($_SESSION['username'])) {
+	include ('../../../inc/koneksi.php');
+	$id = $_GET['id'];
+	$fas = $_GET['fas'];
+	$sql = pg_query("UPDATE msme_building_facilities SET name_of_facility = '$fas' WHERE facility_id = '$id'");
+}
 ?>

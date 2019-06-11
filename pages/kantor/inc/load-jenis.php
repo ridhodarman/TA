@@ -33,7 +33,7 @@
                         </td>';
                     echo "</tr>";
 
-                    $k=pg_num_rows(pg_query("SELECT msme_building_id FROM msme_building WHERE type_of_msme='$id'"));
+                    $k=pg_num_rows(pg_query("SELECT office_building_id FROM office_building WHERE type_of_office='$id'"));
 
                     echo '
                         <div class="modal fade" id="delete-j'.$id.'">
@@ -66,7 +66,7 @@
                                             <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
                                         </div>
                                         <div class="modal-body">
-                                            <p>MSME Type:</p>
+                                            <p>Type of Office:</p>
                                             <input type="text" class="form-control" name="jenis-edit" id="jenis-edit'.$id.'" placeholder="Enter the type of office building..." value="'.$jenis.'">
                                         </div>
                                         <div class="modal-footer">

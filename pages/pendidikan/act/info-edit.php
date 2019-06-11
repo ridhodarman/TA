@@ -35,7 +35,7 @@ if(isset($_SESSION['username']) && $_POST['id'] != null ) {
 					electricity_capacity = '$elect', 
 					type_of_construction = '$cons', 
 					address = '$alamat',
-					model = '$model' 
+					model_id = '$model' 
 					WHERE educational_building_id = '$id_temp'");
 
 

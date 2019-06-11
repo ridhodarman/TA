@@ -22,14 +22,14 @@
                 <th>ID</th>
                 <th>Name of Office Building</th>
                 <th>Address</th>
+                <th>Lat, Long</th>
                 <th>Action</th>
             </tr>
         </thead>
         <tbody>
             <?php
-                $sql=pg_query("SELECT O.office_building_id, O.name_of_office_building, O.address, J.name_of_type AS jenis
-                    FROM office_building AS O 
-                    LEFT JOIN type_of_office AS J ON J.type_id=O.type_of_office");
+                $sql=pg_query("SELECT office_building_id, name_of_office_building, address, ST_X(ST_Centroid(geom)) AS longitude, ST_Y(ST_CENTROID(geom)) AS latitude
+                    FROM office_building ");
                 while ($data=pg_fetch_assoc($sql)) {
                     $id=$data['office_building_id'];
                     $nama=$data['name_of_office_building'];
@@ -38,6 +38,7 @@
                     echo "<td>".$nama."</td>";
                     // echo "<td>".$data['jenis']."</td>";
                     echo "<td>".wordlimit($data['address'],40)."</td>";
+                    echo "<td>".wordlimit($data['latitude'],8).", ".wordlimit($data['longitude'],8)."</td>";
                     echo '<td>
                         <a href="info-kantor.php?id='.$id.'"><button class="btn btn-info btn-xs" title="View Detail"><i class="fa fa-info-circle"></i> View Detail</button></a>
                         <button class="btn btn-danger btn-xs" title="Hapus" data-toggle="modal" data-target="#delete-bang'.$id.'"><i class="fa fa-trash"></i> Delete</button>

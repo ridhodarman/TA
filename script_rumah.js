@@ -29,10 +29,12 @@ function cari_rumah(rows)
 	     $('#kosong').modal('show');
 	    }
   var a=0;
+  $('#found').empty();
 	for (var i in rows) 
 	    {   
 			var row     = rows[i];
 		  	var id   = row.id;
+        var nama   = row.nama;
 		    var latitude  = row.latitude ;
 		    var longitude = row.longitude ;
 		    centerBaru = new google.maps.LatLng(latitude, longitude);
@@ -48,7 +50,13 @@ function cari_rumah(rows)
 				    klikInfoWindow(id);
 		        map.setZoom(14);            
             tampilkanhasilcari();
-		        $('#hasilcari').append("<tr><td>"+id+"</td><td style='text-align: center'><button class='btn btn-theme04 btn-xs' onclick='detailrumah_infow(\""+id+"\");' title='tampilkan info'><i class='fa fa-search-plus'></i></button></td></tr>");
+            if (nama==null) {
+              $('#hasilcari').append("<tr><td>"+id+"</td><td style='text-align: center'><button class='btn btn-theme04 btn-xs' onclick='detailrumah_infow(\""+id+"\");' title='tampilkan info'><i class='fa fa-search-plus'></i></button></td></tr>");  
+            }
+            else {
+              $('#hasilcari').append("<tr><td>"+nama+"</td><td style='text-align: center'><button class='btn btn-theme04 btn-xs' onclick='detailrumah_infow(\""+id+"\");' title='tampilkan info'><i class='fa fa-search-plus'></i></button></td></tr>");
+            }
+		        
             a=a+1;
 	    }
       $('#found').append("Found: "+a)
