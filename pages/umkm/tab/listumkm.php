@@ -71,7 +71,7 @@
     </table>
 </div>
 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDM2fDXHmGzCDmDBk3bdPIEjs6zwnI1kGQ&libraries=drawing"></script>        
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA1TwYksj1uQg1V_5yPUZqwqYYtUIvidrY&libraries=drawing"></script>        
 <script src="../inc/mapupd.js" type="text/javascript"></script>
 
 <div class="modal fade bd-example-modal-lg modal-xl" id="tambahbang">

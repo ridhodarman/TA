@@ -1,1 +1,6 @@
-# TA
+![SS1](https://github.com/ridhodarman/TA/blob/master/ss/0.png)
+![SS2](https://github.com/ridhodarman/TA/blob/master/ss/1.png)
+![SS2](https://github.com/ridhodarman/TA/blob/master/ss/2.png)
+![SS2](https://github.com/ridhodarman/TA/blob/master/ss/3.png)
+![SS2](https://github.com/ridhodarman/TA/blob/master/ss/4.png)
+![SS2](https://github.com/ridhodarman/TA/blob/master/ss/5.png)
